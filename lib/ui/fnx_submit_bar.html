@@ -1,0 +1,28 @@
+<!--
+  Copyright (c) 2015, <your name>. All rights reserved. Use of this source code
+  is governed by a BSD-style license that can be found in the LICENSE file.
+-->
+<dom-module id="fnx-submit-bar" attributes="">
+  <style type="text/less">
+    @import "style.less";
+    :host {
+      display: block;
+      box-sizing: border-box;
+      padding: 0;
+      padding-top: 2em;
+      padding-bottom: 1em;
+      width: 100%;
+      .clearfix();
+      & > #fnx-submit-bar__cancel {
+        float: left;
+      }
+      & > #fnx-submit-bar__submit {
+          float: right;
+      }
+    }
+  </style>
+  <template>
+    <fnx-button negative event="cancel" id="fnx-submit-bar__cancel">Cancel</fnx-button>
+    <fnx-button primary event="submit" id="fnx-submit-bar__submit">Save</fnx-button>
+  </template>
+</dom-module>

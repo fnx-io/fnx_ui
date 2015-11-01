@@ -1,0 +1,75 @@
+<!--
+  Copyright (c) 2015, <your name>. All rights reserved. Use of this source code
+  is governed by a BSD-style license that can be found in the LICENSE file.
+-->
+<dom-module id="fnx-field" attributes="label help error">
+  <style type="text/less">
+    @import "style.less";
+    :host {
+      .fnx-ui-core;
+      display: block;
+      position: relative;
+      padding: 1em 0;
+      width: 100%;
+      .clearfix();
+
+        & > label {
+            display: block;
+            margin:0;
+            width: 15%;
+            min-height: 1px;
+            float: left;
+        }
+        & > #fnx-field__wrapper {
+            margin:0;
+            float: left;
+            width: calc(~"100% - 15% - 2em");
+            padding-left: 1em;
+            padding-right: 1em;
+        }
+        & > fnx-icon {
+              margin:0;
+          float: right;
+          width: 2em;
+          position: relative;
+          top: 0.10em;
+        }
+        & > #fnx-field__wrapper > .error {
+            margin-top: 0.5em;
+            color:red;
+            font-size: 70%;
+        }
+        @media only screen and (max-width: 70em) {
+          & > label {
+            width: calc(~"100% - 2em");
+          }
+          & > #fnx-field__wrapper {
+            width: 100%;
+            padding-left: 0;
+            padding-right: 0;
+            padding-top: 0.5em;
+          }
+          & > fnx-icon {
+            top:0;
+          }
+        }
+      }
+
+    :host.focused {
+    }
+
+  </style>
+  <template>
+      <label><span>{{label}}</span> </label>
+      <template is="dom-if" if="{{help}}">
+        <fnx-icon id="fnx-field__help" class="bigger" icon="help"></fnx-icon>
+        <paper-tooltip for="fnx-field__help">{{help}}</paper-tooltip>
+      </template>
+      <div id="fnx-field__wrapper">
+        <content></content>
+        <template is="dom-if" if="{{error}}">
+            <div class="error">{{error}}</div>
+        </template>
+      </div>
+  </template>
+</dom-module>
