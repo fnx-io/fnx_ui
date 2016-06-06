@@ -1,0 +1,16 @@
+.navbar {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  & > * {
+    margin: 0;
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 0;
+    .renderComponentWithoutBorder(@baseWidgetHeight * 1.5, @lineHeight);
+  }
+}
+.navbar__spacer {
+  flex-grow: 1;
+  flex-basis: 1px;
+}

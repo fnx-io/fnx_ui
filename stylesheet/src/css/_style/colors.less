@@ -1,0 +1,297 @@
+
+// http://www.google.com/design/spec/style/color.html#color-color-palette
+
+html {
+    background-color: @colorBackground;
+    color: @colorText;
+}
+
+a {
+    color: @colorLink;
+    &:visited {
+        color: @colorLink;
+    }
+}
+
+.renderColorSettings(@hexa) {
+    background-color: @hexa;
+    & when (luma(color(@hexa)) <= 60%) {
+        color: #eee;
+        a, a:visited {
+            color: #fff;
+        }
+        .menu--horizontal, .menu--vertical, &.menu--horizontal, &.menu--vertical {
+            a:hover {
+                background-color: lighten(color(@hexa), 5%);
+            }
+        }
+    }
+    & when (luma(color(@hexa)) > 40%) {
+        color: @colorText;
+        a, a:visited {
+            color: #000;
+        }
+        .menu--horizontal, .menu--vertical, &.menu--horizontal, &.menu--vertical {
+            a:hover {
+                background-color: darken(color(@hexa), 5%);
+            }
+        }
+    }
+}
+.renderColorRules(@hexa, @name) {
+
+    .bg--@{name} {
+        .renderColorSettings(@hexa);
+        &--l1 {
+            .renderColorSettings(lighten(color(@hexa), 10%));
+        }
+        &--l2 {
+            .renderColorSettings(lighten(color(@hexa), 20%));
+        }
+        &--l3 {
+            .renderColorSettings(lighten(color(@hexa), 30%));
+        }
+        &--l4 {
+            .renderColorSettings(lighten(color(@hexa), 40%));
+        }
+        &--d1 {
+            .renderColorSettings(darken(color(@hexa), 10%));
+        }
+        &--d2 {
+            .renderColorSettings(darken(color(@hexa), 20%));
+        }
+        &--d3 {
+            .renderColorSettings(darken(color(@hexa), 30%));
+        }
+        &--d4 {
+            .renderColorSettings(darken(color(@hexa), 40%));
+        }
+    }
+    .text--@{name} {
+        color: @hexa;
+        &--l1 {
+            color: (lighten(color(@hexa), 10%));
+        }
+        &--l2 {
+            color: (lighten(color(@hexa), 20%));
+        }
+        &--l3 {
+            color: (lighten(color(@hexa), 30%));
+        }
+        &--l4 {
+            color: (lighten(color(@hexa), 40%));
+        }
+        &--d1 {
+            color: (darken(color(@hexa), 10%));
+        }
+        &--d2 {
+            color: (darken(color(@hexa), 20%));
+        }
+        &--d3 {
+            color: (darken(color(@hexa), 30%));
+        }
+        &--d4 {
+            color: (darken(color(@hexa), 40%));
+        }
+    }
+
+    /*
+        background-color: @hexa;
+        color: @text;
+        a {
+            color: inherit;
+        }
+        & .disabled, & *[disabled] {
+            & when (@name = white) {
+                background-color: @colorWhiteDisabled;
+                color: #aaa;
+            }
+            & when not(@name = white) {
+                background-color: desaturate(color(@hexa), 40%);
+                & when (lightness(desaturate(color(@hexa), 40%)) >= 50%) {
+                    color: #555;
+                }
+                & when (lightness(desaturate(color(@hexa), 40%)) < 50%) {
+                    color: #aaa;
+                }
+            }
+        }
+        &.disabled, &[disabled] {
+            & when (@name = white) {
+                background-color: @colorWhiteDisabled !important;
+                color: #aaa;
+            }
+            & when not(@name = white) {
+                background-color: desaturate(color(@hexa), 40%) !important;
+                & when (lightness(desaturate(color(@hexa), 40%)) >= 50%) {
+                    color: #555;
+                }
+                & when (lightness(desaturate(color(@hexa), 40%)) < 50%) {
+                    color: #aaa;
+                }
+
+            }
+        }
+    }
+
+    .@{name}-text {
+        color: @hexa;
+    }
+    .@{name}-stroke {
+        stroke: @hexa;
+    }
+    .@{name}-border {
+        border-color: @hexa;
+        color: @hexa;
+    }
+
+    // barva sipecky
+    .tabs.arrow.@{name} {
+        & > *.active {
+            &:after {
+                border-top-color: @hexa;
+            }
+        }
+    }
+
+    // barva sipecky u tabu, ktery je prebarveny
+    .tabs.arrow {
+        & > * {
+            &.@{name}, &.@{name}-on-active.active {
+                &.active:after {
+                    border-top-color: @hexa !important;
+                }
+            }
+        }
+    }
+
+    // hovery buttonu a tabu
+    .btn.@{name}, .tabs.@{name} > *:not(.active), .@{name}.light-hover {
+        &:not(.disabled):not([disabled]) {
+            &:hover {
+                & when (@name = white) {
+                    background-color: @colorWhiteHover;
+                }
+                & when not(@name = white) {
+                    background-color: lighten(color(@hexa), 10%);
+                }
+            }
+        }
+    }
+    .tabs .@{name}:not(.active) {
+        &:not(.disabled):not([disabled]) {
+            &:hover {
+                & when (@name = white) {
+                    background-color: @colorWhiteHover !important;
+                }
+                & when not(@name = white) {
+                    background-color: lighten(color(@hexa), 10%) !important;
+                }
+            }
+        }
+    }
+    a.round.@{name} {
+        &:hover when (@name = white) {
+            background-color: @colorWhiteHover;
+        }
+        &:hover when not(@name = white) {
+            background-color: lighten(color(@hexa), 10%);
+        }
+    }
+    */
+
+}
+
+html {
+
+    .renderColorRules(#000, black);
+    .renderColorRules(#fff, white);
+    .renderColorRules(@colorRed, red);
+    .renderColorRules(@colorPink, pink);
+    .renderColorRules(@colorPurple, purple);
+/*
+    .renderColorRules(#2095f2, brand, #fff);
+    .renderColorRules(@colorRed, red, #fff);
+    .renderColorRules(@colorPink, pink, #fff);
+    .renderColorRules(#363f46, grey, #fff);
+    .renderColorRules(#9733ae, purple, #fff);
+    .renderColorRules(#6342b3, deeppurple, #fff);
+    .renderColorRules(#3d54b1, indigo, #fff);
+    .renderColorRules(#2095f2, blue, #fff);
+    .renderColorRules(#20aaf1, lightblue, #fff);
+    .renderColorRules(#29bbd2, cyan, #fff);
+    .renderColorRules(#209487, teal, #fff);
+    .renderColorRules(#54ad54, green, #fff);
+    .renderColorRules(#8fc052, lightgreen, rgba(0, 0, 0, 0.5));
+    .renderColorRules(#cdd948, lime, rgba(0, 0, 0, 0.5));
+    .renderColorRules(@colorYellow, yellow, rgba(0, 0, 0, 0.5));
+    .renderColorRules(#fbbe2e, amber, rgba(0, 0, 0, 0.5));
+    .renderColorRules(#fc9626, orange, rgba(0, 0, 0, 0.5));
+    .renderColorRules(#f8582f, deeporange, #fff);
+    .renderColorRules(#775447, brown, #fff);
+    .renderColorRules(#8a8a8a, grey, rgba(0, 0, 0, 0.5));
+    .renderColorRules(#ddd, lightgrey, #000);
+
+    .renderColorRules(#607c89, bluegrey, #fff);
+
+    .renderColorRules(#97844b, bezova, #fff);
+    .renderColorRules(#1d86d9, modra, #fff);
+    .renderColorRules(#7e7e7e, mse, #fff);
+    .renderColorRules(#005190, korporat, #fff);
+    .renderColorRules(#000, cerna, #fff);
+    .renderColorRules(@colorVcelin, vcelin, #fff);
+    .renderColorRules(@colorContentBg, greybg, #000);
+*/
+
+}
+
+/*
+.tag.tag-pdv {
+    background-color: #9b26af;
+    color: white;
+}
+.tag.tag-ns {
+    background-color: #3e50b4;
+    color: white;
+}
+.tag.tag-ret {
+    background-color: #6639b6;
+    color: white;
+}
+.tag.tag-lide {
+    background-color: #363f45;
+    color: white;
+}
+.tag.tag-korp {
+    background-color: #5f7c8a;
+    color: white;
+}
+.tag.tag-pred {
+    background-color: #f34235;
+    color: white;
+}
+.tag.tag-sedy {
+    background-color: #6b6b6b;
+    color: white;
+}
+.tag.tag-zel {
+    background-color: #8ac249;
+    color: white;
+}
+.tag.tag-mod {
+    background-color: #005190;
+    color: white;
+}
+.tag.tag-cer {
+    background-color: #000;
+    color: white;
+}
+.tag.tag-proj {
+    background-color: #785447;
+    color: white;
+}
+.tag.tag-bezovy {
+    background-color: #927e42;
+    color: white;
+}
+*/

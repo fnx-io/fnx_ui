@@ -1,0 +1,43 @@
+* {
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+
+.dropShadow(@size) {
+  box-shadow: @size @size * 1.5 @size/2 rgba(0,0,0,0.2);
+}
+
+.shadow {
+  .dropShadow(0.2rem);
+  &--raising {
+    .dropShadow(0.2rem);
+    &:hover {
+      .dropShadow(0.4rem);
+    }
+  }
+}
+.shadow--big {
+  .dropShadow(0.4rem);
+  &--raising {
+    .dropShadow(0.4rem);
+    &:hover {
+      .dropShadow(0.6rem);
+    }
+  }
+}
+
+.shadow--huge {
+  .dropShadow(0.6rem);
+  &--raising {
+    .dropShadow(0.6rem);
+    &:hover {
+      .dropShadow(0.8rem);
+    }
+  }
+}
+
+
+
+.border {
+  border: 1px solid @colorBorder;
+}
