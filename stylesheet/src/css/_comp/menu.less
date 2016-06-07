@@ -1,46 +1,102 @@
+.renderMenuItem() {
+  .renderComponentWithoutBorder(@baseWidgetHeight, @lineHeight);
+  padding-left: @padding;
+  padding-right: @padding;
+}
+
+.renderMenuIcons() {
+  &.menu--icons {
+    & > li > *:not(.icon):not(.icon--round):not(.mi) {
+      padding-left: @baseWidgetHeight;
+    }
+    & > li > * {
+      & > .icon, & > .icon--round, & > .mi {
+        .fs-xxl;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+  &.menu--icons--suffix {
+    & > li > *:not(.icon):not(.icon--round):not(.mi) {
+      padding-right: @baseWidgetHeight;
+    }
+    & > li > * {
+      & > .icon, & > .icon--round, & > .mi {
+        .fs-xxl;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+    }
+  }
+  &.menu--icons--suffix.menu--icons {
+    & > li > * {
+      & > .icon, & > .icon--round, & > .mi {
+        left: 0;
+      }
+      & > .icon + .icon, & > .icon--round, & > .mi {
+        left:auto;
+        right:0;
+      }
+    }
+  }
+}
 .menu--horizontal {
   padding:0;
   margin:0;
   .flex-row;
   list-style: none;
+  .renderMenuIcons();
 
   & > li {
+    position: relative;
     & > * {
-      display: block;
-      .renderComponentWithoutBorder(@baseWidgetHeight, @lineHeight);
+      &:not(.icon):not(.icon--round):not(.mi) {
+        .renderMenuItem();
+        display: block;
+      }
     }
     & > a {
       text-decoration: none;
     }
   }
-
 }
-.navbar {
-  & > .menu--horizontal {
-    & > li {
-      & > * {
-        .renderComponentWithoutBorder(@baseWidgetHeight * 1.5, @lineHeight);
-      }
-    }
-  }
-}
-
 
 .menu--vertical {
   padding:0;
   margin:0;
   list-style: none;
+  .renderMenuIcons();
 
   & > li {
     padding:0;
     margin:0;
+    position: relative;
     & > * {
-      display: block;
-      .renderComponentWithoutBorder(@baseWidgetHeight, @lineHeight);
+      &:not(.icon):not(.icon--round):not(.mi) {
+        display: block;
+        .renderMenuItem();
+      }
     }
     & > a {
       text-decoration: none;
     }
   }
-
 }
+
+.navbar {
+  & > .menu--horizontal {
+    & > li {
+      & > * {
+        &:not(.icon):not(.icon--round):not(.mi) {
+          .renderComponentWithoutBorder(@baseWidgetHeight * 1.5, @lineHeight);
+          padding-left: @padding;
+          padding-right: @padding;
+        }
+      }
+    }
+  }
+}
+

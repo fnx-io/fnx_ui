@@ -2,7 +2,15 @@
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: local('MaterialIcons-Regular'), url(icons/MaterialIcons-Regular.woff) format('woff');
+  src: local('MaterialIcons-Regular'), url(_icons/MaterialIcons-Regular.woff) format('woff');
+}
+
+.oneCharSquare() {
+  display: inline-block;
+  height: @baseWidgetHeight;
+  width: @baseWidgetHeight;
+  text-align: center;
+  line-height: @baseWidgetHeight;
 }
 
 .mi {
@@ -42,4 +50,13 @@
   &.md-48 { font-size: 48px; }
   &.md-72 { font-size: 72px; }
   &.md-96 { font-size: 96px; }
+}
+
+.icon, .icon--round {
+  .mi;
+  .oneCharSquare();
+  .fs-xl;
+}
+.icon--round {
+  border-radius: 50%;
 }

@@ -11,6 +11,22 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
+    <style>
+        .example-color {
+            width: 13em;
+            float: left;
+            padding: 0.5em;
+        }
+        .example-color * {
+            padding: 0.1em;
+            font-size: 0.8rem;
+            font-family: monospace;
+        }
+        .example-color *:nth-child(5) {
+            padding: 0.8em 0.1em;
+            margin: 0.2em 0;
+        }
+    </style>
 </head>
 <body>
 <body>
@@ -19,15 +35,18 @@
 <section id="colors">
     <script>
         $(function () {
-            var colors = ["black", "white", "red", "pink", "purple"];
+            var colors = ["black", "white", "red", "pink", "purple",
+                "deep-purple", "indigo", "blue", "light-blue", "cyan", "teal",
+                "green", "light-green", "lime",
+                "yellow","amber","orange","deep-orange","brown","grey","blue-grey"];
             $(colors).each(function(i, val) {
                 $("#colors").append(
                         $("<div class='example-color'>" +
-                                "<div class='bg--"+val+"'>.bg--"+val+"</div>" +
-                                "<div class='bg--"+val+"--l1'>.bg--"+val+"--l1</div>" +
-                                "<div class='bg--"+val+"--l2'>.bg--"+val+"--l2</div>" +
-                                "<div class='bg--"+val+"--l3'>.bg--"+val+"--l3</div>" +
                                 "<div class='bg--"+val+"--l4'>.bg--"+val+"--l4</div>" +
+                                "<div class='bg--"+val+"--l3'>.bg--"+val+"--l3</div>" +
+                                "<div class='bg--"+val+"--l2'>.bg--"+val+"--l2</div>" +
+                                "<div class='bg--"+val+"--l1'>.bg--"+val+"--l1</div>" +
+                                "<div class='bg--"+val+"'>.bg--"+val+"</div>" +
                                 "<div class='bg--"+val+"--d1'>.bg--"+val+"--d1</div>" +
                                 "<div class='bg--"+val+"--d2'>.bg--"+val+"--d2</div>" +
                                 "<div class='bg--"+val+"--d3'>.bg--"+val+"--d3</div>" +
@@ -36,11 +55,11 @@
                 );
                 $("#colors").append(
                         $("<div class='example-color'>" +
-                                "<div class='text--"+val+"'>.text--"+val+"</div>" +
-                                "<div class='text--"+val+"--l1'>.text--"+val+"--l1</div>" +
-                                "<div class='text--"+val+"--l2'>.text--"+val+"--l2</div>" +
-                                "<div class='text--"+val+"--l3'>.text--"+val+"--l3</div>" +
                                 "<div class='text--"+val+"--l4'>.text--"+val+"--l4</div>" +
+                                "<div class='text--"+val+"--l3'>.text--"+val+"--l3</div>" +
+                                "<div class='text--"+val+"--l2'>.text--"+val+"--l2</div>" +
+                                "<div class='text--"+val+"--l1'>.text--"+val+"--l1</div>" +
+                                "<div class='text--"+val+"'>.text--"+val+"</div>" +
                                 "<div class='text--"+val+"--d1'>.text--"+val+"--d1</div>" +
                                 "<div class='text--"+val+"--d2'>.text--"+val+"--d2</div>" +
                                 "<div class='text--"+val+"--d3'>.text--"+val+"--d3</div>" +
@@ -51,6 +70,9 @@
         });
 
     </script>
+
+    <p class="bg--black text--yellow">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, eligendi, placeat? Accusantium adipisci alias assumenda eius, fugiat labore neque omnis similique sunt voluptatibus. Deserunt fugiat iste laborum quam recusandae. Quis.</p>
+    <p class="bg--orange text--white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At autem blanditiis consequuntur cum, deserunt dignissimos dolore esse eveniet exercitationem, facere fuga harum id laboriosam mollitia, placeat quam quas sint voluptates.</p>
 
 </section>
 </body>

@@ -1,16 +1,29 @@
 .navbar {
   display: flex;
   margin: 0;
-  padding: 0;
+  padding: 0 @padding;
   & > * {
     margin: 0;
     display: block;
     flex-grow: 0;
     flex-shrink: 0;
+  }
+  & > *:not(.icon):not(.icon--round):not(.mi):not(.menu--horizontal) {
     .renderComponentWithoutBorder(@baseWidgetHeight * 1.5, @lineHeight);
   }
-}
-.navbar__spacer {
-  flex-grow: 1;
-  flex-basis: 1px;
+  & > *:not(.icon):not(.icon--round):not(.mi):not(:first-child) {
+    margin-left: @padding;
+  }
+  & > .icon, & > .icon--round, & > .mi {
+    margin-top: @baseWidgetHeight * 0.25;
+    margin-bottom: @baseWidgetHeight * 0.25;
+  }
+  & > .mi {
+    .oneCharSquare();
+  }
+
+  .navbar__spacer {
+    flex-grow: 1 !important;
+    flex-basis: 1px;
+  }
 }
