@@ -1,0 +1,71 @@
+.btn {
+  .renderComponentWithoutBorder(@baseWidgetHeight, @lineHeight);
+  padding-left: @padding;
+  padding-right: @padding;
+  border: none;
+  margin: 0;
+  .softBorder();
+  text-decoration: none;
+  text-transform: uppercase;
+  .fs-m;
+  .f-roboto;
+  font-weight: 300;
+  display: inline-block;
+  line-height: @lineHeight;
+
+  .dropShadow(0.1rem);
+  &:hover {
+    .dropShadow(0.3rem);
+    transition: background 0.3s, box-shadow 0.1s;
+  }
+  &:active {
+    .dropShadow(0);
+  }
+
+  .icon {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: auto;
+    line-height: 1.2rem;
+    position: relative;
+    top: 0.1em;
+  }
+}
+
+.buttonbar {
+  .flex-row;
+  padding: @padding 0;
+  & > .btn, & > .multibutton {
+    &:not(:last-child) {
+      margin-right: @padding;
+    }
+  }
+}
+.multibutton {
+  .clearfix();
+  display: inline-block;
+  background-color: transparent;
+  .softBorder();
+  & >.btn, & > .icon {
+    box-shadow: none !important;
+    display: block;
+    float: left;
+    border-radius: 0;
+    &:first-child {
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+    &:last-child {
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+  }
+  .dropShadow(0.1rem);
+  &:hover {
+    .dropShadow(0.3rem);
+    transition: background 0.3s, box-shadow 0.1s;
+  }
+  &:active {
+    .dropShadow(0);
+  }
+}

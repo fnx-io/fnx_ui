@@ -15,25 +15,40 @@ a {
 
 .renderColorSettings(@hexa) {
     background-color: @hexa;
+    &.btn {
+        border-color: @hexa;
+    }
     & when (luma(color(@hexa)) <= 60%) {
         color: #eee;
+        &.btn {
+            color: #eee !important;
+            &:hover {
+                background-color: lighten(color(@hexa), 10%);
+            }
+        }
         a, a:visited {
             color: #fff;
         }
         .menu--horizontal, .menu--vertical, &.menu--horizontal, &.menu--vertical {
-            a:hover {
-                background-color: lighten(color(@hexa), 5%);
+            li:hover {
+                background-color: lighten(color(@hexa), 10%);
             }
         }
     }
     & when (luma(color(@hexa)) > 40%) {
         color: @colorText;
+        &.btn {
+            color: @colorText !important;
+            &:hover {
+                background-color: darken(color(@hexa), 10%);
+            }
+        }
         a, a:visited {
             color: #000;
         }
         .menu--horizontal, .menu--vertical, &.menu--horizontal, &.menu--vertical {
-            a:hover {
-                background-color: darken(color(@hexa), 5%);
+            li:hover {
+                background-color: darken(color(@hexa), 10%);
             }
         }
     }

@@ -1,24 +1,25 @@
-html {
-  height: 100%;
-  width: 100%;
-}
-body {
-  height: 100%;
-  width: 100%;
-  overflow: auto;
-}
-
-.fit {
-  position: absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-}
-
 .renderMainPanel() {
   flex-grow: 1;
   flex-shrink: 1;
   overflow: auto;
   position: relative;
+}
+
+.layout--sidebar {
+  .fit;
+  .flex-row;
+  & > main {
+    .renderMainPanel();
+    .flex-grow;
+  }
+}
+
+
+.layout--header {
+  .fit;
+  .flex-column;
+  & > main {
+    .renderMainPanel();
+    .flex-grow;
+  }
 }

@@ -8,22 +8,17 @@
     flex-grow: 0;
     flex-shrink: 0;
   }
-  & > *:not(.icon):not(.icon--round):not(.mi):not(.menu--horizontal) {
+  & > *:not(.icon):not(.icon--round):not(.mi):not(.menu--horizontal):not(.btn) {
     .renderComponentWithoutBorder(@baseWidgetHeight * 1.5, @lineHeight);
   }
   & > *:not(.icon):not(.icon--round):not(.mi):not(:first-child) {
     margin-left: @padding;
   }
-  & > .icon, & > .icon--round, & > .mi {
+  & > .icon, & > .icon--round, & > .mi, & > .btn {
     margin-top: @baseWidgetHeight * 0.25;
     margin-bottom: @baseWidgetHeight * 0.25;
   }
   & > .mi {
     .oneCharSquare();
-  }
-
-  .navbar__spacer {
-    flex-grow: 1 !important;
-    flex-basis: 1px;
   }
 }
