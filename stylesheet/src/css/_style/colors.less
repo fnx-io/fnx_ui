@@ -1,6 +1,11 @@
 
 // http://www.google.com/design/spec/style/color.html#color-color-palette
 
+@level1: 5%;
+@level2: @level1 * 2;
+@level3: @level1 * 3;
+@level4: @level1 * 4;
+
 html {
     background-color: @colorBackground;
     color: @colorText;
@@ -17,27 +22,27 @@ a {
     & when (luma(color(@hexa)) <= 60%) {
         color: #eee;
         a, a:visited {
-            color: #eee;
+            color: #fff;
         }
     }
     & when (luma(color(@hexa)) > 40%) {
         color: @colorText;
         a, a:visited {
-            color: @colorText;
+            color: #000;
         }
     }
 }
 .renderColorSettings(@hexa) {
     background-color: @hexa;
-    &.btn {
-        border-color: @hexa;
+    &.btn, &.tag {
+        background-color: @hexa !important;
     }
     & when (luma(color(@hexa)) <= 60%) {
         color: #eee;
-        &.btn {
+        &.btn, &.tag {
             color: #eee !important;
             &:hover {
-                background-color: lighten(color(@hexa), 10%);
+                background-color: lighten(color(@hexa), @level1) !important;
             }
         }
         a, a:visited {
@@ -45,16 +50,16 @@ a {
         }
         .menu--horizontal, .menu--vertical, &.menu--horizontal, &.menu--vertical {
             li:hover {
-                background-color: lighten(color(@hexa), 10%);
+                background-color: lighten(color(@hexa), @level1);
             }
         }
     }
     & when (luma(color(@hexa)) > 40%) {
         color: @colorText;
-        &.btn {
+        &.btn, &.tag {
             color: @colorText !important;
             &:hover {
-                background-color: darken(color(@hexa), 10%);
+                background-color: darken(color(@hexa), @level1) !important;
             }
         }
         a, a:visited {
@@ -62,7 +67,7 @@ a {
         }
         .menu--horizontal, .menu--vertical, &.menu--horizontal, &.menu--vertical {
             li:hover {
-                background-color: darken(color(@hexa), 10%);
+                background-color: darken(color(@hexa), @level1);
             }
         }
     }
@@ -71,28 +76,37 @@ a {
     .primary--@{themeName} {
         .picker__header,
         .navbar,
+        .primary,
+        .tag,
+        th,
         .menu--horizontal {
             .renderBgAndText(@hexaColor);
         }
         & when (luma(color(@hexaColor)) <= 60%) {
             .important {
-                .renderBgAndText(lighten(color(@hexaColor), 20%));
+                .renderBgAndText(lighten(color(@hexaColor), @level2));
+            }
+            .btn.primary:hover, a.tag:hover {
+                .renderBgAndText(lighten(color(@hexaColor), @level1));
             }
             .menu--horizontal .menu--vertical {
-                .renderBgAndText(lighten(color(@hexaColor), 5%));
+                .renderBgAndText(lighten(color(@hexaColor), @level1/2));
             }
         }
         & when (luma(color(@hexaColor)) > 40%) {
             .important {
-                .renderBgAndText(darken(color(@hexaColor), 20%));
+                .renderBgAndText(darken(color(@hexaColor), @level2));
+            }
+            .btn.primary:hover, a.tag:hover {
+                .renderBgAndText(darken(color(@hexaColor), @level1));
             }
             .menu--horizontal .menu--vertical {
-                .renderBgAndText(darken(color(@hexaColor), 5%));
+                .renderBgAndText(darken(color(@hexaColor), @level1/2));
             }
         }
     }
     .secondary--@{themeName} {
-        .selected, .menu--horizontal > li:hover, .menu--vertical > li:hover {
+        .selected, .secondary, .menu--horizontal > li:hover > *:not(.menu--vertical), .menu--vertical > li:hover > *:not(.menu--vertical) {
             .renderBgAndText(@hexaColor);
         }
         .select__dropdown > ul > li:hover {
@@ -105,6 +119,17 @@ a {
                 }
             }
         }
+        & when (luma(color(@hexaColor)) <= 60%) {
+            .btn.secondary:hover {
+                .renderBgAndText(lighten(color(@hexaColor), @level1));
+            }
+        }
+        & when (luma(color(@hexaColor)) > 40%) {
+            .btn.secondary:hover {
+                .renderBgAndText(darken(color(@hexaColor), @level1));
+            }
+        }
+
     }
 }
 .renderColorRules(@hexa, @name) {
@@ -112,70 +137,70 @@ a {
     .bg--@{name} {
         .renderColorSettings(@hexa);
         &--l1 {
-            .renderColorSettings(lighten(color(@hexa), 10%));
+            .renderColorSettings(lighten(color(@hexa), @level1));
         }
         &--l2 {
-            .renderColorSettings(lighten(color(@hexa), 20%));
+            .renderColorSettings(lighten(color(@hexa), @level2));
         }
         &--l3 {
-            .renderColorSettings(lighten(color(@hexa), 30%));
+            .renderColorSettings(lighten(color(@hexa), @level3));
         }
         &--l4 {
-            .renderColorSettings(lighten(color(@hexa), 40%));
+            .renderColorSettings(lighten(color(@hexa), @level4));
         }
         &--d1 {
-            .renderColorSettings(darken(color(@hexa), 10%));
+            .renderColorSettings(darken(color(@hexa), @level1));
         }
         &--d2 {
-            .renderColorSettings(darken(color(@hexa), 20%));
+            .renderColorSettings(darken(color(@hexa), @level2));
         }
         &--d3 {
-            .renderColorSettings(darken(color(@hexa), 30%));
+            .renderColorSettings(darken(color(@hexa), @level3));
         }
         &--d4 {
-            .renderColorSettings(darken(color(@hexa), 40%));
+            .renderColorSettings(darken(color(@hexa), @level4));
         }
     }
     body {
         .text--@{name} {
             color: @hexa;
             &--l1 {
-                color: (lighten(color(@hexa), 10%));
+                color: (lighten(color(@hexa), @level1));
             }
             &--l2 {
-                color: (lighten(color(@hexa), 20%));
+                color: (lighten(color(@hexa), @level2));
             }
             &--l3 {
-                color: (lighten(color(@hexa), 30%));
+                color: (lighten(color(@hexa), @level3));
             }
             &--l4 {
-                color: (lighten(color(@hexa), 40%));
+                color: (lighten(color(@hexa), @level4));
             }
             &--d1 {
-                color: (darken(color(@hexa), 10%));
+                color: (darken(color(@hexa), @level1));
             }
             &--d2 {
-                color: (darken(color(@hexa), 20%));
+                color: (darken(color(@hexa), @level2));
             }
             &--d3 {
-                color: (darken(color(@hexa), 30%));
+                color: (darken(color(@hexa), @level3));
             }
             &--d4 {
-                color: (darken(color(@hexa), 40%));
+                color: (darken(color(@hexa), @level4));
             }
         }
     }
 
     .renderTheme(@hexa, @name);
 
-    .renderTheme(lighten(color(@hexa), 10%), ~"@{name}--l1");
-    //.renderTheme(lighten(color(@hexa), 20%), ~"@{name}--l2");
-    //.renderTheme(lighten(color(@hexa), 30%), ~"@{name}--l3");
-    //.renderTheme(lighten(color(@hexa), 40%), ~"@{name}--l4");
-    .renderTheme(darken(color(@hexa), 10%), ~"@{name}--d1");
-    //.renderTheme(darken(color(@hexa), 20%), ~"@{name}--d2");
-    //.renderTheme(darken(color(@hexa), 30%), ~"@{name}--d3");
-    //.renderTheme(darken(color(@hexa), 40%), ~"@{name}--d4");
+    .renderTheme(lighten(color(@hexa), @level1), ~"@{name}--l1");
+    .renderTheme(lighten(color(@hexa), @level2), ~"@{name}--l2");
+    .renderTheme(lighten(color(@hexa), @level3), ~"@{name}--l3");
+    .renderTheme(lighten(color(@hexa), @level4), ~"@{name}--l4");
+    .renderTheme(darken(color(@hexa), @level1), ~"@{name}--d1");
+    .renderTheme(darken(color(@hexa), @level2), ~"@{name}--d2");
+    .renderTheme(darken(color(@hexa), @level3), ~"@{name}--d3");
+    .renderTheme(darken(color(@hexa), @level4), ~"@{name}--d4");
 }
 
 html {

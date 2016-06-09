@@ -1,0 +1,28 @@
+table {
+  border-collapse: collapse;
+  td, th {
+    padding: @padding / 3;
+    .fs-m;
+  }
+}
+
+.table {
+
+  &--borders {
+    td, th {
+      .border;
+    }
+  }
+  &--lines {
+    td, th {
+      border-top: 1px solid @colorBorder;
+      border-bottom: 1px solid @colorBorder;
+    }
+  }
+  &--stripes {
+    tr:nth-child(2n) {
+      background-color: #eee;
+    }
+  }
+
+}
