@@ -2,9 +2,15 @@
   transition: background 0.3s, box-shadow 0.3s;
   outline: none !important;
 }
-*:focus {
+
+.focusOutline() {
   outline: 2px dotted @colorGrey !important;
   outline-offset: 2px !important;
+}
+
+*:focus {
+  .focusOutline();
+  z-index: 1;
 }
 
 .dropShadow(@size) {
@@ -45,5 +51,5 @@
 }
 
 .softBorder() {
-  border-radius: 3px;
+  border-radius: @borderRadius;
 }

@@ -1,4 +1,5 @@
-.input {
+.input, .input--checkgroup {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   padding: @padding / 4 0;
@@ -6,8 +7,9 @@
   & > * {
     flex-grow: 0;
     flex-shrink: 0;
+    margin: 0;
   }
-  & > label {
+  & > label:not(.icon) {
     width: 100%;
     &:first-child {
       margin-top: @padding / 4;
@@ -33,6 +35,57 @@
     }
   }
 
+  & > .check {
+
+  }
+
+}
+.check {
+  position: relative;
+  & > input[type=checkbox], & > input[type=radio] {
+    opacity: 0.01;
+    width: 1px;
+    overflow: hidden;
+    &:focus {
+      outline: none !important;
+      & + label {
+        .focusOutline();
+      }
+    }
+    & + label {
+      padding-left: @baseWidgetHeight;
+      .renderComponentWithoutBorder(@baseWidgetHeight, @lineHeight);
+      min-height: @baseWidgetHeight;
+      margin-bottom: 0;
+
+      &:before {
+        position: absolute;
+        left:0;
+        top:0;
+        .icon;
+        content: 'check_box_outline_blank';
+      }
+    }
+    &:checked + label {
+      &:before {
+        content: 'check_box';
+      }
+    }
+  }
+  & > input[type=radio] {
+    & + label:before {
+      content: 'radio_button_unchecked';
+    }
+    &:checked + label:before {
+      content: 'radio_button_checked';
+    }
+  }
+}
+.input--checkgroup {
+  display: block;
+  & > * {
+    display: block;
+  }
 }
 
 .row {

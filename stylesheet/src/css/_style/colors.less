@@ -12,7 +12,21 @@ a {
         color: @colorLink;
     }
 }
-
+.renderBgAndText(@hexa) {
+    background-color: @hexa;
+    & when (luma(color(@hexa)) <= 60%) {
+        color: #eee;
+        a, a:visited {
+            color: #eee;
+        }
+    }
+    & when (luma(color(@hexa)) > 40%) {
+        color: @colorText;
+        a, a:visited {
+            color: @colorText;
+        }
+    }
+}
 .renderColorSettings(@hexa) {
     background-color: @hexa;
     &.btn {
@@ -54,6 +68,30 @@ a {
     }
 }
 .renderColorRules(@hexa, @name) {
+
+    .primary--@{name} {
+        .selected,
+        .picker__header,
+        .menu--horizontal {
+            .renderBgAndText(@hexa);
+        }
+        .important {
+            & when (luma(color(@hexa)) <= 60%) {
+                .renderBgAndText(lighten(color(@hexa), 20%));
+            }
+            & when (luma(color(@hexa)) > 40%) {
+                .renderBgAndText(darken(color(@hexa), 20%));
+            }
+        }
+        .menu--horizontal > li:hover {
+            & when (luma(color(@hexa)) <= 60%) {
+                .renderBgAndText(lighten(color(@hexa), 10%));
+            }
+            & when (luma(color(@hexa)) > 40%) {
+                .renderBgAndText(darken(color(@hexa), 10%));
+            }
+        }
+    }
 
     .bg--@{name} {
         .renderColorSettings(@hexa);

@@ -1,0 +1,62 @@
+.picker--date {
+  .flex-row;
+  .card;
+  position: absolute;
+  left: @baseWidgetHeight;
+  top: @baseWidgetHeight * 2;
+  background-color: white;
+  z-index: 100;
+  .picker__content:first-child {
+    width: @baseWidgetHeight * 7;
+  }
+  th, td {
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: @baseWidgetHeight;
+    height: @baseWidgetHeight;
+    line-height: @baseWidgetHeight;
+    text-align: center;
+    border-radius: 50%;
+  }
+  .picker__header {
+    width: 100%;
+    margin: 0;
+    height: @baseWidgetHeight;
+    .flex-row;
+    & > a {
+      text-decoration: none;
+    }
+    .picker__today {
+      .flex-grow;
+      .renderComponentWithoutBorder(@baseWidgetHeight, @lineHeight);
+      text-align: center;
+    }
+    & + .picker__time__buttons {
+      margin-top: @baseWidgetHeight / 2;
+    }
+  }
+  .picker__time__time, .picker__time__buttons {
+    padding-left: @baseWidgetHeight;
+    padding-right: @baseWidgetHeight;
+    margin: 0 auto;
+    .flex-row;
+    & > * {
+      display: block;
+      width: @baseWidgetHeight;
+      line-height: @baseWidgetHeight;
+      text-align: center;
+      &:nth-child(2) {
+        width: 1rem;
+      }
+    }
+  }
+  .picker__time__time {
+    .fs-xl;
+  }
+  .picker__time__ampm {
+    padding-left: @baseWidgetHeight;
+    padding-right: @baseWidgetHeight;
+    margin: 0 auto;
+  }
+}

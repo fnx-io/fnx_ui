@@ -2,12 +2,14 @@
   flex-grow: 1;
   flex-shrink: 1;
   overflow: auto;
-  position: relative;
 }
 
 .layout--sidebar {
   .fit;
   .flex-row;
+  & > * {
+    position: relative;
+  }
   & > main {
     .renderMainPanel();
     .flex-grow;
@@ -18,6 +20,9 @@
 .layout--header {
   .fit;
   .flex-column;
+  & > * {
+    position: relative;
+  }
   & > main {
     .renderMainPanel();
     .flex-grow;
