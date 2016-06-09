@@ -20,7 +20,7 @@
     }
   }
 
-  & > input {
+  & > input, & > .select {
     .renderComponentWithBorder(@baseWidgetHeight, @lineHeight);
     .fs-m;
     width: 1em;
@@ -37,6 +37,59 @@
 
   & > .check {
 
+  }
+
+  .select {
+    position: relative;
+    padding-right: @baseWidgetHeight;
+    & > span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      display: block;
+    }
+    &:after {
+      .icon;
+      content: "arrow_drop_down";
+      position: absolute;
+      top:0;
+      right:0;
+    }
+    .select__dropdown {
+      position: absolute;
+      top: 100%;
+      &.drop--up {
+        top: auto;
+        bottom: 100%;
+      }
+      left: 0;
+      max-width: 20em;
+      .shadow;
+      z-index: 100;
+      background-color: white;
+      .border;
+      .softBorder();
+      color: inherit;
+      & > ul {
+        max-height: 25em;
+        overflow-y: scroll;
+        .ul--flat;
+        li {
+          .renderComponentWithBorder(@baseWidgetHeight, @lineHeight);
+          padding-left: @padding;
+          padding-right: @padding;
+          border-bottom: 1px solid lighten(color(@colorBorder), 20%);
+          &:last-child {
+            border: none;
+          }
+        }
+      }
+      .input {
+        padding: @padding / 4;
+        border-bottom: 1px solid lighten(color(@colorBorder), 20%);
+      }
+    }
   }
 
 }

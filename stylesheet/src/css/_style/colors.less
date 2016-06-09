@@ -67,31 +67,47 @@ a {
         }
     }
 }
-.renderColorRules(@hexa, @name) {
-
-    .primary--@{name} {
-        .selected,
+.renderTheme(@hexaColor, @themeName) {
+    .primary--@{themeName} {
         .picker__header,
+        .navbar,
         .menu--horizontal {
-            .renderBgAndText(@hexa);
+            .renderBgAndText(@hexaColor);
         }
-        .important {
-            & when (luma(color(@hexa)) <= 60%) {
-                .renderBgAndText(lighten(color(@hexa), 20%));
+        & when (luma(color(@hexaColor)) <= 60%) {
+            .important {
+                .renderBgAndText(lighten(color(@hexaColor), 20%));
             }
-            & when (luma(color(@hexa)) > 40%) {
-                .renderBgAndText(darken(color(@hexa), 20%));
+            .menu--horizontal .menu--vertical {
+                .renderBgAndText(lighten(color(@hexaColor), 5%));
             }
         }
-        .menu--horizontal > li:hover {
-            & when (luma(color(@hexa)) <= 60%) {
-                .renderBgAndText(lighten(color(@hexa), 10%));
+        & when (luma(color(@hexaColor)) > 40%) {
+            .important {
+                .renderBgAndText(darken(color(@hexaColor), 20%));
             }
-            & when (luma(color(@hexa)) > 40%) {
-                .renderBgAndText(darken(color(@hexa), 10%));
+            .menu--horizontal .menu--vertical {
+                .renderBgAndText(darken(color(@hexaColor), 5%));
             }
         }
     }
+    .secondary--@{themeName} {
+        .selected, .menu--horizontal > li:hover, .menu--vertical > li:hover {
+            .renderBgAndText(@hexaColor);
+        }
+        .select__dropdown > ul > li:hover {
+            .renderBgAndText(@hexaColor);
+        }
+        .picker--date {
+            td, .icon, a {
+                &:hover {
+                    .renderBgAndText(@hexaColor);
+                }
+            }
+        }
+    }
+}
+.renderColorRules(@hexa, @name) {
 
     .bg--@{name} {
         .renderColorSettings(@hexa);
@@ -149,6 +165,17 @@ a {
             }
         }
     }
+
+    .renderTheme(@hexa, @name);
+
+    .renderTheme(lighten(color(@hexa), 10%), ~"@{name}--l1");
+    //.renderTheme(lighten(color(@hexa), 20%), ~"@{name}--l2");
+    //.renderTheme(lighten(color(@hexa), 30%), ~"@{name}--l3");
+    //.renderTheme(lighten(color(@hexa), 40%), ~"@{name}--l4");
+    .renderTheme(darken(color(@hexa), 10%), ~"@{name}--d1");
+    //.renderTheme(darken(color(@hexa), 20%), ~"@{name}--d2");
+    //.renderTheme(darken(color(@hexa), 30%), ~"@{name}--d3");
+    //.renderTheme(darken(color(@hexa), 40%), ~"@{name}--d4");
 }
 
 html {

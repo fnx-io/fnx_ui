@@ -8,6 +8,7 @@ var clean = require('gulp-clean');
 var asciify = require('asciify');
 var sourcemaps = require('gulp-sourcemaps');
 var gutil = require('gulp-util');
+var cleanCSS = require('gulp-clean-css');
 
 var serverPort = 8085;
 
@@ -45,13 +46,13 @@ gulp.task('server', function() {
 
 gulp.task('less', function () {
 	gulp.src(FILES.lessToStart)
-		.pipe(sourcemaps.init())
+		//.pipe(sourcemaps.init())
 		.pipe(less().on('error', function(err){
 			gutil.log(err);
 			this.emit('end');
 		}))
-		.pipe(prefix())
-		.pipe(sourcemaps.write())
+		.pipe(cleanCSS({compatibility: 'ie11'}))
+		//.pipe(sourcemaps.write())
 		.pipe(gulp.dest(workingRoot + 'css'))
 		.pipe(connect.reload());
 });
