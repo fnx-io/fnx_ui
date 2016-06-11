@@ -11,15 +11,14 @@
   font-weight: 300;
   display: inline-block;
   line-height: @lineHeight;
-  text-decoration: none !important;
   background-color: white;
 
   .dropShadow(0.1rem);
-  &:hover {
+  &:hover:not(.disabled):not(:disabled) {
     .dropShadow(0.3rem);
     transition: background 0.3s, box-shadow 0.1s;
   }
-  &:active {
+  &:active:not(.disabled):not(:disabled) {
     .dropShadow(0);
   }
 
@@ -53,15 +52,53 @@
     float: left;
     border-radius: 0;
     &:first-child {
-      border-top-left-radius: @borderRadius;
-      border-bottom-left-radius: @borderRadius;
+      border-top-left-radius: @softBorderRadius;
+      border-bottom-left-radius: @softBorderRadius;
     }
     &:last-child {
-      border-top-right-radius: @borderRadius;
-      border-bottom-right-radius: @borderRadius;
+      border-top-right-radius: @softBorderRadius;
+      border-bottom-right-radius: @softBorderRadius;
     }
   }
   .dropShadow(0.1rem);
+  &:hover:not(.disabled):not(:disabled) {
+    .dropShadow(0.3rem);
+    transition: background 0.3s, box-shadow 0.1s;
+  }
+  &:active:not(.disabled):not(:disabled) {
+    .dropShadow(0);
+  }
+}
+
+@fabSize: @baseWidgetHeight * 1.3;
+.btn--fab {
+  .mi;
+  .fs-xxl;
+  width: @fabSize;
+  padding:0;
+  margin:0;
+  border: none;
+  line-height: @fabSize;
+  text-align: center;
+  border-radius: @fabSize / 2;
+  position: absolute;
+  right: @fabSize / 2;
+  bottom: -@fabSize / 2;
+
+  .dropShadow(0.2rem);
+  &:hover:not(.disabled):not(:disabled) {
+    .dropShadow(0.3rem);
+    transition: background 0.3s, box-shadow 0.1s;
+  }
+  &:active:not(.disabled):not(:disabled) {
+    .dropShadow(0);
+  }
+
+}
+
+.btn--icon {
+  .icon;
+  .dropShadow(0.2rem);
   &:hover {
     .dropShadow(0.3rem);
     transition: background 0.3s, box-shadow 0.1s;
@@ -69,4 +106,8 @@
   &:active {
     .dropShadow(0);
   }
+}
+
+.padding--fab {
+  padding-right: @fabSize + @padding;
 }

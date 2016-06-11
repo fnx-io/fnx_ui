@@ -4,7 +4,7 @@
   position: absolute;
   left: 0;
   top: @baseWidgetHeight * 2;
-  background-color: white;
+  background-color: @colorBackgroundDefault;
   z-index: 100;
   .picker__content:first-child {
     width: @baseWidgetHeight * 7;
@@ -19,6 +19,10 @@
     text-align: center;
     border-radius: 50%;
   }
+  tr:first-child th {
+    border-radius: 0;
+    .renderBgAndText(@colorBackgroundDefault);
+  }
   td {
     cursor: pointer;
   }
@@ -27,13 +31,9 @@
     margin: 0;
     height: @baseWidgetHeight;
     .flex-row;
-    & > a {
-      text-decoration: none;
-    }
     .picker__today {
       .flex-grow;
       .renderComponentWithoutBorder(@baseWidgetHeight, @lineHeight);
-      text-decoration: none;
       text-align: center;
     }
     & + .picker__time__buttons {

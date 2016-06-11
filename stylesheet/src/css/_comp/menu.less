@@ -1,5 +1,5 @@
-.renderMenuItem() {
-  .renderComponentWithoutBorder(@baseWidgetHeight, @lineHeight);
+.renderMenuItem(@height) {
+  .renderComponentWithoutBorder(@height, @lineHeight);
   padding-left: @padding;
   padding-right: @padding;
 }
@@ -36,69 +36,41 @@
       & > .icon, & > .icon--round, & > .mi {
         left: 0;
       }
-      & > .icon + .icon, & > .icon--round, & > .mi {
+      & > .icon + .icon, & > .icon--round + .icon--round, & > .mi + .mi {
         left:auto;
         right:0;
       }
     }
   }
 }
-.menu--horizontal {
+
+.menu() {
   padding:0;
   margin-bottom: 0;
-  .flex-row;
   list-style: none;
   .renderMenuIcons();
-
   & > li {
     position: relative;
     & > * {
       &:not(.icon):not(.icon--round):not(.mi) {
-        .renderMenuItem();
+        .renderMenuItem(@baseWidgetHeight);
         display: block;
-      }
-    }
-    & > a {
-      text-decoration: none;
-    }
-  }
-}
-
-.menu--vertical {
-  padding:0;
-  margin-bottom: 0;
-  list-style: none;
-  background-color: white;
-  .renderMenuIcons();
-
-  & > li {
-    padding:0;
-    margin:0;
-    position: relative;
-    & > * {
-      &:not(.icon):not(.icon--round):not(.mi) {
-        display: block;
-        .renderMenuItem();
-      }
-    }
-    & > a {
-      text-decoration: none;
-    }
-  }
-}
-
-.navbar {
-  & > .menu--horizontal {
-    & > li {
-      & > * {
-        &:not(.icon):not(.icon--round):not(.mi) {
-          .renderComponentWithoutBorder(@baseWidgetHeight * 1.5, @lineHeight);
-          padding-left: @padding;
-          padding-right: @padding;
+        .navbar > & {
+          .renderMenuItem(@navbarHeight);
         }
       }
     }
   }
+}
+
+.menu--horizontal {
+  .flex-row;
+  .menu();
+}
+
+.menu--vertical {
+  .menu();
+  .renderMenuColors(@colorBackgroundDefault, 0);
 }
 
 @keyframes menuTolerance {
@@ -145,6 +117,9 @@
 
 .menu--vertical > li, .menu--horizontal > li, .dropdown__container {
   .dropDownMenuVertical();
+}
+.menu--vertical .menu--vertical {
+  border-top-left-radius: 0 !important;
 }
 .menu--horizontal {
   & > li {

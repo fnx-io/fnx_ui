@@ -2,3 +2,4 @@
 *.iml
 _dist
 _devel
+stylesheet/node_modules/

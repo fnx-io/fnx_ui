@@ -4,6 +4,9 @@ table {
     padding: @padding / 3;
     .fs-m;
   }
+  th {
+    .renderBgAndText(@colorBackgroundThemeDefault);
+  }
 }
 
 .table {
@@ -15,8 +18,8 @@ table {
   }
   &--lines {
     td, th {
-      border-top: 1px solid @colorBorder;
-      border-bottom: 1px solid @colorBorder;
+      border-top: 1px solid @colorBorderDefault;
+      border-bottom: 1px solid @colorBorderDefault;
     }
   }
   &--stripes {

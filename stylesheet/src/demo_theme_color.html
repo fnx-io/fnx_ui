@@ -10,47 +10,42 @@
     <link rel="stylesheet" href="css/fnx_ui.css">
 
 </head>
-<body class="primary--black secondary--grey">
+<body class="theme--blue accent--red">
 
 <div class="layout--header">
     <header>
         <nav class="navbar">
+
+            <span class="mi fs-xxxl">screen_lock_rotation</span>
             <h1>Headline</h1>
 
             <span class="spacer"></span>
 
             <ul class="menu--horizontal">
-                <li><span>item</span>
+                <li><span>Submenu</span>
 
                     <ul class="menu--vertical">
                         <li><a href="#">Home</a></li>
                         <li><a href="#">Sweet</a></li>
-                        <li><span>Home</span></li>
-                        <li><a href="#">Long text<br>Long text<br>Long text<br>Long text</a>
-
-                            <ul class="menu--vertical">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">Sweet</a></li>
-                                <li><span>Home</span></li>
-                                <li><a href="#">Long text<br>Long text<br>Long text<br>Long text</a></li>
-                            </ul>
-
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Submenu here</a>
+                        <ul class="menu--vertical menu--icons--suffix">
+                            <li><a href="#">Home <i class="icon">delete</i></a></li>
+                            <li><a href="#">Sweet <i class="icon">delete</i></a></li>
+                            <li class="disabled"><a href="#">Home <i class="icon">delete</i></a></li>
+                            <li><a href="#">Long text<br>Long text<br>Long text<br>Long text <i class="icon">delete</i></a></li>
+                            <li><a href="#">Home</a></li>
+                        </ul>
                         </li>
-                    </ul>
-                </li>
-                <li><a href="#">link</a>
-                    <ul class="menu--vertical">
-                        <li><a href="#">Home</a></li>
                         <li><a href="#">Sweet</a></li>
-                        <li><span>Home</span></li>
-                        <li><a href="#">Long text<br>Long text<br>Long text<br>Long text</a></li>
+                        <li><a href="#">Home</a></li>
                     </ul>
                 </li>
-                <li><a href="#">item</a></li>
-                <li><a href="#">link</a></li>
-                <li><a href="#">item</a></li>
-                <li><a href="#">link</a></li>
-                <li><a href="#">item</a></li>
+                <li><a href="#">qwertyuiop</a></li>
+                <li><a href="#">asdfghjkl</a></li>
+                <li><a href="#">xcvb werty</a></li>
+                <li class="disabled"><a href="#">lkj qwerty</a></li>
+                <li class="disabled"><a href="#">poiuy sdfg</a></li>
             </ul>
         </nav>
     </header>
@@ -60,77 +55,45 @@
                 <ul class="menu--vertical" style="width: 20em">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Sweet</a></li>
-                    <li><span>Home</span></li>
                     <li><a href="#">Long text<br>Long text<br>Long text<br>Long text</a></li>
+                    <li><a href="#">Submenu here</a>
+                        <ul class="menu--vertical menu--icons--suffix">
+                            <li><a href="#">Home <i class="icon">delete</i></a></li>
+                            <li><a href="#">Sweet <i class="icon">delete</i></a></li>
+                            <li class="disabled"><a href="#">Disabled <i class="icon">delete</i></a></li>
+                            <li><a href="#">Long text<br>Long text<br>Long text<br>Long text <i class="icon">delete</i></a></li>
+                            <li><a href="#">Home</a></li>
+                        </ul>
+                    </li>
+                    <li class="disabled"><a href="#">Disabled</a></li>
                 </ul>
             </aside>
             <main>
                 <div class="layout--header">
                     <header>
-                        <nav class="navbar">
-                            <h1>Headline</h1>
-
-                            <span class="spacer"></span>
-
-                            <ul class="menu--horizontal">
-                                <li><span>item</span></li>
-                                <li><a href="#">link</a></li>
-                                <li><span>item</span></li>
-                                <li><a href="#">link</a></li>
-                                <li><span>item</span></li>
-                                <li><a href="#">link</a></li>
-                                <li><span>item</span></li>
-                            </ul>
-                        </nav>
+                        <ul class="menu--horizontal">
+                            <li><span>item</span></li>
+                            <li><a href="#">link</a></li>
+                            <li><span>item</span></li>
+                            <li><a href="#">link</a></li>
+                            <li><span>item</span></li>
+                            <li><a href="#">link</a></li>
+                            <li class="disabled"><span>Disabled</span></li>
+                        </ul>
                     </header>
                     <main class="padding--big">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur corporis deleniti dignissimos illum ipsam, iure laborum minus nihil pariatur perferendis perspiciatis provident, quia tempora tenetur ullam ut, voluptate. Beatae, repellat.</p>
+                        <p>Lorem ipsum dolor sit amet, <a href="#">consectetur adipisicing elit</a>. Consequuntur corporis deleniti dignissimos illum ipsam, iure laborum minus nihil pariatur perferendis perspiciatis provident, quia tempora tenetur ullam ut, voluptate. Beatae, repellat.</p>
+
+                        <p class="buttonbar">
+                            <a href="#" class="btn bg--theme">Theme!</a>
+                            <a href="#" class="btn bg--important">Important!</a>
+                            <span class="spacer"></span>
+                            <button href="#" class="btn"> Default <i class="icon">more</i></button>
+                            <button href="#" class="btn disabled"> Disabled <i class="icon">more</i></button>
+                        </p>
 
                         <div class="row">
-                            <div class="s6 padding--big--right">
-                                <div class="input">
-                                    <label for="a">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at blanditiis delectus.</label>
-                                    <input type="text" id="a">
-                                </div>
-                                <div class="input">
-                                    <label for="b">lorem ipsum</label>
-                                    <input type="text" id="b" class="error">
-                                    <i class="icon">delete</i>
-                                    <label class="error" for="b">Yes, this is an error, it's very seriuos!!!</label>
-                                </div>
-                                <div class="input">
-                                    <i class="icon">delete</i>
-                                    <input type="text" id="c" class="error">
-                                    <label class="error" for="c">Yes, this is an error, it's very seriuos!!! Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet dignissimos distinctio dolore ea, eum facere fuga fugiat id iste maxime molestiae, nisi quo reprehenderit sint tempora tenetur veniam voluptas.</label>
-                                </div>
-                                <div class="input">
-                                    <label for="d">lorem ipsum</label>
-                                    <input type="text" id="d">
-                                    <i class="icon">delete</i>
-                                </div>
-                                <div class="input">
-                                    <label for="e">lorem ipsum</label>
-                                    <input type="text" id="e">
-                                    <i class="icon">delete</i>
-                                </div>
-                            </div>
-                            <div class="s6">
-
-                                <div class="input--checkgroup margin--bottom">
-                                    <h3>This is a group of radio buttons</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem eius enim error excepturi expedita illo nobis quae quo reprehenderit voluptatum. Consequatur exercitationem fugit ipsam, nulla placeat quae recusandae sequi veniam.</p>
-                                <span class="check">
-                                    <input type="radio" name="whatever" id="br" class="error"><label for="br">myself</label>
-                                </span>
-                                <span class="check">
-                                    <input type="radio" name="whatever" id="zr" class="error"><label for="zr">+ 1</label>
-                                </span>
-                                <span class="check">
-                                    <input type="radio" name="whatever" id="yr" class="error"><label for="yr">and qwerty</label>
-                                </span>
-                                    <label class="error" for="b">Yes, this is an error, it's very seriuos!!!</label>
-                                </div>
-
+                            <div class="s4 padding--right">
                                 <div class="input">
                                     <label for="b">Consectetur adipisicing elit.</label>
                                     <input type="text" id="b" placeholder="23.4.2016 11:54" class="error">
@@ -142,7 +105,7 @@
                                             <header class="picker__header">
                                                 <a href="#" class="icon">fast_rewind</a>
                                                 <a href="#" class="icon">chevron_left</a>
-                                                <a href="#" class="picker__today">10. 7. 2016</a>
+                                                <a href="#" class="picker__today">10. 6. 2016</a>
                                                 <a href="#" class="icon">chevron_right</a>
                                                 <a href="#" class="icon">fast_forward</a>
                                             </header>
@@ -233,9 +196,70 @@
                                     </div>
 
                                 </div>
-
                             </div>
+
+                            <table class="s8 table--stripes">
+                                <thead>
+                                <tr>
+                                    <th>dsads sad sa</th>
+                                    <th>dsa dsad sad sa</th>
+                                    <th>dasdadads as</th>
+                                    <th>dsa dsad sad sa</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>f</td>
+                                    <td>dssds</td>
+                                    <td>2321</td>
+                                    <td><a href="#" class="tag">tag</a></td>
+                                </tr>
+                                <tr>
+                                    <td>34343</td>
+                                    <td>
+                                        <a href="#" class="btn bg--theme">Theme!</a>
+                                        <a href="#" class="btn bg--important">Imp!</a>
+                                        <a href="#" class="btn">Def!</a>
+                                    </td>
+                                    <td>dssds</td>
+                                    <td><a href="#" class="tag">tag</a> <a href="#" class="tag">tag</a> <a href="#" class="tag">tag jinej</a></td>
+                                </tr>
+                                <tr>
+                                    <td>dssds</td>
+                                    <td>
+                    <span class="dropdown__container"><span class="icon">more_horiz</span>
+                        <ul class="menu--vertical border">
+                            <li><span>item</span></li>
+                            <li><a href="#">link</a></li>
+                            <li><span>item</span></li>
+                            <li><a href="#">link</a></li>
+                            <li><span>item</span></li>
+                            <li><a href="#">link</a></li>
+                            <li><span>item</span></li>
+                        </ul>
+                    </span>
+                                    </td>
+                                    <td>2321</td>
+                                    <td>dasda</td>
+                                </tr>
+                                <tr>
+                                    <td>2321</td>
+                                    <td>dasda</td>
+                                    <td>gf sa fs</td>
+                                    <td>
+                                        <a href="#" class="tag">default</a>
+                                        <a href="#" class="tag bg--important">default</a>
+                                        <a href="#" class="tag">red</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
                         </div>
+
+                        <p class="padding margin--top bg--theme">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi ducimus eum harum illo incidunt ipsa iure libero maiores, natus repudiandae rerum totam veritatis. Amet dolores fugiat quia sapiente sunt!s
+                        </p>
 
                     </main>
                 </div>

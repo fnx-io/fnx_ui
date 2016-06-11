@@ -10,47 +10,42 @@
     <link rel="stylesheet" href="css/fnx_ui.css">
 
 </head>
-<body class="primary--indigo secondary--indigo--d1">
+<body>
 
 <div class="layout--header">
     <header>
         <nav class="navbar">
+
+            <span class="mi fs-xxxl">screen_lock_rotation</span>
             <h1>Headline</h1>
 
             <span class="spacer"></span>
 
             <ul class="menu--horizontal">
-                <li><span>item</span>
+                <li><span>Submenu</span>
 
                     <ul class="menu--vertical">
                         <li><a href="#">Home</a></li>
                         <li><a href="#">Sweet</a></li>
-                        <li><span>Home</span></li>
-                        <li><a href="#">Long text<br>Long text<br>Long text<br>Long text</a>
-
-                            <ul class="menu--vertical">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">Sweet</a></li>
-                                <li><span>Home</span></li>
-                                <li><a href="#">Long text<br>Long text<br>Long text<br>Long text</a></li>
-                            </ul>
-
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Submenu here</a>
+                        <ul class="menu--vertical menu--icons--suffix">
+                            <li><a href="#">Home <i class="icon">delete</i></a></li>
+                            <li><a href="#">Sweet <i class="icon">delete</i></a></li>
+                            <li class="disabled"><a href="#">Home <i class="icon">delete</i></a></li>
+                            <li><a href="#">Long text<br>Long text<br>Long text<br>Long text <i class="icon">delete</i></a></li>
+                            <li><a href="#">Home</a></li>
+                        </ul>
                         </li>
-                    </ul>
-                </li>
-                <li><a href="#">link</a>
-                    <ul class="menu--vertical">
-                        <li><a href="#">Home</a></li>
                         <li><a href="#">Sweet</a></li>
-                        <li><span>Home</span></li>
-                        <li><a href="#">Long text<br>Long text<br>Long text<br>Long text</a></li>
+                        <li><a href="#">Home</a></li>
                     </ul>
                 </li>
-                <li><a href="#">item</a></li>
-                <li><a href="#">link</a></li>
-                <li><a href="#">item</a></li>
-                <li><a href="#">link</a></li>
-                <li><a href="#">item</a></li>
+                <li><a href="#">qwertyuiop</a></li>
+                <li><a href="#">asdfghjkl</a></li>
+                <li><a href="#">xcvb werty</a></li>
+                <li class="disabled"><a href="#">lkj qwerty</a></li>
+                <li class="disabled"><a href="#">poiuy sdfg</a></li>
             </ul>
         </nav>
     </header>
@@ -60,40 +55,210 @@
                 <ul class="menu--vertical" style="width: 20em">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Sweet</a></li>
-                    <li><span>Home</span></li>
                     <li><a href="#">Long text<br>Long text<br>Long text<br>Long text</a></li>
+                    <li><a href="#">Submenu here</a>
+                        <ul class="menu--vertical menu--icons--suffix">
+                            <li><a href="#">Home <i class="icon">delete</i></a></li>
+                            <li><a href="#">Sweet <i class="icon">delete</i></a></li>
+                            <li class="disabled"><a href="#">Disabled <i class="icon">delete</i></a></li>
+                            <li><a href="#">Long text<br>Long text<br>Long text<br>Long text <i class="icon">delete</i></a></li>
+                            <li><a href="#">Home</a></li>
+                        </ul>
+                    </li>
+                    <li class="disabled"><a href="#">Disabled</a></li>
                 </ul>
             </aside>
             <main>
                 <div class="layout--header">
                     <header>
-                        <nav class="navbar">
-                            <h1>Headline</h1>
-
-                            <span class="spacer"></span>
-
-                            <ul class="menu--horizontal">
-                                <li><span>item</span></li>
-                                <li><a href="#">link</a></li>
-                                <li><span>item</span></li>
-                                <li><a href="#">link</a></li>
-                                <li><span>item</span></li>
-                                <li><a href="#">link</a></li>
-                                <li><span>item</span></li>
-                            </ul>
-                        </nav>
+                        <ul class="menu--horizontal">
+                            <li><span>item</span></li>
+                            <li><a href="#">link</a></li>
+                            <li><span>item</span></li>
+                            <li><a href="#">link</a></li>
+                            <li><span>item</span></li>
+                            <li><a href="#">link</a></li>
+                            <li class="disabled"><span>Disabled</span></li>
+                        </ul>
                     </header>
                     <main class="padding--big">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur corporis deleniti dignissimos illum ipsam, iure laborum minus nihil pariatur perferendis perspiciatis provident, quia tempora tenetur ullam ut, voluptate. Beatae, repellat.</p>
-
-
+                        <p>Lorem ipsum dolor sit amet, <a href="#">consectetur adipisicing elit</a>. Consequuntur corporis deleniti dignissimos illum ipsam, iure laborum minus nihil pariatur perferendis perspiciatis provident, quia tempora tenetur ullam ut, voluptate. Beatae, repellat.</p>
 
                         <p class="buttonbar">
-                            <a href="#" class="btn primary">Button!</a>
-                            <a href="#" class="btn secondary">Button!</a>
+                            <a href="#" class="btn bg--theme">Theme!</a>
+                            <a href="#" class="btn bg--important">Important!</a>
                             <span class="spacer"></span>
-                            <button href="#" class="btn"><i class="icon">more</i> Button qwertyuiop asdfghjkl! <i class="icon">more</i></button>
-                            <a href="#" class="btn primary">Button zxcvbnm!</a>
+                            <button href="#" class="btn"> Default <i class="icon">more</i></button>
+                            <button href="#" class="btn disabled"> Disabled <i class="icon">more</i></button>
+                        </p>
+
+                        <div class="row">
+                            <div class="s4 padding--right">
+                                <div class="input">
+                                    <label for="b">Consectetur adipisicing elit.</label>
+                                    <input type="text" id="b" placeholder="23.4.2016 11:54" class="error">
+                                    <label class="icon" for="b">date_range</label>
+                                    <label class="error" for="b">Yes, this is an error, it's very seriuos!!!</label>
+
+                                    <div class="picker--date">
+                                        <div class="picker__content">
+                                            <header class="picker__header">
+                                                <a href="#" class="icon">fast_rewind</a>
+                                                <a href="#" class="icon">chevron_left</a>
+                                                <a href="#" class="picker__today">10. 6. 2016</a>
+                                                <a href="#" class="icon">chevron_right</a>
+                                                <a href="#" class="icon">fast_forward</a>
+                                            </header>
+                                            <p class="picker__current">2016/12</p>
+                                            <table>
+                                                <tr>
+                                                    <th>Po</th>
+                                                    <th>Út</th>
+                                                    <th>St</th>
+                                                    <th>Čt</th>
+                                                    <th>Pá</th>
+                                                    <th>So</th>
+                                                    <th>Ne</th>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="selected">1</td>
+                                                    <td>2</td>
+                                                    <td>3</td>
+                                                    <td>4</td>
+                                                    <td>5</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>6</td>
+                                                    <td>7</td>
+                                                    <td>8</td>
+                                                    <td class="important">9</td>
+                                                    <td>10</td>
+                                                    <td>11</td>
+                                                    <td>12</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>6</td>
+                                                    <td>7</td>
+                                                    <td>8</td>
+                                                    <td>9</td>
+                                                    <td>10</td>
+                                                    <td>11</td>
+                                                    <td>12</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>6</td>
+                                                    <td>7</td>
+                                                    <td>8</td>
+                                                    <td>9</td>
+                                                    <td>10</td>
+                                                    <td>11</td>
+                                                    <td>12</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>16</td>
+                                                    <td>17</td>
+                                                    <td>18</td>
+                                                    <td>19</td>
+                                                    <td>20</td>
+                                                    <td>21</td>
+                                                    <td></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="picker__content">
+                                            <header class="picker__header"><!-- empty --></header>
+                                            <p class="picker__time__buttons">
+                                                <a href="#" class="icon">keyboard_arrow_up</a>
+                                                <span class=""></span>
+                                                <a href="#" class="icon">keyboard_arrow_up</a>
+                                            </p>
+                                            <p class="picker__time__time">
+                                                <span class="">11</span>
+                                                <span class="">:</span>
+                                                <span class="">45</span>
+                                            </p>
+                                            <p class="picker__time__buttons">
+                                                <a href="#" class="icon">keyboard_arrow_down</a>
+                                                <span class=""></span>
+                                                <a href="#" class="icon">keyboard_arrow_down</a>
+                                            </p>
+                                            <div class="picker__time__ampm input--checkgroup">
+                        <span class="check">
+                            <input type="radio" checked name="ampm" id="am" class="error"><label for="am">AM</label>
+                        </span>
+                        <span class="check">
+                            <input type="radio" name="ampm" id="pm" class="error"><label for="pm">PM</label>
+                        </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <table class="s8 table--stripes">
+                                <thead>
+                                <tr>
+                                    <th>dsads sad sa</th>
+                                    <th>dsa dsad sad sa</th>
+                                    <th>dasdadads as</th>
+                                    <th>dsa dsad sad sa</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>f</td>
+                                    <td>dssds</td>
+                                    <td>2321</td>
+                                    <td><a href="#" class="tag">tag</a></td>
+                                </tr>
+                                <tr>
+                                    <td>34343</td>
+                                    <td>
+                                        <a href="#" class="btn bg--theme">Theme!</a>
+                                        <a href="#" class="btn bg--important">Imp!</a>
+                                        <a href="#" class="btn">Def!</a>
+                                    </td>
+                                    <td>dssds</td>
+                                    <td><a href="#" class="tag">tag</a> <a href="#" class="tag">tag</a> <a href="#" class="tag">tag jinej</a></td>
+                                </tr>
+                                <tr>
+                                    <td>dssds</td>
+                                    <td>
+                    <span class="dropdown__container"><span class="icon">more_horiz</span>
+                        <ul class="menu--vertical border">
+                            <li><span>item</span></li>
+                            <li><a href="#">link</a></li>
+                            <li><span>item</span></li>
+                            <li><a href="#">link</a></li>
+                            <li><span>item</span></li>
+                            <li><a href="#">link</a></li>
+                            <li><span>item</span></li>
+                        </ul>
+                    </span>
+                                    </td>
+                                    <td>2321</td>
+                                    <td>dasda</td>
+                                </tr>
+                                <tr>
+                                    <td>2321</td>
+                                    <td>dasda</td>
+                                    <td>gf sa fs</td>
+                                    <td>
+                                        <a href="#" class="tag">default</a>
+                                        <a href="#" class="tag bg--important">default</a>
+                                        <a href="#" class="tag">red</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <p class="padding margin--top bg--theme">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi ducimus eum harum illo incidunt ipsa iure libero maiores, natus repudiandae rerum totam veritatis. Amet dolores fugiat quia sapiente sunt!s
                         </p>
 
                     </main>

@@ -3,21 +3,22 @@
   margin: 0;
   padding: 0 @padding;
   position: relative;
+
   & > * {
     margin: 0;
     display: block;
     flex-grow: 0;
     flex-shrink: 0;
   }
-  & > *:not(.icon):not(.icon--round):not(.mi):not(.menu--horizontal):not(.btn) {
-    .renderComponentWithoutBorder(@baseWidgetHeight * 1.5, @lineHeight);
+  & > *:not(.icon):not(.icon--round):not(.mi):not(.menu--horizontal):not(.btn):not(.btn--fab) {
+    .renderComponentWithoutBorder(@navbarHeight, @lineHeight);
   }
   & > *:not(.icon):not(.icon--round):not(.mi):not(:first-child) {
     margin-left: @padding;
   }
   & > .icon, & > .icon--round, & > .mi, & > .btn {
-    margin-top: @baseWidgetHeight * 0.25;
-    margin-bottom: @baseWidgetHeight * 0.25;
+    margin-top: (@navbarHeight - @baseWidgetHeight) / 2;
+    margin-bottom: (@navbarHeight - @baseWidgetHeight) / 2;
   }
   & > .mi {
     .oneCharSquare();

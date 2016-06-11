@@ -1,0 +1,80 @@
+.renderThemeColors(@hexa) {
+    .menu--horizontal {
+        .renderMenuColors(@hexa, 0);
+    }
+    .menu--vertical {
+        & > li {
+            &:hover:not(.disabled) {
+                .renderHover(@hexa);
+            }
+        }
+    }
+    .select__dropdown {
+        li {
+            &:hover:not(.disabled) {
+                .renderHover(@hexa);
+            }
+        }
+    }
+    .menu--vertical, .menu--horizontal {
+        .menu--vertical {
+            .renderMenuColors(@hexa, 0);
+        }
+    }
+    .navbar {
+        .renderBgAndText(@hexa);
+    }
+    .picker__header {
+        .renderBgAndText(@hexa);
+        a:hover {
+            .renderHover(@hexa);
+        }
+    }
+    .selected {
+        .renderBgAndText(@hexa);
+    }
+    .tag {
+        .renderBgAndText(@hexa);
+    }
+    a.tag:hover:not(.disabled) {
+        .renderHover(@hexa);
+    }
+    .picker__content td:hover {
+        .renderBgAndText(@hexa);
+    }
+    .picker__time__buttons a:hover {
+        .renderBgAndText(@hexa);
+    }
+    table th {
+        .renderBgAndText(@hexa);
+    }
+    .bg--theme {
+        .renderBgAndText(@hexa);
+        &, & > * {
+            &.btn, &.btn--fab {
+                &:hover:not(:disabled):not(.disabled) {
+                    .renderHover(@hexa);
+                }
+            }
+        }
+    }
+}
+
+.renderAccentColors(@hexa) {
+    .btn--fab {
+        .renderBgAndText(@hexa);
+        &:hover:not(:disabled):not(.disabled) {
+            .renderHover(@hexa);
+        }
+    }
+    .important,
+    .accent,
+    .bg--important,
+    .bg--accent
+    {
+        .renderBgAndTextImportant(@hexa);
+        &.btn:hover:not(:disabled):not(.disabled) {
+            .renderHoverImportant(@hexa);
+        }
+    }
+}

@@ -28,7 +28,7 @@
     flex-shrink: 1;
     padding-left: @padding / 2;
     padding-right: @padding / 2;
-    border: 1px solid @colorBorder;
+    border: 1px solid @colorBorderDefault;
     .softBorder();
     &.error {
       border-color: @colorRed;
@@ -79,7 +79,7 @@
           .renderComponentWithBorder(@baseWidgetHeight, @lineHeight);
           padding-left: @padding;
           padding-right: @padding;
-          border-bottom: 1px solid lighten(color(@colorBorder), 20%);
+          border-bottom: 1px solid lighten(color(@colorBorderDefault), 20%);
           &:last-child {
             border: none;
           }
@@ -87,7 +87,7 @@
       }
       .input {
         padding: @padding / 4;
-        border-bottom: 1px solid lighten(color(@colorBorder), 20%);
+        border-bottom: 1px solid lighten(color(@colorBorderDefault), 20%);
       }
     }
   }
