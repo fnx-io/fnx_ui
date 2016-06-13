@@ -24,7 +24,7 @@ var releasing = false;
 
 // files configuration
 var FILES = {
-	lessToStart: sourcesRoot + 'css/fnx_ui.less',
+	lessToStart: sourcesRoot + 'css/*.less',
 	lessToWatch: sourcesRoot + 'css/**/*.less',
 	images: sourcesRoot + 'img/**',
 	html: sourcesRoot + '*.html',
@@ -51,7 +51,7 @@ gulp.task('less', function () {
 			gutil.log(err);
 			this.emit('end');
 		}))
-		.pipe(cleanCSS({compatibility: 'ie11'}))
+		.pipe(cleanCSS({compatibility: 'ie11'})) //, 'aggressiveMerging':false, 'restructuring': false}))
 		//.pipe(sourcemaps.write())
 		.pipe(gulp.dest(workingRoot + 'css'))
 		.pipe(connect.reload());

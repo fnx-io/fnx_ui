@@ -21,7 +21,7 @@ a {
         color: @colorLinkDefault;
     }
 }
-.menu--vertical, .menu--horizontal, .btn, .multibutton, .picker__header {
+.menu--vertical, .menu--horizontal, .btn, .multibutton, .picker__header, .navbar, .icon {
     a {
         color: inherit;
     }
@@ -97,7 +97,7 @@ a {
     .renderBgAndTextImportant(@hexa);
     &.btn--fab, &.btn {
         &:hover:not(:disabled):not(.disabled) {
-            .renderHover(@hexa);
+            .renderHoverImportant(@hexa);
         }
     }
 }
@@ -190,6 +190,7 @@ html {
 
     .renderColorRules(#000, black);
     .renderColorRules(#fff, white);
+    .renderColorRules(@colorFnxOrange, fnx);
     .renderColorRules(@colorRed, red);
     .renderColorRules(@colorPink, pink);
     .renderColorRules(@colorPurple, purple);

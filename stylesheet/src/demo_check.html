@@ -8,68 +8,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="css/fnx_ui.css">
+    <link rel="stylesheet" href="css/demo.css">
 
 </head>
 <body>
 
-<h1>Headline</h1>
+<h1>Checkbox and radio</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus dolores fugit hic incidunt ipsa maiores pariatur, porro quasi quia repudiandae sequi sunt veritatis. Eius ex ipsa possimus quo tenetur! Molestias.</p>
+<style>
+    article {
+        margin:0;
+    }
+</style>
 
-<div class="row">
+<div class="row--gutter">
 
-    <div class="s4 padding">
+    <article class="s12 m6 l4  padding">
+        <h3>Basic checkboxes</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur, consequuntur ducimus molestiae necessitatibus quae quos saepe ullam vero voluptate. Autem et ex ipsam maiores maxime odio sed veniam voluptates!</p>
         <div class="input">
             <span class="check">
-                <input id="1" type="checkbox"><label for="1">Maybe label?</label>
+                <input id="1" type="checkbox"><label for="1">Check me!</label>
             </span>
         </div>
         <div class="input">
             <span class="check">
-                <input id="2" type="checkbox"><label for="2">Maybe not?</label>
+                <input id="2" type="checkbox"><label for="2">Check you!</label>
             </span>
             <i class="icon">delete</i>
         </div>
         <div class="input">
             <i class="icon">delete</i>
             <span class="check">
-                <input id="3" type="checkbox"><label for="3"><!-- there must be a label here, at lest empty --></label>
+                <input id="3" type="checkbox"><label for="3">Check it together!</label>
             </span>
         </div>
         <div class="input">
+            <label for="4">Wanna check something?</label>
             <span class="check">
                 <input id="4" type="checkbox"><label for="4"><!-- there must be a label here, at lest empty --></label>
             </span>
         </div>
-        <div class="input">
-            <span class="check">
-                <input id="5" type="checkbox"><label for="5"><!-- there must be a label here, at lest empty --></label>
-            </span>
-        </div>
-        <div class="input">
-            <input type="text" placeholder="Placeholder ...">
-        </div>
-        <div class="input">
-            <input type="text">
-            <i class="icon">delete</i>
-        </div>
-        <div class="input">
-            <i class="icon">delete</i>
-            <input type="text">
-        </div>
-    </div>
+    </article>
 
-
-
-    <div class="s4 padding">
+    <article class="s12 m6 l4 padding">
+        <h3>More examples</h3>
         <div class="input margin--bottom">
-            <label for="a">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at blanditiis delectus.</label>
+            <label for="a">Sometimes you need a longer text to explain what needs to be checked, do you agree?</label>
             <span class="check">
-                <input type="checkbox" id="a"><label for="a">Yes?</label>
+                <input type="checkbox" id="a"><label for="a">Yes!</label>
             </span>
         </div>
-
 
         <div class="input--checkgroup margin--bottom">
-            <h3>This is a group of checkbox</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem eius enim error excepturi expedita illo nobis quae quo reprehenderit voluptatum. Consequatur exercitationem fugit ipsam, nulla placeat quae recusandae sequi veniam.</p>
             <span class="check">
                 <input type="checkbox" id="b" class="error"><label for="b">myself</label>
@@ -83,28 +74,9 @@
             <label class="error" for="b">Yes, this is an error, it's very seriuos!!!</label>
         </div>
 
+    </article>
 
-
-        <div class="input">
-            <span class="check">
-                <input type="checkbox" id="c" class="error"><label for="c">This is an error, no matter what!</label>
-            </span>
-            <label class="error" for="c">Yes, this is an error, it's very seriuos!!! Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet dignissimos distinctio dolore ea, eum facere fuga fugiat id iste maxime molestiae, nisi quo reprehenderit sint tempora tenetur veniam voluptas.</label>
-        </div>
-
-
-        <div class="input">
-            <label for="e">lorem ipsum</label>
-            <span class="check">
-                <input type="checkbox" id="e"><label for="e">Check if you want to not die!</label>
-            </span>
-            <i class="icon">delete</i>
-        </div>
-    </div>
-
-
-
-    <div class="s4 padding">
+    <article class="s12 m6 l4 padding offset--m3 offset--l0">
         <div class="input--checkgroup margin--bottom">
             <h3>This is a group of radio buttons</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem eius enim error excepturi expedita illo nobis quae quo reprehenderit voluptatum. Consequatur exercitationem fugit ipsam, nulla placeat quae recusandae sequi veniam.</p>
@@ -120,7 +92,7 @@
             <label class="error" for="b">Yes, this is an error, it's very seriuos!!!</label>
         </div>
 
-    </div>
+    </article>
 </div>
 
 </body>

@@ -23,12 +23,13 @@
   }
 
   .icon {
-    padding-top: 0;
-    padding-bottom: 0;
+    padding: 0 0.2rem;
     height: auto;
+    width: auto;
     line-height: 1.2rem;
-    position: relative;
-    top: 0.1em;
+    //position: relative;
+    //top: 0.1em;
+    vertical-align: top;
   }
 }
 
@@ -99,6 +100,7 @@
 .btn--icon {
   .icon;
   .dropShadow(0.2rem);
+  z-index: 1;
   &:hover {
     .dropShadow(0.3rem);
     transition: background 0.3s, box-shadow 0.1s;
