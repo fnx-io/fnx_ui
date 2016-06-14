@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
     <title>FNXUI</title>
@@ -8,15 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="css/fnx_ui.css">
+    <link rel="stylesheet" href="css/demo.css">
 
 </head>
 <body>
 
-<h1>Headline</h1>
+<h2>Inputs</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias architecto doloribus minus quis voluptatem! Commodi dolorem eveniet ipsum iure iusto neque perferendis perspiciatis tempora unde, ut. Enim eum fuga labore?</p>
 
-<div class="row">
 
-    <div class="s4 padding">
+<div class="row--gutter">
+
+    <article class="s12 l4">
+        <h3>Inputs</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deserunt exercitationem molestiae. A ab deserunt dolorum explicabo nesciunt omnis sit unde? At delectus deserunt dolor ducimus, impedit nesciunt provident unde?</p>
         <div class="input">
             <input type="text" placeholder="Placeholder ...">
         </div>
@@ -30,144 +34,69 @@
         </div>
         <div class="input primary--lime">
             <label for="b">Please insert a number between 0 and 42</label>
-            <a href="#" class="btn--icon margin--right">exposure_neg_1</a>
+            <a href="#" class="btn--icon margin--right bg--fnx">exposure_neg_1</a>
             <input type="text">
-            <a href="#" class="btn--icon margin--left">exposure_plus_1</a>
+            <a href="#" class="btn--icon margin--left bg--fnx">exposure_plus_1</a>
         </div>
-    </div>
+    </article>
 
-    <div class="s4 padding">
+    <article class="s12 l4">
+        <h3>Labels and errors</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad, animi consectetur dolorem exercitationem fuga ipsa libero molestiae nam officiis quae quaerat quas quo quos sit temporibus totam, voluptates voluptatum.</p>
         <div class="input">
             <label for="a">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at blanditiis delectus.</label>
             <input type="text" id="a">
         </div>
         <div class="input">
-            <label for="b">lorem ipsum</label>
+            <label for="b">Label ipsum</label>
             <input type="text" id="b" class="error">
             <i class="icon">delete</i>
             <label class="error" for="b">Yes, this is an error, it's very seriuos!!!</label>
         </div>
         <div class="input">
-            <i class="icon">delete</i>
+            <label for="b">Label ipsum</label>
             <input type="text" id="c" class="error">
+            <i class="icon">delete</i>
             <label class="error" for="c">Yes, this is an error, it's very seriuos!!! Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet dignissimos distinctio dolore ea, eum facere fuga fugiat id iste maxime molestiae, nisi quo reprehenderit sint tempora tenetur veniam voluptas.</label>
         </div>
-        <div class="input">
-            <label for="d">lorem ipsum</label>
-            <input type="text" id="d">
-            <i class="icon">delete</i>
-        </div>
-        <div class="input">
-            <label for="e">lorem ipsum</label>
-            <input type="text" id="e">
-            <i class="icon">delete</i>
-        </div>
-    </div>
+    </article>
 
-    <div class="s4 padding">
-        <div class="input">
-            <label>lorem ipsum</label>
-            <input type="text">
-            <i class="icon">delete</i>
+    <article class="s12 l4">
+        <h3>Colors and layout</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam animi consequatur corporis cumque id impedit inventore ipsam nesciunt, repellat. Alias, consequatur id ipsum optio quaerat quam quisquam veritatis! Eveniet, explicabo.</p>
+        <div class="row">
+            <label class="s12 m6">Label ipsum</label>
+            <div class="s12 m6 input">
+                <input type="text" class="bg--yellow--l4">
+                <i class="icon">delete</i>
+            </div>
+
+            <label class="s12 m6">Label ipsum</label>
+            <div class="s12 m6 input">
+                <input type="text" class="bg--grey--l4">
+                <i class="icon">delete</i>
+            </div>
+
+            <label class="s12 m6">Label ipsum</label>
+            <div class="s12 m6 input">
+                <input type="text" class="bg--pink--l4">
+                <i class="icon">delete</i>
+            </div>
+
+            <div class="input s12 ">
+                <label for="d">Label ipsum</label>
+                <input type="text" id="d" class="bg--black">
+            </div>
+            <div class="input s12">
+                <label for="e">Label ipsum</label>
+                <input type="text" id="e" class="bg--blue--l4">
+            </div>
+
         </div>
-        <div class="input">
-            <label for="e">lorem ipsum</label>
-            <input type="text">
-        </div>
-        <div class="input">
-            <label>lorem ipsum</label>
-            <input type="text">
-        </div>
-        <div class="input">
-            <label for="e">lorem ipsum</label>
-            <input type="text">
-        </div>
-        <div class="input">
-            <label>lorem ipsum</label>
-            <input type="text">
-        </div>
-        <div class="input">
-            <label for="e">lorem ipsum</label>
-            <input type="text">
-            <i class="icon">delete</i>
-        </div>
-        <div class="input">
-            <label>lorem ipsum</label>
-            <input type="text">
-            <i class="icon">delete</i>
-        </div>
-        <div class="input">
-            <label for="e">lorem ipsum</label>
-            <input type="text">
-            <i class="icon">delete</i>
-        </div>
-    </div>
+    </article>
+
 </div>
 
-<div class="row">
-    <div class="s6 padding bg--lime--l2">
-        <div class="row">
-            <label class="s4">Lorem i kočkám</label>
-            <div class="s8 input">
-                <input type="text">
-                <i class="icon">delete</i>
-            </div>
-        </div>
-
-        <div class="row">
-            <label class="s4">Lorem i kočkám</label>
-            <div class="s8 input">
-                <input type="text">
-                <i class="icon">delete</i>
-            </div>
-        </div>
-
-        <div class="row">
-            <label class="s4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad assumenda, at aut deserunt est in incidunt iusto magnam maxime nisi nulla omnis optio quae quia quos vero, voluptates!</label>
-            <div class="s8 input">
-                <input type="text" class="error">
-                <i class="icon">delete</i>
-                <label class="error" for="b">Yes, this is an error, it's very seriuos!!!</label>
-            </div>
-        </div>
-
-        <div class="row">
-            <label class="s4">Lorem i kočkám</label>
-            <div class="s8 input">
-                <input type="text">
-                <i class="icon">delete</i>
-            </div>
-        </div>
-    </div>
-
-    <div class="s6 padding">
-        <div class="row">
-            <label class="s12 m4">Lorem i kočkám</label>
-            <div class="s12 m8 input">
-                <input type="text" class="bg--yellow">
-                <i class="icon">delete</i>
-            </div>
-        </div>
-
-        <div class="row">
-            <label class="s12 m4">Lorem i kočkám</label>
-            <div class="s12 m8 input">
-                <input type="text" class="bg--grey--d2">
-                <i class="icon">delete</i>
-            </div>
-        </div>
-
-        <div class="row">
-            <label class="s12 m4">Lorem i kočkám</label>
-            <div class="s12 m8 input">
-                <input type="text" class="bg--pink">
-                <i class="icon">delete</i>
-            </div>
-        </div>
-
-    </div>
-
-</div>
 
 </body>
 </html>

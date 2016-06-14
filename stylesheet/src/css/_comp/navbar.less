@@ -10,17 +10,18 @@
     flex-grow: 0;
     flex-shrink: 0;
   }
-  & > *:not(.icon):not(.icon--round):not(.mi):not(.menu--horizontal):not(.btn):not(.btn--fab) {
+  & > *:not(.icon):not(.icon--round):not(.mi):not(.menu--horizontal):not(.btn):not(.btn--fab):not(.btn--icon) {
     .renderComponentWithoutBorder(@navbarHeight, @lineHeight);
   }
   & > *:not(.icon):not(.icon--round):not(.mi):not(:first-child) {
     margin-left: @padding;
   }
-  & > .icon, & > .icon--round, & > .mi, & > .btn {
+  & > .icon, & > .icon--round, & > .mi, & > .btn, & > .btn--icon {
     margin-top: (@navbarHeight - @baseWidgetHeight) / 2;
     margin-bottom: (@navbarHeight - @baseWidgetHeight) / 2;
   }
   & > .mi {
     .oneCharSquare();
   }
+
 }

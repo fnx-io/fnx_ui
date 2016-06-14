@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
     <title>FNXUI</title>
@@ -8,91 +7,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="css/fnx_ui.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/demo.css">
 
 </head>
 <body>
-<body>
-<h1>Icons</h1>
+<h2>Icons</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid autem blanditiis cum delectus doloribus eligendi necessitatibus quaerat sapiente sunt? Asperiores atque eum libero mollitia praesentium quia tempora ut voluptate.</p>
 
-<p>
-    Lorem <i class="mi">screen_lock_rotation</i>
-    ipsum <i class="mi">airplanemode_active</i>
-    sit <i class="mi">bug_report</i>
-    amet.</p>
-<p class="fs-xl">
-    Lorem <i class="mi">screen_lock_rotation</i>
-    dolor <i class="mi">add_circle_outline</i>
-    sit <i class="mi">bug_report</i>
-    amet.</p>
+<article>
+    <h3>Icons in text</h3>
+    <p>
+        Lorem <i class="mi">screen_lock_rotation</i>
+        ipsum <i class="mi">airplanemode_active</i>
+        sit <i class="mi">bug_report</i>
+        amet.</p>
+    <p class="fs-xl">
+        Lorem <i class="mi">screen_lock_rotation</i>
+        dolor <i class="mi">add_circle_outline</i>
+        sit <i class="mi">bug_report</i>
+        amet.</p>
+</article>
 
-<p>
-    <a href="#" class="icon bg--red">cancel</a>
-    <span class="icon bg--yellow">delete</span>
+<article>
+    <h3>Plain icons</h3>
+    <p>
+        <a href="#" class="icon bg--red">cancel</a>
+        <span class="icon bg--yellow">delete</span>
 
-    <a href="#" class="icon--round bg--pink">cancel</a>
-    <span class="icon--round bg--lime">delete</span>
+        <a href="#" class="icon--round bg--pink">cancel</a>
+        <span class="icon--round bg--lime">delete</span>
+    </p>
+</article>
 
-</p>
+<article>
+    <h3>Icons with shadow</h3>
+    <p>
+        <span class="icon bg--red shadow">cancel</span>
+        <span class="icon bg--yellow shadow">delete</span>
 
-<p>
-    <span class="icon bg--red shadow">cancel</span>
-    <span class="icon bg--yellow shadow">delete</span>
+        <span class="icon--round bg--pink shadow">cancel</span>
+        <span class="icon--round bg--lime shadow">delete</span>
 
-    <span class="icon--round bg--pink shadow">cancel</span>
-    <span class="icon--round bg--lime shadow">delete</span>
+    </p>
+</article>
 
-</p>
+<article>
+    <h3>Buttonish icons</h3>
+    <p>
+        <span class="btn--icon bg--red ">cancel</span>
+        <span class="btn--icon bg--yellow">delete</span>
 
-<p>
-    <span class="btn--icon bg--red shadow">cancel</span>
-    <span class="btn--icon bg--yellow shadow">delete</span>
+        <span class="btn--icon bg--pink">cancel</span>
+        <span class="btn--icon bg--lime">delete</span>
+    </p>
+</article>
 
-    <span class="btn--icon bg--pink shadow">cancel</span>
-    <span class="btn--icon bg--lime shadow">delete</span>
+<article>
+    <h3>Icon with a dropdown content</h3>
 
-</p>
+    <div>
+        <span class="dropdown__container"><span class="icon bg--blue">more_horiz</span>
+            <ul class="menu--vertical">
+                <li><a href="#">link</a></li>
+                <li><span>item</span></li>
+                <li><a href="#">link</a></li>
+                <li><span>item</span></li>
+            </ul>
+        </span>
+    </div>
+</article>
 
+<article>
+    <h3>Icons in navbar</h3>
+    <nav class="navbar bg--orange">
+        <span class="mi text--indigo fs-xxxl">screen_lock_rotation</span>
+        <h1>Navbar</h1>
 
-<nav class="navbar bg--orange">
-    <span class="mi text--indigo fs-xxxl">screen_lock_rotation</span>
-    <h1>Navbar</h1>
+        <span class="spacer"></span>
 
-    <span class="spacer"></span>
+        <a class="mi">delete</a>
+        <span class="mi">add_circle_outline</span>
+        <a class="icon text--red">cancel</a>
+        <span class="icon text--yellow">delete</span>
+        <span class="icon--round text--pink">cancel</span>
+        <span class="icon--round text--lime">delete</span>
 
-    <a class="mi">delete</a>
-    <span class="mi">add_circle_outline</span>
-    <a class="icon text--red">cancel</a>
-    <span class="icon text--yellow">delete</span>
-    <span class="icon--round text--pink">cancel</span>
-    <span class="icon--round text--lime">delete</span>
-
-</nav>
-
-<nav class="navbar bg--blue-grey margin--bottom">
-    <h1>Navbar</h1>
-
-    <span class="spacer"></span>
-
-    <span class="icon--round text--pink">cancel</span>
-    <span class="icon--round text--lime">delete</span>
-
-</nav>
-
-<div class="padding--big primary--lime secondary--green">
-    <span class="dropdown__container"><span class="icon bg--blue">more_horiz</span>
-        <ul class="menu--vertical">
-            <li><span>item</span></li>
-            <li><a href="#">link</a></li>
-            <li><span>item</span></li>
-            <li><a href="#">link</a></li>
-            <li><span>item</span></li>
-            <li><a href="#">link</a></li>
-            <li><span>item</span></li>
-        </ul>
-    </span>
-</div>
+    </nav>
+</article>
 
 
 

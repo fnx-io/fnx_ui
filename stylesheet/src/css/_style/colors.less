@@ -11,7 +11,7 @@ html {
     background-color: @colorBackgroundDefault;
     color: @colorTextDefault;
 }
-
+/*
 a {
     color: @colorTextDefault;
     &:visited {
@@ -21,10 +21,9 @@ a {
         color: @colorLinkDefault;
     }
 }
-.menu--vertical, .menu--horizontal, .btn, .multibutton, .picker__header, .navbar, .icon {
-    a {
-        color: inherit;
-    }
+*/
+a {
+    color: inherit;
 }
 
 .selected {
@@ -94,6 +93,9 @@ a {
 }
 
 .renderColorSettings(@hexa) {
+    &, &.menu--vertical, & .menu--vertical, &.menu--horizontal, & .menu--horizontal  {
+        .renderMenuColors(@hexa, 0);
+    }
     .renderBgAndTextImportant(@hexa);
     &.btn--fab, &.btn {
         &:hover:not(:disabled):not(.disabled) {

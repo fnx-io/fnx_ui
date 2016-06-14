@@ -27,9 +27,18 @@
   max-width: 96vw;
   margin: 0 auto;
   .modal__close {
-    .btn--icon;
+    .icon;
     position: absolute;
     top: 0.2em;
     right: 0.2em;
+    cursor: pointer;
+    z-index: 1;
+    &:hover {
+      .dropShadow(0.1rem);
+      transition: background 0.3s, box-shadow 0.1s;
+    }
+    &:active {
+      .dropShadow(0);
+    }
   }
 }

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
     <title>FNXUI</title>
@@ -8,137 +7,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="css/fnx_ui.css">
+    <link rel="stylesheet" href="css/demo.css">
 
 </head>
 <body>
 
-<nav class="navbar bg--pink">
-    <h1>Headline</h1>
+<h2>Menu</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto consequatur dolores earum eligendi fugiat harum hic ipsa itaque, nihil odio recusandae repudiandae saepe sequi temporibus tenetur. Exercitationem facere ipsam laboriosam.</p>
 
-    <span class="spacer"></span>
-
-    <ul class="menu--horizontal">
-        <li><span>item</span></li>
-        <li><a href="#">link</a></li>
-        <li><span>item</span></li>
-        <li><a href="#">link</a></li>
-        <li><span>item</span></li>
-        <li><a href="#">link</a></li>
-        <li><span>item</span></li>
-    </ul>
-</nav>
-
-<ul class="menu--horizontal bg--white">
-    <li><span>item</span></li>
-    <li><a href="#">link</a></li>
-    <li><span>item</span></li>
-    <li><a href="#">link</a></li>
-    <li><span>item</span>
-
-        <ul class="menu--vertical menu--icons--suffix bg--orange--l1">
-            <li><span><i class="icon">delete</i> item</span></li>
-            <li><a href="#"><i class="icon">delete</i> item Lorem ipsu m dol or sit am et, con se ct etur adi pi sicing elit. Consectetur cupiditate dolor</a></li>
+<article>
+    <h3>Horizontal menu in a navbar</h3>
+    <nav class="navbar bg--pink">
+        <ul class="menu--horizontal">
             <li><a href="#">link</a></li>
-            <li><a href="#">item</a></li>
-            <li><span><i class="icon">delete</i> item</span></li>
-            <li><span><i class="icon">delete</i> item</span></li>
-            <li><a href="#">link</a>
+            <li><a href="#">submenu here</a>
 
-                <ul class="menu--vertical menu--icons--suffix bg--orange--l1">
-                    <li><span><i class="icon">delete</i> item</span></li>
-                    <li><a href="#"><i class="icon">delete</i> item Lorem ipsu m dol or sit am et, con se ct etur adi pi sicing elit. Consectetur cupiditate dolor</a></li>
+                <ul class="menu--vertical">
                     <li><a href="#">link</a></li>
-                    <li><a href="#">item</a></li>
-                    <li><span><i class="icon">delete</i> item</span></li>
-                    <li><span><i class="icon">delete</i> item</span></li>
                     <li><a href="#">link</a></li>
+                    <li class="disabled"><a href="#">disabled</a></li>
                 </ul>
 
             </li>
+            <li class="disabled"><a href="#">link</a></li>
         </ul>
 
-    </li>
-    <li><a href="#">link</a>
+        <span class="spacer"></span>
 
-        <ul class="menu--vertical menu--icons--suffix bg--indigo--l1">
-            <li><span><i class="icon">delete</i> item</span></li>
-            <li><a href="#"><i class="icon">delete</i> item Lorem ipsu m dol or sit am et, con se ct etur adi pi sicing elit. Consectetur cupiditate dolor</a></li>
+        <ul class="menu--horizontal">
             <li><a href="#">link</a></li>
-            <li><a href="#">item</a></li>
-            <li><span><i class="icon">delete</i> item</span></li>
-            <li><span><i class="icon">delete</i> item</span></li>
-            <li><a href="#">link</a></li>
+            <li><a href="#">submenu here</a>
+
+                <ul class="menu--vertical">
+                    <li><a href="#">link</a></li>
+                    <li><a href="#">link</a></li>
+                    <li class="disabled"><a href="#">disabled</a></li>
+                </ul>
+
+            </li>
+            <li class="disabled"><a href="#">link</a></li>
         </ul>
+    </nav>
+</article>
 
-    </li>
-    <li><span>item</span>
+<article>
+    <h3>Standalone horizontal menu with submenus</h3>
 
-        <ul class="menu--vertical menu--icons--suffix bg--brown--l1">
-            <li><span><i class="icon">delete</i> item</span></li>
-            <li><a href="#"><i class="icon">delete</i> item Lorem ipsu m dol or sit am et, con se ct etur adi pi sicing elit. Consectetur cupiditate dolor</a></li>
-            <li><a href="#">link</a></li>
-            <li><a href="#">item</a></li>
-            <li><span><i class="icon">delete</i> item</span></li>
-            <li><span><i class="icon">delete</i> item</span></li>
-            <li><a href="#">link</a></li>
-        </ul>
-
-    </li>
-</ul>
-
-<div class="row">
-
-    <ul class="s3 menu--vertical bg--orange">
-        <li><span>item</span></li>
-        <li><span>item</span></li>
+    <ul class="menu--horizontal">
         <li><a href="#">link</a></li>
-        <li><span>item</span></li>
         <li><a href="#">link</a></li>
-        <li><span>item</span></li>
         <li><a href="#">link</a></li>
-    </ul>
+        <li><a href="#">link</a></li>
+        <li><a href="#">submenu here</a>
 
-    <ul class="s3 menu--vertical menu--icons--suffix menu--icons bg--brown">
-        <li><span><i class="icon">delete</i> item <i class="icon">cancel</i></span></li>
-        <li><a href="#">item</a></li>
-        <li><a href="#"><i class="icon">delete</i> item Lorem ipsu m dol or sit am et, con se ct etur adi pi sicing elit. Consectetur cupiditate dolor <i class="icon">cancel</i></a></li>
-        <li><span><i class="icon">delete</i> item</span></li>
-        <li><span><i class="icon">delete</i> item <i class="icon">more_horiz</i></span>
-
-            <ul class="menu--vertical menu--icons--suffix bg--brown--l1">
-                <li><span><i class="icon">delete</i> item</span></li>
-                <li><a href="#"><i class="icon">delete</i> item Lorem ipsu m dol or sit am et, con se ct etur adi pi sicing elit. Consectetur cupiditate dolor</a></li>
+            <ul class="menu--vertical">
                 <li><a href="#">link</a></li>
-                <li><a href="#">item</a></li>
-                <li><span><i class="icon">delete</i> item</span></li>
-                <li><span><i class="icon">delete</i> item</span></li>
                 <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+                <li><a href="#">submenu here</a>
+                    <ul class="menu--vertical">
+                        <li><a href="#">link</a></li>
+                        <li><a href="#">link</a></li>
+                        <li><a href="#">link</a></li>
+                        <li><a href="#">link</a></li>
+                        <li><a href="#">submenu here</a>
+                            <ul class="menu--vertical">
+                                <li><a href="#">link</a></li>
+                                <li><a href="#">link</a></li>
+                                <li><a href="#">link</a></li>
+                                <li><a href="#">link</a></li>
+                                <li class="disabled"><a href="#">disabled</a></li>
+                            </ul>
+                        </li>
+                        <li class="disabled"><a href="#">disabled</a></li>
+                    </ul>
+                </li>
+                <li class="disabled"><a href="#">disabled</a></li>
             </ul>
 
         </li>
-        <li><a href="#"><i class="icon">delete</i> link</a></li>
-    </ul>
+        <li class="disabled"><a href="#">disabled</a></li>
+     </ul>
+</article>
 
-    <ul class="s3 menu--vertical menu--icons bg--light-blue">
-        <li><a href="#"><i class="icon">delete</i> item lorem ipsum qwertyuiop lkjhgfdsa zxcvbnm lkjhgfds qwertyuio</a></li>
-        <li><a href="#"><i class="icon">delete</i> item</a></li>
-        <li><a href="#">link</a></li>
-        <li><span>item</span></li>
-        <li><span><i class="icon">delete</i> item</span></li>
-        <li><span><i class="icon">delete</i> item</span></li>
-        <li><a href="#">link</a></li>
-    </ul>
+<div class="row--gutter">
+    <article class="s12 l4">
+        <h3>Vertical menu with left icons</h3>
 
-    <ul class="s3 menu--vertical menu--icons--suffix bg--blue">
-        <li><span><i class="icon">delete</i> item</span></li>
-        <li><a href="#"><i class="icon">delete</i> item Lorem ipsu m dol or sit am et, con se ct etur adi pi sicing elit. Consectetur cupiditate dolor</a></li>
-        <li><a href="#">link</a></li>
-        <li><a href="#">item</a></li>
-        <li><span><i class="icon">delete</i> item</span></li>
-        <li><span><i class="icon">delete</i> item</span></li>
-        <li><a href="#">link</a></li>
-    </ul>
+        <ul class="menu--vertical menu--icons bg--blue">
+            <li><a href="#"><i class="icon">delete</i> link</a></li>
+            <li><a href="#"><i class="icon">cancel</i> link</a></li>
+            <li><a href="#">link</a></li>
+            <li><a href="#"><i class="icon">note</i> link</a></li>
+        </ul>
 
+    </article>
+    <article class="s12 l4">
+        <h3>Vertical menu with right icons</h3>
+        <ul class="menu--vertical menu--icons--suffix bg--yellow">
+            <li><a href="#"><i class="icon">delete</i> link</a></li>
+            <li><a href="#"><i class="icon">cancel</i> link</a></li>
+            <li><a href="#">link</a></li>
+            <li><a href="#"><i class="icon">note</i> link</a></li>
+        </ul>
+    </article>
+    <article class="s12 l4">
+        <h3>Vertical menu with both icons</h3>
+        <ul class="menu--vertical menu--icons menu--icons--suffix bg--lime">
+            <li><a href="#"><i class="icon">delete</i> link </a></li>
+            <li><a href="#"><i class="icon">cancel</i> link <i class="icon">more_horiz</i></a></li>
+            <li><a href="#"><i class="icon"> </i> link <i class="icon">more_horiz</i></a></li>
+            <li><a href="#"><i class="icon">note</i> link</a></li>
+        </ul>
+    </article>
 </div>
 
 </body>
