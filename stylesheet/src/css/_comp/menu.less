@@ -2,6 +2,7 @@
   .renderComponentWithoutBorder(@height, @lineHeight);
   padding-left: @padding;
   padding-right: @padding;
+  margin:0;
 }
 
 .renderMenuIcons() {
@@ -75,16 +76,16 @@
 
 @keyframes menuTolerance {
   0% {
-    width: 5%;
+    width: 15%;
   }
-  29% {
-    width: 5%;
+  19% {
+    width: 15%;
   }
-  30% {
-    width: 50%;
+  20% {
+    width: 90%;
   }
   100% {
-    width: 5%;
+    width: 15%;
   }
 }
 
@@ -100,9 +101,6 @@
     padding: 0 !important;
     z-index: 100;
     min-width: 20em;
-    & > li {
-      .softBorder();
-    }
     &.open--up {
       top: auto;
       bottom: 0;
@@ -118,9 +116,8 @@
         bottom: 0;
         display: block;
         content: " ";
-        width: 5%;
-        animation: menuTolerance 1.5s;
-        background-color: red;
+        width: 15%;
+        animation: menuTolerance 2s;
       }
     }
   }

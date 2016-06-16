@@ -8,49 +8,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="css/fnx_ui.css">
+    <link rel="stylesheet" href="css/demo.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
-    <style>
-        .property {
-            padding: 1em;
-            clear: both;
-        }
-        .property:after {
-            content: '';
-            display: table;
-            clear: both;
-        }
-        .col {
-            width: 14%;
-            float: left;
-            padding: 1em;
-            border: 1px dotted #999;
-
-        }
-        .col div {
-            background-color: white;
-        }
-        #utils {
-            background-color: yellow;
-        }
-    </style>
 </head>
 <body>
-<body>
-<h1>Effects</h1>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<style>
+    .property {
+        padding: 1em;
+        clear: both;
+    }
+    .property:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+    .col {
+        width: 12%;
+        float: left;
+        border: 1px dotted #efefef;
+        background-color: #ddd;
+        margin: 1%;
+    }
+    .col.property-border {
+        border: none;
+    }
+    .col div {
+        background-color: white;
+    }
+</style>
+
+<h1>Utilities</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis doloremque eius eveniet explicabo magnam, reiciendis sunt voluptates? A at beatae delectus magnam neque perferendis sequi? Eum facere itaque nobis numquam?</p>
 
 <section id="utils">
 
     <script>
         $(function () {
-            var properties = ["padding", "margin", "border"];
+            var properties = ["padding", "padding--small","padding--big","margin","margin--small","margin--big", "border"];
             var modes = ["", "--top", "--bottom", "--left", "--right", "--vertical", "--horizontal"];
 
             $(properties).each(function(i, prop) {
-                var $s = $("<section class='property property__"+prop+"'></section>");
+                var $s = $("<article class='property property__"+prop+"'></article>");
                 $(modes).each(function(i, mode) {
-                    var $c = $("<div class='col'></div>");
+                    var $c = $("<div class='col property-"+prop+"'></div>");
                     var property = prop + mode;
                     $c.append($("<div class='"+property+"'>."+property+"<br>."+property+"<br>."+property+"</div>"));
                     $s.append($c);

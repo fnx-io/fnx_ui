@@ -24,7 +24,9 @@ var releasing = false;
 
 // files configuration
 var FILES = {
-	lessToStart: sourcesRoot + 'css/*.less',
+	lessToStart: sourcesRoot + 'css/fnx_ui.less',
+	lessDemo: sourcesRoot + 'css/demo.less',
+	lessThemes: sourcesRoot + 'css/theme_*.less',
 	lessToWatch: sourcesRoot + 'css/**/*.less',
 	images: sourcesRoot + 'img/**',
 	html: sourcesRoot + '*.html',
@@ -44,8 +46,8 @@ gulp.task('server', function() {
 	});
 });
 
-gulp.task('less', function () {
-	gulp.src(FILES.lessToStart)
+function buildCss(files) {
+	gulp.src(files)
 		//.pipe(sourcemaps.init())
 		.pipe(less().on('error', function(err){
 			gutil.log(err);
@@ -55,6 +57,18 @@ gulp.task('less', function () {
 		//.pipe(sourcemaps.write())
 		.pipe(gulp.dest(workingRoot + 'css'))
 		.pipe(connect.reload());
+}
+
+gulp.task('less', function () {
+	buildCss(FILES.lessToStart);
+});
+
+gulp.task('less-themes', function () {
+	buildCss(FILES.lessThemes);
+});
+
+gulp.task('less-demo', function () {
+	buildCss(FILES.lessDemo);
 });
 
 gulp.task('images', function() {
@@ -93,7 +107,7 @@ gulp.task('watch', function () {
 	gulp.watch(FILES.copy, ['copy']);
 });
 
-gulp.task('devel', ['server', 'less', 'images', 'html', 'copy', 'watch'], function() {
+gulp.task('devel', ['server', 'less', 'less-themes', 'less-demo', 'images', 'html', 'copy', 'watch'], function() {
 	asciify('Watching changes', {color:'yellow', font: 'smshadow'}, function(err, res){ console.log(res); });
 });
 
@@ -102,7 +116,7 @@ gulp.task('configure-release', function() {
 	releasing = true;
 });
 
-gulp.task('release', ['configure-release', 'less', 'images', 'copy', 'html'], function() {
+gulp.task('release', ['configure-release', 'less', 'less-themes', 'less-demo', 'images', 'copy', 'html'], function() {
 	asciify('Releasing', {color:'yellow', font: 'smshadow'}, function(err, res){ console.log(res); });
 });
 

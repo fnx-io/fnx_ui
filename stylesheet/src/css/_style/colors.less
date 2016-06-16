@@ -1,11 +1,6 @@
 
 // http://www.google.com/design/spec/style/color.html#color-color-palette
 
-@level1: 5%;
-@level2: @level1 * 2;
-@level3: @level1 * 3;
-@level4: @level1 * 4;
-
 // GREY DEFAULTS
 html {
     background-color: @colorBackgroundDefault;
@@ -37,61 +32,6 @@ a {
     }
 }
 
-.renderBgAndText(@hexa) {
-    background-color: @hexa;
-    & when (luma(color(@hexa)) <= 60%) {
-        color: @colorLightTextDefault;
-    }
-    & when (luma(color(@hexa)) > 40%) {
-        color: @colorTextDefault;
-    }
-}
-.renderBgAndTextImportant(@hexa) {
-    background-color: @hexa !important;
-    & when (luma(color(@hexa)) <= 60%) {
-        color: @colorLightTextDefault !important;
-    }
-    & when (luma(color(@hexa)) > 40%) {
-        color: @colorTextDefault !important;
-    }
-}
-
-.renderHover(@hexa) {
-    & when (luma(color(@hexa)) <= 60%) {
-        .renderBgAndText(lighten(color(@hexa), @level2));
-    }
-    & when (luma(color(@hexa)) > 40%) {
-        .renderBgAndText(darken(color(@hexa), @level2));
-    }
-}
-.renderHoverImportant(@hexa) {
-    & when (luma(color(@hexa)) <= 60%) {
-        .renderBgAndTextImportant(lighten(color(@hexa), @level2));
-    }
-    & when (luma(color(@hexa)) > 40%) {
-        .renderBgAndTextImportant(darken(color(@hexa), @level2));
-    }
-}
-
-.renderMenuColors(@hexa, @depth) {
-    .renderBgAndText(@hexa);
-    & > li {
-        &:hover:not(.disabled) {
-            .renderHover(@hexa);
-            & when (@depth > 0) {
-                & > .menu--vertical {
-                    & when (luma(color(@hexa)) <= 60%) {
-                        .renderMenuColors(lighten(color(@hexa), @level2), @depth - 1);
-                    }
-                    & when (luma(color(@hexa)) > 40%) {
-                        .renderMenuColors(darken(color(@hexa), @level2), @depth - 1);
-                    }
-                }
-            }
-        }
-    }
-}
-
 .renderColorSettings(@hexa) {
     &, &.menu--vertical, & .menu--vertical, &.menu--horizontal, & .menu--horizontal  {
         .renderMenuColors(@hexa, 0);
@@ -101,15 +41,6 @@ a {
         &:hover:not(:disabled):not(.disabled) {
             .renderHoverImportant(@hexa);
         }
-    }
-}
-.renderTheme(@hexaColor, @themeName) {
-
-    .theme--@{themeName} {
-        .renderThemeColors(@hexaColor);
-    }
-    .accent--@{themeName} {
-        .renderAccentColors(@hexaColor);
     }
 }
 .renderColorRules(@hexa, @name) {
@@ -170,17 +101,6 @@ a {
             }
         }
     }
-
-    .renderTheme(@hexa, @name);
-
-    //.renderTheme(lighten(color(@hexa), @level1), ~"@{name}--l1");
-    .renderTheme(lighten(color(@hexa), @level2), ~"@{name}--l2");
-    //.renderTheme(lighten(color(@hexa), @level3), ~"@{name}--l3");
-    .renderTheme(lighten(color(@hexa), @level4), ~"@{name}--l4");
-    //.renderTheme(darken(color(@hexa), @level1), ~"@{name}--d1");
-    .renderTheme(darken(color(@hexa), @level2), ~"@{name}--d2");
-    //.renderTheme(darken(color(@hexa), @level3), ~"@{name}--d3");
-    .renderTheme(darken(color(@hexa), @level4), ~"@{name}--d4");
 }
 
 @import "colors--utils";

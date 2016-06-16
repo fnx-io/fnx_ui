@@ -14,7 +14,10 @@
 }
 
 .dropShadow(@size) {
-  box-shadow: @size @size * 1.5 @size rgba(0,0,0,0.2);
+  box-shadow: @size @size*1.5 @size rgba(0,0,0,0.2);
+}
+.dropButtonShadow(@size) {
+  box-shadow: @size @size*1.5 @size rgba(0,0,0,0.2), 0 0 1px 1px rgba(0,0,0,0.1);
 }
 .dropShadowDown(@size) {
   box-shadow: 0 @size * 1.5 @size rgba(0,0,0,0.2);

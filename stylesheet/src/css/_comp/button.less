@@ -13,15 +13,14 @@
   line-height: @lineHeight;
   background-color: white;
 
-  .dropShadow(0.1rem);
+  .dropButtonShadow(0.1rem);
   &:hover:not(.disabled):not(:disabled) {
-    .dropShadow(0.3rem);
+    .dropButtonShadow(0.3rem);
     transition: background 0.3s, box-shadow 0.1s;
   }
   &:active:not(.disabled):not(:disabled) {
-    .dropShadow(0);
+    .dropButtonShadow(0);
   }
-
   .icon {
     padding: 0 0.2rem;
     height: auto;
