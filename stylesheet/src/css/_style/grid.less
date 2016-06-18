@@ -66,7 +66,7 @@
   .renderGridRulesWithGutter(s, 12);
 }
 
-@media only screen and (min-width: 601px) {
+@media only screen and (min-width: @widthMobile) {
   .row {
     .renderGridRules(m, 1);
     .renderGridRules(m, 2);
@@ -100,7 +100,7 @@
   }
 
 }
-@media only screen and (min-width: 993px) {
+@media only screen and (min-width: @widthTablet) {
   .row {
     .renderGridRules(l, 1);
     .renderGridRules(l, 2);
