@@ -1,0 +1,48 @@
+@preloaderMaskHeight: 1.6em;
+
+@keyframes preloaderPulse {
+  0% {
+    top: (2em - @preloaderMaskHeight) / 2;
+    height: @preloaderMaskHeight;
+  }
+  100% {
+    top: (2em - @preloaderMaskHeight/4) / 2;
+    height: @preloaderMaskHeight / 4;
+  }
+}
+
+@keyframes preloaderRotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.preloader {
+  display: inline-block;
+  height: 2em;
+  width: 2em;
+  position: relative;
+  background-color: inherit;
+  margin: 0 @padding;
+  animation: preloaderRotation 2s infinite linear;
+  &:before {
+    content: " ";
+    border-radius: 1em;
+    border: 2px solid @colorBorderDefault;
+    position: absolute;
+    .fit;
+  }
+  &:after {
+    content: " ";
+    background-color: inherit;
+    position: absolute;
+    top: 0.3em;
+    left: 0;
+    width: 1em;
+    height: 2em;
+    animation: preloaderPulse 1.7s infinite alternate linear;
+  }
+}

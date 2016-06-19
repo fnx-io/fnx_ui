@@ -1,0 +1,30 @@
+name: fnx_ui
+description: Desktop first components from Angular2 Dart.
+version: 0.0.1
+author: Tomucha <email@example.com>
+#homepage: https://www.example.com
+
+environment:
+  sdk: '>=1.0.0 <2.0.0'
+
+dependencies:
+  angular2: 2.0.0-beta.17 #TODO: change to ^2.0.0
+  logging: "^0.11.3"
+  browser: any
+
+dev_dependencies:
+  test: '>=0.12.0 <0.13.0'
+  dart_to_js_script_rewriter: ^1.0.1
+
+transformers:
+- angular2:
+    platform_directives:
+    - 'package:angular2/common.dart#COMMON_DIRECTIVES'
+    - 'package:angular2/common.dart#CORE_DIRECTIVES'
+    - 'package:angular2/common.dart#FORM_DIRECTIVES'
+    - 'package:angular2/router.dart#ROUTER_DIRECTIVES'
+    - 'package:fnx_ui/fnx_ui.dart#FNX_UI_COMPONENTS'
+    platform_pipes:
+    - 'package:angular2/common.dart#COMMON_PIPES'
+    entry_points: example/example.dart
+- dart_to_js_script_rewriter

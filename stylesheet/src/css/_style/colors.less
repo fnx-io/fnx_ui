@@ -75,6 +75,11 @@ a {
     body {
         .text--@{name} {
             color: @hexa !important;
+            &.preloader, & .preloader {
+                &:before {
+                    border-color: @hexa;
+                }
+            }
             &--l1 {
                 color: (lighten(color(@hexa), @level1)) !important;
             }
