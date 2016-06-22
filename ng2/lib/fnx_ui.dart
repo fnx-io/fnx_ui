@@ -7,9 +7,17 @@
 library fnx_ui;
 
 import 'src/fnx_app/fnx_app_component.dart';
+import 'src/components/input/fnx_input.dart';
+import 'src/components/input/fnx_control_input.dart';
+import 'src/components/select/fnx_select.dart';
 
 
 export 'src/fnx_app/fnx_app_component.dart';
+export 'src/components/input/fnx_input.dart';
+export 'src/components/input/fnx_control_input.dart';
+export 'src/components/select/fnx_select.dart';
 
-
-const List FNX_UI_COMPONENTS = const [FnxApp];
+const List FNX_UI_COMPONENTS = const [FnxApp,
+                                      FNX_INPUT_DIRECTIVES,
+                                      FNX_INPUT_CONTROL_DIRECTIVES,
+                                      FNX_SELECT_DIRECTIVES];

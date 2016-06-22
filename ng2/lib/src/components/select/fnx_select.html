@@ -1,0 +1,26 @@
+<div class="input">
+    <label class="label">{{label}}</label>
+    <div class="select" (click)="toggleDropdown()">
+        <span class="clickable">{{ renderSelectedOptions() }}</span>
+        <div class="select__dropdown" [hidden]="!expanded">
+            <div (hidden)="! showFilter" class="input" (click)="$event.stopPropagation()">
+                <input id="{{id}}-search" type="text" placeholder="Search..." [(ngModel)]="filter">
+                <label for="{{id}}-search" class="icon">search</label>
+            </div>
+            <ul>
+                <li *ngFor="let opt of filteredOptions" (click)="selectOption(opt.value, $event)"
+                    class="clickable"
+                    [class.selected]="isSelected(opt.value)" [class.highlighted]="isHighlighted(opt)">
+                    <i class="mi">
+                        <span *ngIf="isSelected(opt.value)">done</span>
+                    </i>
+                    {{ opt.label }}
+                </li>
+            </ul>
+            <div *ngIf="filteredOptions.isEmpty">
+                {{ optionsEmptyLabel }}
+            </div>
+        </div>
+    </div>
+    <label class="error" *ngIf="error">{{errorMsg}}</label>
+</div>

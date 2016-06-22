@@ -3,6 +3,7 @@
 
 import 'package:angular2/core.dart';
 import 'package:logging/logging.dart';
+import 'package:angular2/common.dart';
 
 @Component(
   selector: 'fnx-app',
@@ -12,7 +13,31 @@ class FnxApp implements OnInit {
 
   final Logger log = new Logger("FnxApp");
 
-  FnxApp();
+  Map user = {'name': 'Ferda', 'surname': 'Mravenec', 'address': {'street': 'Pod Pampeliskou'}, 'mood': 'sad'};
+
+  static dynamic moodValidator = (AbstractControl c) {
+    if (c.value == null) return null;
+    List selected;
+    if (c.value is List) {
+      selected = c.value;
+    } else {
+      selected = [c.value];
+    }
+    if (selected.contains('happy')) {
+      return null;
+    }
+    return {'mood': {'happy': false}};
+  };
+
+  ControlGroup userForm;
+  Control userName = new Control('', Validators.compose([Validators.required, Validators.minLength(3)]));
+  Control mood = new Control('', moodValidator);
+
+  List<Map> moods = [{'id': 'happy', 'name': 'Being 😀'}, {'id': 'sad', 'name': 'Being 😑'}, {'id': 'troll', 'name': 'Be not ⚠️'}];
+
+  FnxApp(FormBuilder fb) {
+    this.userForm = fb.group({"name": userName, 'mood': mood});
+  }
 
   ngOnInit() {
     log.fine("App started");
