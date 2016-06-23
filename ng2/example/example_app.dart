@@ -13,7 +13,12 @@ class ExampleApp implements OnInit {
 
   final Logger log = new Logger("FnxApp");
 
-  Map user = {'name': 'Ferda', 'surname': 'Mravenec', 'address': {'street': 'Pod Pampeliskou'}, 'mood': 'sad'};
+  Map user = {
+    'name': 'Ferda',
+    'surname': 'Mravenec',
+    'address': {'street': 'Pod Pampeliskou'},
+    'mood': 'sad',
+    'birthday': '2016-06-22T15:22:30.638489'};
 
   static dynamic moodValidator = (AbstractControl c) {
     if (c.value == null) return null;

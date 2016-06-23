@@ -1,0 +1,58 @@
+<div class="picker--date" [hidden]="!shown">
+    <div class="picker__content">
+        <header class="picker__header" (click)="$event.preventDefault()">
+            <a href="#" (click)="decYear()"><i class="icon">first_page</i></a>
+            <a href="#" (click)="decMonth()"><i class="icon">chevron_left</i></a>
+
+            <a href="#" (click)="showToday()" class="picker__today">{{ renderToday() }}</a>
+
+            <a href="#" (click)="incMonth()"><i class="icon">chevron_right</i></a>
+            <a href="#" (click)="incYear()"><i class="icon">last_page</i></a>
+        </header>
+        <p class="picker__current">{{year}}/{{formatNumber(month)}}</p>
+        <table>
+            <tr>
+                <th>Mo</th>
+                <th>Tu</th>
+                <th>We</th>
+                <th>Th</th>
+                <th>Fr</th>
+                <th>Sa</th>
+                <th>Su</th>
+            </tr>
+            <tr *ngFor="let week of days">
+                <td *ngFor="let day of week"
+                    (click)="pickDay(year, month, day)"
+                    [class.important]="isSelected(year, month, day)">
+                    {{day}}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="picker__content" (click)="killEvent($event)" [hidden]="!dateTime">
+        <header class="picker__header"></header>
+        <p class="picker__time__buttons">
+            <a href="#" (click)="incHour()" class="icon">keyboard_arrow_up</a>
+            <span class=""></span>
+            <a href="#" (click)="incMinute()" class="icon">keyboard_arrow_up</a>
+        </p>
+        <p class="picker__time__time">
+            <span class="">{{ hourToShow }}</span>
+            <span class="">:</span>
+            <span class="">{{ minute }}</span>
+        </p>
+        <p class="picker__time__buttons">
+            <a href="#" (click)="decHour()" class="icon">keyboard_arrow_down</a>
+            <span class=""></span>
+            <a href="#" (click)="decMinute()" class="icon">keyboard_arrow_down</a>
+        </p>
+        <div class="picker__time__ampm input--checkgroup" [hidden]="hourFormat24">
+            <span class="check" (click)="setAm()">
+                <input type="radio" [checked]="isAm" name="ampm" id="{{componentId}}-am"><label for="{{componentId}}-am">AM</label>
+            </span>
+            <span class="check" (click)="setPm()">
+                <input type="radio" [checked]="isPm" name="ampm" id="{{componentId}}-pm"><label for="{{componentId}}-pm">PM</label>
+            </span>
+        </div>
+    </div>
+</div>

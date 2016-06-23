@@ -312,8 +312,6 @@ class FnxOptionValue {
   String toString() {
     return 'FnxOptionValue{id: $id, value: $value, label: $label}';
   }
-
-
 }
 
 @Component(

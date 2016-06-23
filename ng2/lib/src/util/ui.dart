@@ -42,6 +42,12 @@ bool isActiveElement(Node node) {
   return activeElementTags.contains(el.tagName);
 }
 
+/// Stops the event from propagation and prevents default action
+void killEvent(Event e) {
+  if (e == null) return;
+  e.preventDefault();
+  e.stopPropagation();
+}
 
 /// returns stream of element's position on the screen as a number between 0 and 1,
 /// or negative, if element is above the viewport, or bigger then 1
