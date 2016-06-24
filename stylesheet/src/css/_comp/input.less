@@ -15,6 +15,7 @@
       margin-top: @padding / 4;
     }
     &.error {
+      margin-top: @padding / 4;
       color: @colorRed;
       .fs-s;
     }
@@ -44,7 +45,11 @@
     position: relative;
     padding-right: @baseWidgetHeight;
     background-color: @colorBackgroundDefault;
-    box-shadow: inset -1px -2px 2px rgba(0,0,0,0.1); // maybe?
+    box-shadow: inset -1px -2px 1px rgba(0,0,0,0.1); // maybe?
+    &.open {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
     & > span {
       white-space: nowrap;
       overflow: hidden;
@@ -61,18 +66,22 @@
     }
     .select__dropdown {
       position: absolute;
-      top: 100%;
+      top: calc( ~"100%");
       &.drop--up {
         top: auto;
         bottom: 100%;
       }
-      left: 0;
-      max-width: 20em;
+      left: -1px;
+      width: calc(~"100% + 2px");
+      max-width: 30em;
+      min-width: 20em;
       .shadow;
       z-index: 100;
       background-color: white;
       .border;
       .softBorder();
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
       color: inherit;
       & > ul {
         max-height: 25em;

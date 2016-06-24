@@ -26,5 +26,5 @@ transformers:
     - 'package:fnx_ui/fnx_ui.dart#FNX_UI_COMPONENTS'
     platform_pipes:
     - 'package:angular2/common.dart#COMMON_PIPES'
-    entry_points: example/example.dart
+    entry_points: example/index.dart
 - dart_to_js_script_rewriter

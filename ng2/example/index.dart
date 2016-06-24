@@ -6,6 +6,7 @@ import 'dart:html';
 import 'package:angular2/platform/browser.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:logging/logging.dart';
+import 'example_app.dart';
 
 main() {
 
@@ -30,5 +31,5 @@ main() {
   r.info("================================================================");
   */
   // START!
-  bootstrap(FnxApp, []);
+  bootstrap(ExampleApp, []);
 }

@@ -24,6 +24,7 @@ class FnxSelect implements ControlValueAccessor, OnInit, OnDestroy {
   @Input() String errorMsg;
   @Input() String selectionEmptyLabel = "Select...";
   @Input() String optionsEmptyLabel = "No options to choose from";
+  @Input() String optionsEmptySearchLabel = "No option matches your search";
 
   bool expanded = false;
   @Input() bool neverShowFilter = false;
@@ -148,7 +149,7 @@ class FnxSelect implements ControlValueAccessor, OnInit, OnDestroy {
       toggleSelectedOption(value);
     } else {
       if (_value == value) {
-        _value = null;
+        // _value = null; asi ne
       } else {
         _value = value;
       }

@@ -6,10 +6,10 @@ import 'package:logging/logging.dart';
 import 'package:angular2/common.dart';
 
 @Component(
-  selector: 'fnx-app',
-  templateUrl: 'fnx_app_component.html'
+  selector: 'example-app',
+  templateUrl: 'example_app.html'
 )
-class FnxApp implements OnInit {
+class ExampleApp implements OnInit {
 
   final Logger log = new Logger("FnxApp");
 

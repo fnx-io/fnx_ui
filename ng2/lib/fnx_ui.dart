@@ -6,13 +6,13 @@
 /// More dartdocs go here.
 library fnx_ui;
 
-import 'src/fnx_app/fnx_app_component.dart';
+import 'src/components/app/fnx_app.dart';
 import 'src/components/input/fnx_input.dart';
 import 'src/components/input/fnx_control_input.dart';
 import 'src/components/select/fnx_select.dart';
 
 
-export 'src/fnx_app/fnx_app_component.dart';
+export 'src/components/app/fnx_app.dart';
 export 'src/components/input/fnx_input.dart';
 export 'src/components/input/fnx_control_input.dart';
 export 'src/components/select/fnx_select.dart';

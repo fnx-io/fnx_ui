@@ -1,6 +1,12 @@
 <div class="input">
-    <label class="label">{{label}}</label>
-    <div class="select" (click)="toggleDropdown()">
+    <label class="label" for="{{id}}">{{label}}</label>
+    <div id="{{id}}"
+         class="select"
+         tabindex="0"
+         (click)="toggleDropdown()"
+         [class.open]="expanded"
+         [class.error]="error">
+
         <span class="clickable">{{ renderSelectedOptions() }}</span>
         <div class="select__dropdown" [hidden]="!expanded">
             <div (hidden)="! showFilter" class="input" (click)="$event.stopPropagation()">
@@ -11,16 +17,19 @@
                 <li *ngFor="let opt of filteredOptions" (click)="selectOption(opt.value, $event)"
                     class="clickable"
                     [class.selected]="isSelected(opt.value)" [class.highlighted]="isHighlighted(opt)">
-                    <i class="mi">
+                    <i *ngIf="multi" class="mi">
                         <span *ngIf="isSelected(opt.value)">done</span>
                     </i>
                     {{ opt.label }}
                 </li>
             </ul>
-            <div *ngIf="filteredOptions.isEmpty">
+            <p *ngIf="options.isEmpty" class="padding--small no-margin">
                 {{ optionsEmptyLabel }}
-            </div>
+            </p>
+            <p *ngIf="filteredOptions.isEmpty && options.isNotEmpty" class="padding--small no-margin">
+                {{ optionsEmptySearchLabel }}
+            </p>
         </div>
     </div>
-    <label class="error" *ngIf="error">{{errorMsg}}</label>
+    <label class="error" *ngIf="error" for="{{id}}">{{errorMsg}}</label>
 </div>
