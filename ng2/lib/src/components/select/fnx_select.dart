@@ -26,7 +26,8 @@ class FnxSelect implements ControlValueAccessor, OnInit, OnDestroy {
   @Input() String optionsEmptyLabel = "No options to choose from";
   @Input() String optionsEmptySearchLabel = "No option matches your search";
 
-  bool expanded = false;
+  bool open = false;
+  bool openUp = false;
   @Input() bool neverShowFilter = false;
   @Input() bool alwaysShowFilter = false;
 
@@ -53,11 +54,14 @@ class FnxSelect implements ControlValueAccessor, OnInit, OnDestroy {
   FnxSelect(ElementRef el) {
     if (el != null) {
       container = el.nativeElement;
+      elementPositionStream(container).listen((double position) {
+         openUp = position > 0.5;
+      });
     }
   }
 
   void toggleDropdown() {
-    if (expanded) {
+    if (open) {
       hideOptions();
     } else {
       showOptions();
@@ -65,12 +69,12 @@ class FnxSelect implements ControlValueAccessor, OnInit, OnDestroy {
   }
 
   void hideOptions() {
-    expanded = false;
+    open = false;
     filter = null;
   }
 
   void showOptions() {
-    expanded = true;
+    open = true;
   }
 
   get showFilter {
@@ -200,7 +204,7 @@ class FnxSelect implements ControlValueAccessor, OnInit, OnDestroy {
                                 KeyCode.UP: 'UP',
                                 KeyCode.DOWN: 'DOWN'};
     Set<int> supportedKeys = new Set.from(actions.keys);
-    Stream<KeyboardEvent> onlyWhenExpanded = stream.where((event) => expanded && !isActiveElement(event.target));
+    Stream<KeyboardEvent> onlyWhenExpanded = stream.where((event) => open && !isActiveElement(event.target));
     Stream<KeyboardEvent> onlySupported = onlyWhenExpanded.where((event) => supportedKeys.contains(event.keyCode));
     Stream<KeyboardEvent> cancelled = onlySupported.map((event) {
       event.preventDefault();
@@ -247,7 +251,7 @@ class FnxSelect implements ControlValueAccessor, OnInit, OnDestroy {
   ngOnInit() {
     var self = this;
     this.globalClicks = document.onClick.listen((event) {
-      if (!self.expanded) return;
+      if (!self.open) return;
       if (isEventFromSubtree(event, container)) return;
       hideOptions();
     });

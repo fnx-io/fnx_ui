@@ -4,11 +4,12 @@
          class="select"
          tabindex="0"
          (click)="toggleDropdown()"
-         [class.open]="expanded"
+         [class.open--up]="openUp"
+         [class.open]="open"
          [class.error]="error">
 
         <span class="clickable">{{ renderSelectedOptions() }}</span>
-        <div class="select__dropdown" [hidden]="!expanded">
+        <div class="select__dropdown" [hidden]="!open">
             <div (hidden)="! showFilter" class="input" (click)="$event.stopPropagation()">
                 <input id="{{id}}-search" type="text" placeholder="Search..." [(ngModel)]="filter">
                 <label for="{{id}}-search" class="icon">search</label>

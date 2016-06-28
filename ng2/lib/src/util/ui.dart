@@ -1,5 +1,6 @@
 import 'package:angular2/common.dart';
 import 'dart:html';
+import 'dart:async';
 
 int idCounter = 1;
 /// Generates unique string each time called. When called with a prefix param
@@ -39,4 +40,21 @@ bool isActiveElement(Node node) {
   if (!(node is Element)) return false;
   Element el = node as Element;
   return activeElementTags.contains(el.tagName);
+}
+
+
+/// returns stream of element's position on the screen as a number between 0 and 1,
+/// or negative, if element is above the viewport, or bigger then 1
+/// if the element is below the viewport.
+Stream<double> elementPositionStream(Element e) {
+  // TODO: merge with onResize stream
+  return window.onScroll.transform(
+      new StreamTransformer<Event, double>.fromHandlers(
+          handleData: (Event event, EventSink<double> sink) {
+            Rectangle r = e.getBoundingClientRect();
+            double center = r.top + ((r.bottom - r.top) / 2.0);
+            sink.add(center / window.innerHeight.toDouble());
+          }
+      )
+  );
 }
