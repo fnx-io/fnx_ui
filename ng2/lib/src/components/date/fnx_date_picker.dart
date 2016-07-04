@@ -1,6 +1,5 @@
 import 'package:angular2/core.dart';
 import 'package:intl/intl.dart';
-import 'dart:html' as html;
 import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'dart:async';
 import 'package:fnx_ui/src/util/date.dart';
@@ -14,8 +13,10 @@ class FnxDatePicker implements OnInit, OnDestroy {
 
   String componentId = ui.uid('datepicker-');
 
-
-  static Set<FnxDatePicker> allPickers = new Set.from([]);
+  /// using this emitter instances of DatePickers broadcast, that they
+  /// have been requested to be opened
+  static final EventEmitter<FnxDatePicker> ON_PICKER_OPENED = new EventEmitter<FnxDatePicker>();
+  StreamSubscription<FnxDatePicker> _pickerOpenedSubscription;
 
   bool _shown = false;
 
@@ -33,12 +34,22 @@ class FnxDatePicker implements OnInit, OnDestroy {
   @Output() EventEmitter closed = new EventEmitter();
   @Output() EventEmitter datePicked = new EventEmitter();
 
+  @Input() EventEmitter open;
+  StreamSubscription _openSubscription;
+
   DateTime today = new DateTime.now();
 
   DateTime get value => _value;
 
+  Node container;
+
+  StreamSubscription<MouseEvent> _globalClicks;
+
   /// Constructor used to create instance of Datepicker.
-  FnxDatePicker() {
+  FnxDatePicker(ElementRef el) {
+    if (el != null) {
+      container = el.nativeElement;
+    }
     initPicker();
   }
 
@@ -59,11 +70,8 @@ class FnxDatePicker implements OnInit, OnDestroy {
     bool alreadyShown = _shown;
     this._shown = toShow;
     if (toShow && !alreadyShown) {
-      allPickers.forEach((dp) {
-        if (dp != this) {
-          dp.hidePicker();
-        }
-      });
+      // broadcast, that we are opening this widget
+      ON_PICKER_OPENED.emit(this);
     }
   }
 
@@ -226,14 +234,35 @@ class FnxDatePicker implements OnInit, OnDestroy {
     datePicked.emit(_value);
   }
 
+  void ensureOpened() {
+    shown = true;
+  }
+
   @override
   ngOnInit() {
-    allPickers.add(this);
+    _pickerOpenedSubscription = ON_PICKER_OPENED.listen((picker) => somePickerOpened(picker));
+    if (open != null) {
+      _openSubscription = open.listen((_) => ensureOpened());
+    }
+    _globalClicks = document.onClick.listen((event) {
+      if (!shown) return;
+      if (ui.isEventFromSubtree(event, container.parentNode)) return;
+      shown = false;
+    });
+  }
+
+  void somePickerOpened(FnxDatePicker picker) {
+    // if any other picker has been opened, ensure this one gets closed
+    if (picker != this && _shown) {
+      shown = false;
+    }
   }
 
   @override
   ngOnDestroy() {
-    allPickers.remove(this);
+    if (_openSubscription != null) _openSubscription.cancel();
+    if (_pickerOpenedSubscription != null) _pickerOpenedSubscription.cancel();
+    if (_globalClicks != null) _globalClicks.cancel();
   }
 
   void killEvent(Event event) {

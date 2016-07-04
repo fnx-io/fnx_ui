@@ -6,6 +6,7 @@ import 'package:angular2/common.dart';
 import 'package:angular2/src/common/forms/directives/validators.dart';
 
 import 'package:fnx_ui/src/components/date/fnx_date_picker.dart';
+import 'dart:html';
 export 'package:fnx_ui/src/components/date/fnx_date_picker.dart';
 
 
@@ -50,7 +51,8 @@ class FnxDate implements OnInit, ControlValueAccessor {
 
   bool parseDateError = false;
   bool _focused = false;
-  @Output() bool datePickerShown = false;
+
+  EventEmitter _openDatePicker = new EventEmitter();
 
   var onChange = (_) {};
   var onTouched = (_) {};
@@ -58,10 +60,12 @@ class FnxDate implements OnInit, ControlValueAccessor {
   set focused(bool focused) {
     _focused = focused;
     if (focused) {
-      datePickerShown = true;
+      _openDatePicker.emit(true);
     }
   }
   get focused => _focused;
+
+  get openDatePicker => _openDatePicker;
 
   bool get active {
     if (dateStr == null) return false;
@@ -171,12 +175,6 @@ class FnxDate implements OnInit, ControlValueAccessor {
     }
   }
 
-  void kbMaybeClosePicker(int keyCode) {
-    if (keyCode == 27) {
-      datePickerShown = false;
-    }
-  }
-
   @override
   void registerOnChange(fn) {
     onChange = fn;
@@ -200,6 +198,10 @@ class FnxDate implements OnInit, ControlValueAccessor {
         onChange(parsed);
       }
     }
+  }
+
+  void ensurePickerOpened() {
+    _openDatePicker.emit(true);
   }
 }
 

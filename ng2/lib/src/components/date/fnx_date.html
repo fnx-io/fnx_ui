@@ -5,13 +5,12 @@
            (ngModelChange)="onChangeInput($event)"
            (focus)="focused = true"
            (blur)="focused = false"
-           (keyup)="kbMaybeClosePicker($event.keyCode)"/>
+           (click)="ensurePickerOpened()"/>
     <label class="icon" [attr.for]="id">date_range</label>
     <label class="error" [hidden]="!showError">{{errorMessage}}</label>
     <fnx-date-picker
-            [shown]="datePickerShown"
             [value]="value"
-            (closed)="datePickerShown = false"
+            [open]="openDatePicker"
             [hourFormat24]="true"
             [dateTime]="dateTime"
             (datePicked)="datePicked($event)"></fnx-date-picker>
