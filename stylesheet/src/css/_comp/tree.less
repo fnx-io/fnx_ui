@@ -1,0 +1,77 @@
+@treeSize: @baseWidgetHeight;
+
+.tree {
+  &, & ul, & li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+}
+@treePixelBg: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAAlwSFlzAAALEwAACxMBAJqcGAAAA6ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDUuNC4wIj4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgICAgICAgICAgeG1sbnM6ZXhpZj0iaHR0cDovL25zLmFkb2JlLmNvbS9leGlmLzEuMC8iPgogICAgICAgICA8eG1wOk1vZGlmeURhdGU+MjAxNi0wNS0wNFQxMzowNTo0MjwveG1wOk1vZGlmeURhdGU+CiAgICAgICAgIDx4bXA6Q3JlYXRvclRvb2w+UGl4ZWxtYXRvciAzLjQuNDwveG1wOkNyZWF0b3JUb29sPgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICAgICA8dGlmZjpDb21wcmVzc2lvbj41PC90aWZmOkNvbXByZXNzaW9uPgogICAgICAgICA8dGlmZjpSZXNvbHV0aW9uVW5pdD4yPC90aWZmOlJlc29sdXRpb25Vbml0PgogICAgICAgICA8dGlmZjpZUmVzb2x1dGlvbj43MjwvdGlmZjpZUmVzb2x1dGlvbj4KICAgICAgICAgPHRpZmY6WFJlc29sdXRpb24+NzI8L3RpZmY6WFJlc29sdXRpb24+CiAgICAgICAgIDxleGlmOlBpeGVsWERpbWVuc2lvbj4xPC9leGlmOlBpeGVsWERpbWVuc2lvbj4KICAgICAgICAgPGV4aWY6Q29sb3JTcGFjZT4xPC9leGlmOkNvbG9yU3BhY2U+CiAgICAgICAgIDxleGlmOlBpeGVsWURpbWVuc2lvbj4xPC9leGlmOlBpeGVsWURpbWVuc2lvbj4KICAgICAgPC9yZGY6RGVzY3JpcHRpb24+CiAgIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+Cpu0q10AAAAMSURBVAgdY9i4cSMABCoCFOC9xuQAAAAASUVORK5CYII=');
+.tree {
+  &, & ul {
+    background-image: @treePixelBg;
+    background-repeat: no-repeat;
+    background-position: @treeSize/2 @treeSize/2;
+    background-size: 1px calc(~"100% - " @treeSize);
+  }
+  ul {
+    background-position: @treeSize/2 0;
+    background-size: 1px calc(~"100% - " @treeSize/2);
+  }
+  li {
+    position: relative;
+    background-image: @treePixelBg;
+    background-repeat: no-repeat;
+    background-position: @treeSize/2 @treeSize/2;
+    background-size: @treeSize/2 1px;
+    padding-left: @treeSize;
+    &:after {
+      .icon;
+      line-height: @treeSize;
+      width: @treeSize;
+      .fs-m;
+      position: absolute;
+      top:0;
+      left:0;
+      //color: #555;
+    }
+    & > * {
+      &:not(.icon):not(.icon--round):not(.mi):not(ul) {
+        .renderComponentWithoutBorder(@treeSize, @lineHeight);
+        display: inline-block;
+      }
+      .mi {
+        .fs-l;
+        display: inline-block;
+        width: @treeSize;
+        text-align: center;
+      }
+    }
+  }
+  .node {
+    &:before {
+      content: "";
+      position: absolute;
+      display: block;
+      top: @treeSize/4;
+      left: @treeSize/4;
+      height: @treeSize/2;
+      width: @treeSize/2;
+      background-color: white;
+    }
+    &:after {
+      content: "add_box";
+    }
+    &:not(.open) {
+      ul {
+        display: none;
+      }
+    }
+    &.open {
+      &:after {
+        content: "check_box_outline_blank";
+      }
+    }
+  }
+}
