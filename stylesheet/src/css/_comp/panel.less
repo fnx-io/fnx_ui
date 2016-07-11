@@ -17,3 +17,39 @@
 .panel__content {
   padding: @padding;
 }
+.panel--closable {
+  .panel;
+  .panel__header {
+    cursor: pointer;
+    h1, h2, h3, h4, h5 {
+      &:before {
+        .mi;
+        transition: transform 100ms;
+        content: "play_arrow";
+        margin-right: 0.5em;
+      }
+    }
+  }
+  .panel__content {
+    transition: max-height 300ms, padding 100ms;
+    max-height: 0;
+    overflow: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  &.open {
+    .panel__header {
+      cursor: pointer;
+      h1, h2, h3, h4, h5 {
+        &:before {
+          transform: rotate(90deg);
+        }
+      }
+    }
+    .panel__content {
+      max-height: 500em;
+      padding-top: @padding;
+      padding-bottom: @padding;
+    }
+  }
+}

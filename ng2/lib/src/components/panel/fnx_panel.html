@@ -1,0 +1,11 @@
+<section class="panel"
+         [class.panel--closable]="isClosable"
+         [class.open]="open">
+    <header class="panel__header" attr.id="{{id}}-header">
+        <ng-content select="[header]"></ng-content>
+    </header>
+    <main class="panel__content">
+        <ng-content select="*"></ng-content>
+    </main>
+</section>
+
