@@ -13,8 +13,6 @@
 </head>
 <body>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
 <style>
     .example-color {
         width: 13em;
@@ -31,8 +29,6 @@
         margin: 0.2em 0;
     }
 </style>
-
-<body>
 
 <h2>Colors</h2>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam cum eligendi quod suscipit veritatis? Debitis modi mollitia optio provident quibusdam! Consequuntur illum quas suscipit ullam unde? Ipsa quaerat reprehenderit veniam?</p>
@@ -94,50 +90,8 @@
 
 </article>
 
-<article>
-    <h3>Background and text colors</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, aut autem error fuga illum, maiores modi omnis possimus praesentium quas quibusdam quod reiciendis rem repellendus saepe tempore totam vero voluptatum?</p>
-    <div id="colors" class="row--gutter">
-        <script>
-            $(function () {
-                var colors = ["fnx", "black", "white", "red", "pink", "purple",
-                    "deep-purple", "indigo", "blue", "light-blue", "cyan", "teal",
-                    "green", "light-green", "lime",
-                    "yellow","amber","orange","deep-orange","brown","grey","blue-grey"];
-                $(colors).each(function(i, val) {
-                    $("#colors").append(
-                            $("<div class='s6 m3 l2'>" +
-                                    "<div class='bg--"+val+"--l4'>.bg--"+val+"--l4</div>" +
-                                    "<div class='bg--"+val+"--l3'>.bg--"+val+"--l3</div>" +
-                                    "<div class='bg--"+val+"--l2'>.bg--"+val+"--l2</div>" +
-                                    "<div class='bg--"+val+"--l1'>.bg--"+val+"--l1</div>" +
-                                    "<div class='bg--"+val+"'>.bg--"+val+"</div>" +
-                                    "<div class='bg--"+val+"--d1'>.bg--"+val+"--d1</div>" +
-                                    "<div class='bg--"+val+"--d2'>.bg--"+val+"--d2</div>" +
-                                    "<div class='bg--"+val+"--d3'>.bg--"+val+"--d3</div>" +
-                                    "<div class='bg--"+val+"--d4'>.bg--"+val+"--d4</div>" +
-                                    "</div>")
-                    );
-                    $("#colors").append(
-                            $("<div class='s6 m3 l2'>" +
-                                    "<div class='text--"+val+"--l4'>.text--"+val+"--l4</div>" +
-                                    "<div class='text--"+val+"--l3'>.text--"+val+"--l3</div>" +
-                                    "<div class='text--"+val+"--l2'>.text--"+val+"--l2</div>" +
-                                    "<div class='text--"+val+"--l1'>.text--"+val+"--l1</div>" +
-                                    "<div class='text--"+val+"'>.text--"+val+"</div>" +
-                                    "<div class='text--"+val+"--d1'>.text--"+val+"--d1</div>" +
-                                    "<div class='text--"+val+"--d2'>.text--"+val+"--d2</div>" +
-                                    "<div class='text--"+val+"--d3'>.text--"+val+"--d3</div>" +
-                                    "<div class='text--"+val+"--d4'>.text--"+val+"--d4</div>" +
-                                    "</div>")
-                    );
-                });
-            });
-
-        </script>
-    </div>
-
-</article>
+<div id="colors" class="row--gutter">
+</div>
 
 <article>
     <h3>Color combinations</h3>
@@ -149,4 +103,8 @@
     </div>
 </article>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="demo.js"></script>
+
 </body>
+</html>

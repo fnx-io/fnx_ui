@@ -31,6 +31,7 @@ var FILES = {
 	images: sourcesRoot + 'img/**',
 	html: sourcesRoot + '*.html',
 	copy: [
+		sourcesRoot + 'demo.js',
 		sourcesRoot + '**/*.woff',
 		sourcesRoot + '**/*.ttf'
 	]

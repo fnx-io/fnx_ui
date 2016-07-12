@@ -16,26 +16,26 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
 <style>
-    .property {
+    .demo--property {
         padding: 1em;
         clear: both;
     }
-    .property:after {
+    .demo--property:after {
         content: '';
         display: table;
         clear: both;
     }
-    .col {
+    .demo--col {
         width: 12%;
         float: left;
         border: 1px dotted #efefef;
         background-color: #ddd;
         margin: 1%;
     }
-    .col.property-border {
+    .demo--col.property-border {
         border: none;
     }
-    .col div {
+    .demo--col div {
         background-color: white;
     }
 </style>
@@ -45,27 +45,10 @@
 
 <section id="utils">
 
-    <script>
-        $(function () {
-            var properties = ["padding", "padding--small","padding--big","margin","margin--small","margin--big", "border"];
-            var modes = ["", "--top", "--bottom", "--left", "--right", "--vertical", "--horizontal"];
-
-            $(properties).each(function(i, prop) {
-                var $s = $("<article class='property property__"+prop+"'></article>");
-                $(modes).each(function(i, mode) {
-                    var $c = $("<div class='col property-"+prop+"'></div>");
-                    var property = prop + mode;
-                    $c.append($("<div class='"+property+"'>."+property+"<br>."+property+"<br>."+property+"</div>"));
-                    $s.append($c);
-                });
-                $("#utils").append($s);
-            });
-        });
-
-    </script>
-
-
 </section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="demo.js"></script>
 
 </body>
 <!--

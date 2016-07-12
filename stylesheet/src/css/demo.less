@@ -17,4 +17,32 @@ article {
     color: black;
   }
   box-shadow: 0.5em 1em 0.5em rgba(0,0,0,0.2);
+  position: relative;
+}
+@keyframes codeAppear {
+  0% {
+    opacity: 0;
+    right: 20em;
+  }
+  100% {
+    opacity: 1;
+    right: 0.5em;
+  }
+}
+.button--code {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  animation: codeAppear 300ms;
+}
+#modalCode .modal {
+  height: 80vh;
+}
+.modal_code {
+  height: 100%;
+  overflow: scroll;
+  font-family: monospace;
+  white-space: pre;
+  padding: 1rem 0.5rem;
+  font-size: 80%;
 }

@@ -81,7 +81,7 @@
         </main>
     </div>
 
-    <div class="panel--closable margin--bottom">
+    <div class="panel--closable margin--bottom" id="demoPanel">
         <header class="panel__header">
             <h3>Panel headline</h3>
         </header>
@@ -89,6 +89,12 @@
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque dolores harum nostrum nulla. Consequuntur dicta enim error itaque iure magnam maxime molestias quibusdam sapiente sunt? Dicta non porro tempora ut.
         </main>
     </div>
+
+    <script>
+        $("#demoPanel").on("click", function() {
+           $(this).toggleClass("open");
+        });
+    </script>
 
     <div class="panel--closable open">
         <header class="panel__header">
@@ -102,5 +108,8 @@
 
 
 </article>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="demo.js"></script>
 
 </body>
