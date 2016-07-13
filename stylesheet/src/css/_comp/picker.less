@@ -1,5 +1,5 @@
 .picker--date {
-  .flex-row;
+  .flex--row;
   .card;
   position: absolute;
   left: 0;
@@ -30,9 +30,9 @@
     width: 100%;
     margin: 0;
     height: @baseWidgetHeight;
-    .flex-row;
+    .flex--row;
     .picker__today {
-      .flex-grow;
+      .flex--grow;
       .renderComponentWithoutBorder(@baseWidgetHeight, @lineHeight);
       text-align: center;
     }
@@ -50,7 +50,7 @@
     padding-left: @baseWidgetHeight;
     padding-right: @baseWidgetHeight;
     margin: 0 auto;
-    .flex-row;
+    .flex--row;
     & > * {
       display: block;
       width: @baseWidgetHeight;

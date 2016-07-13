@@ -70,6 +70,7 @@ $(function() {
     $b.on("click", ".button--code", function() {
         var $a = $(this).parent();
         $a.children(".button--code").remove();
+        $a.data("code", null);
         $b.append($('<div class="modal__wrapper" id="modalCode"><div class="modal"><a href="#" class="modal__close">close</a><div class="modal_code"></div></div></div>'));
         $("#modalCode .modal_code").text($a.html());
     });
@@ -78,6 +79,15 @@ $(function() {
        $("#modalCode").remove();
         e.preventDefault();
     });
+
+    $b.on("click", "#demoOpenModalExample", function() {
+       $("#demoModalExample").show();
+    });
+
+    $b.on("click", "#demoModalExample", function() {
+        $("#demoModalExample").hide();
+    });
+
 
 
 

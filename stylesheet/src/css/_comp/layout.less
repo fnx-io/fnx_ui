@@ -6,7 +6,7 @@
 
 .layout--sidebar {
   .fit;
-  .flex-row;
+  .flex--row;
   & > * {
     position: relative;
   }
@@ -15,14 +15,14 @@
   }
   & > main {
     .renderMainPanel();
-    .flex-grow;
+    .flex--grow;
   }
 }
 
 
 .layout--header {
   .fit;
-  .flex-column;
+  .flex--column;
   & > * {
     position: relative;
   }
@@ -32,6 +32,6 @@
   }
   & > main {
     .renderMainPanel();
-    .flex-grow;
+    .flex--grow;
   }
 }
