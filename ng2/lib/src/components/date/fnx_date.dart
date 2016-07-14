@@ -1,12 +1,10 @@
-import 'package:fnx_ui/src/util/ui.dart' as ui;
-import 'package:fnx_ui/src/util/date.dart' as date;
 import 'package:angular2/angular2.dart';
-import 'package:angular2/core.dart';
 import 'package:angular2/common.dart';
-import 'package:angular2/src/common/forms/directives/validators.dart';
-
+import 'package:angular2/core.dart';
 import 'package:fnx_ui/src/components/date/fnx_date_picker.dart';
-import 'dart:html';
+import 'package:fnx_ui/src/components/input/fnx_input.dart';
+import 'package:fnx_ui/src/util/date.dart' as date;
+
 export 'package:fnx_ui/src/components/date/fnx_date_picker.dart';
 
 
@@ -18,15 +16,7 @@ const CUSTOM_DATE_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
     selector: 'fnx-date',
     providers: const [CUSTOM_DATE_VALUE_ACCESSOR],
     templateUrl: 'fnx_date.html')
-class FnxDate implements OnInit, ControlValueAccessor {
-
-  String id = ui.uid('date-');
-
-  @Input()
-  String label;
-
-  @Input()
-  String errorMessage;
+class FnxDate extends FnxInputComponent implements OnInit, ControlValueAccessor {
 
   NgForm formCtrl;
 
@@ -36,7 +26,7 @@ class FnxDate implements OnInit, ControlValueAccessor {
 
   get value => _value;
 
-  /// This is the model for the DOM input field, user types here hers name and
+  /// This is the model for the DOM input field, user types here the date and
   /// we try to parse it and sync it to model
   @Output() String dateStr = null;
 
@@ -49,13 +39,14 @@ class FnxDate implements OnInit, ControlValueAccessor {
   @Input()
   bool dateTime = false;
 
-  bool parseDateError = false;
   bool _focused = false;
 
   EventEmitter _openDatePicker = new EventEmitter();
 
   var onChange = (_) {};
   var onTouched = (_) {};
+
+  FnxDate(@Optional() FnxInput wrapper): super(wrapper);
 
   set focused(bool focused) {
     _focused = focused;
@@ -77,19 +68,7 @@ class FnxDate implements OnInit, ControlValueAccessor {
 
   @override
   ngOnInit() {
-    /*List<ValidatorFn> validators = [];
-    validators.add((AbstractControl) {
-      if (parseDateError) {
-        return {'parseDateError': true};;
-      } else {
-        return null;
-      }
-    });
-    if (required) {
-      validators.add(Validators.required);
-    }
-    control = new Control('', Validators.compose(validators));
-    this.formCtrl.control..addControl(this.inputField, control);*/
+    super.ngOnInit();
   }
 
   /// called when the input field changes
@@ -101,18 +80,16 @@ class FnxDate implements OnInit, ControlValueAccessor {
     DateTime parsed;
     try {
       parsed = dateStrToDateTime(dateStr);
-      errorMessage = null;
-      parseDateError = false;
-    } catch (ex, strace) {
+      errorStateChange.emit(false);
+    } catch (ex) {
       parsed = null;
-      parseDateError = true;
       String format;
       if (dateTime) {
         format = date.DATETIME_FORMAT;
       } else {
         format = date.DATE_FORMAT;
       }
-      errorMessage = "Invalid date, required format ${format.toLowerCase()}";
+      errorStateChange.emit("Invalid date, required format ${format.toLowerCase()}");
     }
     _value = parsed;
     onChange(_value);
@@ -143,6 +120,7 @@ class FnxDate implements OnInit, ControlValueAccessor {
     }
     setStrDate(_value);
     onChange(_value);
+    errorStateChange.emit(false);
   }
 
   void setStrDate(DateTime value) {

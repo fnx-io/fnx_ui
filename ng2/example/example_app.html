@@ -35,7 +35,9 @@
                     </fnx-input>
                 </div>
                 <div class="s12 m6 l4">
-                    <fnx-date [dateTime]="true" [(ngModel)]="user['birthday']" label="date of birth"></fnx-date>
+                    <fnx-input label="date of birth">
+                        <fnx-date [dateTime]="true" [(ngModel)]="user['birthday']"></fnx-date>
+                    </fnx-input>
                 </div>
                 <div class="s12 m6 l4">
                     <fnx-date [dateTime]="true" [(ngModel)]="user['deathday']" label="date of death"></fnx-date>
