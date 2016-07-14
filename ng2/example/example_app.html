@@ -21,11 +21,9 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis cum cumque eaque eligendi error ex expedita explicabo laborum neque nisi, nulla optio porro quas quibusdam repellat, sapiente totam voluptates?</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, qui, similique. Ad aperiam consectetur consequuntur, error esse eum exercitationem mollitia nihil quasi quibusdam reprehenderit vel voluptas voluptatum! Atque distinctio, possimus!</p>
         <form>
-            Normal
-            <fnx-input [(value)]="user['name']" ></fnx-input>
-            <br>
-            Control
-            <fnx-text [(ngModel)]="user['name']" [ngFormControl]="userName" label="Jmeno" errorMsg="Jmeno mravencovo"></fnx-text>
+            <fnx-input label="Jmeno" errorMessage="Jmeno mravencovo">
+                <fnx-text [(ngModel)]="user['name']" [ngFormControl]="userName"></fnx-text>
+            </fnx-input>
             Po
             <div class="row">
                 <div class="s12 m6 l4">
