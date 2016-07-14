@@ -3,17 +3,17 @@ import 'package:angular2/common.dart';
 import 'package:fnx_ui/src/util/ui.dart';
 
 
-const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = const Provider( NG_VALUE_ACCESSOR,
-                                                            useExisting: FnxControlInput,
-                                                            multi: true);
+const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
+                                                          useExisting: FnxText,
+                                                          multi: true);
 
 
 @Component(
-    selector: 'fnx-control-input',
-    templateUrl: 'fnx_control_input.html',
-    providers: const [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
+    selector: 'fnx-text',
+    templateUrl: 'fnx_text.html',
+    providers: const [CUSTOM_INPUT_TEXT_VALUE_ACCESSOR]
 )
-class FnxControlInput implements ControlValueAccessor {
+class FnxText implements ControlValueAccessor {
 
   final String id = uid('input_');
 
@@ -68,4 +68,4 @@ class FnxControlInput implements ControlValueAccessor {
   }
 }
 
-const FNX_INPUT_CONTROL_DIRECTIVES = const [FnxControlInput];
+const FNX_INPUT_TEXT_DIRECTIVES = const [FnxText];
