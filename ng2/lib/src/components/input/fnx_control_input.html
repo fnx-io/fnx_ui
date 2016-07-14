@@ -1,8 +1,0 @@
-<div class="input">
-    <label *ngIf="label != null" for="{{id}}">{{label}}</label>
-    <input
-        id="{{id}}"
-        type="text"
-        [(ngModel)]="value"/>
-    <label *ngIf="error != null && error" for="{{id}}" class="error">{{errorMsg}}</label>
-</div>

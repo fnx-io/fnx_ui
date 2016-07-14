@@ -1,36 +1,32 @@
-<div class="input">
-    <label class="label" for="{{id}}">{{label}}</label>
-    <div id="{{id}}"
-         class="select"
-         tabindex="0"
-         (click)="toggleDropdown()"
-         [class.open--up]="openUp"
-         [class.open]="open"
-         [class.error]="error">
+<div id="{{ componentId }}"
+     class="select"
+     tabindex="0"
+     (click)="toggleDropdown()"
+     [class.open--up]="openUp"
+     [class.open]="open"
+     [class.error]="error">
 
-        <span class="clickable">{{ renderSelectedOptions() }}</span>
-        <div class="select__dropdown" [hidden]="!open">
-            <div (hidden)="! showFilter" class="input" (click)="$event.stopPropagation()">
-                <input id="{{id}}-search" type="text" placeholder="Search..." [(ngModel)]="filter">
-                <label for="{{id}}-search" class="icon">search</label>
-            </div>
-            <ul>
-                <li *ngFor="let opt of filteredOptions" (click)="selectOption(opt.value, $event)"
-                    class="clickable"
-                    [class.selected]="isSelected(opt.value)" [class.highlighted]="isHighlighted(opt)">
-                    <i *ngIf="multi" class="mi">
-                        <span *ngIf="isSelected(opt.value)">done</span>
-                    </i>
-                    {{ opt.label }}
-                </li>
-            </ul>
-            <p *ngIf="options.isEmpty" class="padding--small no-margin">
-                {{ optionsEmptyLabel }}
-            </p>
-            <p *ngIf="filteredOptions.isEmpty && options.isNotEmpty" class="padding--small no-margin">
-                {{ optionsEmptySearchLabel }}
-            </p>
+    <span class="clickable">{{ renderSelectedOptions() }}</span>
+    <div class="select__dropdown" [hidden]="!open">
+        <div (hidden)="! showFilter" class="input" (click)="$event.stopPropagation()">
+            <input id="{{componentId}}-search" type="text" placeholder="Search..." [(ngModel)]="filter">
+            <label for="{{componentId}}-search" class="icon">search</label>
         </div>
+        <ul>
+            <li *ngFor="let opt of filteredOptions" (click)="selectOption(opt.value, $event)"
+                class="clickable"
+                [class.selected]="isSelected(opt.value)" [class.highlighted]="isHighlighted(opt)">
+                <i *ngIf="multi" class="mi">
+                    <span *ngIf="isSelected(opt.value)">done</span>
+                </i>
+                {{ opt.label }}
+            </li>
+        </ul>
+        <p *ngIf="options.isEmpty" class="padding--small no-margin">
+            {{ optionsEmptyLabel }}
+        </p>
+        <p *ngIf="filteredOptions.isEmpty && options.isNotEmpty" class="padding--small no-margin">
+            {{ optionsEmptySearchLabel }}
+        </p>
     </div>
-    <label class="error" *ngIf="error" for="{{id}}">{{errorMsg}}</label>
 </div>
