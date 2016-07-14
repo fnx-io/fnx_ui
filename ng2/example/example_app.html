@@ -5,7 +5,7 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium dolores eveniet excepturi qui soluta veritatis voluptates! Accusamus accusantium eius fugit in neque pariatur praesentium quaerat, quasi quod ratione sed, tempore.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita quaerat quo reiciendis suscipit velit voluptatibus! Adipisci, at expedita iste magni minus nisi porro provident quas rerum sit velit veniam voluptates.</p>
 
-        <fnx-panel closable="true">
+        <fnx-panel closable="true" class="margin--bottom">
             <h3 header>Ahoj, ja jsem header</h3>
             <p header>Ahoj ja jsem vysvetlujici lorem ipsum.</p>
 
@@ -25,7 +25,7 @@
                 <fnx-text [(ngModel)]="user['name']" [ngFormControl]="userName"></fnx-text>
             </fnx-input>
             Po
-            <div class="row">
+            <div class="row--gutter">
                 <div class="s12 m6 l4">
                     <fnx-input label="Character mood" errorMessage="Everyone has to be happy!">
                         <fnx-select [(ngModel)]="user['mood']" [ngFormControl]="mood" [multi]="true">

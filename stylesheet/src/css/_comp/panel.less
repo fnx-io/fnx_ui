@@ -3,6 +3,11 @@
   border: 1px solid @colorBorderDefault;
   .softBorder();
   background-color: inherit;
+  & > p, & > * > p {
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
 }
 .card {
   .panel;

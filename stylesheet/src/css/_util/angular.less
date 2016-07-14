@@ -1,0 +1,32 @@
+.ngBlock() {
+  display: block;
+  width: 100%;
+  padding:0;
+  margin:0;
+}
+
+fnx-input {
+  .ngBlock();
+}
+fnx-text {
+  .ngBlock();
+  input, .select {
+    width: 100%;
+  }
+}
+fnx-date {
+  .ngBlock();
+  display: flex;
+  & > * {
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin:0;
+  }
+  & > input {
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+}
+fnx-panel {
+  .ngBlock();
+}

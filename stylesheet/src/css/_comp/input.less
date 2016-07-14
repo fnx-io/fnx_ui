@@ -12,38 +12,44 @@
   & > label:not(.icon) {
     width: 100%;
     &:first-child {
-      margin-top: @padding / 4;
+      margin-top: round(@padding / 4);
+      margin-bottom: round(@padding / 4);
     }
     &.error {
-      margin-top: @padding / 4;
+      margin-top: round(@padding / 4);
       color: @colorRed;
       .fs-s;
     }
   }
-
-  & > input, & > .select {
-    .renderComponentWithBorder(@baseWidgetHeight, @lineHeight);
-    .fs-m;
-    width: 1em;
-    flex-grow: 1;
-    flex-shrink: 1;
-    padding-left: @padding / 2;
-    border: 1px solid @colorBorderDefault;
-    .softBorder();
-    &.error {
-      border-color: @colorRed;
-    }
-  }
-  & > input {
-    box-shadow: inset 1px 2px 2px rgba(0,0,0,0.1); // maybe?
-    padding-right: @padding / 2;
-  }
-
   & > .check {
 
   }
+  & > *:not(.icon):not(.mi):not(.btn--icon):not(.btn) {
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+  & > input, & > .select {
+    width: 1px;
+  }
 
 }
+
+input, .select {
+  .renderComponentWithBorder(@baseWidgetHeight, @lineHeight);
+  .fs-m;
+  padding-left: @padding / 2;
+  border: 1px solid @colorBorderDefault;
+  .softBorder();
+  font-weight: 200;
+  &.error {
+    border-color: @colorRed;
+  }
+}
+input {
+  box-shadow: inset 1px 2px 2px rgba(0,0,0,0.1); // maybe?
+  padding-right: @padding / 2;
+}
+
 .select {
   position: relative;
   padding-right: @baseWidgetHeight;

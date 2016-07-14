@@ -1,14 +1,14 @@
-@rem: 11pt;
+@rem: 15px;
 
-@baseWidgetHeight: 2.2rem;
-@lineHeight: 1.2em;
+@baseWidgetHeight: round(2.2 * @rem);
+@lineHeight: round(1.2 * @rem);
 @softBorderRadius: 3px;
-@padding: 1rem;
+@padding: @rem;
 
-@widthMobile: 35em;
-@widthTablet: 60em;
+@widthMobile: (@rem * 35);
+@widthTablet: (60 * @rem);
 
-@navbarHeight: @baseWidgetHeight * 1.5;
+@navbarHeight: round(@baseWidgetHeight * 1.5);
 
 
 @colorFnxOrange: #ff8403;

@@ -196,7 +196,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
     }
   }
 
-  StreamSubscription<String> bindKeyHandler(ElementStream<KeyboardEvent> stream) {
+  StreamSubscription<String> bindKeyHandler(Stream<KeyboardEvent> stream) {
     Map<int, String> actions = {KeyCode.ENTER: 'SELECT',
                                 KeyCode.ESC: 'HIDE',
                                 KeyCode.UP: 'UP',

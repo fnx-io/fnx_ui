@@ -123,7 +123,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
     days = result;
   }
 
-  bool isSelected(int year, int month, int day) {
+  bool isSelected(var year, var month, var day) {
     if (_originalValue == null) return false;
     return  _originalValue.year == year &&
             _originalValue.month == month &&
@@ -144,7 +144,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
     closed.emit(true);
   }
 
-  void formatNumber(int num) {
+  String formatNumber(int num) {
     if (num == null) return null;
     var formatter = new NumberFormat('00');
     return formatter.format(num);

@@ -1,13 +1,13 @@
 .renderComponentWithoutBorder(@widgetHeight, @widgetLineHeight) {
   //padding-left: @padding;
   //padding-right: @padding;
-  padding-top: calc((@widgetHeight / 2) ~" - " (@widgetLineHeight / 2) );
-  padding-bottom: calc((@widgetHeight / 2) ~" - " (@widgetLineHeight / 2) );
+  padding-top: calc(round(@widgetHeight / 2) ~" - " round(@widgetLineHeight / 2) );
+  padding-bottom: calc(round(@widgetHeight / 2) ~" - " round(@widgetLineHeight / 2) );
 }
 
 .renderComponentWithBorder(@widgetHeight, @widgetLineHeight) {
   //padding-left: @padding;
   //padding-right: @padding;
-  padding-top: calc((@widgetHeight / 2) ~" - " (@widgetLineHeight / 2) ~" - 1px");
-  padding-bottom: calc((@widgetHeight / 2) ~" - " (@widgetLineHeight / 2) ~" - 1px");
+  padding-top: calc(round(@widgetHeight / 2) ~" - " round(@widgetLineHeight / 2) ~" - 1px");
+  padding-bottom: calc(round(@widgetHeight / 2) ~" - " round(@widgetLineHeight / 2) ~" - 1px");
 }

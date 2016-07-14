@@ -26,12 +26,12 @@
 
 html {
   .renderLeftRightBottomTop(padding, padding, @padding);
-  .renderLeftRightBottomTop(padding--small, padding, @padding/2);
-  .renderLeftRightBottomTop(padding--big, padding, @padding*2);
+  .renderLeftRightBottomTop(padding--small, padding, round(@padding/2));
+  .renderLeftRightBottomTop(padding--big, padding, round(@padding*2));
 
   .renderLeftRightBottomTop(margin, margin, @padding);
-  .renderLeftRightBottomTop(margin--small, margin, @padding/2);
-  .renderLeftRightBottomTop(margin--big, margin, @padding*2);
+  .renderLeftRightBottomTop(margin--small, margin, round(@padding/2));
+  .renderLeftRightBottomTop(margin--big, margin, round(@padding*2));
 
   .renderLeftRightBottomTop(border, border, 1px solid @colorBorderDefault);
 }
