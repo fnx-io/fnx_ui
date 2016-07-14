@@ -20,7 +20,8 @@ class FnxInput {
 
 
   @Input() String label;
-  @Input() String errorMessage;
+  String _errorMessage;
+  String _customErrorMessage;
 
   bool error = false;
 
@@ -28,6 +29,14 @@ class FnxInput {
 
   bool hasError() {
     return error;
+  }
+
+  void set errorMessage(String err) {
+    this._errorMessage = err;
+  }
+
+  String get errorMessage {
+    return _customErrorMessage != null ? _customErrorMessage : _errorMessage;
   }
 
   FnxInputComponent get component => _component;
@@ -43,19 +52,30 @@ class FnxInput {
   handleErrorChange(dynamic errorStatus) {
     if (errorStatus is bool) {
       this.error = errorStatus;
+      if (!errorStatus) {
+        _customErrorMessage = null;
+      }
+    } else if (errorStatus is String) {
+      error = true;
+      _customErrorMessage = errorStatus;
+    } else if (errorStatus == null) {
+      error = false;
+      _customErrorMessage = null;
     }
   }
 }
 
 abstract class FnxInputComponent implements OnInit {
 
-  final FnxInput _wrapper;
+  FnxInput _wrapper;
 
   final String _privComponentId = ui.uid("comp_");
 
   final EventEmitter errorStateChange = new EventEmitter();
 
-  FnxInputComponent(this._wrapper);
+  FnxInputComponent(@Optional() FnxInput wrapper) {
+    this._wrapper = wrapper;
+  }
 
   String get componentId {
     if (_wrapper != null) {
