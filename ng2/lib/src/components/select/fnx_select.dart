@@ -4,6 +4,7 @@ import 'package:fnx_ui/src/util/ui.dart';
 import 'dart:html';
 import 'dart:async';
 import 'package:fnx_ui/src/util/async.dart';
+import 'package:fnx_ui/src/components/input/fnx_input.dart';
 
 const CUSTOM_SELECT_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
                                                       useExisting: FnxSelect,
@@ -14,14 +15,10 @@ const CUSTOM_SELECT_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
     templateUrl: 'fnx_select.html',
     providers: const [CUSTOM_SELECT_VALUE_ACCESSOR]
 )
-class FnxSelect implements ControlValueAccessor, OnInit, OnDestroy {
-
-  final String id = uid('select_');
+class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
 
   List<FnxOptionValue> options = [];
 
-  @Input() String label;
-  @Input() String errorMsg;
   @Input() String selectionEmptyLabel = "Select...";
   @Input() String optionsEmptyLabel = "No options to choose from";
   @Input() String optionsEmptySearchLabel = "No option matches your search";
@@ -51,7 +48,7 @@ class FnxSelect implements ControlValueAccessor, OnInit, OnDestroy {
 
   Node container;
 
-  FnxSelect(ElementRef el) {
+  FnxSelect(ElementRef el, @Optional() FnxInput wrapper): super(wrapper) {
     if (el != null) {
       container = el.nativeElement;
       elementPositionStream(container).listen((double position) {
@@ -161,6 +158,7 @@ class FnxSelect implements ControlValueAccessor, OnInit, OnDestroy {
     }
     valueChange.emit(_value);
     onChange(_value);
+    errorStateChange.emit(hasError(state));
   }
 
   void toggleSelectedOption(dynamic value) {
@@ -249,6 +247,7 @@ class FnxSelect implements ControlValueAccessor, OnInit, OnDestroy {
 
   @override
   ngOnInit() {
+    super.ngOnInit();
     var self = this;
     this.globalClicks = document.onClick.listen((event) {
       if (!self.open) return;
