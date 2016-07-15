@@ -23,3 +23,6 @@ pubspec.lock
 
 # Directory created by dartdoc
 doc/api/
+
+# useless
+.DS_Store
