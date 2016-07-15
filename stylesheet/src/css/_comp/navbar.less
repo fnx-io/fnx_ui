@@ -3,6 +3,10 @@
   margin: 0;
   padding: 0 @padding;
   position: relative;
+  line-height: @navbarHeight;
+  & > .mi {
+    line-height: @navbarHeight;
+  }
 
   & > * {
     margin: 0;
@@ -10,21 +14,55 @@
     flex-grow: 0;
     flex-shrink: 0;
   }
-  & > h1, & > h2, & > h3, & > h4 {
-    line-height: @lineHeight;
-  }
-  & > label, & > h1, & > h2, & > h3, & >h4 {
-    .renderComponentWithoutBorder(@navbarHeight, @lineHeight);
-  }
-  & > *:not(.icon):not(.icon--round):not(.mi):not(:first-child) {
+
+  & > h1,
+  & > h2,
+  & > h3,
+  & > h4,
+  & > h5,
+  & > h6,
+  & > p,
+  & > span,
+  & > h4,
+  & > a {
+    //line-height: @navbarHeight;
     margin-left: @padding;
   }
-  & > .icon, & > .icon--round, & > .mi, & > .btn, & > .btn--icon, & > input, & > .select {
-    margin-top: round(@navbarHeight - @baseWidgetHeight) / 2;
-    margin-bottom: round(@navbarHeight - @baseWidgetHeight) / 2;
+  & > .icon,
+  & > .icon--round,
+  & > .btn,
+  & > .btn--icon,
+  & > input,
+  & > .select {
+    //line-height: @lineHeight;
+    margin-top: round((@navbarHeight - @baseWidgetHeight) / 2);
+    margin-bottom: round((@navbarHeight - @baseWidgetHeight) / 2);
+  }
+  & > .icon,
+  & > .icon--round,
+  & > .btn,
+  & > .btn--icon {
+    margin-left: round(@padding/2);
+    margin-right: 0;
+  }
+  & > *:first-child {
+    margin-left: 0;
+  }
+  & > input,
+  & > .select {
+    margin-left: @padding;
   }
   & > .mi {
-    .oneCharSquare();
+    //.oneCharSquare();
+  }
+
+
+  & > *:not(.icon):not(.icon--round):not(.mi):not(:first-child) {
+    //
+  }
+  & > .icon, & > .icon--round, & > .mi, & > .btn, & > .btn--icon, & > input, & > .select {
+  }
+  & > .mi {
   }
 
 }

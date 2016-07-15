@@ -23,7 +23,6 @@
       @{property}-right: @value;
   }
 }
-
 html {
   .renderLeftRightBottomTop(padding, padding, @padding);
   .renderLeftRightBottomTop(padding--small, padding, round(@padding/2));
@@ -42,3 +41,27 @@ html {
 .no-padding {
   padding: 0;
 }
+.margin--auto, .margin--auto--horizontal {
+  margin-left: auto;
+  margin-right: auto;
+}
+.margin--auto--vertical {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.width--third {
+  width: 33%;
+}
+.width--half {
+  width: 50%;
+}
+.width--10 { width: 10%; }
+.width--20 { width: 20%; }
+.width--30 { width: 30%; }
+.width--40 { width: 40%; }
+.width--50 { width: 50%; }
+.width--60 { width: 60%; }
+.width--70 { width: 70%; }
+.width--80 { width: 80%; }
+.width--90 { width: 90%; }

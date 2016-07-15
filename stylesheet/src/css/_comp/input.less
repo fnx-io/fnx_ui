@@ -41,6 +41,7 @@ input, .select {
   border: 1px solid @colorBorderDefault;
   .softBorder();
   font-weight: 200;
+  line-height: @lineHeight;
   &.error {
     border-color: @colorRed;
   }
@@ -54,6 +55,7 @@ input {
   position: relative;
   padding-right: @baseWidgetHeight;
   background-color: @colorBackgroundDefault;
+  color: @colorTextDefault;
   box-shadow: inset -1px -1px 1px rgba(0,0,0,0.1); // maybe?
   &.open:not(.open--up) {
     border-bottom-left-radius: 0;

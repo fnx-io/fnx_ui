@@ -12,6 +12,8 @@
   display: inline-block;
   line-height: @lineHeight;
   background-color: white;
+  color: @colorTextDefault;
+  cursor: pointer;
 
   .dropButtonShadow(0.1rem);
   &:hover:not(.disabled):not(:disabled) {
@@ -84,6 +86,7 @@
   position: absolute;
   right: @fabSize / 2;
   bottom: -@fabSize / 2;
+  cursor: pointer;
 
   .dropShadow(0.2rem);
   &:hover:not(.disabled):not(:disabled) {
@@ -100,6 +103,7 @@
   .icon;
   .dropShadow(0.2rem);
   z-index: 1;
+  cursor: pointer;
   &:hover {
     .dropShadow(0.3rem);
     transition: background 0.3s, box-shadow 0.1s;

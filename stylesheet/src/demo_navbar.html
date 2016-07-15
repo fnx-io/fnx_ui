@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/demo.css">
 
 </head>
-<body>
+<body class="theme--fnx accent--red">
 
 <h2>Navbar</h2>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, cupiditate, quia? A eos expedita facere, illum laboriosam laborum non nostrum porro saepe voluptatum. Blanditiis itaque maxime nesciunt placeat praesentium unde!</p>
@@ -18,8 +18,16 @@
 <article>
     <h3>Simple menu</h3>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti dicta fugit inventore recusandae? Animi architecto beatae consequatur, cumque distinctio, eius eligendi expedita explicabo harum illo illum inventore labore, nemo quo.</p>
-    <nav class="navbar bg--pink">
-        <h1>Headline</h1>
+    <nav class="navbar">
+        <h1>H1</h1>
+        <h2>H2</h2>
+        <h3>H3</h3>
+        <h4>H4</h4>
+        <h5>H5</h5>
+        <h6>H6</h6>
+        <span>span</span>
+        <a href="#">a href</a>
+        <p>para</p>
 
         <span class="spacer"></span>
 
@@ -33,15 +41,40 @@
     </nav>
 </article>
 
+
+<article>
+    <h3>FAB</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquam aspernatur at corporis cumque, delectus deleniti dolor, dolores enim eos et expedita maxime nam nesciunt officia pariatur reiciendis repellat, voluptatum.</p>
+
+    <nav class="navbar padding--fab">
+        <h1>Navbar</h1>
+        <span class="spacer"></span>
+        <ul class="menu--horizontal">
+            <li><a href="#">submenu</a>
+                <ul class="menu--vertical">
+                    <li><a href="#">link</a></li>
+                    <li><a href="#">link</a></li>
+                    <li><a href="#">link</a></li>
+                </ul>
+            </li>
+            <li><a href="#">link</a></li>
+            <li><a href="#">link</a></li>
+        </ul>
+
+        <a href="#" class="btn--fab bg--red">add</a>
+
+    </nav>
+</article>
+
 <article>
     <h3>Icons and inputs</h3>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum cumque distinctio, doloribus eligendi error expedita illo in, ipsam necessitatibus nemo nulla numquam officia provident quasi quidem quis repellat sunt ut!</p>
 
-    <nav class="navbar bg--orange">
-        <span class="mi text--indigo fs-xxxl">screen_lock_rotation</span>
+    <nav class="navbar">
+        <span class="mi fs-xxxl">screen_lock_rotation</span>
         <h1>Navbar</h1>
         <input type="text">
-        <div class="select open open--up"><span>select</span></div>
+        <div class="select open--up"><span>select</span></div>
 
         <span class="spacer"></span>
 
@@ -55,23 +88,6 @@
     </nav>
 </article>
 
-<article>
-    <h3>FAB</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquam aspernatur at corporis cumque, delectus deleniti dolor, dolores enim eos et expedita maxime nam nesciunt officia pariatur reiciendis repellat, voluptatum.</p>
-
-    <nav class="navbar bg--blue-grey padding--fab">
-        <h1>Navbar</h1>
-        <span class="spacer"></span>
-
-        <ul class="menu--horizontal">
-            <li><a href="#">link</a></li>
-            <li><a href="#">link</a></li>
-        </ul>
-
-        <a href="#" class="btn--fab bg--red">add</a>
-
-    </nav>
-</article>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="demo.js"></script>
