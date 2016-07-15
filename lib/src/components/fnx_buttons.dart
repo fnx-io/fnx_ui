@@ -8,7 +8,7 @@ import 'dart:html';
 <div class="buttonbar">
   <a *ngIf="back" href="#" class="btn " (click)="goBack($event)"><fnx-icon type="arrow_back"></fnx-icon>{{ goBackLabel }}</a>
   <span class="spacer"></span>
-  <button type="submit" class="btn bg--blue">
+  <button type="submit" class="btn bg--important">
     {{ label }}
     <fnx-icon *ngIf="formValid" type="check"></fnx-icon>
     <fnx-icon *ngIf="!formValid" type="not_interested"></fnx-icon>
