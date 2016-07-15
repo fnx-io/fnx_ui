@@ -15,7 +15,7 @@ const CUSTOM_SELECT_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
     templateUrl: 'fnx_select.html',
     providers: const [CUSTOM_SELECT_VALUE_ACCESSOR]
 )
-class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
+class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
 
   List<FnxOptionValue> options = [];
 
@@ -48,7 +48,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 
   Node container;
 
-  FnxSelect(ElementRef el, @Optional() FnxInput wrapper): super(wrapper) {
+  FnxSelect(ElementRef el, @Optional() FnxInput wrapper, @Optional() NgForm form): super(wrapper, form) {
     if (el != null) {
       container = el.nativeElement;
       elementPositionStream(container).listen((double position) {
@@ -283,6 +283,11 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   void writeValue(obj) {
     _value = obj;
     onChange(obj);
+  }
+
+  @override
+  ngAfterViewInit() {
+    super.ngAfterViewInit();
   }
 }
 

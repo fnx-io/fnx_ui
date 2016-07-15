@@ -46,7 +46,7 @@ class FnxDate extends FnxInputComponent implements OnInit, ControlValueAccessor 
   var onChange = (_) {};
   var onTouched = (_) {};
 
-  FnxDate(@Optional() FnxInput wrapper): super(wrapper);
+  FnxDate(@Optional() FnxInput wrapper, @Optional() NgForm form): super(wrapper, form);
 
   set focused(bool focused) {
     _focused = focused;

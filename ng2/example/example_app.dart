@@ -35,7 +35,7 @@ class ExampleApp implements OnInit {
   };
 
   ControlGroup userForm;
-  Control userName = new Control('', Validators.compose([Validators.required, Validators.minLength(3)]));
+  Control userName = new Control('', Validators.maxLength(5));
   Control mood = new Control('', moodValidator);
 
   List<Map> moods = [{'id': 'happy', 'name': 'Being 😀'}, {'id': 'sad', 'name': 'Being 😑'}, {'id': 'troll', 'name': 'Be not ⚠️'}];

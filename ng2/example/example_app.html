@@ -22,7 +22,7 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, qui, similique. Ad aperiam consectetur consequuntur, error esse eum exercitationem mollitia nihil quasi quibusdam reprehenderit vel voluptas voluptatum! Atque distinctio, possimus!</p>
         <form>
             <fnx-input label="Jmeno" errorMessage="Jmeno mravencovo">
-                <fnx-text [(ngModel)]="user['name']" [ngFormControl]="userName"></fnx-text>
+                <fnx-text [(ngModel)]="user['name']" [ngFormControl]="userName" [required]="true"></fnx-text>
             </fnx-input>
             Po
             <div class="row--gutter">
@@ -49,6 +49,12 @@
         </form>
 
         <code>{{user}}</code>
+
+        <form>
+            <fnx-input label="Character name" errorMessage="Please enter your character's name">
+                <fnx-text [(ngModel)]="user['name']" [required]="true" [minLength]="3" [maxLength]="8"></fnx-text>
+            </fnx-input>
+        </form>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci ex facilis illum incidunt itaque labore natus, nemo nisi, nostrum pariatur placeat quas quia, quibusdam quis quisquam saepe sequi veritatis. Natus.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cupiditate exercitationem ipsam iusto, magnam nemo neque optio quod recusandae reiciendis rem, sapiente tempore tenetur. Deserunt fugit incidunt ipsam numquam veniam.</p>
