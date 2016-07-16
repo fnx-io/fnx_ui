@@ -8,21 +8,33 @@ import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'dart:html';
 
 @Component(
-  selector: 'fnx-panel',
-  templateUrl: 'fnx_panel.html'
+  selector: 'fnx-tree',
+  template: """
+  Hoj!
+  """
 )
-class FnxPanel {
+class FnxTree {
 
-  final Logger log = new Logger("FnxPanel");
 
-  @Input()
-  String closable;
+}
 
-  bool get isClosable => closable != null;
+@Component(
+    selector: 'fnx-tre-node',
+    template: """
+  Node!
+  """
+)
+class FnxTreeNode {
+
+  final Logger log = new Logger("FnxTreeNode");
 
   @Input()
   bool open = false;
 
-  String id = ui.uid('panel-');
+  String id = ui.uid('tree-node-');
+
+  FnxTreeNode(@Optional() FnxTreeNode node) {
+  }
 
 }
+

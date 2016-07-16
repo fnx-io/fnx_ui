@@ -34,6 +34,17 @@
 
 }
 
+label {
+  &.required {
+    position: relative;
+    &:after {
+      content: "*";
+      margin-left: @padding/2;
+      opacity: 0.6;
+    }
+  }
+}
+
 input, .select {
   .renderComponentWithBorder(@baseWidgetHeight, @lineHeight);
   .fs-m;
@@ -71,9 +82,6 @@ input {
     text-overflow: ellipsis;
     max-width: 100%;
     display: block;
-  }
-  .tag {
-    margin:0;
   }
   &:after {
     .icon;

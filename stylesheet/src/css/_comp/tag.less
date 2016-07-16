@@ -14,3 +14,19 @@
     width: 1em;
   }
 }
+@smallTagSize: round(@rem * 0.9);
+.select:not(.tags), table {
+  .tag {
+    font-size: @smallTagSize;
+    line-height: 1;
+    .renderComponentWithoutBorder(@smallTagSize+4px; @smallTagSize);
+    .icon {
+      font-size: @smallTagSize;
+      line-height: 1;
+    }
+  }
+}
+.select.tags {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
