@@ -4,22 +4,36 @@
   left:0;
   right:0;
   background-color: rgba(0,0,0,0.3);
-  padding-top: 10vh;
   height: 100%;
   z-index: 1000;
+  display: flex;
+  .flex--column;
+  &:before {
+    display: block;
+    content: " ";
+    height: 10vh;
+    .flex--grow;
+    flex-shrink: 0;
+  }
+  &:after {
+    display: block;
+    content: " ";
+    height: 10vh;
+    .flex--grow--2;
+    flex-shrink: 0;
+  }
 }
 .modal {
   border: 1px solid @colorBorderDefault;
   .shadow--huge;
   .softBorder();
+  .flex--shrink;
+  flex-grow: 0;
   position: relative;
-  max-height: 80vh;
-  height: 50%;
-  min-height: 20em;
   background-color: white;
   & > *, & > .layout--header, & > .layout--sidebar {
     position: static;
-    max-height: 100%;
+    max-height: 80vh;
     & > header {
       padding-right: @baseWidgetHeight * 1.3;
     }

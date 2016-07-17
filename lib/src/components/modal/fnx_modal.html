@@ -1,0 +1,16 @@
+<div class="modal__wrapper" attr.id="{{id}}">
+    <div class="modal">
+        <a (click)="emitClose()" class="modal__close">close</a>
+        <div class="layout--header">
+            <header class="padding">
+                <ng-content select="[header]"></ng-content>
+            </header>
+            <main class="padding">
+                <ng-content select="[main]"></ng-content>
+            </main>
+            <footer class="padding--left padding--right">
+                <ng-content select="[footer]"></ng-content>
+            </footer>
+        </div>
+    </div>
+</div>

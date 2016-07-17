@@ -13,6 +13,8 @@ class ExampleApp implements OnInit {
 
   final Logger log = new Logger("FnxApp");
 
+  bool modalVisible = false;
+
   Map user = {
     'name': 'Ferda',
     'surname': 'Mravenec',

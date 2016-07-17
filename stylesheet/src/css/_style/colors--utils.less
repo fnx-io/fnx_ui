@@ -111,6 +111,11 @@
             }
         }
     }
+    .modal {
+        header, .modal__close {
+            .renderBgAndText(@hexa);
+        }
+    }
 }
 .renderThemeVariants(@hexa, @name) {
     .renderTheme(@hexa, @name);

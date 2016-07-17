@@ -12,6 +12,7 @@ import 'src/components/input/fnx_text.dart';
 import 'src/components/select/fnx_select.dart';
 import 'src/components/date/fnx_date.dart';
 import 'src/components/panel/fnx_panel.dart';
+import 'src/components/modal/fnx_modal.dart';
 import 'src/components/fnx_icon.dart';
 import 'src/components/fnx_buttons.dart';
 
@@ -21,12 +22,14 @@ export 'src/components/input/fnx_text.dart';
 export 'src/components/select/fnx_select.dart';
 export 'src/components/date/fnx_date.dart';
 export 'src/components/panel/fnx_panel.dart';
+export 'src/components/modal/fnx_modal.dart';
 export 'src/components/fnx_icon.dart';
 export 'src/components/fnx_buttons.dart';
 
 
 const List FNX_UI_COMPONENTS = const [FnxApp,
                                       FnxPanel,
+                                      FnxModal,
                                       FNX_INPUT_DIRECTIVES,
                                       FNX_INPUT_TEXT_DIRECTIVES,
                                       FNX_SELECT_DIRECTIVES,

@@ -8,33 +8,20 @@ import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'dart:html';
 
 @Component(
-  selector: 'fnx-tree',
-  template: """
-  Hoj!
-  """
+  selector: 'fnx-modal',
+  templateUrl: 'fnx_modal.html'
 )
-class FnxTree {
+class FnxModal {
 
+  final Logger log = new Logger("FnxModal");
 
-}
+  String id = ui.uid('modal-');
 
-@Component(
-    selector: 'fnx-tre-node',
-    template: """
-  Node!
-  """
-)
-class FnxTreeNode {
+  @Output()
+  EventEmitter<bool> close = new EventEmitter<bool>();
 
-  final Logger log = new Logger("FnxTreeNode");
-
-  @Input()
-  bool open = false;
-
-  String id = ui.uid('tree-node-');
-
-  FnxTreeNode(@Optional() FnxTreeNode node) {
+  void emitClose() {
+    close.emit(true);
   }
 
 }
-

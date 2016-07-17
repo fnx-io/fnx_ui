@@ -17,7 +17,7 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis cum cumque eaque eligendi error ex expedita explicabo laborum neque nisi, nulla optio porro quas quibusdam repellat, sapiente totam voluptates?</p>
         </fnx-panel>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, qui, similique. Ad aperiam consectetur consequuntur, error esse eum exercitationem mollitia nihil quasi quibusdam reprehenderit vel voluptas voluptatum! Atque distinctio, possimus!</p>
+        <p><button class="btn" (click)="modalVisible = true">open modal</button></p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aperiam at beatae cumque, deleniti deserunt dolor dolores doloribus eos error eveniet fuga iste mollitia nisi, omnis porro provident quia tempore.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium dolores eveniet excepturi qui soluta veritatis voluptates! Accusamus accusantium eius fugit in neque pariatur praesentium quaerat, quasi quod ratione sed, tempore.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita quaerat quo reiciendis suscipit velit voluptatibus! Adipisci, at expedita iste magni minus nisi porro provident quas rerum sit velit veniam voluptates.</p>
@@ -72,12 +72,20 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci ex facilis illum incidunt itaque labore natus, nemo nisi, nostrum pariatur placeat quas quia, quibusdam quis quisquam saepe sequi veritatis. Natus.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cupiditate exercitationem ipsam iusto, magnam nemo neque optio quod recusandae reiciendis rem, sapiente tempore tenetur. Deserunt fugit incidunt ipsam numquam veniam.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet eligendi iste laborum quaerat ratione similique! Exercitationem fuga iure minima rem sint sunt ullam vitae. Asperiores et expedita nemo praesentium.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam dolorum ex itaque soluta tempora. Aperiam commodi, eligendi fugiat nesciunt nulla officiis placeat quibusdam quidem quisquam sint tempore totam velit vero?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus cupiditate ducimus ipsum nisi nobis provident! Consequatur culpa dolorem illum labore maiores modi nemo quidem repellat repellendus rerum tenetur totam, ut?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aut blanditiis delectus ipsa iusto nobis non, numquam odio, quam, quisquam quo recusandae repellat voluptatibus? Consectetur dolor dolorum fugit illum possimus.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus consequuntur eligendi enim neque officiis placeat possimus quasi voluptatibus! Dolorum earum error eveniet ex nostrum quam vero? Corporis quo rem repellendus!</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci autem dolore dolorum ea earum numquam quaerat ut veniam. Ab distinctio eligendi et nesciunt odit quasi quo rem repellat reprehenderit sed.</p>
-
 
     </div>
+
+    <fnx-modal [hidden]="!modalVisible" (close)="modalVisible = false">
+        <h3 header>Yes, I'm modal</h3>
+        <p header>Ask me anything.</p>
+        <p main>I have content and stuff</p>
+        <ul main>
+            <li>lorem</li>
+        </ul>
+        <p footer class="buttonbar">
+            <span class="spacer"></span>
+            <button class="btn" (click)="modalVisible = false">OK</button>
+        </p>
+    </fnx-modal>
+
 </fnx-app>
