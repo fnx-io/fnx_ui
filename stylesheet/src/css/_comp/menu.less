@@ -158,8 +158,14 @@
   display: inline-block;
   &:before {
     .icon;
-    .shadow;
     content: "more_horiz";
+  }
+}
+.dropdown--btn {
+  .dropdown;
+  .softBorder();
+  &:before {
+    .dropShadow(0.1rem);
   }
 }
 
