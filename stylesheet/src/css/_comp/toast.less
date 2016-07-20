@@ -1,0 +1,65 @@
+.toast__container {
+  position: fixed;
+  top: @baseWidgetHeight;
+  right: @baseWidgetHeight;
+  z-index: 10000;
+}
+
+@keyframes appearToast {
+  0% {
+    opacity: 0;
+    top: 50vh;
+  }
+  100% {
+    opacity: 1;
+    top: 0;
+  }
+}
+@keyframes hideToast {
+  0% {
+    opacity: 1;
+    max-height: 30vh;
+    padding-top: @padding;
+    padding-bottom: @padding;
+    margin-bottom: @padding;
+  }
+  50% {
+    padding-top: @padding;
+    padding-bottom: @padding;
+    margin-bottom: @padding;
+  }
+  100% {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+}
+
+.toast {
+  .relative;
+  background-color: #333;
+  color: white;
+  .shadow--huge;
+  border-radius: (@softBorderRadius * 2);
+  padding: @padding;
+  animation: appearToast 0.6s;
+  margin-bottom: @padding;
+  width: 30vw;
+  max-width: 60em;
+  min-width: 30em;
+  max-height: 30vh;
+  *:last-child {
+    margin-bottom: 0;
+  }
+  &.hide {
+    animation: hideToast 0.6s;
+    overflow: hidden;
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+}
