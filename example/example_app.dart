@@ -79,5 +79,9 @@ class ExampleApp implements OnInit {
     ).then( (val) => print("Input: ${val}") );
   }
 
+  void showToast(String text, int duration) {
+    app.toast(text, duration: new Duration(milliseconds: duration));
+  }
+
 
 }

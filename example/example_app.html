@@ -29,7 +29,17 @@
             </p>
         </fnx-panel>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aperiam at beatae cumque, deleniti deserunt dolor dolores doloribus eos error eveniet fuga iste mollitia nisi, omnis porro provident quia tempore.</p>
+
+        <fnx-panel class="margin--bottom">
+            <h3 header>Toasts</h3>
+
+            <p class="buttonbar">
+                <button class="btn" (click)="showToast('Yes, I\'m toast', 2000)">short toast</button>
+                <button class="btn" (click)="showToast('I\'m long. Long like a week before the payday.', 3000)">long toast</button>
+                <button class="btn" (click)="showToast('Just stare at me for 10 seconds. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aperiam at beatae cumque, deleniti deserunt dolor dolores doloribus eos error eveniet fuga iste mollitia nisi, omnis porro provident quia tempore.', 10000)">very long toast</button>
+            </p>
+        </fnx-panel>
+
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium dolores eveniet excepturi qui soluta veritatis voluptates! Accusamus accusantium eius fugit in neque pariatur praesentium quaerat, quasi quod ratione sed, tempore.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita quaerat quo reiciendis suscipit velit voluptatibus! Adipisci, at expedita iste magni minus nisi porro provident quas rerum sit velit veniam voluptates.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet eius, labore laboriosam laborum porro reiciendis vel! Adipisci architecto at distinctio dolorem eligendi fuga fugit labore necessitatibus nesciunt qui tenetur, voluptatem?</p>

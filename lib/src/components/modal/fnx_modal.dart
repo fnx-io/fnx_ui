@@ -7,12 +7,13 @@ import 'package:angular2/common.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'dart:html';
 import 'package:fnx_ui/src/util/html.dart';
+import 'dart:async';
 
 @Component(
   selector: 'fnx-modal',
   templateUrl: 'fnx_modal.html'
 )
-class FnxModal {
+class FnxModal implements OnInit, OnDestroy {
 
   final Logger log = new Logger("FnxModal");
 
@@ -21,8 +22,22 @@ class FnxModal {
   @Output()
   EventEmitter<bool> close = new EventEmitter<bool>();
 
+  StreamSubscription<KeyboardEvent> keyDownSubscription;
+
   void emitClose() {
-    close.emit(true);
+    close.emit(false);
   }
 
+  @override
+  ngOnInit() {
+    keyDownSubscription = document.onKeyDown.where((KeyboardEvent e) => e.keyCode == KeyCode.ESC).listen((KeyboardEvent e) {
+      close.emit(false);
+    });
+  }
+
+
+  @override
+  ngOnDestroy() {
+    keyDownSubscription.cancel();
+  }
 }
