@@ -8,9 +8,9 @@ import 'package:angular2/src/common/forms/directives/validators.dart';
     selector: 'fnx-input',
     template: r'''
 <div class="input">
-  <label *ngIf="label != null" for="{{ componentId }}">{{ label }}</label>
+  <label *ngIf="label != null" [attr.for]="componentId">{{ label }}</label>
   <ng-content></ng-content>
-  <label *ngIf="error && errorMessage != null" class="error" for="{{ componentId }}">{{ errorMessage }}</label>
+  <label *ngIf="error && errorMessage != null" class="error" [attr.for]="componentId">{{ errorMessage }}</label>
 </div>
 ''')
 class FnxInput {

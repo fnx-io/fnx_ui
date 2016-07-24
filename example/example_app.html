@@ -17,6 +17,19 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis cum cumque eaque eligendi error ex expedita explicabo laborum neque nisi, nulla optio porro quas quibusdam repellat, sapiente totam voluptates?</p>
         </fnx-panel>
 
+
+        <fnx-panel closable="true" class="margin--bottom">
+            <h3 header>Ahoj, tady se scrolluje.</h3>
+            <fnx-scroll-panel style="height: 15em" (loadMore)="loadMore()">
+                <table>
+                    <tr *ngFor="let row of tableData">
+                        <td>{{row["id"]}}</td>
+                    </tr>
+                </table>
+            </fnx-scroll-panel>
+        </fnx-panel>
+
+
         <fnx-panel class="margin--bottom">
             <h3 header>Modal windows and dialogs</h3>
 

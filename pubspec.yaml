@@ -8,7 +8,7 @@ environment:
   sdk: '>=1.0.0 <2.0.0'
 
 dependencies:
-  angular2: 2.0.0-beta.17 #TODO: change to ^2.0.0
+  angular2: 2.0.0-beta.18 #TODO: change to ^2.0.0
   logging: "^0.11.3"
   browser: any
   dart_to_js_script_rewriter: ^1.0.1

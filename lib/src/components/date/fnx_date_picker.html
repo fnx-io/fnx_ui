@@ -48,10 +48,10 @@
         </p>
         <div class="picker__time__ampm input--checkgroup" [hidden]="hourFormat24">
             <span class="check" (click)="setAm()">
-                <input type="radio" [checked]="isAm" name="ampm" id="{{componentId}}-am"><label for="{{componentId}}-am">AM</label>
+                <input type="radio" [checked]="isAm" name="ampm" id="{{componentId}}-am"><label attr.for="{{componentId}}-am">AM</label>
             </span>
             <span class="check" (click)="setPm()">
-                <input type="radio" [checked]="isPm" name="ampm" id="{{componentId}}-pm"><label for="{{componentId}}-pm">PM</label>
+                <input type="radio" [checked]="isPm" name="ampm" id="{{componentId}}-pm"><label attr.for="{{componentId}}-pm">PM</label>
             </span>
         </div>
     </div>

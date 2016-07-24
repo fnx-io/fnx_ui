@@ -10,7 +10,7 @@
     <div class="select__dropdown" [hidden]="!open">
         <div (hidden)="! showFilter" class="input" (click)="$event.stopPropagation()">
             <input id="{{componentId}}-search" type="text" placeholder="Search..." [(ngModel)]="filter">
-            <label for="{{componentId}}-search" class="icon">search</label>
+            <label attr.for="{{componentId}}-search" class="icon">search</label>
         </div>
         <ul>
             <li *ngFor="let opt of filteredOptions" (click)="selectOption(opt.value, $event)"

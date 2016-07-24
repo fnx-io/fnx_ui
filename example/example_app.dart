@@ -8,17 +8,20 @@ import 'package:fnx_ui/src/components/modal/fnx_modal.dart';
 import 'package:fnx_ui/src/components/app/fnx_app.dart';
 
 @Component(
-  selector: 'example-app',
-  templateUrl: 'example_app.html'
+    selector: 'example-app',
+    templateUrl: 'example_app.html'
 )
 class ExampleApp implements OnInit {
 
   @ViewChild(FnxApp)
   FnxApp app;
 
+
   final Logger log = new Logger("FnxApp");
 
   bool customModalVisible = false;
+
+  List<Map> tableData = [];
 
   Map user = {
     'name': 'Ferda',
@@ -53,6 +56,15 @@ class ExampleApp implements OnInit {
 
   ngOnInit() {
     log.fine("App started");
+    loadMore();
+  }
+
+  void loadMore() {
+    for (int a=0;a<10;a++) {
+      Map<String, Object> row = {};
+      row["id"] = tableData.length + 1;
+      tableData.add(row);
+    }
   }
 
   void openAlert() {
