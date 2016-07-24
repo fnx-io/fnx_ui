@@ -17,7 +17,18 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis cum cumque eaque eligendi error ex expedita explicabo laborum neque nisi, nulla optio porro quas quibusdam repellat, sapiente totam voluptates?</p>
         </fnx-panel>
 
-        <p><button class="btn" (click)="modalVisible = true">open modal</button></p>
+        <fnx-panel class="margin--bottom">
+            <h3 header>Modal windows and dialogs</h3>
+
+            <p class="buttonbar">
+                <button class="btn" (click)="openAlert()">alert</button>
+                <button class="btn" (click)="openConfirm()">confirm</button>
+                <button class="btn" (click)="openInput()">input</button>
+                <span class="spacer"></span>
+                <button class="btn" (click)="customModalVisible = true">custom content</button>
+            </p>
+        </fnx-panel>
+
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aperiam at beatae cumque, deleniti deserunt dolor dolores doloribus eos error eveniet fuga iste mollitia nisi, omnis porro provident quia tempore.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium dolores eveniet excepturi qui soluta veritatis voluptates! Accusamus accusantium eius fugit in neque pariatur praesentium quaerat, quasi quod ratione sed, tempore.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita quaerat quo reiciendis suscipit velit voluptatibus! Adipisci, at expedita iste magni minus nisi porro provident quas rerum sit velit veniam voluptates.</p>
@@ -75,7 +86,7 @@
 
     </div>
 
-    <fnx-modal [hidden]="!modalVisible" (close)="modalVisible = false">
+    <fnx-modal [hidden]="!customModalVisible" (close)="customModalVisible = false">
         <h3 header>Yes, I'm modal</h3>
         <p header>Ask me anything.</p>
         <p main>I have content and stuff</p>
@@ -84,7 +95,7 @@
         </ul>
         <p footer class="buttonbar">
             <span class="spacer"></span>
-            <button class="btn" (click)="modalVisible = false">OK</button>
+            <button class="btn" (click)="customModalVisible = false">OK</button>
         </p>
     </fnx-modal>
 

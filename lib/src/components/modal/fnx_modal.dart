@@ -6,6 +6,7 @@ import 'package:logging/logging.dart';
 import 'package:angular2/common.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'dart:html';
+import 'package:fnx_ui/src/util/html.dart';
 
 @Component(
   selector: 'fnx-modal',

@@ -4,6 +4,8 @@
 import 'package:angular2/core.dart';
 import 'package:logging/logging.dart';
 import 'package:angular2/common.dart';
+import 'package:fnx_ui/src/components/modal/fnx_modal.dart';
+import 'package:fnx_ui/src/components/app/fnx_app.dart';
 
 @Component(
   selector: 'example-app',
@@ -11,9 +13,12 @@ import 'package:angular2/common.dart';
 )
 class ExampleApp implements OnInit {
 
+  @ViewChild(FnxApp)
+  FnxApp app;
+
   final Logger log = new Logger("FnxApp");
 
-  bool modalVisible = false;
+  bool customModalVisible = false;
 
   Map user = {
     'name': 'Ferda',
@@ -42,12 +47,37 @@ class ExampleApp implements OnInit {
 
   List<Map> moods = [{'id': 'happy', 'name': 'Being 😀'}, {'id': 'sad', 'name': 'Being 😑'}, {'id': 'troll', 'name': 'Be not ⚠️'}];
 
-  FnxApp(FormBuilder fb) {
+  ExampleApp(FormBuilder fb) {
     this.userForm = fb.group({"name": userName, 'mood': mood});
   }
 
   ngOnInit() {
     log.fine("App started");
   }
+
+  void openAlert() {
+    app.alert(
+        "Lorem ipsum dolor sit modal, eos error eveniet fuga iste mollitia nisi, omnis porro provident quia tempore.",
+        headline: "Lorem headline"
+
+    ).then( (_) => print("Closed!") );
+  }
+
+  void openConfirm() {
+    app.confirm(
+        "Lorem ipsum dolor sit confirm, eos error eveniet fuga iste mollitia nisi, omnis porro provident quia tempore.",
+        headline: "Confirm please"
+
+    ).then( (_) => print("Closed: ${_}") );
+  }
+
+  void openInput() {
+    app.input(
+        "Input value between 2 and 4, but not 3",
+        headline: "Lorem ipsum dolor sit input"
+
+    ).then( (val) => print("Input: ${val}") );
+  }
+
 
 }

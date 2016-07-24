@@ -1,1 +1,24 @@
 <ng-content></ng-content>
+
+<!-- Modal windows -->
+<fnx-modal *ngFor="let modal of modalWindows.values" [id]="modal.id" (close)="closeModal(modal.id, false)">
+
+    <h3 header>{{modal.headline}}</h3>
+
+    <p main>{{modal.message}}</p>
+
+    <form main *ngIf="modal.input != null">
+        <fnx-input errorMessage="Please provide requested value">
+            <fnx-text [(ngModel)]="modal.value" [required]="true"></fnx-text>
+        </fnx-input>
+    </form>
+
+    <p footer class="buttonbar">
+        <button *ngIf="modal.cancel != null" class="btn" (click)="closeModal(modal.id, false)"
+            ><fnx-icon type="clear"></fnx-icon> {{modal.cancel}}</button>
+        <span class="spacer"></span>
+        <button class="btn bg--important" (click)="closeModal(modal.id, true)"
+        ><fnx-icon type="check"></fnx-icon> {{modal.ok}}</button>
+    </p>
+
+</fnx-modal>
