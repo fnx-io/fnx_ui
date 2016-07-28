@@ -1,0 +1,26 @@
+.alert {
+  padding: @padding 2*@padding;
+  padding-right: 2 * @padding;
+  padding-left: 4 * @padding;
+  border-radius: @padding;
+  min-height: 4.5 * @padding;
+  .relative;
+
+  .alert__icon {
+    position: absolute;
+    .fs-xxxl;
+    top: @padding;
+    left: @padding;
+  }
+
+  .alert__close {
+    position: absolute;
+    .fs-m;
+    top: 0;
+    right: 0;
+  }
+
+  *:last-child {
+    margin-bottom: 0;
+  }
+}

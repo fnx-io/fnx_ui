@@ -36,6 +36,7 @@ import 'package:logging/logging.dart';
 </div>
 ''')
 class FnxScrollPanel implements OnInit {
+
   final Logger log = new Logger("FnxScrollPanel");
 
   @Output()
@@ -72,4 +73,5 @@ class FnxScrollPanel implements OnInit {
       loadMore.emit(true);
     }
   }
+
 }

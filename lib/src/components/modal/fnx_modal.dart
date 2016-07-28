@@ -35,7 +35,6 @@ class FnxModal implements OnInit, OnDestroy {
     });
   }
 
-
   @override
   ngOnDestroy() {
     keyDownSubscription.cancel();

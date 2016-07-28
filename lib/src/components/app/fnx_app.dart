@@ -69,10 +69,10 @@ class FnxApp implements OnInit {
   }
 
   Future _modal(_ModalContent mc) {
-    StreamController streamController = new StreamController();
-    mc._stream = streamController;
+    Completer c = new Completer();
+    mc._completer = c;
     modalWindows[mc.id] = mc;
-    return streamController.stream.first;
+    return c.future;
   }
 
   void closeModal(String id, bool closingResult) {
@@ -84,18 +84,16 @@ class FnxApp implements OnInit {
       // input mode
       if (closingResult) {
         // ok
-        mc._stream.add(mc.value);
+        mc._completer.complete(mc.value);
       } else {
         // cancel
-        mc._stream.add(null);
+        mc._completer.complete(null);
       }
 
     } else {
       // common alert
-      mc._stream.add(closingResult);
+      mc._completer.complete(closingResult);
     }
-
-    mc._stream.close();
   }
 
 }
@@ -108,7 +106,7 @@ class _ModalContent {
   String cancel;
   String input;
   var value;
-  StreamController _stream;
+  Completer _completer;
 }
 
 class _ToastContent {

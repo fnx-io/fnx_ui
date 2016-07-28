@@ -9,7 +9,6 @@ import 'package:angular2/src/common/forms/directives/validators.dart';
 const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
                                                           useExisting: FnxText,
                                                           multi: true);
-
 @Component(
     selector: 'fnx-text',
     template: r'''
