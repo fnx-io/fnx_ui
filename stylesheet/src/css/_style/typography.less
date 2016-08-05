@@ -53,6 +53,9 @@ body {
 .italics {
   font-style: italic;
 }
+.strike, .line-through {
+  text-decoration: line-through;
+}
 .text--center {
   text-align: center;
 }
@@ -88,9 +91,15 @@ h6 {
 }
 a {
   text-decoration: none;
+  cursor: pointer;
+  &[disabled], &.disabled {
+    cursor: not-allowed;
+  }
 }
 p > a {
-  //text-decoration: underline;
+  &:not(.icon):not(.btn):not(.btn--icon):not(.btn--fab):not(.icon--round) {
+    text-decoration: underline;
+  }
 }
 
 
