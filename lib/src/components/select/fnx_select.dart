@@ -27,6 +27,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   bool openUp = false;
   @Input() bool neverShowFilter = false;
   @Input() bool alwaysShowFilter = false;
+  @Input() bool readonly = false;
 
   bool _multi = false;
 

@@ -12,7 +12,7 @@ const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
 @Component(
     selector: 'fnx-text',
     template: r'''
-<input id="{{ componentId }}" type="{{ type }}" [(ngModel)]="value"/>
+<input id="{{ componentId }}" type="{{ type }}" [(ngModel)]="value" [readonly]="readonly"/>
 ''',
     providers: const [CUSTOM_INPUT_TEXT_VALUE_ACCESSOR]
 )
@@ -27,6 +27,7 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
   @Input() int minLength = null;
   @Input() int maxLength = null;
   @Input() String type = 'text';
+  @Input() bool readonly = false;
 
   @ContentChild(NgControl) NgControl formControl;
 
