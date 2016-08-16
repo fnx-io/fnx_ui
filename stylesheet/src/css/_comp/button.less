@@ -1,5 +1,5 @@
 .btn {
-  .renderComponentWithoutBorder(@baseWidgetHeight, @lineHeight);
+  .renderItem;
   padding-left: @padding;
   padding-right: @padding;
   border: none;
@@ -10,7 +10,6 @@
   .f-roboto;
   font-weight: 300;
   display: inline-block;
-  line-height: @lineHeight;
   background-color: white;
   color: @colorTextDefault;
   cursor: pointer;
@@ -22,15 +21,6 @@
   }
   &:active:not(.disabled):not(:disabled) {
     .dropButtonShadow(0);
-  }
-  .icon {
-    padding: 0 0.2rem;
-    height: auto;
-    width: auto;
-    line-height: 1.2rem;
-    //position: relative;
-    //top: 0.1em;
-    vertical-align: top;
   }
 }
 
@@ -54,12 +44,12 @@
     float: left;
     border-radius: 0;
     &:first-child {
-      border-top-left-radius: @softBorderRadius;
-      border-bottom-left-radius: @softBorderRadius;
+      border-top-left-radius: @borderRadius;
+      border-bottom-left-radius: @borderRadius;
     }
     &:last-child {
-      border-top-right-radius: @softBorderRadius;
-      border-bottom-right-radius: @softBorderRadius;
+      border-top-right-radius: @borderRadius;
+      border-bottom-right-radius: @borderRadius;
     }
   }
   .dropShadow(0.1rem);
@@ -72,7 +62,7 @@
   }
 }
 
-@fabSize: @baseWidgetHeight * 1.3;
+@fabSize: 2 * round(@basicWidgetSize * 1.3 / 2); // something nice, divisible by 2
 .btn--fab {
   .mi;
   .fs-xxl;
@@ -99,11 +89,12 @@
 
 }
 
-.btn--icon {
-  .icon;
-  .dropShadow(0.2rem);
+.btn.icon {
   z-index: 1;
   cursor: pointer;
+  .char;
+  .icon;
+  padding: 0;
   &:hover {
     .dropShadow(0.3rem);
     transition: background 0.3s, box-shadow 0.1s;

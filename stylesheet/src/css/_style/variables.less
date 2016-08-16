@@ -1,15 +1,33 @@
+// root font size
 @rem: 15px;
 
-@baseWidgetHeight: (round(1.1 * @rem)*2);
-@lineHeight: round(1.2 * @rem);
-@softBorderRadius: 3px;
+@borderSize: 1px;
+@borderRadius: 3px;
+
+
+// basic line-height of all texts
+@lineHeight: 1.2;
+
+// line-height in absolute units
+@absoluteLineHeight: 2 * round(@lineHeight * @rem / 2);
+
+// basic padding of a widget
+@basicWidgetPadding: 8px;
+
+@borderedWidgetPadding: @basicWidgetPadding - @borderSize;
+
+// height of a widget (line height + 2x padding)
+@basicWidgetSize: 2*@basicWidgetPadding + @absoluteLineHeight;
+
 @padding: @rem;
+@paddingBig: @basicWidgetSize;
+@paddingSmall: @basicWidgetPadding;
 
 @widthMobile: (@rem * 35);
 @widthTablet: (60 * @rem);
 
-@navbarHeight: round(@baseWidgetHeight * 1.5);
-
+@navbarHeight: 2 * round(@basicWidgetSize * 1.4 / 2);
+@navbarPadding: (@navbarHeight - @basicWidgetSize) / 2;
 
 @colorFnxOrange: #ff8403;
 
@@ -43,4 +61,5 @@
 @colorBackgroundDefault: #fff;
 @colorBackgroundThemeDefault: #ccc;
 @colorLinkDefault: #000;
+
 @colorBorderDefault: #bbb;

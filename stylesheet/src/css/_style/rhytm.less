@@ -1,0 +1,56 @@
+.renderItemIcons() {
+  &[data-prefix] {
+    position: relative;
+    padding-left: @paddingBig !important;
+    &:before {
+      .icon;
+      position: absolute;
+      top:0;
+      left:0;
+      content: attr(data-prefix);
+    }
+  }
+  &[data-suffix] {
+    position: relative;
+    padding-right: @paddingBig !important;
+    &:after {
+      .icon;
+      position: absolute;
+      top:0;
+      right:0;
+      content: attr(data-suffix);
+    }
+  }
+}
+
+.renderItem() {
+  margin: 0;
+  padding: @basicWidgetPadding;
+  & > a {
+    &:first-child:last-child {
+      display: block;
+      margin: -@basicWidgetPadding;
+      padding: @basicWidgetPadding;
+      .renderItemIcons();
+    }
+  }
+}
+.item {
+  .renderItem();
+}
+.item--border {
+  margin: 0;
+  padding: @borderedWidgetPadding;
+  border: @borderSize solid @colorBorderDefault;
+  border-radius: @borderRadius;
+}
+.char {
+  display: inline-block;
+  width: @basicWidgetSize;
+  line-height: @basicWidgetSize;
+  text-align: center;
+}
+
+.item, .item--border {
+  .renderItemIcons();
+}

@@ -41,7 +41,7 @@
 
 .renderMenuColors(@hexa, @depth) {
     .renderBgAndText(@hexa);
-    & > li {
+    & > li, .item {
         &:hover:not(.disabled) {
             .renderHover(@hexa);
             & when (@depth > 0) {
@@ -61,17 +61,22 @@
 .renderThemeColors(@hexa) {
     .menu--vertical {
         .menu--vertical {
-            .renderMenuColors(@hexa, 5);
+            .renderMenuColors(@hexa, 3);
         }
     }
     .menu--horizontal {
-        .renderMenuColors(@hexa, 5);
+        .renderMenuColors(@hexa, 3);
     }
     .select__dropdown {
         li {
             &:hover:not(.disabled) {
                 .renderHover(@hexa);
             }
+        }
+    }
+    .select__items .item {
+        &:hover:not(.disabled) {
+            .renderHover(@hexa);
         }
     }
     .navbar, .panel__header {

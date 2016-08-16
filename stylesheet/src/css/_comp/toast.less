@@ -1,7 +1,7 @@
 .toast__container {
   position: fixed;
-  top: @baseWidgetHeight;
-  right: @baseWidgetHeight;
+  top: @paddingBig;
+  right: @paddingBig;
   z-index: 10000;
 }
 
@@ -42,7 +42,7 @@
   background-color: #333;
   color: white;
   .shadow--huge;
-  border-radius: (@softBorderRadius * 2);
+  border-radius: (@borderRadius * 2);
   padding: @padding;
   animation: appearToast 0.6s;
   margin-bottom: @padding;

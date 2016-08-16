@@ -2,7 +2,8 @@
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  padding: @padding / 4 0;
+  padding: 0;
+  padding-bottom: @paddingSmall;
 
   & > * {
     flex-grow: 0;
@@ -39,17 +40,17 @@ label {
     position: relative;
     &:after {
       content: "*";
-      margin-left: @padding/2;
-      opacity: 0.6;
+      margin-left: @paddingSmall;
+      opacity: 0.7;
+      .bold;
     }
   }
 }
 
 input, .select {
-  .renderComponentWithBorder(@baseWidgetHeight, @lineHeight);
+  .item--border;
   .fs-m;
-  padding-left: @padding / 2;
-  border: 1px solid @colorBorderDefault;
+  padding-left: @paddingSmall;
   .softBorder();
   font-weight: 200;
   line-height: @lineHeight;
@@ -67,12 +68,12 @@ input, .select {
 }
 input {
   box-shadow: inset 1px 2px 2px rgba(0,0,0,0.1); // maybe?
-  padding-right: @padding / 2;
+  padding-right: @paddingSmall;
 }
 
 .select {
   position: relative;
-  padding-right: @baseWidgetHeight;
+  padding-right: @basicWidgetSize;
   background-color: @colorBackgroundDefault;
   color: @colorTextDefault;
   box-shadow: inset -1px -1px 1px rgba(0,0,0,0.1); // maybe?
@@ -107,8 +108,8 @@ input {
       bottom: 100%;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
-      border-top-left-radius: @softBorderRadius;
-      border-top-right-radius: @softBorderRadius;
+      border-top-left-radius: @borderRadius;
+      border-top-right-radius: @borderRadius;
     }
   }
   .select__dropdown {
@@ -126,14 +127,13 @@ input {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     color: inherit;
-    & > ul {
+    & > ul, .select__items {
       max-height: 25em;
       overflow-y: scroll;
       .ul--flat;
-      li {
-        .renderComponentWithBorder(@baseWidgetHeight, @lineHeight);
-        padding-left: @padding;
-        padding-right: @padding;
+      li, .item {
+        .renderItem;
+        display: block;
         border-bottom: 1px solid lighten(color(@colorBorderDefault), 20%);
         &:last-child {
           border: none;
@@ -160,9 +160,9 @@ input {
       }
     }
     & + label {
-      padding-left: @baseWidgetHeight;
-      .renderComponentWithoutBorder(@baseWidgetHeight, @lineHeight);
-      min-height: @baseWidgetHeight;
+      .renderItem;
+      padding-left: @basicWidgetSize;
+      min-height: @basicWidgetSize;
       margin-bottom: 0;
 
       &:before {
@@ -197,7 +197,7 @@ input {
 
 .row {
   & > label {
+    .renderItem;
     margin: @padding / 4 0;
-    .renderComponentWithoutBorder(@baseWidgetHeight, @lineHeight);
   }
 }

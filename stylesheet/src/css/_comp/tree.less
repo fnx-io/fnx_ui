@@ -1,4 +1,4 @@
-@treeSize: @baseWidgetHeight;
+@treeSize: @basicWidgetSize;
 
 .tree {
   &, & ul, & li {
@@ -38,7 +38,8 @@
     }
     & > * {
       &:not(.icon):not(.icon--round):not(.mi):not(ul) {
-        .renderComponentWithoutBorder(@treeSize, @lineHeight);
+        .item;
+        //.renderComponentWithoutBorder(@treeSize, @absoluteLineHeight);
         display: inline-block;
       }
       .mi {

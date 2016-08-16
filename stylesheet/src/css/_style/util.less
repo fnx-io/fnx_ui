@@ -25,12 +25,12 @@
 }
 html {
   .renderLeftRightBottomTop(padding, padding, @padding);
-  .renderLeftRightBottomTop(padding--small, padding, round(@padding/2));
-  .renderLeftRightBottomTop(padding--big, padding, @baseWidgetHeight);
+  .renderLeftRightBottomTop(padding--small, padding, @paddingSmall);
+  .renderLeftRightBottomTop(padding--big, padding, @paddingBig);
 
   .renderLeftRightBottomTop(margin, margin, @padding);
-  .renderLeftRightBottomTop(margin--small, margin, round(@padding/2));
-  .renderLeftRightBottomTop(margin--big, margin, @baseWidgetHeight);
+  .renderLeftRightBottomTop(margin--small, margin, @paddingSmall);
+  .renderLeftRightBottomTop(margin--big, margin, @paddingBig);
 
   .renderLeftRightBottomTop(border, border, 1px solid @colorBorderDefault);
 }

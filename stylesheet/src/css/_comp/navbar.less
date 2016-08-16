@@ -1,9 +1,57 @@
 .navbar {
   display: flex;
   margin: 0;
+  position: relative;
+  padding-left: @padding;
+  & > * {
+    margin-top: @navbarPadding;
+    margin-bottom: @navbarPadding;
+    margin-right: @padding;
+    display: inline-block;
+  }
+  & > h1,
+  & > h2,
+  & > h3,
+  & > h4,
+  & > h5,
+  & > h6,
+  & > p,
+  & > span,
+  & > h4,
+  & > a {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: @navbarHeight;
+  }
+  & > .btn, & > .icon {
+    margin-top: @navbarPadding;
+    margin-bottom: @navbarPadding;
+    line-height: @basicWidgetSize;
+  }
+  & > .btn--fab {
+    line-height: @fabSize;
+  }
+  & > .menu--horizontal {
+    & > li {
+      padding-top: @navbarPadding;
+      padding-bottom: @navbarPadding;
+      line-height: @basicWidgetSize;
+      * {
+        line-height: @absoluteLineHeight;
+      }
+      & > a {
+        line-height: @basicWidgetSize;
+      }
+    }
+  }
+}
+
+/*
+.navbar {
+  display: flex;
+  margin: 0;
   padding: 0 @padding;
   position: relative;
-  line-height: @navbarHeight;
   & > .mi {
     line-height: @navbarHeight;
   }
@@ -35,8 +83,8 @@
   & > input,
   & > .select {
     //line-height: @lineHeight;
-    margin-top: round((@navbarHeight - @baseWidgetHeight) / 2);
-    margin-bottom: round((@navbarHeight - @baseWidgetHeight) / 2);
+    margin-top: round((@navbarHeight - @basicWidgetSize) / 2);
+    margin-bottom: round((@navbarHeight - @basicWidgetSize) / 2);
   }
   & > .icon,
   & > .icon--round,
@@ -66,3 +114,4 @@
   }
 
 }
+*/

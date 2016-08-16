@@ -1,32 +1,20 @@
 .tag {
-  .renderComponentWithoutBorder(@lineHeight*1.2, @lineHeight);
-  padding-left: @padding / 2;
-  padding-right: @padding / 2;
-  border-radius: @lineHeight*0.6;
-  line-height: @lineHeight;
+  border-radius: @absoluteLineHeight*0.6;
   background-color: @colorBorderDefault;
   display: inline-block;
-  margin: 0.1em 0;
+  padding: 2px @paddingSmall;
   .icon {
     .fs-m;
     padding: 0;
-    line-height: @lineHeight;
+    line-height: @absoluteLineHeight;
     width: 1em;
   }
-}
-@smallTagSize: round(@rem * 0.9);
-.select:not(.tags), table {
-  .tag {
-    font-size: @smallTagSize;
-    line-height: 1;
-    .renderComponentWithoutBorder(@smallTagSize+4px; @smallTagSize);
-    .icon {
-      font-size: @smallTagSize;
-      line-height: 1;
-    }
+  &, & a {
+    text-decoration: none !important;
   }
 }
-.select.tags {
-  padding-top: 2px;
-  padding-bottom: 2px;
+.select, table {
+  .tag {
+    margin: -2px 0;
+  }
 }

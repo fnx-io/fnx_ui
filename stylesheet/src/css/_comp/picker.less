@@ -3,19 +3,19 @@
   .card;
   position: absolute;
   left: 0;
-  top: @baseWidgetHeight * 1.9;
+  top: @basicWidgetSize * 1.9;
   background-color: @colorBackgroundDefault;
   z-index: 100;
   .picker__content:first-child {
-    width: @baseWidgetHeight * 7;
+    width: @basicWidgetSize * 7;
   }
   th, td {
     border: none;
     padding: 0;
     margin: 0;
-    width: @baseWidgetHeight;
-    height: @baseWidgetHeight;
-    line-height: @baseWidgetHeight;
+    width: @basicWidgetSize;
+    height: @basicWidgetSize;
+    line-height: @basicWidgetSize;
     text-align: center;
     border-radius: 50%;
   }
@@ -29,15 +29,15 @@
   .picker__header {
     width: 100%;
     margin: 0;
-    height: @baseWidgetHeight;
+    height: @basicWidgetSize;
     .flex--row;
     .picker__today {
       .flex--grow;
-      .renderComponentWithoutBorder(@baseWidgetHeight, @lineHeight);
+      .renderItem();
       text-align: center;
     }
     & + .picker__time__buttons {
-      margin-top: @baseWidgetHeight / 2;
+      margin-top: @basicWidgetSize / 2;
     }
   }
   .picker__current {
@@ -47,14 +47,14 @@
     font-weight: bold;
   }
   .picker__time__time, .picker__time__buttons {
-    padding-left: @baseWidgetHeight;
-    padding-right: @baseWidgetHeight;
+    padding-left: @basicWidgetSize;
+    padding-right: @basicWidgetSize;
     margin: 0 auto;
     .flex--row;
     & > * {
       display: block;
-      width: @baseWidgetHeight;
-      line-height: @baseWidgetHeight;
+      width: @basicWidgetSize;
+      line-height: @basicWidgetSize;
       text-align: center;
       &:nth-child(2) {
         width: 1rem;
@@ -71,8 +71,8 @@
     .fs-xl;
   }
   .picker__time__ampm {
-    padding-left: @baseWidgetHeight;
-    padding-right: @baseWidgetHeight;
+    padding-left: @basicWidgetSize;
+    padding-right: @basicWidgetSize;
     margin: 0 auto;
   }
 }

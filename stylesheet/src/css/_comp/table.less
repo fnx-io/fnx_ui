@@ -3,7 +3,7 @@ table {
   width: 100%;
 
   td, th {
-    padding: 2px 5px;
+    padding: @paddingSmall @paddingSmall;
     .fs-m;
   }
   th {
@@ -12,7 +12,6 @@ table {
 }
 
 .table {
-
   &--borders {
     td, th {
       .border;
@@ -20,8 +19,8 @@ table {
   }
   &--lines {
     td, th {
-      border-top: 1px solid @colorBorderDefault;
-      border-bottom: 1px solid @colorBorderDefault;
+      border-top: @borderSize solid @colorBorderDefault;
+      border-bottom: @borderSize solid @colorBorderDefault;
     }
   }
   &--stripes {

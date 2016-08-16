@@ -57,7 +57,7 @@ $(function() {
         var $a = $(this);
         if ($a.data("code") == "true") return;
         $a.data("code", "true");
-        $a.append($("<button class='button--code btn bg--red'><span class='mi'>code</span></button>"));
+        $a.append($("<button class='button--code btn icon bg--red'>code</button>"));
     });
 
     $("article").on("mouseleave", function() {

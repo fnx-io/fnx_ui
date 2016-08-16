@@ -46,10 +46,9 @@
     <h3>Icons</h3>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus asperiores eveniet ipsa ipsam nemo nihil odit reprehenderit sunt? Alias assumenda at distinctio dolor incidunt nihil numquam officiis quo veniam voluptates.</p>
     <main>
-        <a href="#" class="btn">More <i class="icon">more_horiz</i></a>
-        <a href="#" class="btn bg--pink"><i class="icon">search</i> Search</a>
-        <button href="#" class="btn bg--purple"><i class="icon">search</i> Search more! <i class="icon">more_horiz</i></button>
-
+        <a href="#" class="btn" data-suffix="more_horiz">More</a>
+        <a href="#" class="btn bg--pink" data-prefix="search">Search</a>
+        <button href="#" class="btn bg--purple" data-prefix="search" data-suffix="more_horiz">Search more!</button>
     </main>
 </article>
 
@@ -59,10 +58,10 @@
 
     <main>
         <div class="buttonbar">
-            <a href="#" class="btn"><i class="icon">cancel</i> Cancel</a>
-            <a href="#" class="btn"><i class="icon">delete</i> Delete</a>
+            <a href="#" class="btn" data-prefix="cancel">Cancel</a>
+            <a href="#" class="btn" data-prefix="delete">Delete</a>
             <span class="spacer"></span>
-            <button href="#" class="btn bg--purple">Save <i class="icon">save</i></button>
+            <button href="#" class="btn bg--purple" data-prefix="save">Save</button>
         </div>
     </main>
 
