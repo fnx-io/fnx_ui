@@ -1,26 +1,26 @@
 .renderLeftRightBottomTop(@name, @property, @value) {
   .@{name} {
-    @{property}: @value;
+    @{property}: @value !important;
   }
   .@{name}--left {
-      @{property}-left: @value;
+      @{property}-left: @value !important;
   }
   .@{name}--right {
-      @{property}-right: @value;
+      @{property}-right: @value !important;
   }
   .@{name}--bottom {
-      @{property}-bottom: @value;
+      @{property}-bottom: @value !important;
   }
   .@{name}--top {
-      @{property}-top: @value;
+      @{property}-top: @value !important;
   }
   .@{name}--vertical {
-      @{property}-top: @value;
-      @{property}-bottom: @value;
+      @{property}-top: @value !important;
+      @{property}-bottom: @value !important;
   }
   .@{name}--horizontal {
-      @{property}-left: @value;
-      @{property}-right: @value;
+      @{property}-left: @value !important;
+      @{property}-right: @value !important;
   }
 }
 html {

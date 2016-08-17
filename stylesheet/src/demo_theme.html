@@ -31,11 +31,11 @@
                         <li><a href="#">Sweet</a></li>
                         <li><a href="#">Home</a></li>
                         <li><a href="#">Submenu here</a>
-                        <ul class="menu--vertical menu--icons--suffix">
-                            <li><a href="#">Home <i class="icon">delete</i></a></li>
-                            <li><a href="#">Sweet <i class="icon">delete</i></a></li>
-                            <li class="disabled"><a href="#">Home <i class="icon">delete</i></a></li>
-                            <li><a href="#">Long text<br>Long text<br>Long text<br>Long text <i class="icon">delete</i></a></li>
+                        <ul class="menu--vertical">
+                            <li><a href="#" data-prefix="delete">Home</a></li>
+                            <li><a href="#" data-prefix="delete">Sweet</a></li>
+                            <li class="disabled"><a href="#" data-prefix="delete">Home</a></li>
+                            <li><a href="#" data-prefix="delete" data-suffix="more">Long text<br>Long text<br>Long text<br>Long text</a></li>
                             <li><a href="#">Home</a></li>
                         </ul>
                         </li>
@@ -59,12 +59,12 @@
                     <li><a href="#">Sweet</a></li>
                     <li><a href="#">Long text<br>Long text<br>Long text<br>Long text</a></li>
                     <li><a href="#">Submenu here</a>
-                        <ul class="menu--vertical menu--icons--suffix">
-                            <li><a href="#">Home <i class="icon">delete</i></a></li>
-                            <li><a href="#">Sweet <i class="icon">delete</i></a></li>
-                            <li class="disabled"><a href="#">Disabled <i class="icon">delete</i></a></li>
-                            <li><a href="#">Long text<br>Long text<br>Long text<br>Long text <i class="icon">delete</i></a></li>
-                            <li><a href="#">Home</a></li>
+                        <ul class="menu--vertical">
+                            <li><a href="#" data-prefix="delete">Home</a></li>
+                            <li><a href="#" data-prefix="delete">Sweet</a></li>
+                            <li class="disabled"><a href="#" data-prefix="delete">Disabled</a></li>
+                            <li><a href="#" data-prefix="delete">Long text<br>Long text<br>Long text<br>Long text</a></li>
+                            <li><a href="#" data-prefix="delete">Home</a></li>
                         </ul>
                     </li>
                     <li class="disabled"><a href="#">Disabled</a></li>
@@ -90,8 +90,8 @@
                             <a href="#" class="btn bg--theme">Theme!</a>
                             <a href="#" class="btn bg--important">Important!</a>
                             <span class="spacer"></span>
-                            <button href="#" class="btn"> Default <i class="icon">more</i></button>
-                            <button href="#" class="btn disabled"> Disabled <i class="icon">more</i></button>
+                            <button href="#" class="btn" data-suffix="more"> Default </button>
+                            <button href="#" class="btn disabled" data-suffix="more"> Disabled </button>
                         </p>
 
                         <div class="row">
@@ -229,7 +229,7 @@
                                 <tr>
                                     <td>dssds</td>
                                     <td>
-                    <span class="dropdown"><span class="icon">more_horiz</span>
+                    <span class="dropdown">
                         <ul class="menu--vertical border">
                             <li><span>item</span></li>
                             <li><a href="#">link</a></li>

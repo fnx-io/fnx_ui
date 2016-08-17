@@ -24,14 +24,16 @@
 }
 
 .renderItem() {
+  position: relative;
   margin: 0;
-  padding: @basicWidgetPadding;
+  padding: @basicWidgetPadding @padding;
+  min-height: @basicWidgetSize;
   & > a {
-    &:first-child:last-child {
-      display: block;
-      margin: -@basicWidgetPadding;
-      padding: @basicWidgetPadding;
+    &:only-child {
       .renderItemIcons();
+      margin: -@basicWidgetPadding -@padding;
+      padding: @basicWidgetPadding @padding;
+      display: block;
     }
   }
 }

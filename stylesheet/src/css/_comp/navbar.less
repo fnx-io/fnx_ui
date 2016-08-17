@@ -23,13 +23,19 @@
     margin-bottom: 0;
     line-height: @navbarHeight;
   }
-  & > .btn, & > .icon {
+  & > .btn {
+    margin-top: @navbarPadding;
+    margin-bottom: @navbarPadding;
+    line-height: @absoluteLineHeight;
+  }
+  & > .icon {
     margin-top: @navbarPadding;
     margin-bottom: @navbarPadding;
     line-height: @basicWidgetSize;
   }
   & > .btn--fab {
     line-height: @fabSize;
+    right: 0;
   }
   & > .menu--horizontal {
     & > li {
