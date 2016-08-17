@@ -15,10 +15,10 @@
 
     <p footer class="buttonbar">
         <button *ngIf="modal.cancel != null" class="btn" (click)="closeModal(modal.id, false)"
-            ><fnx-icon type="clear"></fnx-icon> {{modal.cancel}}</button>
+                data-prefix="clear">{{modal.cancel}}</button>
         <span class="spacer"></span>
         <button class="btn bg--important" (click)="closeModal(modal.id, true)"
-        ><fnx-icon type="check"></fnx-icon> {{modal.ok}}</button>
+                data-prefix="check">{{modal.ok}}</button>
     </p>
 
 </fnx-modal>

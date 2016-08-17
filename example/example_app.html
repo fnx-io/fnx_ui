@@ -70,6 +70,7 @@
                         <fnx-select [(ngModel)]="user['mood']" [ngFormControl]="mood" [multi]="true">
                             <fnx-option *ngFor="let i of moods"
                                         label="{{i['name']}}" [value]="i['id']"></fnx-option>
+                            <fnx-option value="unknow">this is <strong>unknown mood</strong></fnx-option>
                         </fnx-select>
                     </fnx-input>
                 </div>

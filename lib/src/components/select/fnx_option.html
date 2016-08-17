@@ -1,0 +1,4 @@
+<div class="item">
+    <template [ngIf]="label != null">{{label}}</template>
+    <template [ngIf]="label == null"><ng-content></ng-content></template>
+</div>

@@ -6,12 +6,10 @@ import 'dart:html';
     selector: 'fnx-submit-bar',
     template: r'''
 <div class="buttonbar">
-  <a *ngIf="back" href="#" class="btn " (click)="goBack($event)"><fnx-icon type="arrow_back"></fnx-icon>{{ goBackLabel }}</a>
+  <a *ngIf="back" href="#" class="btn " (click)="goBack($event)" data-prefix="arrow_back">{{ goBackLabel }}</a>
   <span class="spacer"></span>
-  <button type="submit" class="btn bg--important">
+  <button type="submit" class="btn bg--important" attr.data-prefix="{{formValid ? 'check' : 'not_interested'}}">
     {{ label }}
-    <fnx-icon *ngIf="formValid" type="check"></fnx-icon>
-    <fnx-icon *ngIf="!formValid" type="not_interested"></fnx-icon>
   </button>
 </div>
 ''')
