@@ -141,8 +141,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
     }
   }
 
-  void selectOption(dynamic value, Event event) {
-    event.stopPropagation();
+  void selectOption(dynamic value) {
     doSelectOption(value);
   }
 
@@ -339,6 +338,14 @@ class FnxOption implements OnInit {
   ngOnInit() {
     parent.options.add(new FnxOptionValue(value, label));
   }
+
+  void optionSelected(Event event) {
+    event?.preventDefault();
+
+    parent?.selectOption(value);
+  }
+
+  get selected => parent != null && parent.isSelected(value);
 }
 
 const FNX_SELECT_DIRECTIVES = const [FnxSelect, FnxOption];

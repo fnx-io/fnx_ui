@@ -1,4 +1,7 @@
-<div class="item">
+<div class="item"
+     (click)="optionSelected($event)"
+     [class.selected]="selected"
+     attr.data-prefix="{{selected ? 'done' : null}}">
     <template [ngIf]="label != null">{{label}}</template>
     <template [ngIf]="label == null"><ng-content></ng-content></template>
 </div>

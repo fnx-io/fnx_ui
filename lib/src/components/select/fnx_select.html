@@ -15,16 +15,6 @@
         </div>
         <div class="select__items">
             <ng-content></ng-content>
-            <!--
-            <div *ngFor="let opt of filteredOptions" (click)="selectOption(opt.value, $event)"
-                class="clickable item"
-                [class.selected]="isSelected(opt.value)" [class.highlighted]="isHighlighted(opt)">
-                <i *ngIf="multi" class="mi">
-                    <span *ngIf="isSelected(opt.value)">done</span>
-                </i>
-                {{ opt.label }}
-            </div>
-            -->
         </div>
         <p *ngIf="options.isEmpty" class="padding--small no-margin">
             {{ optionsEmptyLabel }}
