@@ -10,6 +10,7 @@ import 'example_app.dart';
 import 'package:angular2/router.dart';
 import 'package:angular2/core.dart';
 import 'package:angular2/platform/common.dart';
+import 'example_buttons_renderer.dart';
 
 main() {
 
@@ -37,6 +38,7 @@ main() {
   // START!
   bootstrap(ExampleApp, [
       ROUTER_PROVIDERS,
+      [ExampleButtonsRenderer],
       provide(LocationStrategy, useClass: HashLocationStrategy)
   ]);
 

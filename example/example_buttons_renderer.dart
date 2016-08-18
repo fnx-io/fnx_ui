@@ -9,17 +9,20 @@ import 'package:fnx_ui/src/components/modal/fnx_modal.dart';
 import 'package:fnx_ui/src/components/app/fnx_app.dart';
 import 'example_testing.dart';
 import 'example_panels.dart';
-import 'example_buttons_renderer.dart';
 
 @Component(
-    selector: 'example-app',
-    templateUrl: 'example_app.html',
-    directives: const [ExampleButtonsRenderer]
+    selector: 'example-buttons-renderer',
+    template: '''
+  <p class="margin--bottom padding--bottom border--bottom">
+    Source codes for this example:
+    <a target="_blank" href="https://github.com/fnx-io/fnx_ui/blob/master/example/{{name}}.dart" class="btn">Dart source</a>
+    <a target="_blank" href="https://github.com/fnx-io/fnx_ui/blob/master/example/{{name}}.html" class="btn">Template source</a>
+  </p>
+'''
 )
-@RouteConfig(const [
-  const Route(path: "/Testing", name: "Testing", component: ExampleTesting, useAsDefault: true),
-  const Route(path: "/Panels", name: "Panels", component: ExamplePanels)
-])
-class ExampleApp {
+class ExampleButtonsRenderer {
+
+  @Input()
+  String name;
 
 }

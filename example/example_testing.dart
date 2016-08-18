@@ -6,10 +6,12 @@ import 'package:logging/logging.dart';
 import 'package:angular2/common.dart';
 import 'package:fnx_ui/src/components/modal/fnx_modal.dart';
 import 'package:fnx_ui/src/components/app/fnx_app.dart';
+import 'example_buttons_renderer.dart';
 
 @Component(
     selector: 'example-testing',
-    templateUrl: 'example_testing.html'
+    templateUrl: 'example_testing.html',
+    directives: const [ExampleButtonsRenderer]
 )
 class ExampleTesting implements OnInit {
 
@@ -18,8 +20,6 @@ class ExampleTesting implements OnInit {
   final Logger log = new Logger("FnxApp");
 
   bool customModalVisible = false;
-
-  List<Map> tableData = [];
 
   Map user = {
     'name': 'Ferda',
@@ -55,15 +55,6 @@ class ExampleTesting implements OnInit {
 
   ngOnInit() {
     log.fine("App started");
-    loadMore();
-  }
-
-  void loadMore() {
-    for (int a=0;a<10;a++) {
-      Map<String, Object> row = {};
-      row["id"] = tableData.length + 1;
-      tableData.add(row);
-    }
   }
 
   void openAlert() {

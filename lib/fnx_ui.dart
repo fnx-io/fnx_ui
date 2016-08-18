@@ -18,6 +18,7 @@ import 'src/components/fnx_icon.dart';
 import 'src/components/fnx_buttons.dart';
 import 'src/components/layout/fnx_form.dart';
 import 'src/components/input/fnx_check.dart';
+import 'src/components/layout/fnx_panel_small.dart';
 
 export 'src/components/app/fnx_app.dart';
 export 'src/components/input/fnx_input.dart';
@@ -31,9 +32,11 @@ export 'src/components/fnx_icon.dart';
 export 'src/components/fnx_buttons.dart';
 export 'src/components/layout/fnx_form.dart';
 export 'src/components/input/fnx_check.dart';
+export 'src/components/layout/fnx_panel_small.dart';
 
 const List FNX_UI_COMPONENTS = const [FnxApp,
                                       FnxPanel,
+                                      FnxPanelSmall,
                                       FnxModal,
                                       FnxScrollPanel,
                                       FnxForm,

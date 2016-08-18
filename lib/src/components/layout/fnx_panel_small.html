@@ -1,0 +1,16 @@
+<style>
+    :host {
+        display: block;
+    }
+</style>
+<section class="panel--small"
+         [class.panel--closable--small]="isClosable"
+         [class.open]="open">
+    <header class="panel__header" attr.id="{{id}}-header" (click)="open = !open">
+        <ng-content select="[header]"></ng-content>
+    </header>
+    <main class="panel__content">
+        <ng-content select="*"></ng-content>
+    </main>
+</section>
+

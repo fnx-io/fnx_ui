@@ -8,24 +8,16 @@
         <main>
             <div class="layout--sidebar">
                 <aside class="flex--column" style="width: 15em">
-                    <ul class="menu--vertical flex--grow">
+                    <ul class="menu--vertical flex--grow bg--white--d1">
                         <li><a href="#" [routerLink]="['Testing']">Testing</a></li>
+                        <li><a href="#" [routerLink]="['Panels']">Panels</a></li>
                     </ul>
                     <p class="text--center bg--fnx no-margin padding">
                         <a href="https://fnx.io/">fnx.io</a>
                     </p>
                 </aside>
-                <main class="border--left">
-                    <div class="layout--header">
-                        <header>
-                            <nav class="navbar padding--fab bg--fnx--d1">
-                                <h2>Yes, this is demo</h2>
-                            </nav>
-                        </header>
-                        <main class="padding--big">
-                            <router-outlet></router-outlet>
-                        </main>
-                    </div>
+                <main class="border--left padding--big--horizontal padding--vertical">
+                    <router-outlet></router-outlet>
                 </main>
             </div>
         </main>
