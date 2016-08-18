@@ -7,6 +7,9 @@ import 'package:angular2/platform/browser.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:logging/logging.dart';
 import 'example_app.dart';
+import 'package:angular2/router.dart';
+import 'package:angular2/core.dart';
+import 'package:angular2/platform/common.dart';
 
 main() {
 
@@ -32,5 +35,9 @@ main() {
   */
 
   // START!
-  bootstrap(ExampleApp, []);
+  bootstrap(ExampleApp, [
+      ROUTER_PROVIDERS,
+      provide(LocationStrategy, useClass: HashLocationStrategy)
+  ]);
+
 }

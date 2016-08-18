@@ -1,178 +1,34 @@
 <fnx-app>
-    <div class="margin--big">
-        <fnx-icon type="build"></fnx-icon>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita quaerat quo reiciendis suscipit velit voluptatibus! Adipisci, at expedita iste magni minus nisi porro provident quas rerum sit velit veniam voluptates.</p>
-
-        <fnx-panel class="margin--bottom">
-            <h3 header>Ahoj, ja jsem panel</h3>
-            <p>A projel jsem k vam z Mostu.</p>
-        </fnx-panel>
-
-        <fnx-panel closable="true" class="margin--bottom">
-            <h3 header>Ahoj, ja jsem panel otviraci</h3>
-            <p header>Ahoj ja jsem vysvetlujici lorem ipsum.</p>
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet eius, labore laboriosam laborum porro reiciendis vel! Adipisci architecto at distinctio dolorem eligendi fuga fugit labore necessitatibus nesciunt qui tenetur, voluptatem?</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis cum cumque eaque eligendi error ex expedita explicabo laborum neque nisi, nulla optio porro quas quibusdam repellat, sapiente totam voluptates?</p>
-        </fnx-panel>
-
-
-        <fnx-panel closable="true" class="margin--bottom">
-            <h3 header>Ahoj, tady se scrolluje.</h3>
-            <fnx-scroll-panel style="height: 15em" (loadMore)="loadMore()">
-                <table>
-                    <tr *ngFor="let row of tableData">
-                        <td>{{row["id"]}}</td>
-                    </tr>
-                </table>
-            </fnx-scroll-panel>
-        </fnx-panel>
-
-
-        <fnx-panel class="margin--bottom">
-            <h3 header>Modal windows and dialogs</h3>
-
-            <p class="buttonbar">
-                <button class="btn" (click)="openAlert()">alert</button>
-                <button class="btn" (click)="openConfirm()">confirm</button>
-                <button class="btn" (click)="openInput()">input</button>
-                <span class="spacer"></span>
-                <button class="btn" (click)="customModalVisible = true">custom content</button>
-            </p>
-        </fnx-panel>
-
-
-        <fnx-panel class="margin--bottom">
-            <h3 header>Toasts</h3>
-
-            <p class="buttonbar">
-                <button class="btn" (click)="showToast('Yes, I\'m toast', 2000)">short toast</button>
-                <button class="btn" (click)="showToast('I\'m long. Long like a week before the payday.', 3000)">long toast</button>
-                <button class="btn" (click)="showToast('Just stare at me for 10 seconds. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aperiam at beatae cumque, deleniti deserunt dolor dolores doloribus eos error eveniet fuga iste mollitia nisi, omnis porro provident quia tempore.', 10000)">very long toast</button>
-            </p>
-        </fnx-panel>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium dolores eveniet excepturi qui soluta veritatis voluptates! Accusamus accusantium eius fugit in neque pariatur praesentium quaerat, quasi quod ratione sed, tempore.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita quaerat quo reiciendis suscipit velit voluptatibus! Adipisci, at expedita iste magni minus nisi porro provident quas rerum sit velit veniam voluptates.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet eius, labore laboriosam laborum porro reiciendis vel! Adipisci architecto at distinctio dolorem eligendi fuga fugit labore necessitatibus nesciunt qui tenetur, voluptatem?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis cum cumque eaque eligendi error ex expedita explicabo laborum neque nisi, nulla optio porro quas quibusdam repellat, sapiente totam voluptates?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, qui, similique. Ad aperiam consectetur consequuntur, error esse eum exercitationem mollitia nihil quasi quibusdam reprehenderit vel voluptas voluptatum! Atque distinctio, possimus!</p>
-        <!--
-        <form>
-            <fnx-input label="Jmeno" errorMessage="Jmeno mravencovo">
-                <fnx-text [(ngModel)]="user['name']" [ngFormControl]="userName" [required]="true"></fnx-text>
-            </fnx-input>
-
-            Po
-            <div class="row--gutter">
-                <div class="s12 m6 l4">
-                    <fnx-input label="Character mood" errorMessage="Everyone has to be happy!">
-                        <fnx-select [(ngModel)]="user['mood']" [ngFormControl]="mood" [multi]="true">
-                            <fnx-option *ngFor="let i of moods"
-                                        label="{{i['name']}}" [value]="i['id']"></fnx-option>
-                            <fnx-option value="unknow">this is <strong>unknown mood</strong></fnx-option>
-                        </fnx-select>
-                    </fnx-input>
-                </div>
-                <div class="s12 m6 l4">
-                    <fnx-input label="date of birth">
-                        <fnx-date [dateTime]="true" [(ngModel)]="user['birthday']"></fnx-date>
-                    </fnx-input>
-                </div>
-                <div class="s12 m6 l4">
-                    <fnx-input label="date of death">
-                        <fnx-date [dateTime]="true" [(ngModel)]="user['deathday']"></fnx-date>
-                    </fnx-input>
-                </div>
+    <div class="layout--header">
+        <header>
+            <nav class="navbar">
+                <h1>fnx|ui</h1>
+            </nav>
+        </header>
+        <main>
+            <div class="layout--sidebar">
+                <aside class="flex--column" style="width: 15em">
+                    <ul class="menu--vertical flex--grow">
+                        <li><a href="#" [routerLink]="['Testing']">Testing</a></li>
+                    </ul>
+                    <p class="text--center bg--fnx no-margin padding">
+                        <a href="https://fnx.io/">fnx.io</a>
+                    </p>
+                </aside>
+                <main class="border--left">
+                    <div class="layout--header">
+                        <header>
+                            <nav class="navbar padding--fab bg--fnx--d1">
+                                <h2>Yes, this is demo</h2>
+                            </nav>
+                        </header>
+                        <main class="padding--big">
+                            <router-outlet></router-outlet>
+                        </main>
+                    </div>
+                </main>
             </div>
-
-        </form>
-
-        <code>{{user}}</code>
-
-        <form>
-            <fnx-input label="Character name" errorMessage="Please enter your character's name">
-                <fnx-text [(ngModel)]="user['name']" [required]="true" [minLength]="3" [maxLength]="8"></fnx-text>
-            </fnx-input>
-            <fnx-submit-bar [back]="true"></fnx-submit-bar>
-        </form>
-        -->
-
-        <fnx-form>
-
-            <p>
-                bez
-                <fnx-text [required]="true" [(ngModel)]="user['name']"></fnx-text>
-                labelu
-            </p>
-
-            <p>
-                <fnx-input label="S wrapperem" errorMessage="Toto je povinna hodnota!">
-                    <fnx-text [required]="true" [(ngModel)]="user['name']"></fnx-text>
-                </fnx-input>
-            </p>
-            <p>
-                <fnx-check label="Zaskrtni me" [(ngModel)]="user['dead']"></fnx-check>
-            </p>
-            <p>
-                <fnx-input label="Je mrtev?" errorMessage="Zive nebereme!">
-                    <fnx-check [required]="true" [(ngModel)]="user['dead']"></fnx-check>
-                </fnx-input>
-            </p>
-
-            <fnx-input label="Jakou ma naladu?">
-                <fnx-select [(ngModel)]="user['mood']" [ngFormControl]="mood" [multi]="true">
-                    <fnx-option *ngFor="let i of moods"
-                                label="{{i['name']}}" [value]="i['id']"></fnx-option>
-                </fnx-select>
-            </fnx-input>
-
-            <div class="row--gutter">
-                <div class="s12 m6 l4">
-                    <fnx-input label="date of birth">
-                        <fnx-date [dateTime]="true" [(ngModel)]="user['birthday']"></fnx-date>
-                    </fnx-input>
-                </div>
-                <div class="s12 m6 l4">
-                    <fnx-input label="date of death">
-                        <fnx-date [dateTime]="true" [(ngModel)]="user['deathday']"></fnx-date>
-                    </fnx-input>
-                </div>
-            </div>
-
-
-            <fnx-submit-bar [back]="true"></fnx-submit-bar>
-        </fnx-form>
-
-        <p>{{user}}</p>
-
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci ex facilis illum incidunt itaque labore natus, nemo nisi, nostrum pariatur placeat quas quia, quibusdam quis quisquam saepe sequi veritatis. Natus.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cupiditate exercitationem ipsam iusto, magnam nemo neque optio quod recusandae reiciendis rem, sapiente tempore tenetur. Deserunt fugit incidunt ipsam numquam veniam.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet eligendi iste laborum quaerat ratione similique! Exercitationem fuga iure minima rem sint sunt ullam vitae. Asperiores et expedita nemo praesentium.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam dolorum ex itaque soluta tempora. Aperiam commodi, eligendi fugiat nesciunt nulla officiis placeat quibusdam quidem quisquam sint tempore totam velit vero?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus cupiditate ducimus ipsum nisi nobis provident! Consequatur culpa dolorem illum labore maiores modi nemo quidem repellat repellendus rerum tenetur totam, ut?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aut blanditiis delectus ipsa iusto nobis non, numquam odio, quam, quisquam quo recusandae repellat voluptatibus? Consectetur dolor dolorum fugit illum possimus.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus consequuntur eligendi enim neque officiis placeat possimus quasi voluptatibus! Dolorum earum error eveniet ex nostrum quam vero? Corporis quo rem repellendus!</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci autem dolore dolorum ea earum numquam quaerat ut veniam. Ab distinctio eligendi et nesciunt odit quasi quo rem repellat reprehenderit sed.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci ex facilis illum incidunt itaque labore natus, nemo nisi, nostrum pariatur placeat quas quia, quibusdam quis quisquam saepe sequi veritatis. Natus.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cupiditate exercitationem ipsam iusto, magnam nemo neque optio quod recusandae reiciendis rem, sapiente tempore tenetur. Deserunt fugit incidunt ipsam numquam veniam.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet eligendi iste laborum quaerat ratione similique! Exercitationem fuga iure minima rem sint sunt ullam vitae. Asperiores et expedita nemo praesentium.</p>
+        </main>
 
     </div>
-
-    <fnx-modal [hidden]="!customModalVisible" (close)="customModalVisible = false">
-        <h3 header>Yes, I'm modal</h3>
-        <p header>Ask me anything.</p>
-        <p main>I have content and stuff</p>
-        <ul main>
-            <li>lorem</li>
-        </ul>
-        <p footer class="buttonbar">
-            <span class="spacer"></span>
-            <button class="btn" (click)="customModalVisible = false">OK</button>
-        </p>
-    </fnx-modal>
-
 </fnx-app>
