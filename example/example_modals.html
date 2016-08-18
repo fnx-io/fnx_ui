@@ -1,0 +1,32 @@
+<example-buttons-renderer name="example_modals"></example-buttons-renderer>
+
+<h3>Modal windows and dialogs</h3>
+
+<p class="buttonbar margin--big--bottom">
+    <button class="btn" (click)="openAlert()">alert</button>
+    <button class="btn" (click)="openConfirm()">confirm</button>
+    <button class="btn" (click)="openInput()">input</button>
+    <span class="spacer"></span>
+    <button class="btn" (click)="customModalVisible = true">custom content</button>
+</p>
+
+<h3>Toasts</h3>
+
+<p class="buttonbar">
+    <button class="btn" (click)="showToast('Yes, I\'m toast', 2000)">short toast</button>
+    <button class="btn" (click)="showToast('I\'m long. Long like a week before the payday.', 3000)">long toast</button>
+    <button class="btn" (click)="showToast('Just stare at me for 10 seconds. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aperiam at beatae cumque, deleniti deserunt dolor dolores doloribus eos error eveniet fuga iste mollitia nisi, omnis porro provident quia tempore.', 10000)">very long toast</button>
+</p>
+
+<fnx-modal [hidden]="!customModalVisible" (close)="customModalVisible = false">
+    <h3 header>Yes, I'm modal</h3>
+    <p header>Ask me anything.</p>
+    <p main>I have content and stuff</p>
+    <ul main>
+        <li>lorem</li>
+    </ul>
+    <p footer class="buttonbar">
+        <span class="spacer"></span>
+        <button class="btn" (click)="customModalVisible = false">OK</button>
+    </p>
+</fnx-modal>

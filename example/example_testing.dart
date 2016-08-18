@@ -19,8 +19,6 @@ class ExampleTesting implements OnInit {
 
   final Logger log = new Logger("FnxApp");
 
-  bool customModalVisible = false;
-
   Map user = {
     'name': 'Ferda',
     'surname': 'Mravenec',
@@ -56,34 +54,5 @@ class ExampleTesting implements OnInit {
   ngOnInit() {
     log.fine("App started");
   }
-
-  void openAlert() {
-    app.alert(
-        "Lorem ipsum dolor sit modal, eos error eveniet fuga iste mollitia nisi, omnis porro provident quia tempore.",
-        headline: "Lorem headline"
-
-    ).then( (_) => print("Closed!") );
-  }
-
-  void openConfirm() {
-    app.confirm(
-        "Lorem ipsum dolor sit confirm, eos error eveniet fuga iste mollitia nisi, omnis porro provident quia tempore.",
-        headline: "Confirm please"
-
-    ).then( (_) => print("Closed: ${_}") );
-  }
-
-  void openInput() {
-    app.input(
-        "Input value between 2 and 4, but not 3",
-        headline: "Lorem ipsum dolor sit input"
-
-    ).then( (val) => print("Input: ${val}") );
-  }
-
-  void showToast(String text, int duration) {
-    app.toast(text, duration: new Duration(milliseconds: duration));
-  }
-
 
 }

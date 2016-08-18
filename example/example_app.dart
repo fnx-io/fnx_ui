@@ -10,6 +10,7 @@ import 'package:fnx_ui/src/components/app/fnx_app.dart';
 import 'example_testing.dart';
 import 'example_panels.dart';
 import 'example_buttons_renderer.dart';
+import 'example_modals.dart';
 
 @Component(
     selector: 'example-app',
@@ -18,7 +19,8 @@ import 'example_buttons_renderer.dart';
 )
 @RouteConfig(const [
   const Route(path: "/Testing", name: "Testing", component: ExampleTesting, useAsDefault: true),
-  const Route(path: "/Panels", name: "Panels", component: ExamplePanels)
+  const Route(path: "/Panels", name: "Panels", component: ExamplePanels),
+  const Route(path: "/Modals", name: "Modals", component: ExampleModals)
 ])
 class ExampleApp {
 
