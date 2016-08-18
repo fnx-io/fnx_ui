@@ -4,6 +4,7 @@ import 'package:angular2/core.dart';
 import 'package:fnx_ui/src/components/date/fnx_date_picker.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/util/date.dart' as date;
+import 'package:fnx_ui/fnx_ui.dart';
 
 export 'package:fnx_ui/src/components/date/fnx_date_picker.dart';
 
@@ -11,20 +12,11 @@ export 'package:fnx_ui/src/components/date/fnx_date_picker.dart';
 const CUSTOM_DATE_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
                                                     useExisting: FnxDate,
                                                     multi: true);
-
 @Component(
     selector: 'fnx-date',
     providers: const [CUSTOM_DATE_VALUE_ACCESSOR],
     templateUrl: 'fnx_date.html')
-class FnxDate extends FnxInputComponent implements OnInit, ControlValueAccessor {
-
-  NgForm formCtrl;
-
-  /// This is the property from the model, we propagate dates from it and
-  /// back to it, as user changes them.
-  var _value;
-
-  get value => _value;
+class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
 
   /// This is the model for the DOM input field, user types here the date and
   /// we try to parse it and sync it to model
@@ -43,10 +35,7 @@ class FnxDate extends FnxInputComponent implements OnInit, ControlValueAccessor 
 
   EventEmitter _openDatePicker = new EventEmitter();
 
-  var onChange = (_) {};
-  var onTouched = (_) {};
-
-  FnxDate(@Optional() FnxInput wrapper, @Optional() NgForm form): super(wrapper, form);
+  FnxDate(@Optional() FnxInput wrapper, @Optional() FnxForm form): super(form, wrapper);
 
   set focused(bool focused) {
     _focused = focused;
@@ -66,10 +55,7 @@ class FnxDate extends FnxInputComponent implements OnInit, ControlValueAccessor 
 
   bool get showError => false; //!control.valid && !control.root.pristine;
 
-  @override
-  ngOnInit() {
-    super.ngOnInit();
-  }
+  bool validFormattedDate = true;
 
   /// called when the input field changes
   /// we try to parse date from it and make errors, if the string is not
@@ -80,28 +66,28 @@ class FnxDate extends FnxInputComponent implements OnInit, ControlValueAccessor 
     DateTime parsed;
     try {
       parsed = dateStrToDateTime(dateStr);
-      errorStateChange.emit(false);
+      validFormattedDate = true;
     } catch (ex) {
       parsed = null;
+      validFormattedDate = false;
       String format;
       if (dateTime) {
         format = date.DATETIME_FORMAT;
       } else {
         format = date.DATE_FORMAT;
       }
-      errorStateChange.emit("Invalid date, required format ${format.toLowerCase()}");
+      //errorStateChange.emit("Invalid date, required format ${format.toLowerCase()}");
     }
-    _value = parsed;
-    onChange(_value);
+    value = parsed;
   }
 
   void datePicked(DateTime picked) {
     if (picked == null) {
-      _value = null;
-    } else if (_value == null || !(_value is DateTime)){
-      _value = picked;
+      value = null;
+    } else if (value == null || !(value is DateTime)){
+      value = picked;
     } else {
-      DateTime original = _value as DateTime;
+      DateTime original = value as DateTime;
       DateTime newVersion;
 
       // preserve hours and minute info if we are in date only mode
@@ -116,11 +102,10 @@ class FnxDate extends FnxInputComponent implements OnInit, ControlValueAccessor 
       } else {
         newVersion = new DateTime(picked.year, picked.month, picked.day, hour, minute);
       }
-      _value = newVersion;
+      value = newVersion;
     }
-    setStrDate(_value);
-    onChange(_value);
-    errorStateChange.emit(false);
+    setStrDate(value);
+    validFormattedDate = true;
   }
 
   void setStrDate(DateTime value) {
@@ -154,32 +139,32 @@ class FnxDate extends FnxInputComponent implements OnInit, ControlValueAccessor 
   }
 
   @override
-  void registerOnChange(fn) {
-    onChange = fn;
-  }
-
-  @override
-  void registerOnTouched(fn) {
-    onTouched = fn;
-  }
-
-  @override
   void writeValue(obj) {
     if (obj is DateTime) {
-      _value = obj;
+      super.writeValue(obj);
       setStrDate(obj);
     } else {
       var parsed = tryParseDate(obj);
-      _value = parsed;
+      super.writeValue(parsed);
       if (parsed != null) {
         setStrDate(parsed);
-        onChange(parsed);
       }
     }
   }
 
+  void onFocus() {
+    focused = true;
+    markAsTouched();
+  }
+
   void ensurePickerOpened() {
+    markAsTouched();
     _openDatePicker.emit(true);
+  }
+
+  @override
+  bool hasValidValue() {
+    return validFormattedDate;
   }
 }
 

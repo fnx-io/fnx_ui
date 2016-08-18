@@ -1,6 +1,8 @@
 import 'package:angular2/angular2.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'dart:html';
+import 'package:fnx_ui/fnx_ui.dart';
+import 'package:fnx_ui/src/validator.dart';
 
 @Component(
     selector: 'fnx-submit-bar',
@@ -19,13 +21,13 @@ class FnxSubmitBar {
   @Input() String goBackLabel = "Back";
   @Input() bool back = false;
 
-  final NgForm _form;
+  final FnxForm _form;
 
-  FnxSubmitBar(@Optional() this._form);
+  FnxSubmitBar(this._form);
 
   bool get formValid {
     if (_form == null) return true;
-    return _form.control.valid;
+    return _form.isValid();
   }
 
   void goBack(Event event) {

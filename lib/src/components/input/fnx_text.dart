@@ -1,27 +1,26 @@
 import 'package:angular2/core.dart';
 import 'package:angular2/common.dart';
-import 'package:fnx_ui/src/util/ui.dart';
+import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:angular2/src/common/forms/directives/validators.dart';
+import 'package:fnx_ui/src/validator.dart';
 
 
 const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
-                                                          useExisting: FnxText,
-                                                          multi: true);
+    useExisting: FnxText,
+    multi: true);
 @Component(
     selector: 'fnx-text',
     template: r'''
-<input id="{{ componentId }}" type="{{ type }}" [(ngModel)]="value" [readonly]="readonly"/>
+<input id="{{ componentId }}" type="{{ type }}" [(ngModel)]="value" [readonly]="readonly"
+(focus)="markAsTouched()"
+(click)="markAsTouched()"
+  />
 ''',
     providers: const [CUSTOM_INPUT_TEXT_VALUE_ACCESSOR]
 )
-class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit, AfterViewInit {
-
-  dynamic _value;
-  @Output() EventEmitter valueChange = new EventEmitter();
-
-  bool formError = false;
+class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
 
   @Input() bool required = false;
   @Input() int minLength = null;
@@ -29,71 +28,15 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
   @Input() String type = 'text';
   @Input() bool readonly = false;
 
-  @ContentChild(NgControl) NgControl formControl;
+  FnxText(@Optional() FnxForm form, @Optional() FnxInput wrapper): super(form, wrapper);
 
-  FnxText(@Optional() FnxInput wrapper, @Optional() NgForm form): super(wrapper, form);
-
-  get value => _value;
-
-  @Input()
-  set value(dynamic v) {
-    if (v != this._value) {
-      this._value = v;
-      this.onChange(v);
-      this.valueChange.emit(v);
-      checkErrors();
+  @override
+  bool hasValidValue() {
+    if (required) {
+      if (value == null) return false;
+      if (type == 'text' && value.toString().isEmpty) return false;
     }
+    return true;
   }
 
-  var onChange = (_) {};
-  var onTouched = (_) {};
-
-  void checkErrors() {
-    formError = formControl != null && !formControl.valid;
-    errorStateChange.emit(formError);
-  }
-
-  @override
-  void registerOnChange(fn) {
-    this.onChange = fn;
-  }
-
-  @override
-  void registerOnTouched(fn) {
-    this.onTouched = fn;
-  }
-
-  @override
-  void writeValue(obj) {
-    _value = obj;
-    onChange(obj);
-  }
-
-  NgForm getForm() {
-    return form;
-  }
-
-  bool requiredValidation() {
-    return required;
-  }
-
-  int minLengthValidation() {
-    return minLength;
-  }
-
-  int maxLengthValidation() {
-    return maxLength;
-  }
-
-  @override
-  ngAfterViewInit() {
-    super.ngAfterViewInit();
-  }
-
-  @override
-  ngOnInit() {
-    super.ngOnInit();
-  }
 }
-
-const FNX_INPUT_TEXT_DIRECTIVES = const [FnxText];

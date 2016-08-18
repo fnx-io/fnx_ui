@@ -1,7 +1,7 @@
 <input type="text" class="form-control" [attr.id]="componentId"
        [ngModel]="dateStr"
        (ngModelChange)="onChangeInput($event)"
-       (focus)="focused = true"
+       (focus)="onFocus()"
        (blur)="focused = false"
        (click)="ensurePickerOpened()"/>
 <label class="icon" [attr.for]="componentId">date_range</label>

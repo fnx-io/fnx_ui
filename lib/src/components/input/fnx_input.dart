@@ -3,81 +3,91 @@ import 'package:angular2/common.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'dart:async';
 import 'package:angular2/src/common/forms/directives/validators.dart';
+import 'package:fnx_ui/src/validator.dart';
+import 'package:fnx_ui/fnx_ui.dart';
 
 @Component(
     selector: 'fnx-input',
     template: r'''
 <div class="input">
-  <label *ngIf="label != null" [attr.for]="componentId">{{ label }}</label>
+  <label *ngIf="label != null" [attr.for]="componentId" (click)="markAsTouched()">{{ label }}</label>
   <ng-content></ng-content>
-  <label *ngIf="error && errorMessage != null" class="error" [attr.for]="componentId">{{ errorMessage }}</label>
+  <label *ngIf="isTouchedAndInvalid()" class="error" [attr.for]="componentId">{{ errorMessage }}</label>
 </div>
 ''')
-class FnxInput {
+class FnxInput extends FnxValidatorComponent {
 
   final String componentId = ui.uid('comp_');
 
-  FnxInputComponent _component;
+  List<FnxInputComponent> inputComponents;
 
   @Input() String label;
   String _errorMessage;
-  String _customErrorMessage;
-
-  bool error = false;
-
-  StreamSubscription _errorSubscription;
 
   @Input()
   void set errorMessage(String err) {
     this._errorMessage = err;
   }
 
-
   String get errorMessage {
-    return _customErrorMessage != null ? _customErrorMessage : _errorMessage;
+    return _errorMessage == null ? "Error" : _errorMessage;
   }
 
-  FnxInputComponent get component => _component;
-
-  void set component(FnxInputComponent component) {
-
-    if (_errorSubscription != null) _errorSubscription.cancel();
-    this._component = component;
-    if (component != null) {
-      _errorSubscription = component.errorStateChange.listen(handleErrorChange);
-    }
-  }
-
-  handleErrorChange(dynamic errorStatus) {
-    if (errorStatus is bool) {
-      this.error = errorStatus;
-      if (!errorStatus) {
-        _customErrorMessage = null;
-      }
-    } else if (errorStatus is String) {
-      error = true;
-      _customErrorMessage = errorStatus;
-    } else if (errorStatus == null) {
-      error = false;
-      _customErrorMessage = null;
-    }
+  @override
+  bool hasValidValue() {
+    return true;
   }
 }
 
-abstract class FnxInputComponent implements OnInit, AfterViewInit {
+abstract class FnxInputComponent extends FnxValidatorComponent implements OnInit, ControlValueAccessor {
 
   FnxInput _wrapper;
-  NgForm form;
+  FnxForm _form;
 
   final String _privComponentId = ui.uid("comp_");
 
-  final EventEmitter errorStateChange = new EventEmitter();
-
   Control componentControl;
 
-  FnxInputComponent(@Optional() FnxInput wrapper, @Optional() NgForm form) {
-    this._wrapper = wrapper;
-    this.form = form;
+  FnxInputComponent(this._form, this._wrapper);
+
+  dynamic _value;
+
+  get value => _value;
+
+  @Output() EventEmitter valueChange = new EventEmitter();
+
+  @Input()
+  set value(dynamic v) {
+    if (v != this._value) {
+      this._value = v;
+      notifyChange();
+      this.valueChange.emit(v);
+    }
+  }
+
+  void notifyChange() {
+    if (onChange != null) {
+      onChange(_value);
+    }
+  }
+
+  var onChange = (_) {};
+  var onTouched = (_) {};
+
+  @override
+  void registerOnChange(fn) {
+    this.onChange = fn;
+  }
+
+  @override
+  void registerOnTouched(fn) {
+    this.onTouched = fn;
+  }
+
+  @override
+  void writeValue(obj) {
+    _value = obj;
+    notifyChange();
   }
 
   String get componentId {
@@ -88,47 +98,25 @@ abstract class FnxInputComponent implements OnInit, AfterViewInit {
     }
   }
 
-  /// flag that model of this input is required
-  bool requiredValidation() => false;
-  int minLengthValidation() => null;
-  int maxLengthValidation() => null;
-
-  /// Implement this to add custom validators to the input's control
-  List<ValidatorFn> getCustomValidators() {
-    return [];
-  }
-
   @override
   ngOnInit() {
     if (_wrapper != null) {
-      _wrapper.component = this;
+      _wrapper.registerChild(this);
+    }
+    if (_form != null) {
+      _form.registerChild(this);
     }
   }
 
   @override
-  ngAfterViewInit() {
-    List<ValidatorFn> validators = [];
-    if (requiredValidation()) {
-      validators.add(Validators.required);
+  ngOnDestroy() {
+    if (_wrapper != null) {
+      _wrapper.deregisterChild(this);
     }
-    if (minLengthValidation() != null) {
-      validators.add(Validators.minLength(minLengthValidation()));
-    }
-    if (maxLengthValidation() != null) {
-      validators.add(Validators.maxLength(maxLengthValidation()));
-    }
-    var customValidators = getCustomValidators();
-    if (customValidators != null && customValidators.isNotEmpty) {
-      validators.addAll(customValidators);
-    }
-    if (validators.isNotEmpty) {
-      componentControl = new Control('', Validators.compose(validators));
-      if (form != null) {
-        form.control.addControl(componentId, componentControl);
-      }
+    if (_form != null) {
+      _form.deregisterChild(this);
     }
   }
-
 
 }
 

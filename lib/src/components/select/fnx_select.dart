@@ -5,17 +5,17 @@ import 'dart:html';
 import 'dart:async';
 import 'package:fnx_ui/src/util/async.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
+import 'package:fnx_ui/fnx_ui.dart';
 
 const CUSTOM_SELECT_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
                                                       useExisting: FnxSelect,
                                                       multi: true);
-
 @Component(
     selector: 'fnx-select',
     templateUrl: 'fnx_select.html',
     providers: const [CUSTOM_SELECT_VALUE_ACCESSOR]
 )
-class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
+class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
 
   List<FnxOptionValue> options = [];
 
@@ -31,12 +31,6 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 
   bool _multi = false;
 
-  var onChange = (_) {};
-  var onTouched = (_) {};
-
-  dynamic _value;
-  @Output() EventEmitter valueChange = new EventEmitter();
-
   FnxOptionValue _highlighted;
 
   String _filter = null;
@@ -49,7 +43,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 
   Node container;
 
-  FnxSelect(ElementRef el, @Optional() FnxInput wrapper, @Optional() NgForm form): super(wrapper, form) {
+  FnxSelect(ElementRef el, @Optional() FnxInput wrapper, @Optional() FnxForm form): super(form, wrapper) {
     if (el != null) {
       container = el.nativeElement;
       elementPositionStream(container).listen((double position) {
@@ -59,6 +53,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   }
 
   void toggleDropdown() {
+    markAsTouched();
     if (open) {
       hideOptions();
     } else {
@@ -84,14 +79,14 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   @Input()
   set multi(bool flag) {
     if (flag) {
-      if (_value == null) {
-        _value = [];
-      } else if (!(_value is List)) {
-        _value = [_value];
+      if (value == null) {
+        value = [];
+      } else if (!(value is List)) {
+        value = [value];
       }
     } else {
-      if ((_value is List) && _value.length > 0) {
-        _value = _value[0];
+      if ((value is List) && value.length > 0) {
+        value = value[0];
       }
     }
     _multi = flag;
@@ -99,13 +94,13 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 
   get multi => _multi;
 
-  bool isSelected(dynamic value) {
-    if (_value == null) return value == null;
-    if (value == null) return false;
-    if (_value is List) {
-      return _value.contains(value);
+  bool isSelected(dynamic v) {
+    if (value == null) return v == null;
+    if (v == null) return false;
+    if (value is List) {
+      return value.contains(v);
     } else {
-      return _value == value;
+      return value == v;
     }
   }
 
@@ -117,16 +112,16 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   /// in the order they were defined in the options collection
   String renderSelectedOptions () {
     List<FnxOptionValue> allSelected;
-    if (_value == null) {
+    if (value == null) {
       allSelected = [];
-    } else if (_value is List) {
-      Set selected = new Set.from(_value as List);
+    } else if (value is List) {
+      Set selected = new Set.from(value as List);
       allSelected = options.where((opt) {
         return selected.contains(opt.value);
       }).toList();
     } else {
       FnxOptionValue found = options.firstWhere((opt) {
-        return opt.value == _value;
+        return opt.value == value;
       }, orElse: () => null);
       if (found != null) {
         allSelected = [found];
@@ -149,28 +144,25 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
     if (multi) {
       toggleSelectedOption(value);
     } else {
-      if (_value == value) {
+      if (this.value == value) {
         // _value = null; asi ne
       } else {
-        _value = value;
+        this.value = value;
       }
       hideOptions();
     }
-    valueChange.emit(_value);
-    onChange(_value);
-    errorStateChange.emit(hasError(state));
   }
 
-  void toggleSelectedOption(dynamic value) {
-    if (_value == null) {
-      _value = [];
-    } else if (!(_value is List)) {
-      _value = [_value];
+  void toggleSelectedOption(dynamic v) {
+    if (value == null) {
+      value = [];
+    } else if (!(value is List)) {
+      value = [value];
     }
-    if (_value.contains(value)) {
-      _value.remove(value);
+    if (value.contains(v)) {
+      value.remove(v);
     } else {
-      _value.add(value);
+      value.add(v);
     }
   }
   @Input()
@@ -259,36 +251,20 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 
   @override
   ngOnDestroy() {
+    super.ngOnDestroy();
     cancelSubscription(globalClicks);
     globalClicks = null;
     cancelSubscription(navigationActions);
     navigationActions = null;
   }
 
-  bool get error {
-    return hasError(state);
-  }
 
   @override
-  void registerOnChange(fn) {
-    onChange = fn;
+  bool hasValidValue() {
+    // TODO: aspon required
+    return true;
   }
 
-  @override
-  void registerOnTouched(fn) {
-    onTouched = fn;
-  }
-
-  @override
-  void writeValue(obj) {
-    _value = obj;
-    onChange(obj);
-  }
-
-  @override
-  ngAfterViewInit() {
-    super.ngAfterViewInit();
-  }
 }
 
 class FnxOptionValue {

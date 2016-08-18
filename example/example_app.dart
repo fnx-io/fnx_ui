@@ -28,6 +28,7 @@ class ExampleApp implements OnInit {
     'surname': 'Mravenec',
     'address': {'street': 'Pod Pampeliskou'},
     'mood': 'sad',
+    'dead': false,
     'birthday': '2016-06-22T15:22:30.638489'};
 
   static dynamic moodValidator = (AbstractControl c) {

@@ -5,7 +5,7 @@
      [attr.readonly]="readonly"
      [class.open--up]="openUp"
      [class.open]="open"
-     [class.error]="error">
+     [class.error]="!isValid()">
 
     <span class="clickable">{{ renderSelectedOptions() }}</span>
     <div class="select__dropdown" [hidden]="!open || readonly">

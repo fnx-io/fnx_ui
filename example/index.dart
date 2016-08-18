@@ -30,6 +30,7 @@ main() {
   r.info("   - build: ${fnxConfigMeta()["timestamp"]}");
   r.info("================================================================");
   */
+
   // START!
   bootstrap(ExampleApp, []);
 }
