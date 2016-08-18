@@ -23,7 +23,11 @@ class FnxSubmitBar {
 
   final FnxForm _form;
 
-  FnxSubmitBar(this._form);
+  FnxSubmitBar(@Optional() this._form) {
+    if (_form == null) {
+      throw new Exception("To use fnx-submit-bar, please wrap your form into <fnx-form></fnx-form> component!");
+    }
+  }
 
   bool get formValid {
     if (_form == null) return true;
