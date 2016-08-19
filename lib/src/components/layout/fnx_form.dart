@@ -11,15 +11,30 @@ import 'dart:async';
 
 @Component(
   selector: 'fnx-form',
-  template: '<form (submit)="markAsTouched()"><ng-content></ng-content></form>'
+  templateUrl: 'fnx_form.html'
 )
 class FnxForm extends FnxValidatorComponent {
 
   final Logger log = new Logger("FnxForm");
 
+  final EventEmitter<Event> submit = new EventEmitter<Event>();
+
   String id = ui.uid('form-');
 
-  // TODO submit emiter, pokud je form submit a ja jsem valid
+  /// Handles submitting the underlying form event.
+  /// Only propagates the submit event when this form is valid.
+  /// Forces validation of all components inside this form.
+  void submitForm(Event event) {
+    markAsTouched();
+    if (event != null) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    if (isValid()) {
+      submit.emit(event);
+    }
+  }
 
   @override
   bool hasValidValue() {
