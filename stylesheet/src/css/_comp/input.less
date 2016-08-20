@@ -29,7 +29,7 @@
     flex-grow: 1;
     flex-shrink: 1;
   }
-  & > input, & > .select {
+  & > input, & > .select, & > textarea {
     width: 1px;
   }
 
@@ -47,7 +47,7 @@ label {
   }
 }
 
-input, .select {
+input, .select, textarea {
   .item--border;
   .fs-m;
   padding-left: @paddingSmall;
@@ -61,14 +61,17 @@ input, .select {
     border-color: fadeout(color(@colorBorderDefault), 70%);
     box-shadow: none;
   }
-  &[disabled] {
+  &[disabled]:not([disabled=false]) {
     opacity: 0.6;
     cursor: not-allowed;
   }
 }
-input {
+input, textarea {
   box-shadow: inset 1px 2px 2px rgba(0,0,0,0.1); // maybe?
   padding-right: @paddingSmall;
+}
+textarea {
+  min-height: 4em * @lineHeight;
 }
 
 .select {
