@@ -73,6 +73,11 @@
             </fnx-select>
         </fnx-input>
 
+
+        <fnx-input label="Areja" errorMessage="Toto je povinna hodnota!">
+            <fnx-textarea [required]="true" [(ngModel)]="user['name']"></fnx-textarea>
+        </fnx-input>
+
         <div class="row--gutter">
             <div class="s12 m6 l4">
                 <fnx-input label="date of birth">
@@ -86,8 +91,8 @@
             </div>
         </div>
 
-
         <fnx-submit-bar [back]="true"></fnx-submit-bar>
+
     </fnx-form>
 
     <p>{{user}}</p>
