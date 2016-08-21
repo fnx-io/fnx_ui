@@ -64,6 +64,10 @@
   & > li, .item {
     padding-left: @padding;
     padding-right: @padding;
+    &.tab--active {
+      border-bottom: round(@basicWidgetPadding/3) solid grey;
+      padding-bottom: @basicWidgetPadding - round(@basicWidgetPadding/3);
+    }
   }
   & > li {
     .renderItemIcons();
