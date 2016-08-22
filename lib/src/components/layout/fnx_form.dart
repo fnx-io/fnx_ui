@@ -17,6 +17,7 @@ class FnxForm extends FnxValidatorComponent {
 
   final Logger log = new Logger("FnxForm");
 
+  @Output()
   final EventEmitter<Event> submit = new EventEmitter<Event>();
 
   String id = ui.uid('form-');
