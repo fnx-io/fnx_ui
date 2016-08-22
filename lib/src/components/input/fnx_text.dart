@@ -15,6 +15,7 @@ const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
 <input id="{{ componentId }}" type="{{ type }}" [(ngModel)]="value" [readonly]="readonly"
 (focus)="markAsTouched()"
 (click)="markAsTouched()"
+[class.error]="isTouchedAndInvalid()"
   />
 ''',
     providers: const [CUSTOM_INPUT_TEXT_VALUE_ACCESSOR]

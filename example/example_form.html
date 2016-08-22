@@ -1,0 +1,56 @@
+<example-buttons-renderer name="example_form"></example-buttons-renderer>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, accusantium debitis dolores enim eum id laboriosam libero minus mollitia natus odit omnis perspiciatis quibusdam quod, sit tempore, vero. Assumenda, deserunt.</p>
+
+<fnx-form (submit)="postRecord()">
+
+    <div class="row--gutter">
+
+        <fnx-panel-small class="s12 l6">
+            <h5 header>About you</h5>
+
+            <fnx-input label="Your name" errorMessage="Please fill out your name">
+                <fnx-text [(ngModel)]="record['name']" [required]="true"></fnx-text>
+            </fnx-input>
+
+            <fnx-input label="Your occupation" errorMessage="Please tell us what you do">
+                <fnx-select [(ngModel)]="record['occupation']" [required]="true">
+                    <fnx-option value="hardly_working" label="hardly working"></fnx-option>
+                    <fnx-option value="summer_holidays" label="summer holidays"></fnx-option>
+                    <fnx-option value="whatever" label="whatever"></fnx-option>
+                </fnx-select>
+            </fnx-input>
+
+
+        </fnx-panel-small>
+
+        <fnx-panel-small class="s12 l6">
+            <h5 header>Your address</h5>
+
+            <div class="row--gutter--horizontal">
+
+                <fnx-input label="Street" class="s9">
+                    <fnx-text [(ngModel)]="record['street']"></fnx-text>
+                </fnx-input>
+
+                <fnx-input label="Number" class="s3">
+                    <fnx-text [(ngModel)]="record['number']"></fnx-text>
+                </fnx-input>
+
+                <fnx-input label="City" class="s12">
+                    <fnx-text [(ngModel)]="record['city']"></fnx-text>
+                </fnx-input>
+
+                <fnx-input label="Zip" class="s4">
+                    <fnx-text [(ngModel)]="record['zip']"></fnx-text>
+                </fnx-input>
+
+            </div>
+
+        </fnx-panel-small>
+
+    </div>
+
+    <fnx-submit-bar [back]="true"></fnx-submit-bar>
+
+</fnx-form>

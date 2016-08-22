@@ -1,6 +1,6 @@
 @gutter: (2 * round(@padding/2));
 
-.row, .row--gutter {
+.row, .row--gutter, .row--gutter--horizontal {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -15,6 +15,10 @@
   & > * {
     margin-bottom: @gutter;
   }
+}
+.row--gutter--horizontal {
+  margin-left: round(-@gutter/2);
+  margin-right: round(-@gutter/2);
 }
 .renderGridRules(@name, @cols) {
   & > .@{name}@{cols} {
@@ -48,7 +52,7 @@
   .renderGridRules(s, 11);
   .renderGridRules(s, 12);
 }
-.row--gutter {
+.row--gutter, .row--gutter--horizontal {
   .offset--s0 {
     margin-left: @gutter/2 !important;
   }

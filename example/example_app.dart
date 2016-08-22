@@ -13,6 +13,8 @@ import 'example_buttons_renderer.dart';
 import 'example_modals.dart';
 import 'dart:math';
 import 'example_tabs.dart';
+import 'cookbook/cookbook_preloader.dart';
+import 'example_form.dart';
 
 @Component(
     selector: 'example-app',
@@ -20,10 +22,14 @@ import 'example_tabs.dart';
     directives: const [ExampleButtonsRenderer]
 )
 @RouteConfig(const [
-  const Route(path: "/Testing", name: "Testing", component: ExampleTesting, useAsDefault: true),
+  const Route(path: "/Testing", name: "Testing", component: ExampleTesting),
+
+  const Route(path: "/Form", name: "Form", component: ExampleForm, useAsDefault: true),
   const Route(path: "/Panels", name: "Panels", component: ExamplePanels),
   const Route(path: "/Modals", name: "Modals", component: ExampleModals),
-  const Route(path: "/Tabs/...", name: "Tabs", component: ExampleTabs)
+  const Route(path: "/Tabs/...", name: "Tabs", component: ExampleTabs),
+
+  const Route(path: "/Cookbook/Preloader", name: "Cookbook-Preloader", component: CookbookPreloader)
 ])
 class ExampleApp {
 
@@ -50,6 +56,8 @@ class ExampleApp {
 
 
   void loadMore() {
+    if (list.length >= 500) return;
+
     for (int a=0;a<10;a++) {
       Map<String, Object> row = {};
       String n1 = names[r.nextInt(names.length)];

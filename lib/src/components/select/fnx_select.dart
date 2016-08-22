@@ -17,6 +17,11 @@ const CUSTOM_SELECT_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
 )
 class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
 
+  @Input() bool required = false;
+  @Input() bool neverShowFilter = false;
+  @Input() bool alwaysShowFilter = false;
+  @Input() bool readonly = false;
+
   List<FnxOptionValue> options = [];
 
   @Input() String selectionEmptyLabel = "Select...";
@@ -25,9 +30,6 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 
   bool open = false;
   bool openUp = false;
-  @Input() bool neverShowFilter = false;
-  @Input() bool alwaysShowFilter = false;
-  @Input() bool readonly = false;
 
   bool _multi = false;
 
@@ -261,7 +263,10 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 
   @override
   bool hasValidValue() {
-    // TODO: aspon required
+    if (required) {
+      if (value == null) return false;
+      if (multi && value is List && value.isEmpty) return false;
+    }
     return true;
   }
 

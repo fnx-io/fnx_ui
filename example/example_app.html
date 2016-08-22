@@ -9,10 +9,16 @@
             <div class="layout--sidebar">
                 <aside class="flex--column" style="width: 15em">
                     <ul class="menu--vertical flex--grow bg--white--d1">
-                        <li><a href="#" [routerLink]="['Testing']">Testing</a></li>
-                        <li><a href="#" [routerLink]="['Panels']">Panels</a></li>
-                        <li><a href="#" [routerLink]="['Modals']">Modals 'n' toasts</a></li>
-                        <li><a href="#" [routerLink]="['Tabs']">Tabs</a></li>
+                        <li><a [routerLink]="['Form']">Form</a></li>
+                        <li><a [routerLink]="['Panels']">Panels</a></li>
+                        <li><a [routerLink]="['Modals']">Modals 'n' toasts</a></li>
+                        <li><a [routerLink]="['Tabs']">Tabs</a></li>
+                        <li data-suffix="more_horiz"><span>Cookbook</span>
+                            <ul class="menu--vertical">
+                                <li><a [routerLink]="['Cookbook-Preloader']">Preloader</a></li>
+                            </ul>
+                        </li>
+                        <li><a [routerLink]="['Testing']">Testing</a></li>
                     </ul>
                     <p class="text--center bg--fnx no-margin padding">
                         <a href="https://fnx.io/">fnx.io</a>
