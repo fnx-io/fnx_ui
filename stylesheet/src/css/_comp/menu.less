@@ -64,9 +64,9 @@
   & > li, .item {
     padding-left: @padding;
     padding-right: @padding;
-    &.tab--active {
-      border-bottom: round(@basicWidgetPadding/3) solid grey;
-      padding-bottom: @basicWidgetPadding - round(@basicWidgetPadding/3);
+    &.tab--active, &.router-link-active {
+      border-bottom: round(@basicWidgetPadding/2) solid grey;
+      padding-bottom: @basicWidgetPadding - round(@basicWidgetPadding/2);
     }
   }
   & > li {
@@ -77,6 +77,16 @@
 .menu--horizontal {
   .flex--row;
   .menu();
+}
+
+.menu--tabs {
+  .flex--row;
+  .menu();
+  & > li, .item {
+    flex-shrink: 1;
+    flex-grow: 1;
+    text-align: center;
+  }
 }
 
 .menu--vertical {

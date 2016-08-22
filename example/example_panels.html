@@ -2,62 +2,72 @@
 
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita quaerat quo reiciendis suscipit velit voluptatibus! Adipisci, at expedita iste magni minus nisi porro provident quas rerum sit velit veniam voluptates.</p>
 
-<div class="row--gutter">
-    <div class="s12 m6">
-        <h2>Big panels</h2>
+<fnx-panel closable="true">
+    <h1 header>Click me and expect a lot of different panels</h1>
 
-        <fnx-panel class="margin--bottom">
-            <h3 header>Ahoj, ja jsem panel</h3>
-            <p>A projel jsem k vam z Mostu.</p>
-        </fnx-panel>
+    <div class="row--gutter">
+        <div class="s12 m6">
+            <h2>Big panels</h2>
 
-        <fnx-panel closable="true" class="margin--bottom">
-            <h3 header>Ahoj, ja jsem panel otviraci</h3>
-            <p header>Ahoj ja jsem vysvetlujici lorem ipsum.</p>
+            <fnx-panel class="margin--bottom">
+                <h3 header>Hi, I'm a panel</h3>
+                <p>I came from a galaxy far far away.</p>
+            </fnx-panel>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet eius, labore laboriosam laborum porro reiciendis vel! Adipisci architecto at distinctio dolorem eligendi fuga fugit labore necessitatibus nesciunt qui tenetur, voluptatem?</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis cum cumque eaque eligendi error ex expedita explicabo laborum neque nisi, nulla optio porro quas quibusdam repellat, sapiente totam voluptates?</p>
-        </fnx-panel>
+            <fnx-panel closable="true" class="margin--bottom">
+                <h3 header>Click me and observe</h3>
+                <p header>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet eius, labore laboriosam laborum porro reiciendis vel! Adipisci architecto at distinctio dolorem eligendi fuga fugit labore necessitatibus nesciunt qui tenetur, voluptatem?</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis cum cumque eaque eligendi error ex expedita explicabo laborum neque nisi, nulla optio porro quas quibusdam repellat, sapiente totam voluptates?</p>
+            </fnx-panel>
 
 
-        <fnx-panel closable="true" class="margin--bottom">
-            <h3 header>Ahoj, tady se scrolluje.</h3>
-            <fnx-scroll-panel style="height: 15em" (loadMore)="loadMore()">
-                <table>
-                    <tr *ngFor="let row of tableData">
-                        <td>{{row["id"]}}</td>
-                    </tr>
-                </table>
-            </fnx-scroll-panel>
-        </fnx-panel>
+            <fnx-panel closable="true" class="margin--bottom">
+                <h3 header>You can scroll here</h3>
+                <fnx-scroll-panel style="height: 15em" (loadMore)="loadMore()">
+                    <table>
+                        <tr *ngFor="let row of list">
+                            <td>{{row["id"]}}</td>
+                            <td>{{row["name"]}}</td>
+                            <td>{{row["email"]}}</td>
+                        </tr>
+                    </table>
+                </fnx-scroll-panel>
+            </fnx-panel>
+        </div>
+        <div class="s12 m6">
+            <h2>Small panels</h2>
+
+            <fnx-panel-small class="margin--bottom">
+                <h5 header>Hi, I'm a panel</h5>
+                <p>I came from a galaxy far far away.</p>
+            </fnx-panel-small>
+
+            <fnx-panel-small closable="true" class="margin--bottom">
+                <h5 header>Click me and observe</h5>
+                <p header>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet eius, labore laboriosam laborum porro reiciendis vel! Adipisci architecto at distinctio dolorem eligendi fuga fugit labore necessitatibus nesciunt qui tenetur, voluptatem?</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis cum cumque eaque eligendi error ex expedita explicabo laborum neque nisi, nulla optio porro quas quibusdam repellat, sapiente totam voluptates?</p>
+            </fnx-panel-small>
+
+
+            <fnx-panel-small closable="true" class="margin--bottom">
+                <h5 header>You can scroll here</h5>
+                <fnx-scroll-panel style="height: 15em" (loadMore)="loadMore()">
+                    <table>
+                        <tr *ngFor="let row of list">
+                            <td>{{row["id"]}}</td>
+                            <td>{{row["name"]}}</td>
+                            <td>{{row["email"]}}</td>
+                        </tr>
+                    </table>
+                </fnx-scroll-panel>
+            </fnx-panel-small>
+
+        </div>
+
     </div>
-    <div class="s12 m6">
-        <h2>Small panels</h2>
 
-        <fnx-panel-small class="margin--bottom">
-            <h5 header>Ahoj, ja jsem panel</h5>
-            <p>A projel jsem k vam z Mostu.</p>
-        </fnx-panel-small>
-
-        <fnx-panel-small closable="true" class="margin--bottom">
-            <h5 header>Ahoj, ja jsem panel otviraci</h5>
-            <p header>Ahoj ja jsem vysvetlujici lorem ipsum.</p>
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet eius, labore laboriosam laborum porro reiciendis vel! Adipisci architecto at distinctio dolorem eligendi fuga fugit labore necessitatibus nesciunt qui tenetur, voluptatem?</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis cum cumque eaque eligendi error ex expedita explicabo laborum neque nisi, nulla optio porro quas quibusdam repellat, sapiente totam voluptates?</p>
-        </fnx-panel-small>
-
-        <fnx-panel-small closable="true" class="margin--bottom">
-            <h5 header>Ahoj, tady se scrolluje.</h5>
-            <fnx-scroll-panel style="height: 15em" (loadMore)="loadMore()">
-                <table>
-                    <tr *ngFor="let row of tableData">
-                        <td>{{row["id"]}}</td>
-                    </tr>
-                </table>
-            </fnx-scroll-panel>
-        </fnx-panel-small>
-
-    </div>
-
-</div>
+</fnx-panel>

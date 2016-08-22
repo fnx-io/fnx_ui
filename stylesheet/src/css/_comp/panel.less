@@ -27,7 +27,7 @@
 }
 .panel--closable, .panel--closable--small {
   .panel;
-  .panel__header {
+  & > .panel__header {
     .renderItemIcons();
     cursor: pointer;
     h1, h2, h3, h4, h5 {
@@ -47,7 +47,7 @@
     padding-bottom: 0;
   }
   &.open {
-    .panel__header {
+    & > .panel__header {
       cursor: pointer;
       h1, h2, h3, h4, h5 {
         &:before {
@@ -55,7 +55,7 @@
         }
       }
     }
-    .panel__content {
+    & > .panel__content {
       max-height: 500em;
       padding-top: @padding;
       padding-bottom: @padding;

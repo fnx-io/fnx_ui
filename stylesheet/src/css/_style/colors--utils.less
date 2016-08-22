@@ -67,6 +67,9 @@
     .menu--horizontal {
         .renderMenuColors(@hexa, 3);
     }
+    .menu--tabs {
+        .renderMenuColors(@hexa, 1);
+    }
     .select__dropdown {
         li {
             &:hover:not(.disabled) {
@@ -150,7 +153,7 @@
         }
     }
     .tab--active {
-        border-bottom-color: @hexa;
+        border-bottom-color: @hexa !important;
     }
     .important,
     .accent,
@@ -160,6 +163,11 @@
         .renderBgAndTextImportant(@hexa);
         &.btn:hover:not(:disabled):not(.disabled) {
             .renderHoverImportant(@hexa);
+        }
+    }
+    .menu--tabs {
+        .item.router-link-active {
+            border-bottom-color: @hexa !important;
         }
     }
 }

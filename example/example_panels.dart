@@ -7,6 +7,7 @@ import 'package:angular2/common.dart';
 import 'package:fnx_ui/src/components/modal/fnx_modal.dart';
 import 'package:fnx_ui/src/components/app/fnx_app.dart';
 import 'example_buttons_renderer.dart';
+import 'example_app.dart';
 
 @Component(
     selector: 'example-panels',
@@ -17,17 +18,18 @@ class ExamplePanels implements OnInit {
 
   final Logger log = new Logger("ExamplePanels");
 
-  List<Map> tableData = [];
+  ExampleApp app;
+
+  ExamplePanels(this.app);
 
   ngOnInit() {
     loadMore();
   }
 
+  List get list => app.list;
+
   void loadMore() {
-    for (int a=0;a<10;a++) {
-      Map<String, Object> row = {};
-      row["id"] = tableData.length + 1;
-      tableData.add(row);
-    }
+    app.loadMore();
   }
+
 }

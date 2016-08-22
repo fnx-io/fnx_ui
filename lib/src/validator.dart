@@ -6,6 +6,9 @@ abstract class FnxValidatorComponent {
 
   bool _touched = false;
 
+  // this is universal rule, used to render "star" in component's label
+  bool required = false;
+
   List<FnxValidatorComponent> _validatorChildren = [];
 
   void markAsTouched() {
@@ -32,6 +35,11 @@ abstract class FnxValidatorComponent {
   bool hasValidChildren() {
     if (_validatorChildren.isEmpty) return true;
     return _validatorChildren.firstWhere((val) => !val.isValid(), orElse: () => null) == null;
+  }
+
+  bool hasRequiredChildren() {
+    if (_validatorChildren.isEmpty) return false;
+    return _validatorChildren.firstWhere((val) => val.required, orElse: () => null) != null;
   }
 
   void registerChild(FnxValidatorComponent child) {

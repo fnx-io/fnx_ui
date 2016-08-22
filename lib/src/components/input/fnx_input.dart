@@ -10,7 +10,10 @@ import 'package:fnx_ui/fnx_ui.dart';
     selector: 'fnx-input',
     template: r'''
 <div class="input">
-  <label *ngIf="label != null" [attr.for]="componentId" (click)="markAsTouched()">{{ label }}</label>
+  <label *ngIf="label != null"
+    [attr.for]="componentId"
+    [class.required]="hasRequiredChildren()"
+    (click)="markAsTouched()">{{ label }}</label>
   <ng-content></ng-content>
   <label *ngIf="isTouchedAndInvalid()" class="error" [attr.for]="componentId">{{ errorMessage }}</label>
 </div>
@@ -18,8 +21,6 @@ import 'package:fnx_ui/fnx_ui.dart';
 class FnxInput extends FnxValidatorComponent {
 
   final String componentId = ui.uid('comp_');
-
-  List<FnxInputComponent> inputComponents;
 
   @Input() String label;
   String _errorMessage;
@@ -37,6 +38,7 @@ class FnxInput extends FnxValidatorComponent {
   bool hasValidValue() {
     return true;
   }
+
 }
 
 abstract class FnxInputComponent extends FnxValidatorComponent implements OnInit, ControlValueAccessor {
