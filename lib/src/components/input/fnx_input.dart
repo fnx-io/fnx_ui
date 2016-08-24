@@ -62,8 +62,8 @@ abstract class FnxInputComponent extends FnxValidatorComponent implements OnInit
   set value(dynamic v) {
     if (v != this._value) {
       this._value = v;
-      notifyChange();
       this.valueChange.emit(v);
+      notifyChange();
     }
   }
 

@@ -21,6 +21,9 @@
                 </fnx-select>
             </fnx-input>
 
+            <fnx-input label="Your photo">
+                <fnx-file [(ngModel)]="record['photo']" (files)="uploadFile($event)"></fnx-file>
+            </fnx-input>
 
         </fnx-panel-small>
 
@@ -50,6 +53,10 @@
         </fnx-panel-small>
 
     </div>
+
+    <p class="padding f-monospace">
+        Debug: {{record}}
+    </p>
 
     <fnx-submit-bar [back]="true"></fnx-submit-bar>
 

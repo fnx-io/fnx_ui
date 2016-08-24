@@ -94,11 +94,11 @@
   .char;
   .icon;
   padding: 0;
-  &:hover {
+  &:hover:not(.disabled):not(:disabled) {
     .dropShadow(0.3rem);
     transition: background 0.3s, box-shadow 0.1s;
   }
-  &:active {
+  &:active:hover:not(.disabled):not(:disabled) {
     .dropShadow(0);
   }
 }

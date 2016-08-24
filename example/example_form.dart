@@ -7,6 +7,7 @@ import 'package:angular2/common.dart';
 import 'package:fnx_ui/src/components/modal/fnx_modal.dart';
 import 'package:fnx_ui/src/components/app/fnx_app.dart';
 import 'example_buttons_renderer.dart';
+import 'dart:html';
 
 @Component(
     selector: 'example-form',
@@ -23,5 +24,15 @@ class ExampleForm {
 
   void postRecord() {
     app.toast("And I'm posting your data right now: ${record}", duration: new Duration(milliseconds: 3000));
+  }
+
+  void uploadFile(File data) {
+    if (data == null) {
+      app.toast("Deleted");
+      record['photo'] = null;
+    } else {
+      app.toast("Uloading ${data.name}");
+      record['photo'] = data.name;
+    }
   }
 }

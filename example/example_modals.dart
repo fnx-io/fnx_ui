@@ -36,7 +36,7 @@ class ExampleModals {
         "Lorem ipsum dolor sit confirm, eos error eveniet fuga iste mollitia nisi, omnis porro provident quia tempore.",
         headline: "Confirm please"
 
-    ).then( (_) => showToast("Closed with ${_}", 2000) );
+    ).then( (bool result) => showToast("Closed with ${result}", 2000) );
   }
 
   void openInput() {

@@ -9,6 +9,7 @@ library fnx_ui;
 import 'src/components/app/fnx_app.dart';
 import 'src/components/input/fnx_input.dart';
 import 'src/components/input/fnx_text.dart';
+import 'src/components/input/fnx_file.dart';
 import 'src/components/input/fnx_textarea.dart';
 import 'src/components/select/fnx_select.dart';
 import 'src/components/date/fnx_date.dart';
@@ -20,10 +21,12 @@ import 'src/components/fnx_buttons.dart';
 import 'src/components/layout/fnx_form.dart';
 import 'src/components/input/fnx_check.dart';
 import 'src/components/layout/fnx_panel_small.dart';
+import 'package:fnx_ui/src/components/input/fnx_file.dart';
 
 export 'src/components/app/fnx_app.dart';
 export 'src/components/input/fnx_input.dart';
 export 'src/components/input/fnx_text.dart';
+export 'src/components/input/fnx_file.dart';
 export 'src/components/input/fnx_textarea.dart';
 export 'src/components/select/fnx_select.dart';
 export 'src/components/date/fnx_date.dart';
@@ -44,6 +47,7 @@ const List FNX_UI_COMPONENTS = const [FnxApp,
                                       FnxForm,
                                       FnxCheck,
                                       FnxText,
+                                      FnxFile,
                                       FnxTextarea,
                                       FNX_INPUT_DIRECTIVES,
                                       FNX_SELECT_DIRECTIVES,
