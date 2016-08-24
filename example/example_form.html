@@ -25,6 +25,14 @@
                 <fnx-file [(ngModel)]="record['photo']" (files)="uploadFile($event)"></fnx-file>
             </fnx-input>
 
+            <fnx-input label="Your email" errorMessage="Please provide real email">
+                <fnx-text [(ngModel)]="record['email']" type="email"></fnx-text>
+            </fnx-input>
+
+            <fnx-input label="Your homepage" errorMessage="Address must start with http:// or https://">
+                <fnx-text [(ngModel)]="record['homepage']" type="http"></fnx-text>
+            </fnx-input>
+
         </fnx-panel-small>
 
         <fnx-panel-small class="s12 l6">
@@ -44,8 +52,8 @@
                     <fnx-text [(ngModel)]="record['city']"></fnx-text>
                 </fnx-input>
 
-                <fnx-input label="Zip" class="s4">
-                    <fnx-text [(ngModel)]="record['zip']"></fnx-text>
+                <fnx-input label="Zip" class="s4" errorMessage="Please use exactly 5 digits">
+                    <fnx-text [(ngModel)]="record['zip']" type="number" [min]="10000" [max]="99999"></fnx-text>
                 </fnx-input>
 
             </div>

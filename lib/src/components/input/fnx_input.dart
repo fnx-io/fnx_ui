@@ -60,6 +60,7 @@ abstract class FnxInputComponent extends FnxValidatorComponent implements OnInit
 
   @Input()
   set value(dynamic v) {
+    if (v == "") v = null; // TODO: is it a good idea?
     if (v != this._value) {
       this._value = v;
       this.valueChange.emit(v);
