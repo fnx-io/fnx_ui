@@ -14,6 +14,7 @@ import 'src/components/input/fnx_textarea.dart';
 import 'src/components/select/fnx_select.dart';
 import 'src/components/date/fnx_date.dart';
 import 'src/components/layout/fnx_panel.dart';
+import 'src/components/layout/fnx_alert.dart';
 import 'src/components/layout/fnx_scroll_panel.dart';
 import 'src/components/modal/fnx_modal.dart';
 import 'src/components/fnx_icon.dart';
@@ -31,6 +32,7 @@ export 'src/components/input/fnx_textarea.dart';
 export 'src/components/select/fnx_select.dart';
 export 'src/components/date/fnx_date.dart';
 export 'src/components/layout/fnx_panel.dart';
+export 'src/components/layout/fnx_alert.dart';
 export 'src/components/layout/fnx_scroll_panel.dart';
 export 'src/components/modal/fnx_modal.dart';
 export 'src/components/fnx_icon.dart';
@@ -49,6 +51,7 @@ const List FNX_UI_COMPONENTS = const [FnxApp,
                                       FnxText,
                                       FnxFile,
                                       FnxTextarea,
+                                      FnxAlert,
                                       FNX_INPUT_DIRECTIVES,
                                       FNX_SELECT_DIRECTIVES,
                                       FNX_DATE_DIRECTIVES,

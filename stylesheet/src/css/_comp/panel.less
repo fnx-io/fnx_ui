@@ -21,6 +21,9 @@
 }
 .panel__content {
   padding: @padding;
+  & > fnx-scroll-panel {
+    margin: -@padding;
+  }
 }
 .panel--small {
   .panel;
@@ -39,7 +42,7 @@
       }
     }
   }
-  .panel__content {
+  & > .panel__content {
     transition: max-height 100ms, padding 100ms;
     max-height: 0;
     overflow: auto;
@@ -63,7 +66,7 @@
   }
 }
 .panel--closable--small, .panel--small {
-  .panel__header {
+  & > .panel__header {
     .renderItemIcons();
     background-color: @colorGreySupport;
   }

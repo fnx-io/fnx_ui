@@ -2,6 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular2/core.dart';
+import 'package:fnx_ui/fnx_ui.dart';
 import 'package:logging/logging.dart';
 import 'package:angular2/common.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
@@ -11,18 +12,12 @@ import 'dart:html';
   selector: 'fnx-panel-small',
   templateUrl: 'fnx_panel_small.html'
 )
-class FnxPanelSmall {
-
-  final Logger log = new Logger("FnxPanelSmall");
+class FnxPanelSmall extends FnxPanel implements OnInit {
 
   @Input()
-  String closable;
-
-  bool get isClosable => closable != null;
+  bool closable = false;
 
   @Input()
-  bool open = false;
-
-  String id = ui.uid('panel-');
+  bool open = null;
 
 }

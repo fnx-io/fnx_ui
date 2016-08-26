@@ -32,7 +32,7 @@ class ExampleForm {
       record['photo'] = null;
     } else {
       app.toast("Uloading ${data.name}");
-      record['photo'] = data.name;
+      record['photo'] = "//example.com/${data.name}";
     }
   }
 }

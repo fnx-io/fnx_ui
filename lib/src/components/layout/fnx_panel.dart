@@ -11,18 +11,23 @@ import 'dart:html';
   selector: 'fnx-panel',
   templateUrl: 'fnx_panel.html'
 )
-class FnxPanel {
+class FnxPanel implements OnInit {
 
   final Logger log = new Logger("FnxPanel");
 
   @Input()
-  String closable;
-
-  bool get isClosable => closable != null;
+  bool closable = false;
 
   @Input()
-  bool open = false;
+  bool open = null;
 
   String id = ui.uid('panel-');
 
+  @override
+  ngOnInit() {
+    if (closable == null) closable = false;
+    if (open == null) {
+      open = !closable;
+    }
+  }
 }
