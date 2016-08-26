@@ -1,0 +1,29 @@
+<!--
+
+Hi there fellow developer!
+
+Please note, most of the classes here are pretty vital for this example. Be sure to use:
+
+- fit and flex--column in wrapper
+- flex--grow and flex--shrink in fnx-scroll-panel
+
+-->
+<div class="flex--column fit padding">
+
+    <example-buttons-renderer name="cookbook/cookbook_table"></example-buttons-renderer>
+
+    <p>Please note the fixed footer at the bottom ...</p>
+
+    <fnx-scroll-panel class="flex--grow flex--shrink margin--bottom" (loadMore)="loadMore()">
+        <table>
+            <tr *ngFor="let row of list">
+                <td>{{row["id"]}}</td>
+                <td>{{row["name"]}}</td>
+                <td>{{row["email"]}}</td>
+            </tr>
+        </table>
+    </fnx-scroll-panel>
+
+    <p>Fixed footer here, thank you ... lorem ipsum.</p>
+
+</div>
