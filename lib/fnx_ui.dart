@@ -6,6 +6,7 @@
 /// More dartdocs go here.
 library fnx_ui;
 
+import 'src/components/layout/fnx_tabs.dart';
 import 'src/components/app/fnx_app.dart';
 import 'src/components/input/fnx_input.dart';
 import 'src/components/input/fnx_text.dart';
@@ -22,8 +23,8 @@ import 'src/components/fnx_buttons.dart';
 import 'src/components/layout/fnx_form.dart';
 import 'src/components/input/fnx_check.dart';
 import 'src/components/layout/fnx_panel_small.dart';
-import 'package:fnx_ui/src/components/input/fnx_file.dart';
 
+export 'src/components/layout/fnx_tabs.dart';
 export 'src/components/app/fnx_app.dart';
 export 'src/components/input/fnx_input.dart';
 export 'src/components/input/fnx_text.dart';
@@ -52,6 +53,8 @@ const List FNX_UI_COMPONENTS = const [FnxApp,
                                       FnxFile,
                                       FnxTextarea,
                                       FnxAlert,
+                                      FnxTabs,
+                                      FnxTab,
                                       FNX_INPUT_DIRECTIVES,
                                       FNX_SELECT_DIRECTIVES,
                                       FNX_DATE_DIRECTIVES,
