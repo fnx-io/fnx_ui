@@ -4,12 +4,13 @@ import 'dart:html';
 
 import 'package:angular2/angular2.dart';
 import 'package:angular2/core.dart';
+import 'package:fnx_ui/src/util/async.dart';
 import 'package:logging/logging.dart';
 
 ///
 /// Panel, kterému je potřeba nastavit nějakou výšku a jeho vnitřní obsah je pak skrolovatelný. Pokud user zaskroluje
-/// na konec, vyvolá se událost "loadMore". Události můžou chodit v dosti rychlém sledu, tak je vhodné si přidat nějaký
-/// debounce. Viz. @RestListing
+/// na konec, vyvolá se událost "loadMore". Události můžou chodit v dosti rychlém sledu, tak je tu defaultni debounce 80ms,
+/// ktery lze ovlivnit atributem debounceMs.
 ///
 /// Použití:
 ///
@@ -42,6 +43,9 @@ class FnxScrollPanel implements OnInit {
   @Output()
   EventEmitter loadMore = new EventEmitter();
 
+  @Input()
+  int debounceMs = 80;
+
   ElementRef template;
 
   Element container;
@@ -51,6 +55,8 @@ class FnxScrollPanel implements OnInit {
   static const int _LOAD_THRESHOLD = 100;
 
   FnxScrollPanel(this.template);
+
+  FnxDebouncer emitDebouncer = null;
 
   @override
   ngOnInit() {
@@ -62,16 +68,32 @@ class FnxScrollPanel implements OnInit {
     content.on["DOMNodeInserted"].listen(processScroll);
     content.on["DOMNodeRemoved"].listen(processScroll);
 
-    loadMore.emit(true);
+    if (debounceMs != null && debounceMs > 0) {
+      emitDebouncer = new FnxDebouncer(new Duration(milliseconds: debounceMs), doEmit);
+    }
+
+    processScroll(null);
   }
 
   void processScroll(event) {
-    log.fine("Checking scroll state, should we load more data?");
+    //log.finest("Checking scroll state, should we load more data?");
     int bottom = container.scrollHeight - container.scrollTop;
     if (bottom < container.clientHeight + _LOAD_THRESHOLD) {
-      log.info("Emiting load more event");
-      loadMore.emit(true);
+      debounceEmitLoadMore();
     }
+  }
+
+  void debounceEmitLoadMore() {
+    if (emitDebouncer == null) {
+      doEmit();
+    } else {
+      emitDebouncer.debounce();
+    }
+  }
+
+  void doEmit() {
+    log.fine("Emiting load more event (with $debounceMs ms debounce)");
+    loadMore.emit(true);
   }
 
 }

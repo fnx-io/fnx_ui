@@ -22,8 +22,8 @@ const CUSTOM_INPUT_FILE_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
       (drop)="onDrop($event)">
       {{renderDescription}}
   </span>
-  <a *ngIf="!isEmpty" class="btn icon margin--small--right" (click)="deleteFiles()">delete</a>
-  <span *ngIf="isEmpty" class="btn icon margin--small--right disabled">delete</span>
+  <a *ngIf="!isEmpty" class="input__file__delete btn icon margin--small--right" (click)="deleteFiles()">delete</a>
+  <span *ngIf="isEmpty" class="input__file__delete btn icon margin--small--right disabled">delete</span>
   <span class="input__file__browse" data-suffix="search"
     (focus)="markAsTouched()"
     (click)="markAsTouched()"
@@ -39,7 +39,8 @@ const CUSTOM_INPUT_FILE_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
 ''',
     styles: const [
       ":host { display: block; flex-grow: 1; flex-shrink: 1;}",
-      ".input__file { width: 100%; }"
+      ".input__file { width: 100%; }",
+      ".input__file__delete { z-index: 0 }"
     ],
     providers: const [CUSTOM_INPUT_FILE_VALUE_ACCESSOR]
 )
