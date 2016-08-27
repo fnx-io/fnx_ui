@@ -1,6 +1,7 @@
 // Copyright (c) 2016, <your name>. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
+import 'cookbook/cookbook_3step.dart';
 import 'cookbook/cookbook_dashboard.dart';
 import 'cookbook/cookbook_table.dart';
 import 'package:angular2/core.dart';
@@ -33,7 +34,8 @@ import 'example_form.dart';
 
   const Route(path: "/Cookbook/Preloader", name: "Cookbook-Preloader", component: CookbookPreloader),
   const Route(path: "/Cookbook/Table", name: "Cookbook-Table", component: CookbookTable),
-  const Route(path: "/Cookbook/Dashboard", name: "Cookbook-Dashboard", component: CookbookDashboard)
+  const Route(path: "/Cookbook/Dashboard", name: "Cookbook-Dashboard", component: CookbookDashboard),
+  const Route(path: "/Cookbook/3step", name: "Cookbook-3step", component: Cookbook3Step)
 ])
 class ExampleApp {
 

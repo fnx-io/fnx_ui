@@ -1,0 +1,49 @@
+<!--
+
+Hi there fellow developer!
+
+Please note, most of the classes here are pretty vital for this example. Be sure to use:
+
+- fit and flex--column in wrapper
+- flex--grow and flex--shrink in fnx-scroll-panel
+
+-->
+<example-buttons-renderer name="cookbook/cookbook_3step"></example-buttons-renderer>
+
+<h1 class="margin--big--bottom">Please pick the right value</h1>
+
+<div class="row--gutter">
+
+    <div class="s12 m4 flex--column">
+        <fnx-scroll-panel class="flex--grow flex--shrink">
+            <div class="menu--vertical">
+                <a  *ngFor="let item of step1"
+                    class="item"
+                    [class.selected]="selected1 == item"
+                    [attr.data-suffix]="selected1 == item ? 'chevron_right' : ''"
+                    (click)="loadStep2(item)">{{item}}</a>
+            </div>
+        </fnx-scroll-panel>
+    </div>
+
+    <div class="s12 m4 flex--column">
+        <fnx-scroll-panel class="flex--grow flex--shrink">
+            <div class="menu--vertical">
+                <a  *ngFor="let item of step2"
+                    class="item"
+                    [class.selected]="selected2 == item"
+                    [attr.data-suffix]="selected2 == item ? 'chevron_right' : ''"
+                    (click)="loadStep3(item)">{{item}}</a>
+            </div>
+        </fnx-scroll-panel>
+    </div>
+
+    <div class="s12 m4 flex--column">
+        <fnx-scroll-panel class="flex--grow flex--shrink">
+            <div class="menu--vertical">
+                <a class="item" *ngFor="let item of step3" (click)="finish(item)">{{item}}</a>
+            </div>
+        </fnx-scroll-panel>
+    </div>
+
+</div>
