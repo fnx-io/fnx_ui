@@ -79,11 +79,13 @@ final DateFormat isoFormat = new DateFormat(ISO_FORMAT);
 DateTime parseDate(Object o) {
   if (o is DateTime) return o;
   if (!(o is String)) return null;
+  String str = o as String;
+  bool isUtc = str.contains("Z");
   try {
-    return isoFormat.parse(o);
+    return isoFormat.parse(o, isUtc).toLocal();
   } catch (ex, strace) {
     try {
-      return dateFormat.parse(o);
+      return dateFormat.parse(o, isUtc).toLocal();
     } catch (ex, strace) {
       try {
         return DateTime.parse(o);
