@@ -71,7 +71,7 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
     if (required && value == null) return false;
     if (value == null) return true;
 
-    if (type == "text" || type == "http" || type == "email") {
+    if (type == "text" || type == "http" || type == "email" || type == "password") {
       return hasValidTextImpl();
 
     } else if (type == "number") {
@@ -133,8 +133,9 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
     if (type != "text"
         && type != "number"
         && type != "email"
-        && type != "http") {
-      throw "The only possible types at this moment are 'text', 'number', 'email' and 'http'";
+        && type != "http"
+        && type != "password") {
+      throw "The only possible types at this moment are 'text', 'number', 'email', 'http' and 'password'";
     }
   }
 }
