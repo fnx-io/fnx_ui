@@ -38,7 +38,7 @@ const CUSTOM_INPUT_FILE_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
 </div>
 ''',
     styles: const [
-      ":host { display: block; flex-grow: 1; flex-shrink: 1;}",
+      ":host { display: block; flex-grow: 1; flex-shrink: 1; max-width: 100%}",
       ".input__file { width: 100%; }",
       ".input__file__delete { z-index: 0 }"
     ],

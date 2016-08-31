@@ -46,7 +46,9 @@ article {
   height: 100%;
   overflow: scroll;
   font-family: monospace;
-  white-space: pre;
-  padding: 1rem 0.5rem;
+  @media only screen and (min-width: @widthMobile) {
+    white-space: pre;
+  }
+  padding: @basicWidgetSize @padding;
   font-size: 80%;
 }

@@ -8,7 +8,7 @@ of angular2 components optimized for this particular type of applications.
 
 # It doesn't work on mobile?
 
-Yes it does, and we are trying to keep it this way. But - the emphasis is on desktop. 
+Yes it does, and we are trying to keep it this way. But - the emphasis is on desktop, mouse, keyboard.
 
 # CSS
 

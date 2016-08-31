@@ -48,6 +48,37 @@ body {
     .renderMainPanel();
     .flex--grow;
   }
+
+  &.responsive {
+    @media only screen and (max-width: @widthMobile) {
+      & > aside {
+        position: absolute;
+        right: calc(~"100% - " @padding);
+        top:0;
+        bottom:0;
+        z-index: 1;
+        border-right: 1px solid @colorGreySupport;
+        &:after {
+          .icon;
+          content: "play_arrow";
+          position: absolute;
+          top:0;
+          right: -@padding;
+          background-color: @colorGreySupport;
+          transform: scale(0.8);
+          transform-origin: 0 0;
+        }
+        &:hover {
+          left:0;
+          right: auto;
+          &:after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
 }
 
 

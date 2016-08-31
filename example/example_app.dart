@@ -1,6 +1,7 @@
 // Copyright (c) 2016, <your name>. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
+import 'about.dart';
 import 'cookbook/cookbook_3step.dart';
 import 'cookbook/cookbook_dashboard.dart';
 import 'cookbook/cookbook_table.dart';
@@ -27,7 +28,8 @@ import 'example_form.dart';
 @RouteConfig(const [
   const Route(path: "/Testing", name: "Testing", component: ExampleTesting),
 
-  const Route(path: "/Form", name: "Form", component: ExampleForm, useAsDefault: true),
+  const Route(path: "/Form", name: "Form", component: ExampleForm),
+  const Route(path: "/About", name: "About", component: About, useAsDefault: true),
   const Route(path: "/Panels", name: "Panels", component: ExamplePanels),
   const Route(path: "/Modals", name: "Modals", component: ExampleModals),
   const Route(path: "/Tabs/...", name: "Tabs", component: ExampleTabs),

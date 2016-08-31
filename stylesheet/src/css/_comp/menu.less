@@ -76,6 +76,7 @@
 
 .menu--horizontal {
   .flex--row;
+  flex-wrap: wrap;
   .menu();
 }
 
@@ -146,6 +147,13 @@
         animation: menuTolerance 2s;
       }
     }
+  }
+}
+.menu--vertical .menu--vertical {
+  @media only screen and (max-width: @widthMobile) {
+    position: relative;
+    top: @basicWidgetPadding;
+    left: -@padding;
   }
 }
 .menu--vertical .menu--vertical .menu--vertical {

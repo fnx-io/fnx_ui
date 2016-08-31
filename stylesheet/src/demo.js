@@ -2,6 +2,29 @@ $(function() {
 
     var $b = $("body");
 
+    var touchConfigured = false;
+
+    function touchHandler(e) {
+        // dostali jsme touch udalost
+
+        if (e.touchProcessed != true) {
+            $t = $(e.target);
+            var wasTouchedBefore = $t.hasClass("touched");
+            $(".touched").removeClass("touched");
+            if (!wasTouchedBefore) {
+                $t.addClass("touched");
+                $t.parents().addClass("touched");
+            }
+            e.touchProcessed = true;
+        }
+
+        if (!touchConfigured) {
+            $("body").addClass("touch");
+            touchConfigured = true;
+        }
+    }
+    document.addEventListener("touchstart", touchHandler);
+
     if ($("#utils").length > 0) {
         var properties = ["padding", "padding--small","padding--big","margin","margin--small","margin--big", "border"];
         var modes = ["", "--top", "--bottom", "--left", "--right", "--vertical", "--horizontal"];
