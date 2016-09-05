@@ -22,9 +22,17 @@
     <h3 header>Yes, I'm modal</h3>
     <p header>Ask me anything.</p>
     <p main>I have content and stuff</p>
-    <ul main>
-        <li>lorem</li>
-    </ul>
+    <div main class="row--gutter">
+        <ul class="s5">
+            <li>lorem</li>
+            <li>i psum</li>
+            <li>i kockam</li>
+        </ul>
+        <fnx-panel-small class="s7">
+            <h5 header>Don't mind me</h5>
+            <p>... I'm just a panel. Nobody likes me.</p>
+        </fnx-panel-small>
+    </div>
     <p main>And so on. Thanks. Now choose freely:</p>
     <p footer class="buttonbar">
         <button class="btn bg--theme" (click)="customModalVisible = false">OK</button>
