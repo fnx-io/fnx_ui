@@ -111,7 +111,14 @@ $(function() {
         $("#demoModalExample").hide();
     });
 
-
+    $b.on("click", ".menu--vertical a", function(event) {
+        if (event.target.nodeName == "a") {
+            var $this = $(this);
+            setTimeout(function () {
+                $(".touched").removeClass("touched");
+            }, 100);
+        }
+    });
 
 
 });

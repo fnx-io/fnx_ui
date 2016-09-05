@@ -3,14 +3,19 @@
 <p>This is probably the main reason why we started with the development of fnx_ui - we need to create LOTS of web forms
 and we don't like repetitive tasks. See the dart source code.</p>
 
+<!-- Support for validation, smart submit button at the bottom -->
 <fnx-form (submit)="postRecord()">
 
+    <!-- flex based grid -->
     <div class="row--gutter">
 
+        <!-- left side of the screen -->
         <fnx-panel-small class="s12 l6">
             <h5 header>About you</h5>
 
+            <!-- nice label and error handlign for any fnx component -->
             <fnx-input label="Your name" errorMessage="Please fill out your name">
+                <!-- input type="text" -->
                 <fnx-text [(ngModel)]="record['name']" [required]="true"></fnx-text>
             </fnx-input>
 
@@ -36,6 +41,7 @@ and we don't like repetitive tasks. See the dart source code.</p>
 
         </fnx-panel-small>
 
+        <!-- right side of the screen -->
         <fnx-panel-small class="s12 l6">
             <h5 header>Your address</h5>
 
@@ -67,6 +73,7 @@ and we don't like repetitive tasks. See the dart source code.</p>
         Debug: {{record}}
     </p>
 
+    <!-- smart submit button -->
     <fnx-submit-bar [back]="true"></fnx-submit-bar>
 
 </fnx-form>
