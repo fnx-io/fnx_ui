@@ -54,7 +54,15 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
 
   FnxText(@Optional() FnxForm form, @Optional() FnxInput wrapper) : super(form, wrapper);
 
-  String get htmlType => type == "number" ? "number" : "text";
+  String get htmlType {
+    switch(type) {
+      case 'password':
+      case 'number':
+        return type;
+      default:
+        return 'text';
+    }
+  }
 
   static final RegExp _EMAIL_REGEXP = new RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
 
