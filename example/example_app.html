@@ -2,12 +2,13 @@
     <div class="layout--header">
         <header>
             <nav class="navbar">
+                <button class="hide-on-l btn icon" (click)="layout.toggle()">menu</button>
                 <h1>fnx|ui</h1>
             </nav>
         </header>
         <main>
-            <div class="layout--sidebar">
-                <aside class="flex--column" style="width: 15em">
+            <fnx-layout-sidebar #layout>
+                <div sidebar class="flex--column">
                     <ul class="menu--vertical flex--grow bg--white--d1">
                         <li><a [routerLink]="['About']">About</a></li>
                         <li><a [routerLink]="['Form']">Form</a></li>
@@ -27,11 +28,13 @@
                     <p class="text--center bg--fnx no-margin padding">
                         <a href="https://fnx.io/">fnx.io</a>
                     </p>
-                </aside>
+                </div>
+
                 <main class="border--left padding--big--horizontal padding--vertical">
                     <router-outlet></router-outlet>
                 </main>
-            </div>
+
+            </fnx-layout-sidebar>
         </main>
 
     </div>

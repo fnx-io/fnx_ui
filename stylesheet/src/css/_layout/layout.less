@@ -50,27 +50,23 @@ body {
   }
 
   &.responsive {
-    @media only screen and (max-width: @widthMobile) {
+    @media only screen and (max-width: @widthTablet) {
       & > aside {
         position: absolute;
-        right: calc(~"100% - " @padding);
+        left: 0;
         top: 0;
         bottom: 0;
         z-index: 1;
         border-right: 1px solid @colorGreySupport;
-        &.touched {
-          left: 0;
-          right: auto;
-          &:after {
-            display: none;
-          }
+        transition: transform 0.2s;
+        transform: translateX(-100%);
+        &.open {
+          transform: translateX(0%);
         }
       }
     }
   }
-
 }
-
 
 .layout--header {
   .fit;

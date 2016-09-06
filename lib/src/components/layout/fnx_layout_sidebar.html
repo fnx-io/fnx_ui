@@ -1,0 +1,8 @@
+<div class="layout--sidebar responsive">
+    <aside class="layout__sidebar" [style.width.px]="widthPx" [class.open]="open" [class.shadow]="open">
+        <ng-content select="[sidebar]"></ng-content>
+    </aside>
+    <main class="layout__main">
+        <ng-content></ng-content>
+    </main>
+</div>

@@ -27,7 +27,7 @@ class FnxApp implements OnInit {
 
   // TOASTS
 
-  Future toast(String text, {Duration duration: const Duration(milliseconds: 4000 )}) {
+  void toast(String text, {Duration duration: const Duration(milliseconds: 4000 )}) {
     _ToastContent t = new _ToastContent()
         ..message = text;
     toasts.add(t);
