@@ -23,6 +23,7 @@ const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useEx
   [attr.maxlength]="maxLength"
   [attr.min]="min"
   [attr.max]="max"
+  [attr.autocomplete]="autocompleteAttr"
   (focus)="markAsTouched()"
   (click)="markAsTouched()"
   [class.error]="isTouchedAndInvalid()"
@@ -50,6 +51,9 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
   String type = 'text';
 
   @Input()
+  bool autocomplete = true;
+
+  @Input()
   bool readonly = false;
 
   FnxText(@Optional() FnxForm form, @Optional() FnxInput wrapper) : super(form, wrapper);
@@ -61,6 +65,16 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
         return type;
       default:
         return 'text';
+    }
+  }
+
+  String get autocompleteAttr {
+    if (autocomplete) {
+      return 'on';
+    } else if (type == 'password') { // passwd autocomplete is different from text autocomplete
+      return "new-password";
+    } else {
+      return 'off';
     }
   }
 
