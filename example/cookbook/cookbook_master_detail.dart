@@ -10,33 +10,31 @@ import 'package:fnx_ui/src/components/app/fnx_app.dart';
 import '../example_buttons_renderer.dart';
 
 @Component(
-    selector: 'cookbook-table',
-    templateUrl: 'cookbook_table.html',
+    selector: 'cookbook-master-detail',
+    templateUrl: 'cookbook_master_detail.html',
     directives: const [ExampleButtonsRenderer]
 )
-class CookbookTable {
+class CookbookMasterDetail {
 
-  ExampleApp app;
+  ExampleApp exApp;
+  FnxApp app;
 
-  String search = null;
+  var selected = null;
 
-  CookbookTable(this.app);
+  CookbookMasterDetail(this.exApp, this.app);
 
   ngOnInit() {
     loadMore();
   }
 
-  Iterable get list {
-    if (search == null) return app.list;
-    return app.list.where(containsSearch);
-  }
-
-  bool containsSearch(Map<String,String> row) {
-    return row["name"].contains(search) || row["email"].contains(search);
-  }
+  List get list => exApp.list;
 
   void loadMore() {
-    app.loadMore();
+    exApp.loadMore();
+  }
+
+  void todo() {
+    app.alert("This function is not implemented. Why would be, this is a master-detail example", headline: "This is not a real app");
   }
 
 

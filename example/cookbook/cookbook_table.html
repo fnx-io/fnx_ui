@@ -14,6 +14,16 @@ Please note, most of the classes here are pretty vital for this example. Be sure
 
     <p class="text--red">Please note the fixed footer at the bottom ...</p>
 
+    <fnx-form (submit)="search = fulltext.value">
+        <div class="flex--row margin--vertical">
+            <fnx-text #fulltext class="flex--grow flex--shrink margin--right"></fnx-text>
+            <button class="btn margin--small--right" (click)="search = fulltext.value">Search</button>
+            <button type="reset" class="btn icon" [class.disabled]="search == null" (click)="search = null">cancel</button>
+        </div>
+    </fnx-form>
+
+    <h5 *ngIf="search != null">Searching for '{{search}}':</h5>
+
     <fnx-scroll-panel class="flex--grow flex--shrink margin--bottom" (loadMore)="loadMore()">
         <table>
             <tr *ngFor="let row of list">

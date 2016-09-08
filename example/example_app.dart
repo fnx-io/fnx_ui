@@ -4,6 +4,7 @@
 import 'about.dart';
 import 'cookbook/cookbook_3step.dart';
 import 'cookbook/cookbook_dashboard.dart';
+import 'cookbook/cookbook_master_detail.dart';
 import 'cookbook/cookbook_table.dart';
 import 'package:angular2/core.dart';
 import 'package:logging/logging.dart';
@@ -37,7 +38,8 @@ import 'example_form.dart';
   const Route(path: "/Cookbook/Preloader", name: "Cookbook-Preloader", component: CookbookPreloader),
   const Route(path: "/Cookbook/Table", name: "Cookbook-Table", component: CookbookTable),
   const Route(path: "/Cookbook/Dashboard", name: "Cookbook-Dashboard", component: CookbookDashboard),
-  const Route(path: "/Cookbook/3step", name: "Cookbook-3step", component: Cookbook3Step)
+  const Route(path: "/Cookbook/3step", name: "Cookbook-3step", component: Cookbook3Step),
+const Route(path: "/Cookbook/MasterDetail", name: "Cookbook-MasterDetail", component: CookbookMasterDetail)
 ])
 class ExampleApp {
 
