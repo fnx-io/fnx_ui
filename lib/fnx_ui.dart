@@ -7,6 +7,7 @@
 library fnx_ui;
 
 import 'src/components/layout/fnx_layout_sidebar.dart';
+import 'src/components/layout/fnx_form.dart';
 import 'src/components/layout/fnx_tabs.dart';
 import 'src/components/app/fnx_app.dart';
 import 'src/components/input/fnx_input.dart';
@@ -21,13 +22,13 @@ import 'src/components/layout/fnx_scroll_panel.dart';
 import 'src/components/modal/fnx_modal.dart';
 import 'src/components/fnx_icon.dart';
 import 'src/components/fnx_buttons.dart';
-import 'src/components/layout/fnx_form.dart';
 import 'src/components/input/fnx_check.dart';
 import 'src/components/layout/fnx_panel_small.dart';
 
 export 'src/components/layout/fnx_layout_sidebar.dart';
 export 'src/components/layout/fnx_tabs.dart';
 export 'src/components/app/fnx_app.dart';
+export 'src/components/layout/fnx_form.dart';
 export 'src/components/input/fnx_input.dart';
 export 'src/components/input/fnx_text.dart';
 export 'src/components/input/fnx_file.dart';
@@ -40,7 +41,6 @@ export 'src/components/layout/fnx_scroll_panel.dart';
 export 'src/components/modal/fnx_modal.dart';
 export 'src/components/fnx_icon.dart';
 export 'src/components/fnx_buttons.dart';
-export 'src/components/layout/fnx_form.dart';
 export 'src/components/input/fnx_check.dart';
 export 'src/components/layout/fnx_panel_small.dart';
 
