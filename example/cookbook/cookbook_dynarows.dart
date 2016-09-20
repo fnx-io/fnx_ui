@@ -21,10 +21,6 @@ class CookbookDynarows {
     {"name": "Two"}
   ];
 
-  ExampleApp app;
-
-  CookbookDynarows(this.app);
-
   void addRow() {
     rows.add({});
   }
