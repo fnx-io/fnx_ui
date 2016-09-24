@@ -42,7 +42,8 @@ class ExampleModals {
   void openInput() {
     app.input(
         "Input value between 2 and 4, but not 3",
-        headline: "Lorem ipsum dolor sit input"
+        headline: "Lorem ipsum dolor sit input",
+        prefilledValue: "3"
 
     ).then( (val) => showToast("Value = ${val}", 2000) );
   }

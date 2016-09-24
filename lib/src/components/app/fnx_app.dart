@@ -58,13 +58,14 @@ class FnxApp implements OnInit {
     return _modal(m);
   }
 
-  Future<Object> input(String message, {String headline: "Input value"}) {
+  Future<Object> input(String message, {String headline: "Input value", String prefilledValue: null}) {
     _ModalContent m = new _ModalContent()
       ..headline = headline
       ..message = message
       ..input = "text"
       ..ok="ok"
-      ..cancel="cancel";
+      ..cancel="cancel"
+      ..value=prefilledValue;
     return _modal(m);
   }
 
