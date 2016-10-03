@@ -184,7 +184,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
       var result = options.where((option) {
         return option.label.toLowerCase().contains(filter);
       }).toList();
-      _cachedFilteredOptions = null;
+      _cachedFilteredOptions = result;
       return result;
     } else {
       return options;
@@ -274,11 +274,11 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 }
 
 class FnxOptionValue {
-  final String id = uid('ov_');
+  final String id;
   final String label;
   final String value;
 
-  FnxOptionValue(this.value, this.label);
+  FnxOptionValue(this.id, this.value, this.label);
 
   @override
   bool operator ==(Object other) {
@@ -306,6 +306,8 @@ class FnxOptionValue {
 )
 class FnxOption implements OnInit {
 
+  final String id = uid('ov_');
+
   FnxSelect parent;
 
   @Input()
@@ -316,9 +318,18 @@ class FnxOption implements OnInit {
 
   FnxOption(this.parent);
 
+  bool get visible {
+    List<FnxOptionValue> opts = parent?.filteredOptions;
+    if (opts == null) return false;
+    FnxOptionValue found = opts.firstWhere((FnxOptionValue el) {
+      return el != null && el.id == id;
+    }, orElse: () => null);
+    return found != null;
+  }
+
   @override
   ngOnInit() {
-    parent.options.add(new FnxOptionValue(value, label));
+    parent.options.add(new FnxOptionValue(id, value, label));
   }
 
   void optionSelected(Event event) {
