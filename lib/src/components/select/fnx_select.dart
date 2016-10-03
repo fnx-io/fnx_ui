@@ -57,7 +57,9 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   void toggleDropdown() {
     markAsTouched();
     if (open) {
-      hideOptions();
+      if (!multi) {
+        hideOptions();
+      }
     } else {
       showOptions();
     }
@@ -151,7 +153,6 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
       } else {
         this.value = value;
       }
-      hideOptions();
     }
   }
 
