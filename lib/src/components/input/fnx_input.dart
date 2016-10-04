@@ -24,6 +24,7 @@ class FnxInput extends FnxValidatorComponent {
 
   @Input() String label;
   String _errorMessage;
+  String _defaultErrorMessage;
 
   @Input()
   void set errorMessage(String err) {
@@ -31,12 +32,24 @@ class FnxInput extends FnxValidatorComponent {
   }
 
   String get errorMessage {
-    return _errorMessage == null ? "Error" : _errorMessage;
+    if (_errorMessage != null) {
+      return _errorMessage;
+    } else if (_defaultErrorMessage != null) {
+      return _defaultErrorMessage;
+    } else {
+      return "Error";
+    }
   }
 
   @override
   bool hasValidValue() {
     return true;
+  }
+
+  /// fields can have better default error message
+  /// than the generic "Error" message
+  set setDefaultErrorMessage(String msg) {
+    _defaultErrorMessage = msg;
   }
 
 }

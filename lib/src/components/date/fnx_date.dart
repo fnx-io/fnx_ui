@@ -35,7 +35,11 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
 
   EventEmitter _openDatePicker = new EventEmitter();
 
-  FnxDate(@Optional() FnxInput wrapper, @Optional() FnxForm form): super(form, wrapper);
+  FnxInput _inputWrapper;
+
+  FnxDate(@Optional() FnxInput wrapper, @Optional() FnxForm form): super(form, wrapper) {
+    _inputWrapper = wrapper;
+  }
 
   set focused(bool focused) {
     _focused = focused;
@@ -57,6 +61,31 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
 
   bool validFormattedDate = true;
 
+
+  @override
+  ngOnInit() {
+    super.ngOnInit();
+    setSuggestedErrorMessage(value);
+  }
+
+  void setSuggestedErrorMessage(value) {
+    if (_inputWrapper != null) {
+      _inputWrapper.setDefaultErrorMessage = getSuggestedErrorMessage(value);
+    }
+  }
+
+  String getSuggestedErrorMessage(value) {
+    bool valueEmpty = value == null;
+    if (!valueEmpty && value is String) {
+      valueEmpty = value.isEmpty;
+    }
+    if (required && valueEmpty) {
+      return "Required value, expected format ${applicableFormat.toLowerCase()}";
+    } else {
+      return  "Invalid value, expected format ${applicableFormat.toLowerCase()}";
+    }
+  }
+
   /// called when the input field changes
   /// we try to parse date from it and make errors, if the string is not
   /// in correct date format
@@ -70,16 +99,12 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
     } catch (ex) {
       parsed = null;
       validFormattedDate = false;
-      String format;
-      if (dateTime) {
-        format = date.DATETIME_FORMAT;
-      } else {
-        format = date.DATE_FORMAT;
-      }
-      //errorStateChange.emit("Invalid date, required format ${format.toLowerCase()}");
     }
     value = parsed;
+    setSuggestedErrorMessage(dateStr);
   }
+
+  String get applicableFormat => dateTime ? date.DATETIME_FORMAT: date.DATE_FORMAT;
 
   void datePicked(DateTime picked) {
     if (picked == null) {
@@ -164,7 +189,9 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
 
   @override
   bool hasValidValue() {
-    return validFormattedDate;
+    bool requiredCheck = true;
+    if (required) requiredCheck = value != null;
+    return requiredCheck && validFormattedDate;
   }
 }
 
