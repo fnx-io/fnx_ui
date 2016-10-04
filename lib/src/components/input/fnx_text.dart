@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:angular2/core.dart';
 import 'package:angular2/common.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
@@ -27,6 +28,7 @@ const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useEx
   (focus)="markAsTouched()"
   (click)="markAsTouched()"
   [class.error]="isTouchedAndInvalid()"
+  [attr.step]="decimalsAttr"
 />
 ''',
     providers: const [CUSTOM_INPUT_TEXT_VALUE_ACCESSOR])
@@ -56,6 +58,8 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
   @Input()
   bool readonly = false;
 
+  int _decimals = 0;
+
   FnxText(@Optional() FnxForm form, @Optional() FnxInput wrapper) : super(form, wrapper);
 
   String get htmlType {
@@ -63,6 +67,8 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
       case 'password':
       case 'number':
         return type;
+      case 'decimal':
+        return 'number';
       default:
         return 'text';
     }
@@ -86,6 +92,28 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
     assertType();
   }
 
+  int get decimals {
+    if (type == 'decimal') return _decimals;
+
+    return null;
+  }
+
+  String get decimalsAttr {
+    int dec = decimals;
+    if (dec == null) return null;
+    if (dec == 0) return '1';
+
+    return '0.' + '1'.padLeft(dec, '0');
+  }
+
+  @Input()
+  set decimals(int decimals) {
+    if (decimals == null || decimals < 0 || decimals > 10) {
+      throw "Invalid decimals count for decimal field. Min 0 max 10 decimals.";
+    }
+    _decimals = decimals;
+  }
+
   @override
   bool hasValidValue() {
     assertType();
@@ -98,7 +126,8 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
 
     } else if (type == "number") {
       return hasValidNumberImpl();
-
+    } else if (type == "decimal") {
+      return hasValidNumberImpl() && hasValidDecimals();
     } else {
       throw "This really should not happen: type=${type}";
     }
@@ -109,13 +138,35 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
   ///
   bool hasValidNumberImpl() {
     if (min == null && max == null) return true;
-    num v = (value is num) ? value : num.parse(value, (_) => null);
+    num v = parseNum(value);
 
     if (v == null && value != null && value.toString().length > 0) return false; // not a number
     if (required && v == null) return false;
     if (min != null && v < min) return false;
     if (max != null && v > max) return false;
     return true;
+  }
+
+  bool hasValidDecimals() {
+    num v = parseNum(value);
+    if (v == null) return true;
+
+    if (decimals < 1) {
+      return v.toInt() == v;
+    } else {
+      int fac = pow(10, decimals);
+      int i = (v.abs() * fac).toInt();
+      double d = (v.abs() * fac).toDouble();
+
+      double diff = d - i;
+      double threshold = 1e-8;
+
+      return diff.abs() < threshold;
+    }
+  }
+
+  num parseNum(value) {
+    return (value is num) ? value : num.parse(value, (_) => null);
   }
 
   ///
@@ -156,8 +207,9 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
         && type != "number"
         && type != "email"
         && type != "http"
-        && type != "password") {
-      throw "The only possible types at this moment are 'text', 'number', 'email', 'http' and 'password'";
+        && type != "password"
+        && type != "decimal") {
+      throw "The only possible types at this moment are 'text', 'number', 'decimal', 'email', 'http' and 'password'";
     }
   }
 }

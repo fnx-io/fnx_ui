@@ -91,6 +91,10 @@
             </div>
         </div>
 
+        <fnx-input label="Account balance" errorMessage="Please enter your account balance (max 3 decimals)">
+            <fnx-text [(ngModel)]="user['accountBalance']" type="decimal" [decimals]="3"></fnx-text>
+        </fnx-input>
+
         <fnx-input label="date of birth">
             <fnx-file [(ngModel)]="user['file']"></fnx-file>
         </fnx-input>
