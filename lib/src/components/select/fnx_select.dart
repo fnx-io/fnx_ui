@@ -276,7 +276,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 class FnxOptionValue {
   final String id;
   final String label;
-  final String value;
+  final dynamic value;
 
   FnxOptionValue(this.id, this.value, this.label);
 
