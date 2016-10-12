@@ -7,6 +7,7 @@ import 'cookbook/cookbook_dashboard.dart';
 import 'cookbook/cookbook_dynarows.dart';
 import 'cookbook/cookbook_master_detail.dart';
 import 'cookbook/cookbook_table.dart';
+import 'example_exceptions.dart';
 import 'package:angular2/core.dart';
 import 'package:logging/logging.dart';
 import 'package:angular2/common.dart';
@@ -34,6 +35,7 @@ import 'example_form.dart';
   const Route(path: "/About", name: "About", component: About, useAsDefault: true),
   const Route(path: "/Panels", name: "Panels", component: ExamplePanels),
   const Route(path: "/Modals", name: "Modals", component: ExampleModals),
+  const Route(path: "/Exceptions", name: "Exceptions", component: ExampleExceptions),
   const Route(path: "/Tabs/...", name: "Tabs", component: ExampleTabs),
 
   const Route(path: "/Cookbook/Preloader", name: "Cookbook-Preloader", component: CookbookPreloader),

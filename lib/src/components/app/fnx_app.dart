@@ -2,6 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular2/core.dart';
+import 'package:fnx_ui/errors.dart';
 import 'package:logging/logging.dart';
 import 'package:angular2/common.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
@@ -18,7 +19,17 @@ class FnxApp implements OnInit {
   Map<String, _ModalContent> modalWindows = {};
   List<_ToastContent> toasts = [];
 
-  FnxApp() {
+  ChangeDetectorRef _changeDetector;
+
+  FnxApp(@Optional() ExceptionHandler ex, this._changeDetector) {
+    if (ex == null) {
+      log.warning("There is no exception handler configured");
+    }
+    if (ex is! FnxExceptionHandler) {
+      log.warning("Configured exception handler is not FnxExceptionHandler, fnx_ui won't be able to show nice errors.\nConsider: provide(ExceptionHandler, useValue: new FnxExceptionHandler())");
+    } else {
+      (ex as FnxExceptionHandler).setShowErrorCallback(showError);
+    }
   }
 
   ngOnInit() {
@@ -31,12 +42,26 @@ class FnxApp implements OnInit {
     _ToastContent t = new _ToastContent()
         ..message = text;
     toasts.add(t);
-    new Future.delayed(duration).then((_) => t.hide = true);
+    new Future.delayed(duration).then((_) {
+      t.hide = true;
+      _changeDetector.detectChanges();
+    });
     new Future.delayed(duration + const Duration(seconds: 1)).then((_) {
       if (toasts.firstWhere((_ToastContent t) => t.hide == false, orElse: () => null) == null) {
         toasts.clear();
       }
     });
+    _changeDetector.detectChanges();
+  }
+
+  // Exception handling
+
+  FnxError errorToShow;
+
+  void showError(FnxError error) {
+    log.info("Showing error $error on U I");
+    this.errorToShow = error;
+    _changeDetector.detectChanges();
   }
 
   // MODAL WINDOWS
@@ -73,6 +98,7 @@ class FnxApp implements OnInit {
     Completer c = new Completer();
     mc._completer = c;
     modalWindows[mc.id] = mc;
+    _changeDetector.detectChanges();
     return c.future;
   }
 

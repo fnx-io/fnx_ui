@@ -4,6 +4,7 @@
 import 'dart:html';
 
 import 'package:angular2/platform/browser.dart';
+import 'package:fnx_ui/errors.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:logging/logging.dart';
 import 'example_app.dart';
@@ -39,7 +40,8 @@ main() {
   bootstrap(ExampleApp, [
       ROUTER_PROVIDERS,
       [ExampleButtonsRenderer],
-      provide(LocationStrategy, useClass: HashLocationStrategy)
+      provide(LocationStrategy, useClass: HashLocationStrategy),
+      provide(ExceptionHandler, useValue: new FnxExceptionHandler())
   ]);
 
 }

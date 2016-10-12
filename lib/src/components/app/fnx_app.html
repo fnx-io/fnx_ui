@@ -29,3 +29,16 @@
         <p>{{toast.message}}</p>
     </div>
 </div>
+
+<!-- Uncaught exceptions -->
+<fnx-modal (close)="errorToShow = null" *ngIf="errorToShow != null">
+    <h3 header>{{errorToShow.headline}}</h3>
+    <p main>{{errorToShow.message}}</p>
+    <ul main *ngIf="errorToShow.details.isNotEmpty">
+        <li *ngFor="let e of errorToShow.details">{{e}}</li>
+    </ul>
+    <p footer class="buttonbar">
+        <span class="spacer"></span>
+        <button class="btn bg--important" (click)="errorToShow = null">OK</button>
+    </p>
+</fnx-modal>
