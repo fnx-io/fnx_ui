@@ -45,11 +45,13 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 
   Node container;
 
+  StreamSubscription<double> _positionSubscription;
+
   FnxSelect(ElementRef el, @Optional() FnxInput wrapper, @Optional() FnxForm form): super(form, wrapper) {
     if (el != null) {
       container = el.nativeElement;
-      elementPositionStream(container).listen((double position) {
-         openUp = position > 0.5;
+      _positionSubscription = verticalElementPositionStream(container).listen((double position) {
+         openUp = position > 0.6;
       });
     }
   }
@@ -74,10 +76,11 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
     open = true;
   }
 
-  get showFilter {
+  bool get showFilter {
     if (neverShowFilter) return false;
     if (alwaysShowFilter) return true;
     if (options != null && options.length > 10) return true;
+    return false;
   }
 
   @Input()
@@ -256,6 +259,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   ngOnDestroy() {
     super.ngOnDestroy();
     cancelSubscription(globalClicks);
+    cancelSubscription(_positionSubscription);
     globalClicks = null;
     cancelSubscription(navigationActions);
     navigationActions = null;
