@@ -77,11 +77,11 @@ abstract class FnxInputComponent extends FnxValidatorComponent implements OnInit
     if (v != this._value) {
       this._value = v;
       this.valueChange.emit(v);
-      notifyChange();
+      notifyNgModel();
     }
   }
 
-  void notifyChange() {
+  void notifyNgModel() {
     if (onChange != null) {
       onChange(_value);
     }
@@ -103,7 +103,7 @@ abstract class FnxInputComponent extends FnxValidatorComponent implements OnInit
   @override
   void writeValue(obj) {
     _value = obj;
-    notifyChange();
+    // notifyNgModel(); //we shouldn't do this, no need to notify NgModel about changes it already knows
   }
 
   String get componentId {

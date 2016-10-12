@@ -84,6 +84,10 @@ class FnxDatePicker implements OnInit, OnDestroy {
   int get hour => _value.hour;
   int get minute => _value.minute;
 
+  String get minuteToShow {
+    if (minute < 10) return "0$minute";
+    return "$minute";
+  }
   int get hourToShow {
     if (hourFormat24) {
       return hour;
