@@ -7,7 +7,8 @@ import 'dart:html';
 
 @Component(
     selector: 'fnx-date-picker',
-    templateUrl: 'fnx_date_picker.html'
+    templateUrl: 'fnx_date_picker.html',
+    preserveWhitespace: false
 )
 class FnxDatePicker implements OnInit, OnDestroy {
 

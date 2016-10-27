@@ -17,7 +17,8 @@ const CUSTOM_INPUT_TEXTAREA_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
 (click)="markAsTouched()"></textarea>
 ''',
     styles: const ["textarea { height: 100%}"],
-    providers: const [CUSTOM_INPUT_TEXTAREA_VALUE_ACCESSOR]
+    providers: const [CUSTOM_INPUT_TEXTAREA_VALUE_ACCESSOR],
+    preserveWhitespace: false
 )
 class FnxTextarea extends FnxText implements OnInit, OnDestroy {
 

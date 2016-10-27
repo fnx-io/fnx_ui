@@ -14,7 +14,9 @@ import 'package:fnx_ui/src/validator.dart';
     {{ label }}
   </button>
 </div>
-''')
+''',
+  preserveWhitespace: false
+)
 class FnxSubmitBar {
 
   @Input() String label = "Submit";

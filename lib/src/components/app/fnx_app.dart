@@ -10,7 +10,8 @@ import 'dart:async';
 
 @Component(
   selector: 'fnx-app',
-  templateUrl: 'fnx_app.html'
+  templateUrl: 'fnx_app.html',
+  preserveWhitespace: false
 )
 class FnxApp implements OnInit {
 

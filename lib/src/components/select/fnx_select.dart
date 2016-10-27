@@ -13,7 +13,8 @@ const CUSTOM_SELECT_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
 @Component(
     selector: 'fnx-select',
     templateUrl: 'fnx_select.html',
-    providers: const [CUSTOM_SELECT_VALUE_ACCESSOR]
+    providers: const [CUSTOM_SELECT_VALUE_ACCESSOR],
+    preserveWhitespace: false
 )
 class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
 
@@ -306,7 +307,8 @@ class FnxOptionValue {
 
 @Component(
     selector: 'fnx-option',
-    templateUrl: 'fnx_option.html'
+    templateUrl: 'fnx_option.html',
+    preserveWhitespace: false
 )
 class FnxOption implements OnInit {
 

@@ -31,7 +31,9 @@ const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useEx
   [attr.step]="decimalsAttr"
 />
 ''',
-    providers: const [CUSTOM_INPUT_TEXT_VALUE_ACCESSOR])
+    providers: const [CUSTOM_INPUT_TEXT_VALUE_ACCESSOR],
+    preserveWhitespace: false
+)
 class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
 
   @Input()

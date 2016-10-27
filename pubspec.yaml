@@ -1,6 +1,6 @@
 name: fnx_ui
 description: Desktop first components from Angular2 Dart.
-version: 0.0.5
+version: 0.0.6
 author: Tomucha <tomucha@gmail.com>
 #homepage: https://www.example.com
 
@@ -8,7 +8,7 @@ environment:
   sdk: '>=1.0.0 <2.0.0'
 
 dependencies:
-  angular2: '2.0.0-beta.22'
+  angular2: '>=2.0.0 < 2.1.0'
   logging: "^0.11.3"
   browser: any
 
@@ -23,6 +23,5 @@ transformers:
     - 'package:angular2/common.dart#FORM_DIRECTIVES'
     - 'package:angular2/router.dart#ROUTER_DIRECTIVES'
     - 'package:fnx_ui/fnx_ui.dart#FNX_UI_COMPONENTS'
-    - 'package:admin/all.dart#FNX_COMPONENTS'
     platform_pipes:
     - 'package:angular2/common.dart#COMMON_PIPES'

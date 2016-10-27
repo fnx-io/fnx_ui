@@ -4,7 +4,9 @@ import 'package:angular2/angular2.dart';
     selector: 'fnx-icon',
     template: r'''
 <i class="icon">{{ type }}</i>
-''')
+''',
+    preserveWhitespace: false
+)
 class FnxIcon {
 
   @Input() String type;

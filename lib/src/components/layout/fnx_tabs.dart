@@ -19,7 +19,8 @@ import 'dart:html';
     <div class="relative">
         <ng-content></ng-content>
     </div>
-  '''
+  ''',
+  preserveWhitespace: false
 )
 class FnxTabs implements OnInit {
 
@@ -60,7 +61,8 @@ class FnxTabs implements OnInit {
     <ng-content></ng-content>
   </div>
   ''',
-  styles: const [":host { display: block; } "]
+  styles: const [":host { display: block; } "],
+  preserveWhitespace: false
 )
 class FnxTab implements OnInit, OnDestroy {
 

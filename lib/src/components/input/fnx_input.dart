@@ -17,7 +17,8 @@ import 'package:fnx_ui/fnx_ui.dart';
   <ng-content></ng-content>
   <label *ngIf="isTouchedAndInvalid()" class="error" [attr.for]="componentId">{{ errorMessage }}</label>
 </div>
-''')
+''',
+    preserveWhitespace: false)
 class FnxInput extends FnxValidatorComponent {
 
   final String componentId = ui.uid('comp_');

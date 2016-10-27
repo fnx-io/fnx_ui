@@ -11,7 +11,8 @@ import 'dart:async';
 
 @Component(
   selector: 'fnx-modal',
-  templateUrl: 'fnx_modal.html'
+  templateUrl: 'fnx_modal.html',
+  preserveWhitespace: false
 )
 class FnxModal implements OnInit, OnDestroy {
 

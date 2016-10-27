@@ -13,7 +13,8 @@ import 'dart:html';
   styles: const [
     ":host .layout__sidebar > *:only-child { position: absolute; top:0; left:0; bottom:0; right:0; }",
     ":host .layout__main > *:only-child { position: absolute; top:0; left:0; bottom:0; right:0; }"
-  ]
+  ],
+  preserveWhitespace: false
 )
 class FnxLayoutSidebar implements OnInit {
 

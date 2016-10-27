@@ -9,7 +9,8 @@ import 'dart:html';
 
 @Component(
   selector: 'fnx-panel',
-  templateUrl: 'fnx_panel.html'
+  templateUrl: 'fnx_panel.html',
+  preserveWhitespace: false
 )
 class FnxPanel implements OnInit {
 

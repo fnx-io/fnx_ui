@@ -42,7 +42,8 @@ const CUSTOM_INPUT_FILE_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
       ".input__file { width: 100%; }",
       ".input__file__delete { z-index: 0 }"
     ],
-    providers: const [CUSTOM_INPUT_FILE_VALUE_ACCESSOR]
+    providers: const [CUSTOM_INPUT_FILE_VALUE_ACCESSOR],
+    preserveWhitespace: false
 )
 class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
 

@@ -35,7 +35,9 @@ import 'package:logging/logging.dart';
 <div class="scroll-panel-content">
   <ng-content></ng-content>
 </div>
-''')
+''',
+    preserveWhitespace: false
+)
 class FnxScrollPanel implements OnInit {
 
   final Logger log = new Logger("FnxScrollPanel");

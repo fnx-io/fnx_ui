@@ -15,7 +15,9 @@ const CUSTOM_DATE_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
 @Component(
     selector: 'fnx-date',
     providers: const [CUSTOM_DATE_VALUE_ACCESSOR],
-    templateUrl: 'fnx_date.html')
+    templateUrl: 'fnx_date.html',
+    preserveWhitespace: false
+)
 class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
 
   /// This is the model for the DOM input field, user types here the date and

@@ -9,7 +9,8 @@ import 'dart:html';
 
 @Component(
   selector: 'fnx-alert',
-  templateUrl: 'fnx_alert.html'
+  templateUrl: 'fnx_alert.html',
+  preserveWhitespace: false
 )
 class FnxAlert implements OnInit {
 

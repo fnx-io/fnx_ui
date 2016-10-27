@@ -23,8 +23,8 @@ const CUSTOM_INPUT_CHECK_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
     >{{label}}</label>
 </span>
 ''',
-    providers: const [CUSTOM_INPUT_CHECK_VALUE_ACCESSOR]
-
+    providers: const [CUSTOM_INPUT_CHECK_VALUE_ACCESSOR],
+    preserveWhitespace: false
 )
 class FnxCheck extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
 
