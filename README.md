@@ -52,7 +52,7 @@ Your pubspec.yaml should look much like this:
     name: your_app
     ...
     dependencies:
-      angular2: 2.0.0-beta.19
+      angular2: any <-- for now, let fnx|ui decide which one, we are trying to keep up with Angular2
       browser: ^0.10.0
       dart_to_js_script_rewriter: ^1.0.1
       fnx_ui:
