@@ -1,4 +1,5 @@
-"Desktop first" pure Dart angular2 components for creating Material design friendly web applications.
+"Desktop first" pure Dart angular2 components for a rapid development of "form-heavy" apps - CMS,
+backend administrations, ... 
 
 # Desktop first? What kind of heresy is that?
  
@@ -23,12 +24,72 @@ Then see stylesheet/_dist/.
          
 # Angular2 components
          
-         cd ng2
-         pub serve example
+         cd showcase
+         pub get
+         pub serve
          
 Then see http://localhost:8080/
 
-# P.S.
+# Documentation
 
-Work in progress.
-         
+Unfortunately there is not much documentation yet :-)
+
+Please see examples:
+
+http://demo.fnx.io/fnx_ui/css/ - set of CSS examples. A lot of things in fnx|ui is solved in CSS only.
+You can see the source code of each example by clicking on the red \[<>] button.
+
+http://demo.fnx.io/fnx_ui/ng2/ - set of Angular 2 Examples with source codes.
+
+Some documentation (mostly CSS part) is appearing here:
+ 
+https://github.com/fnx-io/fnx_ui/wiki  
+
+# Getting started
+
+Your pubspec.yaml should look much like this:
+
+    name: your_app
+    ...
+    dependencies:
+      angular2: 2.0.0-beta.19
+      browser: ^0.10.0
+      dart_to_js_script_rewriter: ^1.0.1
+      fnx_ui:
+        git:
+          url: https://github.com/fnx-io/fnx_ui
+          ref: master
+       ...
+    transformers:
+    - angular2:
+        platform_directives:
+        - 'package:angular2/common.dart#COMMON_DIRECTIVES'
+        - 'package:angular2/common.dart#CORE_DIRECTIVES'
+        - 'package:angular2/router.dart#ROUTER_DIRECTIVES'
+        - 'package:fnx_ui/fnx_ui.dart#FNX_UI_COMPONENTS'
+        entry_points: web/main.dart
+    - dart_to_js_script_rewriter
+
+In your entry script (main.dart), initialize app as usual, but provide custom exception handler:
+
+      bootstrap(YourRootComponent, [
+          ROUTER_PROVIDERS,
+          provide(LocationStrategy, useClass: HashLocationStrategy),
+          provide(ExceptionHandler, useValue: new FnxExceptionHandler()) // !!!
+      ]);
+
+In the template of your root component, please use <fnx-app> element and wrap whole application into it. This element
+takes care of notifications, alerts, error handling.
+
+    <fnx-app>
+        <div class="layout--header">
+            <header>
+                ...
+            </header>
+            <main>
+                ...
+                
+And that's about it. Please dive into examples, find what you like
+or what you want to use and see the source code.
+
+Any feedback is more then welcome: tomucha@gmail.com
