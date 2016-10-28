@@ -89,6 +89,15 @@ takes care of notifications, alerts, error handling.
             <main>
                 ...
                 
+Also don't forget to link stylesheets:
+                
+    <!-- Main CSS -->            
+    <link rel="stylesheet" href="packages/fnx_ui/css/fnx_ui.css">
+    
+    <!-- Theme and accent of your choice -->
+    <link rel="stylesheet" href="packages/fnx_ui/css/theme_grey.css">
+    <link rel="stylesheet" href="packages/fnx_ui/css/theme_brown.css">
+                
 And that's about it. Please dive into examples, find what you like
 or what you want to use and see the source code.
 
