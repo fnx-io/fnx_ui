@@ -37,13 +37,18 @@ Unfortunately there is not much documentation yet :-)
 Please see examples:
 
 http://demo.fnx.io/fnx_ui/css/ - set of CSS examples. A lot of things in fnx|ui is solved in CSS only.
-You can see the source code of each example by clicking on the red \[<>] button.
+You can see the source code of each example by clicking on the red \[<>] button. We use this demo
+to create CSS, so it's occasionally animated using jQuery. Final components are pure Dart, though. 
 
 http://demo.fnx.io/fnx_ui/ng2/ - set of Angular 2 Examples with source codes.
 
 Some documentation (mostly CSS part) is appearing here:
  
 https://github.com/fnx-io/fnx_ui/wiki  
+
+If you are interested, complex example project is: https://github.com/fnx-io/rpg_manager
+  
+Which you can see online: http://demo.fnx.io/rpg-manager/
 
 # Getting started
 
