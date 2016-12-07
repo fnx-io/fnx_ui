@@ -1,5 +1,6 @@
 // Copyright (c) 2016, Tomucha, Majzlik ruce pryc!
 
+import 'dart:async';
 import 'dart:html';
 
 import 'package:angular2/angular2.dart';
@@ -56,9 +57,9 @@ class FnxScrollPanel implements OnInit {
 
   static const int _LOAD_THRESHOLD = 100;
 
-  FnxScrollPanel(this.template);
+  StreamController<int> _debounceCtrl;
 
-  FnxDebouncer emitDebouncer = null;
+  FnxScrollPanel(this.template);
 
   @override
   ngOnInit() {
@@ -70,9 +71,14 @@ class FnxScrollPanel implements OnInit {
     content.on["DOMNodeInserted"].listen(processScroll);
     content.on["DOMNodeRemoved"].listen(processScroll);
 
+    _debounceCtrl = new StreamController<int>();
+    Stream<int> eventStream = _debounceCtrl.stream;
+    // debounce the stream of load events if we have some duration
     if (debounceMs != null && debounceMs > 0) {
-      emitDebouncer = new FnxDebouncer(new Duration(milliseconds: debounceMs), doEmit);
+      FnxStreamDebouncer<int> debouncer = new FnxStreamDebouncer<int>(new Duration(milliseconds: debounceMs));
+      eventStream = eventStream.transform(debouncer);
     }
+    eventStream.listen((_) => doEmit());
 
     processScroll(null);
   }
@@ -86,11 +92,7 @@ class FnxScrollPanel implements OnInit {
   }
 
   void debounceEmitLoadMore() {
-    if (emitDebouncer == null) {
-      doEmit();
-    } else {
-      emitDebouncer.debounce();
-    }
+    _debounceCtrl.add(new DateTime.now().millisecondsSinceEpoch);
   }
 
   void doEmit() {
