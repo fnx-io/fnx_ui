@@ -22,6 +22,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   @Input() bool neverShowFilter = false;
   @Input() bool alwaysShowFilter = false;
   @Input() bool readonly = false;
+  @Input() bool nullable = false;
 
   List<FnxOptionValue> options = [];
 
@@ -154,7 +155,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
       toggleSelectedOption(value);
     } else {
       if (this.value == value) {
-        // _value = null; asi ne
+        if (nullable) this.value = null;
       } else {
         this.value = value;
       }
