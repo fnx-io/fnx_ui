@@ -10,7 +10,7 @@
     <span class="clickable">{{ renderSelectedOptions() }}</span>
     <div class="select__dropdown" [hidden]="!open || readonly">
         <div *ngIf="showFilter" class="input" (click)="$event.stopPropagation()">
-            <input id="{{componentId}}-search" type="text" placeholder="Search..." [(ngModel)]="filter">
+            <input id="{{componentId}}-search" type="text" [placeholder]="filterPlaceholder" [(ngModel)]="filter">
             <label attr.for="{{componentId}}-search" class="icon">search</label>
         </div>
         <div class="select__items">

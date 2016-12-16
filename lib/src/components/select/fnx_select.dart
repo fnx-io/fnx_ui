@@ -28,6 +28,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   @Input() String selectionEmptyLabel = "Select...";
   @Input() String optionsEmptyLabel = "No options to choose from";
   @Input() String optionsEmptySearchLabel = "No option matches your search";
+  @Input() String filterPlaceholder = "Search...";
 
   bool open = false;
   bool openUp = false;
