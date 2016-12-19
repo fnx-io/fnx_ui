@@ -188,7 +188,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
     if (_filter != null) {
       if (_cachedFilteredOptions != null ) return _cachedFilteredOptions;
       var result = options.where((option) {
-        return option.label.toLowerCase().contains(filter);
+        return option.label != null && option.label.toLowerCase().contains(filter);
       }).toList();
       _cachedFilteredOptions = result;
       return result;
