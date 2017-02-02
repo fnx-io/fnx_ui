@@ -75,6 +75,11 @@ class FnxTab implements OnInit, OnDestroy {
 
   FnxTab(this.parent);
 
+  void selectTab() {
+    if (parent == null) return;
+    parent.selectedId = id;
+  }
+
   @override
   ngOnInit() {
     if (title == null) throw "Title attribute is mandatory!";
