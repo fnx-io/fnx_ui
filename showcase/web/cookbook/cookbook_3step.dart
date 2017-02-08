@@ -44,7 +44,7 @@ class Cookbook3Step {
   }
 
   void finish(String item) {
-    app.confirm("Please confirm that '$item' is the right value").then((_) { if (_) app.toast("Great!"); });
+    app.confirm("Please confirm that '$item' is the right value").then((bool result) { if (result) app.toast("Great!"); });
   }
 
 }

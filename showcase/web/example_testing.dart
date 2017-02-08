@@ -31,7 +31,7 @@ class ExampleTesting implements OnInit {
     if (c.value == null) return null;
     List selected;
     if (c.value is List) {
-      selected = c.value;
+      selected = c.value as List;
     } else {
       selected = [c.value];
     }
@@ -43,6 +43,7 @@ class ExampleTesting implements OnInit {
 
   ControlGroup userForm;
   Control userName = new Control('', Validators.maxLength(5));
+  // ignore: argument_type_not_assignable
   Control mood = new Control('', moodValidator);
 
   List<Map> moods = [{'id': 'happy', 'name': 'Being 😀'}, {'id': 'sad', 'name': 'Being 😑'}, {'id': 'troll', 'name': 'Be not ⚠️'}];

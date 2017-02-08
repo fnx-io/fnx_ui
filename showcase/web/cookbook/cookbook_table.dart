@@ -31,8 +31,8 @@ class CookbookTable {
     return app.list.where(containsSearch);
   }
 
-  bool containsSearch(Map<String,String> row) {
-    return row["name"].contains(search) || row["email"].contains(search);
+  bool containsSearch(Map<String,Object> row) {
+    return row["name"].toString().contains(search) || row["email"].toString().contains(search);
   }
 
   void loadMore() {

@@ -42,7 +42,7 @@ class ExampleExceptions {
   ///
   /// Custom exception handler.
   ///
-  FnxError processIntException(exception, stacktrace) {
+  FnxError processIntException(Object exception, StackTrace stacktrace) {
     int code = (exception as int);
     return new FnxError("This is error code ${code}",
         headline: "Custom headline",
@@ -52,10 +52,10 @@ class ExampleExceptions {
   ///
   /// Custom exception handler.
   ///
-  FnxError processCustomException(exception, stacktrace) {
+  FnxError processCustomException(Object exception, StackTrace stacktrace) {
     app.toast("Custom exception, yay!");
+    return null;
   }
-
 
 }
 

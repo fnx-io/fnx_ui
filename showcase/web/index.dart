@@ -13,7 +13,7 @@ import 'package:angular2/core.dart';
 import 'package:angular2/platform/common.dart';
 import 'example_buttons_renderer.dart';
 
-main() {
+void main() {
 
   // logování
   Logger.root.level = Level.ALL;

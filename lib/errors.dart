@@ -7,6 +7,14 @@ library errors;
 /// is an "Iterable" which will be rendered as <ul><li>element.toString()</li> for each
 /// element.
 ///
+/// You are supposed to register your own custom exception handlers like this:
+///
+///     (handler as FnxExceptionHandler).registerErrorProcessor(CustomException, processCustomException);
+///
+/// Where processCustomException receives exception of the specified type and can return either FnxError to show something to
+/// the user, or process exception completely and return null.
+///
+///
 
 import 'package:angular2/core.dart';
 import 'package:angular2/src/facade/base_wrapped_exception.dart';
@@ -131,6 +139,7 @@ class FnxExceptionHandler implements ExceptionHandler {
   FnxError _processError(originalException, originalStack) {
     for (Type type in _errorBuilders.keys) {
       if (originalException.runtimeType == type) {
+        if (_errorBuilders[type] == null) return null;
         return _errorBuilders[type](originalException, originalStack);
       }
     }
