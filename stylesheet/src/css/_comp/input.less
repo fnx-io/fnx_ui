@@ -58,7 +58,7 @@ input, .select, textarea, .input__file__dropzone {
   &.error {
     border-color: @colorRed;
   }
-  &[readonly]:not([readonly=false]) {
+  &[readonly]:not([readonly=false]), &.readonly {
     border-color: fadeout(color(@colorBorderDefault), 70%);
     box-shadow: none;
   }

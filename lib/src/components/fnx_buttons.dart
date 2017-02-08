@@ -9,6 +9,7 @@ import 'package:fnx_ui/src/validator.dart';
     template: r'''
 <div class="buttonbar">
   <a *ngIf="back" href="#" class="btn " (click)="goBack($event)" data-prefix="arrow_back">{{ goBackLabel }}</a>
+  <ng-content></ng-content>
   <span class="spacer"></span>
   <button type="submit" class="btn bg--important" attr.data-prefix="{{formValid ? 'check' : 'not_interested'}}">
     {{ label }}

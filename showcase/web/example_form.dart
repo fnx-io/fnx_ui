@@ -20,6 +20,8 @@ class ExampleForm {
 
   FnxApp app;
 
+  bool readonly = false;
+
   ExampleForm(this.app);
 
   void postRecord() {

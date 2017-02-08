@@ -16,11 +16,11 @@ and we don't like repetitive tasks. See the dart source code.</p>
             <!-- nice label and error handlign for any fnx component -->
             <fnx-input label="Your name" errorMessage="Please fill out your name">
                 <!-- input type="text" -->
-                <fnx-text [(ngModel)]="record['name']" [required]="true"></fnx-text>
+                <fnx-text [(ngModel)]="record['name']" [required]="true" [readonly]="readonly"></fnx-text>
             </fnx-input>
 
             <fnx-input label="Your occupation" errorMessage="Please tell us what you do">
-                <fnx-select [(ngModel)]="record['occupation']" [required]="true">
+                <fnx-select [(ngModel)]="record['occupation']" [required]="true" [readonly]="readonly">
                     <fnx-option value="hardly_working" label="hardly working"></fnx-option>
                     <fnx-option value="summer_holidays" label="summer holidays"></fnx-option>
                     <fnx-option value="whatever" label="whatever"></fnx-option>
@@ -28,15 +28,15 @@ and we don't like repetitive tasks. See the dart source code.</p>
             </fnx-input>
 
             <fnx-input label="Your photo">
-                <fnx-file [(ngModel)]="record['photo']" (files)="uploadFile($event)"></fnx-file>
+                <fnx-file [(ngModel)]="record['photo']" (files)="uploadFile($event)" [readonly]="readonly"></fnx-file>
             </fnx-input>
 
             <fnx-input label="Your email" errorMessage="Please provide a real email">
-                <fnx-text [(ngModel)]="record['email']" type="email"></fnx-text>
+                <fnx-text [(ngModel)]="record['email']" type="email" [readonly]="readonly"></fnx-text>
             </fnx-input>
 
             <fnx-input label="Your homepage" errorMessage="Address must start with http:// or https://">
-                <fnx-text [(ngModel)]="record['homepage']" type="http"></fnx-text>
+                <fnx-text [(ngModel)]="record['homepage']" type="http" [readonly]="readonly"></fnx-text>
             </fnx-input>
 
         </fnx-panel-small>
@@ -48,19 +48,19 @@ and we don't like repetitive tasks. See the dart source code.</p>
             <div class="row--gutter--horizontal">
 
                 <fnx-input label="Street" class="s9">
-                    <fnx-text [(ngModel)]="record['street']"></fnx-text>
+                    <fnx-text [(ngModel)]="record['street']" [readonly]="readonly"></fnx-text>
                 </fnx-input>
 
                 <fnx-input label="Number" class="s3">
-                    <fnx-text [(ngModel)]="record['number']"></fnx-text>
+                    <fnx-text [(ngModel)]="record['number']" [readonly]="readonly"></fnx-text>
                 </fnx-input>
 
                 <fnx-input label="City" class="s12">
-                    <fnx-text [(ngModel)]="record['city']"></fnx-text>
+                    <fnx-text [(ngModel)]="record['city']" [readonly]="readonly"></fnx-text>
                 </fnx-input>
 
                 <fnx-input label="Zip" class="s4" errorMessage="Please use exactly 5 digits">
-                    <fnx-text [(ngModel)]="record['zip']" type="number" [min]="10000" [max]="99999"></fnx-text>
+                    <fnx-text [(ngModel)]="record['zip']" type="number" [min]="10000" [max]="99999" [readonly]="readonly"></fnx-text>
                 </fnx-input>
 
             </div>
@@ -74,6 +74,6 @@ and we don't like repetitive tasks. See the dart source code.</p>
     </p>
 
     <!-- smart submit button -->
-    <fnx-submit-bar [back]="true"></fnx-submit-bar>
+    <fnx-submit-bar [back]="true"><button class="btn" type="button" (click)="readonly = !readonly">{{readonly ? 'Make editable': 'Make readonly'}}</button> </fnx-submit-bar>
 
 </fnx-form>
