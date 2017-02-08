@@ -13,7 +13,7 @@ Please note, most of the classes here are pretty vital for this example. Be sure
     <example-buttons-renderer name="cookbook/cookbook_master_detail"></example-buttons-renderer>
 
     <fnx-scroll-panel class="flex--grow flex--shrink margin--bottom table--stripes table--lines" (loadMore)="loadMore()">
-        <table>
+        <table class="table--active">
             <tr *ngFor="let row of list"
                 style="cursor: pointer"
                 [class.selected]="row == selected"
