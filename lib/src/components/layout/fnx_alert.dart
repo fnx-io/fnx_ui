@@ -7,6 +7,11 @@ import 'package:angular2/common.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'dart:html';
 
+///
+/// Creates standardized (very visible) box with warning, error, important notice etc.
+///
+/// Demo: [http://demo.fnx.io/fnx_ui/ng2/#/Panels](http://demo.fnx.io/fnx_ui/ng2/#/Panels)
+///
 @Component(
   selector: 'fnx-alert',
   templateUrl: 'fnx_alert.html',
@@ -18,15 +23,27 @@ class FnxAlert implements OnInit {
 
   static const POSSIBLE_TYPES = const ["info","warning","error","success"];
 
+  ///
+  /// Input. One of possible predefined types:"info","warning","error","success"
+  ///
   @Input()
   String type;
 
+  ///
+  /// Input. Displays small cross icon which hides the message.
+  ///
   @Input()
   bool closable = true;
 
+  ///
+  /// Input. Use to customize colors: bg--red text--yellow.
+  ///
   @Input()
   String colorClass;
 
+  ///
+  /// Input. Use to customize icon. Possible values are icon names from material design icons.
+  ///
   @Input()
   String icon;
 

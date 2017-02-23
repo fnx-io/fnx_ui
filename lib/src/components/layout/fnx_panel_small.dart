@@ -8,6 +8,15 @@ import 'package:angular2/common.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'dart:html';
 
+///
+/// Nice "fieldset", smaller and less contrasting then fnx-panel.. It should have a header, defined with attribute 'header'. Like this:
+///
+///      <fnx-panel-small>
+///          <h1 header>Address</h1>
+///          <p header>Please fill your address</p>
+///          <div>Panel content ...</div>
+///      </fnx-panel-small>
+///
 @Component(
   selector: 'fnx-panel-small',
   templateUrl: 'fnx_panel_small.html',
@@ -15,6 +24,9 @@ import 'dart:html';
 )
 class FnxPanelSmall extends FnxPanel implements OnInit {
 
+  ///
+  /// Input. Can by collapsed or expanded by user. Default = false = always open.
+  ///
   @Input()
   bool closable = false;
 

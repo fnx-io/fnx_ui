@@ -8,6 +8,12 @@ import 'package:angular2/common.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'dart:async';
 
+///
+/// Provides usefull methods for toast, simple 'alert' style dialogs, manages exceptions.
+/// Wrap your whole app into this component and inject it into your components.
+///
+/// Demo: [http://demo.fnx.io/fnx_ui/ng2/#/Modals](http://demo.fnx.io/fnx_ui/ng2/#/Modals)
+///
 @Component(
   selector: 'fnx-app',
   templateUrl: 'fnx_app.html',
@@ -38,7 +44,9 @@ class FnxApp implements OnInit {
   }
 
   // TOASTS
-
+  ///
+  /// Shows simple 'flash message': 'User created', 'Record deleted', etc.
+  ///
   void toast(String text, {Duration duration: const Duration(milliseconds: 4000 )}) {
     _ToastContent t = new _ToastContent()
         ..message = text;
@@ -66,7 +74,9 @@ class FnxApp implements OnInit {
   }
 
   // MODAL WINDOWS
-
+  ///
+  /// Plain old window.alert style dialog. Nonblocking.
+  ///
   Future alert(String message, {String headline: "Message"}) {
     _ModalContent m = new _ModalContent()
       ..headline = headline
@@ -75,6 +85,9 @@ class FnxApp implements OnInit {
     return _modal(m);
   }
 
+  ///
+  /// Plain old window.confirm style dialog. Nonblocking.
+  ///
   Future<bool> confirm(String message, {String headline: "Confirm"}) {
     _ModalContent m = new _ModalContent()
       ..headline = headline
@@ -84,6 +97,9 @@ class FnxApp implements OnInit {
     return _modal(m);
   }
 
+  ///
+  /// Plain old window.input style dialog. Nonblocking.
+  ///
   Future<Object> input(String message, {String headline: "Input value", String prefilledValue: null}) {
     _ModalContent m = new _ModalContent()
       ..headline = headline

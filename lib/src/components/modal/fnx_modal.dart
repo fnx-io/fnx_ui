@@ -9,6 +9,19 @@ import 'dart:html';
 import 'package:fnx_ui/src/util/html.dart';
 import 'dart:async';
 
+///
+/// Basic empty modal window. Show it with *ngIf="something". Window emits
+/// (close) event, use it to set something=false.
+///
+/// Window content is ".layout--header", which you can fill using attributes: header, main, footer. Like this:
+///
+///      <fnx-modal *ngIf="showMyModal" (close)="showMyModal = false">
+///          <h1 header>Window header</h1>
+///          <p main>Window content</p>
+///          <p footer>Window footer</p>
+///      </fnx-modal>
+///
+///
 @Component(
   selector: 'fnx-modal',
   templateUrl: 'fnx_modal.html',
@@ -20,6 +33,9 @@ class FnxModal implements OnInit, OnDestroy {
 
   String id = ui.uid('modal-');
 
+  ///
+  /// Output. Catch it and hide this window, user clicked the "close" icon.
+  ///
   @Output()
   EventEmitter<bool> close = new EventEmitter<bool>();
 

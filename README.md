@@ -107,3 +107,29 @@ And that's about it. Please dive into examples, find what you like
 or what you want to use and see the source code.
 
 Any feedback is more then welcome: tomucha@gmail.com
+
+# Components
+
+| component | meaning of life | doc | demo |
+| --------- | --------------- | --- | ---- |
+| `<fnx-alert>` | big message | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxAlert-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Panels) |
+| `<fnx-app>` | app wrapper | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxApp-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Modals) |
+| `<fnx-form>` | form wrapper | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxForm-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Form) |
+| `<fnx-image-crop>` | allows user to crop image | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxImageCrop-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Cookbook/Crop) |
+| `<fnx-layout-sidebar>` | responsive left-side menu and content | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxLayoutSidebar-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/About) |
+| `<fnx-modal>` | modal window | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxModal-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Modals) |
+| `<fnx-panel>` |  nice collapsible fieldset | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxPanel-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Panels) |
+| `<fnx-panel-small>` | nice collapsible fieldset, smaller | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxPanelSmall-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Panels) |
+| `<fnx-scroll-panel>` | scrollable panel for lazy loading | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxScrollPanel-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Cookbook/Table) |
+| `<fnx-submit-bar>` | buttons for fnx-form | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxSubmitBar-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Form) |
+| `<fnx-tabs>` | tabs holder | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxTabs-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Tabs/Tab1) |
+| `<fnx-tab>` | one tab | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxTab-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Tabs/Tab1) |
+| `<fnx-input>` | input wrapper, handles field validation and label | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxInput-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Form) |
+| `<fnx-text>` | input - text | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxText-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Form) |
+| `<fnx-textarea>` | input - textarea | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxTextarea-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Form) |
+| `<fnx-check>` | input - checkbox | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxCheck-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Testing) |
+| `<fnx-date>` | input - date picker | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxDate-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Testing) |
+| `<fnx-file>` | input - file | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxFile-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Form) |
+| `<fnx-select>` | input - select | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxSelect-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Form) |
+| `<fnx-option>` | one option of a select | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxOption-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Form) |
+

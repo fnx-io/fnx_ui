@@ -9,19 +9,20 @@ import 'package:fnx_ui/src/util/async.dart';
 import 'package:logging/logging.dart';
 
 ///
-/// Panel, kterému je potřeba nastavit nějakou výšku a jeho vnitřní obsah je pak skrolovatelný. Pokud user zaskroluje
-/// na konec, vyvolá se událost "loadMore". Události můžou chodit v dosti rychlém sledu, tak je tu defaultni debounce 80ms,
-/// ktery lze ovlivnit atributem debounceMs.
+/// Srollable panel which emits (loadMore) event whenever the user scrolls to the bottom of current content.
+/// Make sure the panel has some height, either set it to some value (style="height: 20em") or place the panel
+/// into `<div class="flex--column">`. Etc.
 ///
-/// Použití:
+/// (loadMore) events might be emmited very frequently. Use debounceMs attribute to set 'debounce'. '200' might be a reasonable value, default is 80.
 ///
-///     <fnx-scroll-panel style="height: 100%;" (loadMore)="listing.loadNextPage()">
-///         <table class="bordered striped">
-///             <tr *ngFor="#e of listing.list">
-///              ...
-///             </tr>
-///         </table>
-///         ...
+///
+///       <fnx-scroll-panel (loadMore)="listing.loadNextPage()">
+///           <table class="table--border">
+///               <tr *ngFor="let e of listing.list">
+///                ...
+///               </tr>
+///           </table>
+///           ...
 ///
 @Component(
     selector: 'fnx-scroll-panel',
@@ -46,6 +47,9 @@ class FnxScrollPanel implements OnInit {
   @Output()
   EventEmitter loadMore = new EventEmitter();
 
+  ///
+  /// Input. Debounce of (loadMore) events in ms.
+  ///
   @Input()
   int debounceMs = 80;
 
