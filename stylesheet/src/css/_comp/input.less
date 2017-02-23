@@ -29,7 +29,7 @@
     flex-grow: 1;
     flex-shrink: 1;
   }
-  & > input, & > .select, & > textarea {
+  & > input, & > .select, & > textarea, & > .input--component {
     width: 1px;
   }
 
@@ -47,7 +47,7 @@ label {
   }
 }
 
-input, .select, textarea, .input__file__dropzone {
+input, .select, textarea, .input__file__dropzone, .input--component {
   .item--border;
   min-height: @basicWidgetSize;
   .fs-m;
@@ -68,7 +68,7 @@ input, .select, textarea, .input__file__dropzone {
   }
 }
 
-input, textarea, .input__file__dropzone {
+input, textarea, .input__file__dropzone, .input--component {
   box-shadow: inset 1px 2px 2px rgba(0,0,0,0.1); // maybe?
   padding-right: @paddingSmall;
 }

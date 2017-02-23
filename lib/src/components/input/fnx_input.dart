@@ -55,6 +55,9 @@ class FnxInput extends FnxValidatorComponent {
 
 }
 
+///
+/// Ads support for custom validation and ngModel.
+///
 abstract class FnxInputComponent extends FnxValidatorComponent implements OnInit, ControlValueAccessor {
 
   FnxInput _wrapper;

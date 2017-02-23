@@ -106,7 +106,20 @@
         </fnx-input>
         -->
 
+        <fnx-input label="Wysiwyg poor">
+            <fnx-wysiwyg-poor [(ngModel)]="user['wysiwyg_poor']"></fnx-wysiwyg-poor>
+        </fnx-input>
+
+        <fnx-input label="Wysiwyg poor - readonly">
+            <fnx-wysiwyg-poor [(ngModel)]="user['wysiwyg_poor']" [readonly]="true"></fnx-wysiwyg-poor>
+        </fnx-input>
+
+
         <fnx-submit-bar [back]="true"></fnx-submit-bar>
+
+
+
+
 
     </fnx-form>
 
