@@ -20,6 +20,7 @@ import 'dart:html';
 @Component(
   selector: 'fnx-panel-small',
   templateUrl: 'fnx_panel_small.html',
+  styles: const [":host {display: block;}"],
   preserveWhitespace: false
 )
 class FnxPanelSmall extends FnxPanel implements OnInit {

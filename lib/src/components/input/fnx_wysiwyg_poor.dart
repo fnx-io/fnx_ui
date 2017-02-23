@@ -32,7 +32,7 @@ const CUSTOM_INPUT_WYSIWYG_POOR_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCES
 ''',
     styles: const [
       ":host { display: block; height: 10em; }",
-      ":host .wysiwyg--wrapper {height: 100%}",
+      ":host .wysiwyg--wrapper { height: 100% }",
       ":host .input--component { overflow-y: scroll; }",
       ":host .input--component a {text-decoration: underline;}",
       ":host .input--component div {margin-top: 0.6em;}",
@@ -98,7 +98,7 @@ class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, 
     Selection sel = window.getSelection();
     if (sel.rangeCount > 0) {
       List<Range> ranges = [];
-      for (var i = 0, len = sel.rangeCount; i < len; ++i) {
+      for (var i = 0; i < sel.rangeCount; ++i) {
         ranges.add(sel.getRangeAt(i));
       }
       return ranges;
@@ -107,7 +107,9 @@ class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, 
 
   void restoreSelection(List<Range> savedSel) {
     Selection sel = window.getSelection();
-    sel.removeAllRanges();
+    if (sel.rangeCount > 0) {
+      sel.removeAllRanges();
+    }
     for (var i = 0, len = savedSel.length; i < len; ++i) {
       sel.addRange(savedSel[i]);
     }
