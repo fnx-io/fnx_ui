@@ -125,11 +125,11 @@ Any feedback is more then welcome: tomucha@gmail.com
 | `<fnx-tabs>` | tabs holder | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxTabs-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Tabs/Tab1) |
 | `<fnx-tab>` | one tab | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxTab-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Tabs/Tab1) |
 | `<fnx-input>` | input wrapper, handles field validation and label | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxInput-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Form) |
-| `<fnx-text>` | input - text | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxText-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Form) |
-| `<fnx-textarea>` | input - textarea | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxTextarea-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Form) |
-| `<fnx-check>` | input - checkbox | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxCheck-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Testing) |
-| `<fnx-date>` | input - date picker | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxDate-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Testing) |
+| `<fnx-text>` | input - text (ngModel compat.)| [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxText-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Form) |
+| `<fnx-textarea>` | input - textarea (ngModel compat.) | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxTextarea-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Form) |
+| `<fnx-check>` | input - checkbox (ngModel compat.) | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxCheck-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Testing) |
+| `<fnx-date>` | input - date picker (ngModel compat.) | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxDate-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Testing) |
 | `<fnx-file>` | input - file | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxFile-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Form) |
-| `<fnx-select>` | input - select | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxSelect-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Form) |
+| `<fnx-select>` | input - select (ngModel compat.)| [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxSelect-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Form) |
 | `<fnx-option>` | one option of a select | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxOption-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Form) |
 
