@@ -20,7 +20,7 @@ bool hasError(NgControl ctrl) {
 /// returns true if target can be found in potentialParent's DOM subtree
 bool isParentNodeOf(Node target, Node potentialParent) {
   var root = document;
-  while (target != root) {
+  while (target != root && target != null) {
     if (target == potentialParent) return true;
     target = target.parentNode;
   }

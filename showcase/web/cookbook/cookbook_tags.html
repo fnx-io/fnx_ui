@@ -1,0 +1,35 @@
+<!--
+
+Hi there fellow developer!
+
+Please note, most of the css classes here are pretty vital for this example. Be sure to use:
+
+- fit and flex--column in wrapper
+- flex--grow and flex--shrink in fnx-scroll-panel
+
+-->
+<div class="flex--column fit padding">
+
+    <example-buttons-renderer name="cookbook/cookbook_tags"></example-buttons-renderer>
+
+    <fnx-form>
+
+        <fnx-input label="Tags and labels">
+            <div>
+                <p class="no-margin" *ngIf="usedTags.isNotEmpty">
+                    <span class="tag margin--small--bottom margin--small--right" *ngFor="let tag of usedTags">{{tag}} <a (click)="usedTags.remove(tag)" class="mi">clear</a></span>
+                </p>
+                <fnx-select [(ngModel)]="usedTags"
+                            [allwaysShowFilter]="true"
+                            [multi]="true"
+                            [valueDescriptionRenderer]="renderTagSelectDescription">
+                    <fnx-option [label]="item" [value]="item" *ngFor="let item of allTags"></fnx-option>
+                </fnx-select>
+            </div>
+
+        </fnx-input>
+
+
+    </fnx-form>
+
+</div>

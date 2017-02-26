@@ -7,6 +7,9 @@ import 'package:fnx_ui/src/util/async.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 
+
+typedef String ValueDescriptionRenderer();
+
 const CUSTOM_SELECT_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
                                                       useExisting: FnxSelect,
                                                       multi: true);
@@ -23,6 +26,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   @Input() bool alwaysShowFilter = false;
   @Input() bool readonly = false;
   @Input() bool nullable = false;
+  @Input() ValueDescriptionRenderer valueDescriptionRenderer;
 
   List<FnxOptionValue> options = [];
 
@@ -120,7 +124,20 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 
   /// returns label constructed from all selected option labels joined by ','
   /// in the order they were defined in the options collection
-  String renderSelectedOptions () {
+  ///
+  /// Pluggable using valueDescriptionRenderer attribute.
+  ///
+  /// See [ValueDescriptionRenderer].
+  ///
+  String renderValueDescription() {
+    if (valueDescriptionRenderer == null) {
+      return _renderValueDescription();
+    } else {
+      return valueDescriptionRenderer();
+    }
+  }
+
+  String _renderValueDescription() {
     List<FnxOptionValue> allSelected;
     if (value == null) {
       allSelected = [];

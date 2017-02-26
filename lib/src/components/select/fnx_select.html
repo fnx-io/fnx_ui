@@ -7,7 +7,7 @@
      [class.open]="open"
      [class.error]="isTouchedAndInvalid()">
 
-    <span class="clickable">{{ renderSelectedOptions() }}</span>
+    <span class="clickable">{{ renderValueDescription() }}</span>
     <div class="select__dropdown" [hidden]="!open || readonly">
         <div *ngIf="showFilter" class="input" (click)="$event.stopPropagation()">
             <input id="{{componentId}}-search" type="text" [placeholder]="filterPlaceholder" [(ngModel)]="filter">
