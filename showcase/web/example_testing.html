@@ -107,14 +107,14 @@
         -->
 
         <fnx-input label="Wysiwyg poor">
-            <fnx-wysiwyg-poor [(ngModel)]="user['wysiwyg_poor']"></fnx-wysiwyg-poor>
+            <fnx-wysiwyg-rich [(ngModel)]="user['wysiwyg_poor']" [imagePicker]="dumbImagePicker"></fnx-wysiwyg-rich>
         </fnx-input>
 
-        <fnx-input label="Wysiwyg poor - readonly">
-            <fnx-wysiwyg-poor [(ngModel)]="user['wysiwyg_poor']" [readonly]="true"></fnx-wysiwyg-poor>
+        <fnx-input label="Wysiwyg poor 2">
+            <fnx-wysiwyg-rich [(ngModel)]="user['wysiwyg_poor']" heightEm="25" maxWidthEm="25"></fnx-wysiwyg-rich>
         </fnx-input>
 
-
+        
         <fnx-submit-bar [back]="true"></fnx-submit-bar>
 
 

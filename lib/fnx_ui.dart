@@ -6,6 +6,7 @@
 /// More dartdocs go here.
 library fnx_ui;
 
+import 'src/components/input/fnx_wysiwyg_rich.dart';
 import 'src/components/input/fnx_wysiwyg_poor.dart';
 import 'src/components/layout/fnx_layout_sidebar.dart';
 import 'src/components/layout/fnx_form.dart';
@@ -27,6 +28,7 @@ import 'src/components/input/fnx_check.dart';
 import 'src/components/layout/fnx_panel_small.dart';
 import 'src/components/image/fnx_image_crop.dart';
 
+export 'src/components/input/fnx_wysiwyg_rich.dart';
 export 'src/components/input/fnx_wysiwyg_poor.dart';
 export 'src/components/layout/fnx_layout_sidebar.dart';
 export 'src/components/layout/fnx_tabs.dart';
@@ -64,6 +66,7 @@ const List FNX_UI_COMPONENTS = const [FnxApp,
                                       FnxTab,
                                       FnxImageCrop,
                                       FnxWysiwygPoor,
+                                      FnxWysiwygRich,
                                       FNX_INPUT_DIRECTIVES,
                                       FNX_SELECT_DIRECTIVES,
                                       FNX_DATE_DIRECTIVES,

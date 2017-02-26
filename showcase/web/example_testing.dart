@@ -1,7 +1,9 @@
 // Copyright (c) 2016, <your name>. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
+import 'dart:async';
 import 'package:angular2/core.dart';
+import 'package:fnx_ui/fnx_ui.dart';
 import 'package:logging/logging.dart';
 import 'package:angular2/common.dart';
 import 'package:fnx_ui/src/components/modal/fnx_modal.dart';
@@ -18,6 +20,8 @@ class ExampleTesting implements OnInit {
   FnxApp app;
 
   final Logger log = new Logger("FnxApp");
+
+  PickImageUrl dumbImagePicker;
 
   Map user = {
     'name': 'Ferda',
@@ -50,6 +54,8 @@ class ExampleTesting implements OnInit {
 
   ExampleTesting(this.app, FormBuilder fb) {
     this.userForm = fb.group({"name": userName, 'mood': mood});
+
+    this.dumbImagePicker = () => (app.input("Image url please") as Future<String>);
   }
 
   ngOnInit() {
