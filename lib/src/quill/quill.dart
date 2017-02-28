@@ -1,5 +1,5 @@
 @JS()
-library Downloads.index.d.ts.txt;
+library quill;
 
 import "package:js/js.dart";
 import "package:func/func.dart";

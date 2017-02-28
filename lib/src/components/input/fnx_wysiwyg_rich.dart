@@ -10,6 +10,9 @@ import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:angular2/src/common/forms/directives/validators.dart';
 import 'package:fnx_ui/src/validator.dart';
 
+
+const EMPTY_STRING_VALUE = "<p><br></p>";
+
 const CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
     useExisting: FnxWysiwygRich,
     multi: true);
@@ -54,7 +57,7 @@ const CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCES
       ":host .input--component { padding: 0;}",
       ":host .input--component a {text-decoration: underline;}",
       ":host .ql-container.ql-snow {border:0;}",
-      ":host .ql-toolbar.ql-snow {border:0; padding: 0}"
+      ":host .ql-toolbar.ql-snow {display: none;}"
     ],
     providers: const [CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR],
     preserveWhitespace: false
@@ -93,19 +96,20 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
     QuillOptionsStatic options = new QuillOptionsStatic();
     options.theme = "snow";
     options.readOnly = false;
-    options.modules = new JsObject.jsify({
-      "toolbar": toolbar.nativeElement
-    });
     quill = new Quill(wysiwyg.nativeElement, options);
+    quill.on("change", allowInterop(edited));
   }
 
   bool hasValidValue() {
-    if (required && value == null) return false;
+    print(value);
+    if (required && (value == null || (value as String).isEmpty) || value == "<p><br></p>") return false;
     return true;
   }
 
   void edited() {
-    value = editor.innerHtml;
+    String html = editor.innerHtml;
+    value = (html == EMPTY_STRING_VALUE ? null : html);
+    markAsTouched();
   }
 
   void writeValue(obj) {
@@ -176,7 +180,7 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
   }
 
   Future<bool> focus() async {
-    await new Future.delayed(new Duration(milliseconds: 50));
+    await new Future.delayed(new Duration(milliseconds: 20));
     editor.focus();
     return true;
   }

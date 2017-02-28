@@ -57,21 +57,23 @@ class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, 
   @override
   ngOnInit() {
     super.ngOnInit();
-    (editor.nativeElement as Element).innerHtml = value == null ? "" : value;
+    (editor.nativeElement as Element).innerHtml = value == null ? EMPTY_STRING_VALUE : value;
   }
 
   bool hasValidValue() {
-    if (required && value == null) return false;
+    if (required && (value == null || (value as String).isEmpty) || value == EMPTY_STRING_VALUE) return false;
     return true;
   }
 
   void edited() {
-    value = (editor.nativeElement as Element).innerHtml;
+    String html = editor.nativeElement.innerHtml;
+    value = (html == EMPTY_STRING_VALUE ? null : html);
+    markAsTouched();
   }
 
   void writeValue(obj) {
     super.writeValue(obj);
-    (editor.nativeElement as Element).innerHtml = value == null ? "" : value;
+    (editor.nativeElement as Element).innerHtml = (value == null || value.isEmpty) ? EMPTY_STRING_VALUE : value;
   }
 
   void doCommand(String command) {

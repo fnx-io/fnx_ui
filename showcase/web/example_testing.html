@@ -106,15 +106,18 @@
         </fnx-input>
         -->
 
+        <fnx-input label="Wysiwyg rich">
+            <fnx-wysiwyg-rich [(ngModel)]="user['wysiwyg_poor']" [imagePicker]="dumbImagePicker" [required]="true"></fnx-wysiwyg-rich>
+        </fnx-input>
+
+        <fnx-input label="Wysiwyg rich 2">
+            <fnx-wysiwyg-rich [(ngModel)]="user['wysiwyg_poor']" heightEm="15" maxWidthEm="25"></fnx-wysiwyg-rich>
+        </fnx-input>
+
         <fnx-input label="Wysiwyg poor">
-            <fnx-wysiwyg-rich [(ngModel)]="user['wysiwyg_poor']" [imagePicker]="dumbImagePicker"></fnx-wysiwyg-rich>
+            <fnx-wysiwyg-poor [(ngModel)]="user['wysiwyg_poor']" [required]="true"></fnx-wysiwyg-poor>
         </fnx-input>
 
-        <fnx-input label="Wysiwyg poor 2">
-            <fnx-wysiwyg-rich [(ngModel)]="user['wysiwyg_poor']" heightEm="25" maxWidthEm="25"></fnx-wysiwyg-rich>
-        </fnx-input>
-
-        
         <fnx-submit-bar [back]="true"></fnx-submit-bar>
 
 
