@@ -118,7 +118,12 @@ class FnxExceptionHandler implements ExceptionHandler {
     log.severe(messages.join("\n"));
 
     // ... and then try to display exception on UI
-    FnxError errorToShow = _processError(originalException, originalStack);
+    FnxError errorToShow = null;
+    if (originalException != null) {
+      errorToShow = _processError(originalException, originalStack);
+    } else {
+      errorToShow = _processError(exception, stackTrace);
+    }
 
     if (errorToShow == null) {
       log.fine("Error to show is null, hopefully it got processed some other way");
