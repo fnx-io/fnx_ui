@@ -1,6 +1,7 @@
 // Copyright (c) 2016, <your name>. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
+import 'cookbook/cookbook_select_or_create.dart';
 import 'cookbook/cookbook_tags.dart';
 import 'package:angular2/core.dart';
 import 'package:logging/logging.dart';
@@ -49,7 +50,8 @@ import 'dart:math';
   const Route(path: "/Cookbook/3step", name: "Cookbook-3step", component: Cookbook3Step),
   const Route(path: "/Cookbook/Dynarows", name: "Cookbook-Dynarows", component: CookbookDynarows),
   const Route(path: "/Cookbook/MasterDetail", name: "Cookbook-MasterDetail", component: CookbookMasterDetail),
-  const Route(path: "/Cookbook/Tags", name: "Cookbook-Tags", component: CookbookTags)
+  const Route(path: "/Cookbook/Tags", name: "Cookbook-Tags", component: CookbookTags),
+  const Route(path: "/Cookbook/SelectOrCreate", name: "Cookbook-SelectOrCreate", component: CookbookSelectOrCreate)
 
 ])
 class ExampleApp {

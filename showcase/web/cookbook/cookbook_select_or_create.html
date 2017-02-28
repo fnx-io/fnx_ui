@@ -1,0 +1,76 @@
+<div>
+
+    <example-buttons-renderer name="cookbook/cookbook_select_or_create"></example-buttons-renderer>
+
+    <div  style="max-width: 60em">
+        <fnx-alert type="info">Complex example of special form which allows user to select multiple
+            objects from collection and also create new if needed.</fnx-alert>
+
+        <fnx-panel-small>
+            <h5 header>Select project members</h5>
+
+            <!-- Rows -->
+            <div *ngFor="let r of members; let c = index; let last = last" class="flex--row margin--small--bottom">
+
+                <span class="char margin--small--right">#{{c+1}}</span>
+
+                <fnx-select [(ngModel)]="members[c]" class="flex--grow flex--shrink margin--small--right" selectionEmptyLabel="Choose a member of your team ...">
+                    <fnx-option *ngFor="let pm of possibleMembers"
+                                [value]="pm['id']" label="{{pm['name'] + ', ' + pm['occupation'] + ', ' + pm['phone']}}"></fnx-option>
+                </fnx-select>
+
+                <div class="s3 margin--small--right" *ngIf="last" >
+                    <button class="btn" (click)="openCreateModal = true">create new person</button>
+                </div>
+
+                <span class="s1 text--right">
+                <button class="btn icon" (click)="removeMember(c)">remove</button>
+            </span>
+
+            </div>
+
+            <!-- Add more button -->
+            <div class="text--right">
+                Add next member:
+                <button class="btn icon bg--accent margin--small--left" (click)="addMember()">add</button>
+            </div>
+
+        </fnx-panel-small>
+
+        <p class="padding f-monospace">
+            Debug: {{members}}
+        </p>
+
+
+        <fnx-form (submit)="createNewPerson()">
+            <fnx-modal *ngIf="openCreateModal" (close)="openCreateModal = false">
+                <h3 header>Create new member</h3>
+                <div main>
+
+                    <fnx-input label="Name" errorMessage="Mandatory value">
+                        <fnx-text [(ngModel)]="newMember['name']" [required]="true"></fnx-text>
+                    </fnx-input>
+
+                    <fnx-input label="Occupation" errorMessage="Mandatory value">
+                        <fnx-text [(ngModel)]="newMember['occupation']" [required]="true"></fnx-text>
+                    </fnx-input>
+
+                    <fnx-input label="Phone" errorMessage="Mandatory value">
+                        <fnx-text [(ngModel)]="newMember['phone']" [required]="true"></fnx-text>
+                    </fnx-input>
+
+
+                    <p class="padding f-monospace">
+                        Debug: {{newMember}}
+                    </p>
+
+                </div>
+                <fnx-submit-bar footer>
+                    <button class="btn" (click)="openCreateModal = false">close</button>
+                </fnx-submit-bar>
+            </fnx-modal>
+        </fnx-form>
+
+    </div>
+
+</div>
