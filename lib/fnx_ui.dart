@@ -6,6 +6,7 @@
 /// More dartdocs go here.
 library fnx_ui;
 
+import 'package:intl/intl.dart';
 import 'src/components/input/fnx_wysiwyg_rich.dart';
 import 'src/components/input/fnx_wysiwyg_poor.dart';
 import 'src/components/layout/fnx_layout_sidebar.dart';

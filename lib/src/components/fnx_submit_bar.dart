@@ -1,4 +1,5 @@
 import 'package:angular2/angular2.dart';
+import 'package:fnx_ui/src/util/global_messages.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'dart:html';
 import 'package:fnx_ui/fnx_ui.dart';
@@ -37,7 +38,7 @@ class FnxSubmitBar {
   ///
   /// Input - use it to change label on submit button.
   ///
-  @Input() String label = "Submit";
+  @Input() String label = GlobalMessages.formSubmitLabelMessage();
 
   ///
   /// Input - use it to change label on back button.

@@ -12,9 +12,11 @@ dependencies:
   logging: "^0.11.3"
   browser: any
   func: any
+  intl: any
 
 dev_dependencies:
   test: '>=0.12.0 <0.13.0'
+  intl_translation: any
 
 transformers:
 - angular2:
