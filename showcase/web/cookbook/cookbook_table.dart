@@ -20,6 +20,11 @@ class CookbookTable {
 
   String search = null;
 
+  bool bordersOn = false;
+  bool linesOn = false;
+  bool stripesOn = false;
+  bool activeOn = false;
+
   CookbookTable(this.app);
 
   ngOnInit() {

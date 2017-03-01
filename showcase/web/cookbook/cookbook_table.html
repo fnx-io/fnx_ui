@@ -12,6 +12,21 @@ Please note, most of the css classes here are pretty vital for this example. Be 
 
     <example-buttons-renderer name="cookbook/cookbook_table"></example-buttons-renderer>
 
+    <div class="row--gutter">
+        <fnx-input class="s12 m6 l3">
+            <fnx-check label="table--borders" [(ngModel)]="bordersOn"></fnx-check>
+        </fnx-input>
+        <fnx-input class="s12 m6 l3">
+            <fnx-check label="table--lines" [(ngModel)]="linesOn"></fnx-check>
+        </fnx-input>
+        <fnx-input class="s12 m6 l3">
+            <fnx-check label="table--stripes" [(ngModel)]="stripesOn"></fnx-check>
+        </fnx-input>
+        <fnx-input class="s12 m6 l3">
+            <fnx-check label="table--active" [(ngModel)]="activeOn"></fnx-check>
+        </fnx-input>
+    </div>
+
     <p class="text--red">Please note the fixed footer at the bottom ...</p>
 
     <fnx-form (submit)="search = fulltext.value">
@@ -25,7 +40,7 @@ Please note, most of the css classes here are pretty vital for this example. Be 
     <h5 *ngIf="search != null">Searching for '{{search}}':</h5>
 
     <fnx-scroll-panel class="flex--grow flex--shrink margin--bottom" (loadMore)="loadMore()">
-        <table>
+        <table [class.table--borders]="bordersOn" [class.table--lines]="linesOn" [class.table--stripes]="stripesOn" [class.table--active]="activeOn">
             <tr *ngFor="let row of list">
                 <td>{{row["id"]}}</td>
                 <td>{{row["name"]}}</td>
