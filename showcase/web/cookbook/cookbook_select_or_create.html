@@ -16,7 +16,7 @@
                 <span class="char margin--small--right">#{{c+1}}</span>
 
                 <p class="item flex--grow flex--shrink margin--small--right">
-                    {{possibleMembersById[r]['name'] + ', ' + possibleMembersById[r]['occupation'] + ', ' + possibleMembersById[r]['phone']}}
+                    {{personsById[r]['name'] + ', ' + personsById[r]['occupation'] + ', ' + personsById[r]['phone']}}
                 </p>
 
                 <span class="text--right">
@@ -30,8 +30,11 @@
 
                 <span class="char margin--right"></span>
 
-                <fnx-select (ngModelChange)="addMember($event)" [ngModel]="selectedMember" class="flex--grow flex--shrink" selectionEmptyLabel="Choose a member of your team ...">
-                    <fnx-option *ngFor="let pm of possibleMembers"
+                <fnx-select [(ngModel)]="members"
+                            [multi]="true"
+                            [valueDescriptionRenderer]="renderPersonSelectDescription"
+                            class="flex--grow flex--shrink">
+                    <fnx-option *ngFor="let pm of persons"
                                 [value]="pm['id']" label="{{pm['name'] + ', ' + pm['occupation'] + ', ' + pm['phone']}}"></fnx-option>
                 </fnx-select>
 
@@ -64,20 +67,20 @@
                 <div main>
 
                     <fnx-input label="Name" errorMessage="Mandatory value">
-                        <fnx-text [(ngModel)]="newMember['name']" [required]="true"></fnx-text>
+                        <fnx-text [(ngModel)]="createPerson['name']" [required]="true"></fnx-text>
                     </fnx-input>
 
                     <fnx-input label="Occupation" errorMessage="Mandatory value">
-                        <fnx-text [(ngModel)]="newMember['occupation']" [required]="true"></fnx-text>
+                        <fnx-text [(ngModel)]="createPerson['occupation']" [required]="true"></fnx-text>
                     </fnx-input>
 
                     <fnx-input label="Phone" errorMessage="Mandatory value">
-                        <fnx-text [(ngModel)]="newMember['phone']" [required]="true"></fnx-text>
+                        <fnx-text [(ngModel)]="createPerson['phone']" [required]="true"></fnx-text>
                     </fnx-input>
 
 
                     <p class="padding f-monospace">
-                        Debug: {{newMember}}
+                        Debug: {{createPerson}}
                     </p>
 
                 </div>

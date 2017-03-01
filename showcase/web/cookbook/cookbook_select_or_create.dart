@@ -17,12 +17,10 @@ import '../example_buttons_renderer.dart';
 class CookbookSelectOrCreate {
 
   int id = 6;
-
-  int selectedMember = null;
-
+  
   FnxApp app;
 
-  List possibleMembers = [
+  List persons = [
       {"id":1, "name":"John Smith", "occupation":"warrior", "phone":"4235532423"},
       {"id":2, "name":"Kevin Baker", "occupation":"mage", "phone":"936246323"},
       {"id":3, "name":"Emma Govinda", "occupation":"paladin", "phone":"423434334"},
@@ -30,50 +28,46 @@ class CookbookSelectOrCreate {
       {"id":5, "name":"George Holmes", "occupation":"detective", "phone":"4265321456"},
     ];
 
-  Map<int, Map> possibleMembersById = {};
+  Map<int, Map> personsById = {};
 
   List<int> members = []; // first element - empty, waiting for selection
 
-  Map newMember = {};
+  Map createPerson = {};
   
   CookbookSelectOrCreate(this.app) {
-    possibleMembers.forEach((Map member) {
-      possibleMembersById[member['id']] = member;
+    persons.forEach((Map member) {
+      personsById[member['id']] = member;
     });
   }
 
   bool openCreateModal = false;
 
-  void addMember(int newMemberId) {
-    print(newMemberId);
-    if (newMemberId != null) {
-      if (members.contains(newMemberId)) {
-        app.toast("This person is already part of your team");
-      } else {
-        members.add(newMemberId);
-        selectedMember = null;
-      }
-    }
-  }
-
   void removeMember(int index) {
     members.removeAt(index);
+  }
+
+  String renderPersonSelectDescription() {
+    if (members.isEmpty) {
+      return "Select a person ...";
+    } else {
+      return "Select a person (${members.length} selected)";
+    }
   }
 
   void createNewPerson() {
 
     // send to server, validate, receive id
-    newMember["id"] = id++;
+    createPerson["id"] = id++;
 
     // add to local copies
-    possibleMembers.add(newMember);
-    possibleMembersById[newMember["id"]] = newMember;
+    persons.add(createPerson);
+    personsById[createPerson["id"]] = createPerson;
 
     // insert as the last value
-    members.add(newMember["id"]);
+    members.add(createPerson["id"]);
 
     // rest form
-    newMember = {};
+    createPerson = {};
 
     // hide form
     openCreateModal = false;
