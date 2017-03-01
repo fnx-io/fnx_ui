@@ -3,6 +3,7 @@
 
 import 'cookbook/cookbook_select_or_create.dart';
 import 'cookbook/cookbook_tags.dart';
+import 'cookbook/cookbook_wizard.dart';
 import 'package:angular2/core.dart';
 import 'package:logging/logging.dart';
 import 'package:angular2/common.dart';
@@ -51,7 +52,8 @@ import 'dart:math';
   const Route(path: "/Cookbook/Dynarows", name: "Cookbook-Dynarows", component: CookbookDynarows),
   const Route(path: "/Cookbook/MasterDetail", name: "Cookbook-MasterDetail", component: CookbookMasterDetail),
   const Route(path: "/Cookbook/Tags", name: "Cookbook-Tags", component: CookbookTags),
-  const Route(path: "/Cookbook/SelectOrCreate", name: "Cookbook-SelectOrCreate", component: CookbookSelectOrCreate)
+  const Route(path: "/Cookbook/SelectOrCreate", name: "Cookbook-SelectOrCreate", component: CookbookSelectOrCreate),
+  const Route(path: "/Cookbook/Wizard", name: "Cookbook-Wizard", component: CookbookWizard)
 
 ])
 class ExampleApp {

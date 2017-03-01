@@ -18,6 +18,10 @@ class CookbookSelectOrCreate {
 
   int id = 6;
 
+  int selectedMember = null;
+
+  FnxApp app;
+
   List possibleMembers = [
       {"id":1, "name":"John Smith", "occupation":"warrior", "phone":"4235532423"},
       {"id":2, "name":"Kevin Baker", "occupation":"mage", "phone":"936246323"},
@@ -28,21 +32,28 @@ class CookbookSelectOrCreate {
 
   Map<int, Map> possibleMembersById = {};
 
-  List<int> members = [];
+  List<int> members = []; // first element - empty, waiting for selection
 
   Map newMember = {};
   
-  CookbookSelectOrCreate() {
+  CookbookSelectOrCreate(this.app) {
     possibleMembers.forEach((Map member) {
       possibleMembersById[member['id']] = member;
     });
-    addMember();
   }
 
   bool openCreateModal = false;
 
-  void addMember() {
-    members.add(null);
+  void addMember(int newMemberId) {
+    print(newMemberId);
+    if (newMemberId != null) {
+      if (members.contains(newMemberId)) {
+        app.toast("This person is already part of your team");
+      } else {
+        members.add(newMemberId);
+        selectedMember = null;
+      }
+    }
   }
 
   void removeMember(int index) {
@@ -59,16 +70,13 @@ class CookbookSelectOrCreate {
     possibleMembersById[newMember["id"]] = newMember;
 
     // insert as the last value
-    members[members.length-1] = newMember["id"];
+    members.add(newMember["id"]);
 
     // rest form
     newMember = {};
 
     // hide form
     openCreateModal = false;
-
-    // add new slot
-    addMember();
   }
   
 }

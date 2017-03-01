@@ -16,6 +16,11 @@ abstract class FnxValidatorComponent {
     _validatorChildren.forEach((FnxValidatorComponent c) => c.markAsTouched());
   }
 
+  void markAsNotTouched() {
+    _touched = false;
+    _validatorChildren.forEach((FnxValidatorComponent c) => c.markAsNotTouched());
+  }
+
   bool isValid() {
     return hasValidValue() && hasValidChildren();
   }

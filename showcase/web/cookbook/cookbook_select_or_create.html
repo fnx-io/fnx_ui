@@ -7,32 +7,42 @@
             objects from collection and also create new if needed.</fnx-alert>
 
         <fnx-panel-small>
+
             <h5 header>Select project members</h5>
 
-            <!-- Rows -->
+            <!-- Existing rows Rows -->
             <div *ngFor="let r of members; let c = index; let last = last" class="flex--row margin--small--bottom">
 
                 <span class="char margin--small--right">#{{c+1}}</span>
 
-                <fnx-select [(ngModel)]="members[c]" class="flex--grow flex--shrink margin--small--right" selectionEmptyLabel="Choose a member of your team ...">
+                <p class="item flex--grow flex--shrink margin--small--right">
+                    {{possibleMembersById[r]['name'] + ', ' + possibleMembersById[r]['occupation'] + ', ' + possibleMembersById[r]['phone']}}
+                </p>
+
+                <span class="text--right">
+                    <button class="btn icon" (click)="removeMember(c)">remove</button>
+                </span>
+
+            </div>
+
+            <!-- Add new row -->
+            <div class="flex--row">
+
+                <span class="char margin--right"></span>
+
+                <fnx-select (ngModelChange)="addMember($event)" [ngModel]="selectedMember" class="flex--grow flex--shrink" selectionEmptyLabel="Choose a member of your team ...">
                     <fnx-option *ngFor="let pm of possibleMembers"
                                 [value]="pm['id']" label="{{pm['name'] + ', ' + pm['occupation'] + ', ' + pm['phone']}}"></fnx-option>
                 </fnx-select>
 
-                <div class="s3 margin--small--right" *ngIf="last" >
-                    <button class="btn" (click)="openCreateModal = true">create new person</button>
+                <span class="char">
+                    or
+                </span>
+                
+                <div>
+                    <button class="btn" (click)="openCreateModal = true">create a new person</button>
                 </div>
-
-                <span class="s1 text--right">
-                <button class="btn icon" (click)="removeMember(c)">remove</button>
-            </span>
-
-            </div>
-
-            <!-- Add more button -->
-            <div class="text--right">
-                Add next member:
-                <button class="btn icon bg--accent margin--small--left" (click)="addMember()">add</button>
+                
             </div>
 
         </fnx-panel-small>
@@ -42,9 +52,15 @@
         </p>
 
 
+        <!--
+           Modal with form.
+
+           Notice how form wraps the modal and not the other way around.
+           This allows me to place submit bar into standard modal footer.
+        -->
         <fnx-form (submit)="createNewPerson()">
             <fnx-modal *ngIf="openCreateModal" (close)="openCreateModal = false">
-                <h3 header>Create new member</h3>
+                <h3 header>Create a new member</h3>
                 <div main>
 
                     <fnx-input label="Name" errorMessage="Mandatory value">

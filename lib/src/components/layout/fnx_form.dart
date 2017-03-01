@@ -26,12 +26,12 @@ class FnxForm extends FnxValidatorComponent {
   /// Only propagates the submit event when this form is valid.
   /// Forces validation of all components inside this form.
   void submitForm(Event event) {
-    markAsTouched();
     if (event != null) {
       event.preventDefault();
       event.stopPropagation();
     }
 
+    markAsTouched();
     if (isValid()) {
       submit.emit(event);
     }

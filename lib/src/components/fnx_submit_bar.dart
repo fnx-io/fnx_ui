@@ -9,13 +9,15 @@ import 'package:fnx_ui/src/validator.dart';
 /// Standardized set of buttons at the bottom of the `fnx-form`. Renders submit button which is enabled only if the
 /// form is valid (= all components in the form are valid).
 ///
-/// Use `[back]="true"` to enable back button.
+/// Use `[back]="true"` to enable standard back button.
 ///
 /// Add custom buttons like this:
 ///
 ///         <fnx-submit-bar [back]="true">
-///             <button class="btn" type="button" (click)="doSt()">Special action</button>
+///             <button class="btn" type="button" (click)="doSt($event)">Special action</button>
 ///         </fnx-submit-bar>
+///
+/// BUT don't forget to prevent $event from bubbling in you doSt method, otherwise the form would be submitted as well.
 ///
 /// Custom buttons are aligned to left (next to back button).
 ///
@@ -67,6 +69,7 @@ class FnxSubmitBar {
     ui.killEvent(event);
     window.history.back();
   }
+  
 }
 
 const FNX_BUTTON_DIRECTIVES = const [FnxSubmitBar];
