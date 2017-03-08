@@ -34,6 +34,11 @@ class FnxModal implements OnInit, OnDestroy {
   String id = ui.uid('modal-');
 
   ///
+  /// Optional CSS width of this modal window. Possibly 90vw etc.
+  @Input()
+  String width = null;
+
+  ///
   /// Output. Catch it and hide this window, user clicked the "close" icon.
   ///
   @Output()

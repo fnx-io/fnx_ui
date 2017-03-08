@@ -1,5 +1,5 @@
 <div class="modal__wrapper" attr.id="{{id}}">
-    <div class="modal">
+    <div class="modal" [style.width]="width">
         <a (click)="emitClose()" class="modal__close">close</a>
         <div class="layout--header">
             <header class="padding modal__header">
