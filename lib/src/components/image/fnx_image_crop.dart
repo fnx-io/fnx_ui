@@ -12,7 +12,7 @@ import 'package:fnx_ui/src/util/ui.dart' as ui;
       "div { overflow: hidden; position: relative; } ",
       "img { position: absolute; cursor: move; } ",
       "p { position: absolute; left:0; bottom:0; right:0}",
-      "p span { opacity: 0.3 }",
+      "p span { opacity: 0.7 }",
       "p span:hover { opacity: 1 }",
     ],
     template: """

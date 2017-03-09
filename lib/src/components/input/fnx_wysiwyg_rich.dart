@@ -101,7 +101,6 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
   }
 
   bool hasValidValue() {
-    print(value);
     if (required && (value == null || (value as String).isEmpty) || value == "<p><br></p>") return false;
     return true;
   }

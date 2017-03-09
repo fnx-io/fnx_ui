@@ -83,7 +83,6 @@ class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, 
 
   Future<Null> createLink() async {
     List<Range> selection = saveSelection();
-    print(selection);
     String link = await app.input("Insert link, including http://", headline: "Link");
     if (link != null) {
       restoreSelection(selection);
