@@ -31,7 +31,7 @@ Please note, most of the css classes here are pretty vital for this example. Be 
 
     <fnx-form (submit)="search = fulltext.value">
         <div class="flex--row margin--vertical">
-            <fnx-text #fulltext class="flex--grow flex--shrink margin--right"></fnx-text>
+            <fnx-text autoFocus #fulltext class="flex--grow flex--shrink margin--right"></fnx-text>
             <button class="btn margin--small--right" (click)="search = fulltext.value">Search</button>
             <button type="reset" class="btn icon" [class.disabled]="search == null" (click)="search = null">cancel</button>
         </div>

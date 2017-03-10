@@ -16,7 +16,7 @@ and we don't like repetitive tasks. See the dart source code.</p>
             <!-- nice label and error handlign for any fnx component -->
             <fnx-input label="Your name" errorMessage="Please fill out your name">
                 <!-- input type="text" -->
-                <fnx-text [(ngModel)]="record['name']" [required]="true" [readonly]="readonly"></fnx-text>
+                <fnx-text [(ngModel)]="record['name']" [required]="true" [readonly]="readonly" autoFocus ></fnx-text>
             </fnx-input>
 
             <fnx-input label="Your occupation" errorMessage="Please tell us what you do">

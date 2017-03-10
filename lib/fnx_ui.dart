@@ -6,6 +6,7 @@
 /// More dartdocs go here.
 library fnx_ui;
 
+import 'package:fnx_ui/src/components/auto_focus.dart';
 import 'package:intl/intl.dart';
 import 'src/components/input/fnx_wysiwyg_rich.dart';
 import 'src/components/input/fnx_wysiwyg_poor.dart';
@@ -50,6 +51,7 @@ export 'src/components/fnx_submit_bar.dart';
 export 'src/components/input/fnx_check.dart';
 export 'src/components/layout/fnx_panel_small.dart';
 export 'src/components/image/fnx_image_crop.dart';
+export 'src/components/auto_focus.dart';
 
 const List FNX_UI_COMPONENTS = const [FnxApp,
                                       FnxPanel,
@@ -68,6 +70,7 @@ const List FNX_UI_COMPONENTS = const [FnxApp,
                                       FnxImageCrop,
                                       FnxWysiwygPoor,
                                       FnxWysiwygRich,
+                                      AutoFocus,
                                       FNX_INPUT_DIRECTIVES,
                                       FNX_SELECT_DIRECTIVES,
                                       FNX_DATE_DIRECTIVES,

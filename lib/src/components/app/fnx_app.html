@@ -1,27 +1,41 @@
 <ng-content></ng-content>
 
 <!-- Modal windows -->
-<fnx-modal *ngFor="let modal of modalWindows.values" [id]="modal.id" (close)="closeModal(modal.id, false)">
+<fnx-form  *ngFor="let modal of modalWindows.values" (submit)="closeModal(modal.id, true)">
 
-    <h3 header>{{modal.headline}}</h3>
+    <fnx-modal [id]="modal.id" (close)="closeModal(modal.id, false)">
 
-    <p main>{{modal.message}}</p>
+        <h3 header>{{modal.headline}}</h3>
 
-    <form main *ngIf="modal.input != null">
-        <fnx-input errorMessage="Please provide requested value">
-            <fnx-text [(ngModel)]="modal.value" [required]="true"></fnx-text>
+        <p main>{{modal.message}}</p>
+
+        <fnx-input main errorMessage="Please provide requested value" *ngIf="modal.input != null">
+            <fnx-text [(ngModel)]="modal.value" [required]="true" autoFocus ></fnx-text>
         </fnx-input>
-    </form>
 
-    <p footer class="buttonbar">
-        <button *ngIf="modal.cancel != null" class="btn" (click)="closeModal(modal.id, false)"
-                data-prefix="clear">{{modal.cancel}}</button>
-        <span class="spacer"></span>
-        <button class="btn bg--important" (click)="closeModal(modal.id, true)"
-                data-prefix="check">{{modal.ok}}</button>
-    </p>
+        <p footer class="buttonbar">
+            <button *ngIf="modal.cancel != null" class="btn" (click)="closeModal(modal.id, false)"
+                    type="button"
+                    data-prefix="clear">{{modal.cancel}}</button>
+            <span class="spacer"></span>
 
-</fnx-modal>
+            <!-- We have input, it will request focus -->
+            <button
+                *ngIf="modal.input != null"
+                type="submit"
+                class="btn bg--important" (click)="closeModal(modal.id, true)" data-prefix="check">{{modal.ok}}</button>
+
+            <!-- We don't have input, we will request focus -->
+            <button
+                *ngIf="modal.input == null" autoFocus
+                type="submit"
+                class="btn bg--important" (click)="closeModal(modal.id, true)" data-prefix="check">{{modal.ok}}</button>
+
+        </p>
+
+    </fnx-modal>
+
+</fnx-form>
 
 <!-- Toasts -->
 <div class="toast__container">

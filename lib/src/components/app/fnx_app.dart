@@ -120,6 +120,12 @@ class FnxApp implements OnInit {
   }
 
   void closeModal(String id, bool closingResult) {
+    print("Closing $closingResult");
+    try {
+      throw "ssa";
+    } catch (_, st ) {
+      print(st);
+    }
     _ModalContent mc = modalWindows[id];
     if (mc == null) return;
     modalWindows.remove(id);

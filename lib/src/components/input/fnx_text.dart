@@ -25,16 +25,19 @@ const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useEx
   [attr.min]="min"
   [attr.max]="max"
   [attr.autocomplete]="autocompleteAttr"
-  (focus)="markAsTouched()"
-  (click)="markAsTouched()"
+  (keyup)="markAsTouched()"
   [class.error]="isTouchedAndInvalid()"
   [attr.step]="decimalsAttr"
+  #input
 />
 ''',
-    providers: const [CUSTOM_INPUT_TEXT_VALUE_ACCESSOR],
+    providers: const [
+      CUSTOM_INPUT_TEXT_VALUE_ACCESSOR,
+      const Provider(Focusable, useExisting: FnxText, multi: false)
+    ],
     preserveWhitespace: false
 )
-class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
+class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
 
   @Input()
   bool required = false;
@@ -59,6 +62,9 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
 
   @Input()
   bool readonly = false;
+
+  @ViewChild("input")
+  ElementRef elementRef;
 
   int _decimals = 0;
 
@@ -212,6 +218,12 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
         && type != "password"
         && type != "decimal") {
       throw "The only possible types at this moment are 'text', 'number', 'decimal', 'email', 'http' and 'password'";
+    }
+  }
+  @override
+  void focus() {
+    if (elementRef != null && elementRef.nativeElement != null) {
+      elementRef.nativeElement.focus();
     }
   }
 }
