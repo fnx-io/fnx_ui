@@ -116,8 +116,8 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
 
   @Input()
   set decimals(int decimals) {
-    if (decimals == null || decimals < 0 || decimals > 10) {
-      throw "Invalid decimals count for decimal field. Min 0 max 10 decimals.";
+    if (decimals == null || decimals < 0 || decimals > 12) {
+      throw "Invalid decimals count for decimal field. Min 0 max 12 decimals.";
     }
     _decimals = decimals;
   }
@@ -167,7 +167,7 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
       double d = (v.abs() * fac).toDouble();
 
       double diff = d - i;
-      double threshold = 1e-8;
+      double threshold = 1e-7;
 
       return diff.abs() < threshold;
     }
