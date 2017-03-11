@@ -43,7 +43,7 @@ const CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCES
 
           <ng-content></ng-content>
       </div>
-      <div class="input--component" [style.max-width.em]="maxWidthEm" [style.height.em]="heightEm">
+      <div class="input--component" [style.max-width]="maxWidth" [style.height]="height">
         <div #wysiwyg
              [class.readonly]="readonly"
              (blur)="edited()"
@@ -59,15 +59,18 @@ const CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCES
       ":host .ql-container.ql-snow {border:0;}",
       ":host .ql-toolbar.ql-snow {display: none;}"
     ],
-    providers: const [CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR],
+    providers: const [
+      CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR,
+      const Provider(Focusable, useExisting: FnxWysiwygRich)
+    ],
     preserveWhitespace: false
 )
-class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
+class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
 
   @Input() bool required = false;
   @Input() bool readonly = false;
-  @Input() String heightEm = "15";
-  @Input() String maxWidthEm = "50";
+  @Input() String height = "15";
+  @Input() String maxWidth = "50";
   @Input() PickImageUrl imagePicker = null;
 
   Quill quill;

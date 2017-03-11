@@ -29,6 +29,8 @@ import 'dart:async';
 )
 class FnxModal implements OnInit, OnDestroy {
 
+  static List<FnxModal> _stack = [];
+
   final Logger log = new Logger("FnxModal");
 
   String id = ui.uid('modal-');
@@ -52,7 +54,11 @@ class FnxModal implements OnInit, OnDestroy {
 
   @override
   ngOnInit() {
-    keyDownSubscription = document.onKeyDown.where((KeyboardEvent e) => e.keyCode == KeyCode.ESC).listen((KeyboardEvent e) {
+    _stack.add(this);
+    keyDownSubscription = document.onKeyDown
+        .where((KeyboardEvent e) => this == _stack.last)
+        .where((KeyboardEvent e) => e.keyCode == KeyCode.ESC)
+        .listen((KeyboardEvent e) {
       ui.killEvent(e);
       close.emit(false);
     });
@@ -61,5 +67,7 @@ class FnxModal implements OnInit, OnDestroy {
   @override
   ngOnDestroy() {
     keyDownSubscription.cancel();
+    _stack.remove(this);
   }
+
 }

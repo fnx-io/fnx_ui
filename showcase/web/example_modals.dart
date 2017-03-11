@@ -1,6 +1,7 @@
 // Copyright (c) 2016, <your name>. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
+import 'dart:async';
 import 'package:angular2/core.dart';
 import 'package:logging/logging.dart';
 import 'package:angular2/common.dart';
@@ -23,29 +24,26 @@ class ExampleModals {
 
   ExampleModals(this.app);
 
-  void openAlert() {
-    app.alert(
+  Future<Null> openAlert() async {
+    await app.alert(
         "Lorem ipsum dolor sit modal, eos error eveniet fuga iste mollitia nisi, omnis porro provident quia tempore.",
-        headline: "Lorem headline"
-
-    ).then( (_) => showToast("Closed!", 1000) );
+        headline: "Lorem headline");
+    showToast("Closed!", 1000);
   }
 
-  void openConfirm() {
-    app.confirm(
+  Future<Null> openConfirm() async {
+    bool result = await app.confirm(
         "Lorem ipsum dolor sit confirm, eos error eveniet fuga iste mollitia nisi, omnis porro provident quia tempore.",
-        headline: "Confirm please"
-
-    ).then( (bool result) => showToast("Closed with ${result}", 2000) );
+        headline: "Confirm please");
+    showToast("Closed with ${result}", 2000);
   }
 
-  void openInput() {
-    app.input(
+  Future<Null> openInput() async {
+    var val = await app.input(
         "Input value between 2 and 4, but not 3",
         headline: "Lorem ipsum dolor sit input",
-        prefilledValue: "3"
-
-    ).then( (val) => showToast("Value = ${val}", 2000) );
+        prefilledValue: "3");
+    showToast("Value = ${val}", 2000);
   }
 
   void showToast(String text, int duration) {
