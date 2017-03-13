@@ -13,8 +13,26 @@ final _keepAnalysisHappy = Intl.defaultLocale;
 class MessageLookup extends MessageLookupByLibrary {
   get localeName => 'cs_CZ';
 
+  static m0(count) => "${count} soubory";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => {
-    "formSubmitLabelMessage" : MessageLookupByLibrary.simpleMessage("Odeslat")
+    "appDefaultAlertHeadline" : MessageLookupByLibrary.simpleMessage("Upozornění"),
+    "appDefaultConfirmHeadline" : MessageLookupByLibrary.simpleMessage("Potvrďte"),
+    "appDefaultInputHeadline" : MessageLookupByLibrary.simpleMessage("Vstup"),
+    "cancel" : MessageLookupByLibrary.simpleMessage("Zrušit"),
+    "fileDragAndDropHere" : MessageLookupByLibrary.simpleMessage("Sem přetáhněte soubor"),
+    "fileSomeFilesSelected" : m0,
+    "fileBrowse" : MessageLookupByLibrary.simpleMessage("Procházet"),
+    "formBackLabelMessage" : MessageLookupByLibrary.simpleMessage("Zpět"),
+    "formSubmitLabelMessage" : MessageLookupByLibrary.simpleMessage("Odeslat"),
+    "inputGenericError" : MessageLookupByLibrary.simpleMessage("Hodnota není platná"),
+    "no" : MessageLookupByLibrary.simpleMessage("ne"),
+    "ok" : MessageLookupByLibrary.simpleMessage("Budiž"),
+    "selectFilterPlaceholder" : MessageLookupByLibrary.simpleMessage("Hledat..."),
+    "selectOptionsEmptyLabel" : MessageLookupByLibrary.simpleMessage("Není z čeho vybírat"),
+    "selectOptionsEmptySearchLabel" : MessageLookupByLibrary.simpleMessage("Vašemu hledání neodpovídá žádná z možností"),
+    "selectSelectionEmptyLabel" : MessageLookupByLibrary.simpleMessage("Vyberte ..."),
+    "yes" : MessageLookupByLibrary.simpleMessage("Ano")
   };
 }

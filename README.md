@@ -133,3 +133,8 @@ Any feedback is more then welcome: tomucha@gmail.com
 | `<fnx-select>` | input - select (ngModel compat.)| [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxSelect-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Form) |
 | `<fnx-option>` | one option of a select | [doc](http://demo.fnx.io/fnx_ui/doc/fnx_ui/FnxOption-class.html) | [demo](http://demo.fnx.io/fnx_ui/ng2/#/Form) |
 
+# Are you looking for ...
+
+- **button** - there is no component for button, just use `<a class="btn">` or `<button class="btn">` with (click) handler:
+http://demo.fnx.io/fnx_ui/css/demo_buttons.html
+- **menu** - again, no component for menu: http://demo.fnx.io/fnx_ui/css/demo_menu.html

@@ -1,1 +1,101 @@
-{"_locale": "cs_CZ","formSubmitLabelMessage":"Odeslat","@formSubmitLabelMessage":{"description":"Label on the submit button","type":"text","placeholders":{}}}
+{
+  "_locale": "cs_CZ",
+  "formSubmitLabelMessage": "Odeslat",
+  "@formSubmitLabelMessage": {
+    "description": "Label on the submit button",
+    "type": "text",
+    "placeholders": {}
+  },
+  "formBackLabelMessage": "Zpět",
+  "@formBackLabelMessage": {
+    "description": "Label on the back button",
+    "type": "text",
+    "placeholders": {}
+  },
+  "selectSelectionEmptyLabel": "Vyberte ...",
+  "@selectSelectionEmptyLabel": {
+    "description": "Select - nothing selected",
+    "type": "text",
+    "placeholders": {}
+  },
+  "selectOptionsEmptyLabel": "Není z čeho vybírat",
+  "@selectOptionsEmptyLabel": {
+    "description": "Select - empty options",
+    "type": "text",
+    "placeholders": {}
+  },
+  "selectOptionsEmptySearchLabel": "Vašemu hledání neodpovídá žádná z možností",
+  "@selectOptionsEmptySearchLabel": {
+    "description": "Select - filter on options is too restrictive",
+    "type": "text",
+    "placeholders": {}
+  },
+  "selectFilterPlaceholder": "Hledat...",
+  "@selectFilterPlaceholder": {
+    "description": "Select - search field placeholder",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fileDragAndDropHere": "Sem přetáhněte soubor",
+  "@fileDragAndDropHere": {
+    "description": "File - drop area is empty",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fileSomeFilesSelected": "{count} soubory",
+  "@fileSomeFilesSelected": {
+    "description": "File - some files are chosen",
+    "type": "text",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "inputGenericError": "Hodnota není platná",
+  "@inputGenericError": {
+    "description": "Input - generic validation error",
+    "type": "text",
+    "placeholders": {}
+  },
+  "appDefaultAlertHeadline": "Upozornění",
+  "@appDefaultAlertHeadline": {
+    "description": "App - default headline for 'alert' dialog",
+    "type": "text",
+    "placeholders": {}
+  },
+  "appDefaultInputHeadline": "Vstup",
+  "@appDefaultInputHeadline": {
+    "description": "App - default headline for 'input' dialog",
+    "type": "text",
+    "placeholders": {}
+  },
+  "appDefaultConfirmHeadline": "Potvrďte",
+  "@appDefaultConfirmHeadline": {
+    "description": "App - default headline for 'confirm' dialog",
+    "type": "text",
+    "placeholders": {}
+  },
+  "ok": "Budiž",
+  "@ok": {
+    "description": "App - global 'ok'",
+    "type": "text",
+    "placeholders": {}
+  },
+  "yes": "Ano",
+  "@yes": {
+    "description": "App - global 'yes'",
+    "type": "text",
+    "placeholders": {}
+  },
+  "no": "ne",
+  "@no": {
+    "description": "App - global 'no'",
+    "type": "text",
+    "placeholders": {}
+  },
+  "cancel": "Zrušit",
+  "@cancel": {
+    "description": "App - global 'cancel'",
+    "type": "text",
+    "placeholders": {}
+  }
+}

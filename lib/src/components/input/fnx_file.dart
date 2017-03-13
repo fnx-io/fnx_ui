@@ -1,5 +1,6 @@
 import 'package:angular2/core.dart';
 import 'package:angular2/common.dart';
+import 'package:fnx_ui/src/util/global_messages.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
@@ -30,7 +31,7 @@ const CUSTOM_INPUT_FILE_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
     [class.error]="isTouchedAndInvalid()"
     [style.visibility]="readonly ? 'hidden' : 'visible'"
     >
-      Browse
+      {{browseLabel}}
       <input type="file" id="{{ componentId }}"
         (focus)="markAsTouched()"
         (click)="markAsTouched()"
@@ -42,7 +43,8 @@ const CUSTOM_INPUT_FILE_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
     styles: const [
       ":host { display: block; flex-grow: 1; flex-shrink: 1; max-width: 100%}",
       ".input__file { width: 100%; }",
-      ".input__file__delete { z-index: 0 }"
+      ".input__file__delete { z-index: 0 }",
+      ".input__file__browse { cursor: pointer }"
     ],
     providers: const [CUSTOM_INPUT_FILE_VALUE_ACCESSOR],
     preserveWhitespace: false
@@ -68,6 +70,10 @@ class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit,
 
   @Output()
   EventEmitter files = new EventEmitter();
+
+  @Input()
+  String browseLabel = GlobalMessages.fileBrowse();
+
 
   //@Input() bool readonly = false;
 
@@ -144,184 +150,16 @@ class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit,
   }
 
   String get renderDescription {
-    if (isEmpty) return "Drag'n'drop a file here";
+    if (isEmpty) return GlobalMessages.fileDragAndDropHere();
     if (fileName != null) return fileName;
     if (value is List && value.length == 1) {
       return value[0].toString();
     }
     if (value is List) {
       int count = value.length;
-      return "$count files selected";
+      return GlobalMessages.fileSomeFilesSelected(count);
     }
     return value.toString();
   }
 
 }
-
-/*
-class FormFileInput extends FormComponent implements
-
-  void processFiles(List<File> files) {
-  }OnInit, AfterViewInit {
-  final Logger log = new Logger("FormFileInput");
-
-  String inputField = ui.uid("file-input-");
-
-  @Input()
-  String label;
-
-  @Input()
-  String errorMessage;
-
-  NgForm formCtrl;
-  @Input()
-  var inputModel;
-
-  @Output()
-  EventEmitter inputModelChange = new EventEmitter();
-
-  RestClient rest;
-
-  @Optional()
-  @Input()
-  bool required = false;
-
-  @Optional()
-  @Input()
-  String mimePattern;
-
-  String mimeValue = null;
-
-  bool working = false;
-  String uploadError = null;
-
-  FormFileInput(FormWrapper wrap, RestClient rest): super(wrap) {
-    formCtrl = wrap.formCtrl;
-    this.rest = rest.child("/v1/uploads");
-  }
-
-  Control control = null;
-
-  ngOnInit() {
-    List<ValidatorFn> validators = [];
-    if (required) {
-      validators.add((AbstractControl control) {
-        return inputModel == null ? {"required": true} : null;
-      });
-    }
-    if (mimePattern != null) {
-      validators.add((AbstractControl control) {
-        if (inputModel == null) return null;
-        if ((inputModel as String).startsWith("http")) return null; // to je url ze serveru, to je asi ulozeny dobre
-        if (mimeValue == null) return {"mime": true};
-        var regex = new RegExp('''^${ mimePattern}\$''');
-        return regex.hasMatch(mimeValue) ? null : {"mime": true};
-      });
-    }
-
-    control = new Control('', Validators.compose(validators));
-    this.formCtrl.control..addControl(this.inputField, control);
-  }
-
-  bool get showError => !control.valid && !control.root.pristine;
-
-  onChangeInput(event) {
-    uploadError = null;
-    control.markAsDirty();
-
-    if (event.target.files is! List || event.target.files.isEmpty) {
-      log.warning("No file");
-      inputModel = null;
-      mimeValue = null;
-      this.inputModelChange.emit(inputModel);
-    } else {
-      File file = event.target.files[0];
-      inputModel = file.name;
-      mimeValue = file.type;
-
-      if (mimePattern != null) {
-        log.info("Invalid mime type");
-        var regex = new RegExp('''^${ mimePattern}\$''');
-        if (!regex.hasMatch(mimeValue)) {
-          control.updateValueAndValidity();
-          inputModel = null;
-          mimeValue = null;
-          this.inputModelChange.emit(inputModel);
-          return;
-        }
-      }
-      log.info("Uploading");
-      working = true;
-      inputModel = null;
-      mimeValue = null;
-      this.inputModelChange.emit(inputModel);
-
-      _uploadFile(file).then((url) {
-        working = false;
-        inputModel = url;
-        this.inputModelChange.emit(inputModel);
-        control.updateValueAndValidity();
-      }).catchError((e) {
-        working = false;
-        inputModel = null;
-        mimeValue = null;
-        this.inputModelChange.emit(inputModel);
-        uploadError = "Upload failed, please check your connection and try again";
-      });
-    }
-    control.updateValueAndValidity();
-  }
-
-  String fileId = null;
-
-  Future<String> _uploadFile(File file) async {
-    fileId = null;
-    int page = 0;
-    String url = null;
-    while (url == null) {
-      url = await _uploadFilePart(file, page);
-      page++;
-    }
-    return url;
-  }
-
-  Future<String> _uploadFilePart(File file, int page) async {
-    String fileName = file.name;
-    fileName = removeAccents(fileName.toLowerCase());
-    fileName = fileName.replaceAll(new RegExp("[^a-z10-9._-]"), "-");
-    log.info("Using filename ${fileName}");
-
-    int pageSize = fnxConfig()["fileUploadPageSize"];
-    int start = page * pageSize;
-    int end = (page + 1) * pageSize;
-
-    String mimeType = file.type;
-
-    end = min(file.size, end);
-
-    log.info("Uploading file part $page (size=$pageSize)");
-    FileReader reader = new FileReader();
-    // reader.onProgress.listen((_) => print(_));
-    reader.onError.listen((_) => throw _);
-    reader.readAsArrayBuffer(file.slice(start, end));
-    await reader.onLoad.first;
-
-    String newId = await rest.child("/${fileId == null ? '' : fileId}").post(reader.result, extraHeaders: {"X-Filename": fileName, "Content-Type": mimeType});
-    fileId = newId;
-
-    if (end == file.size) {
-      // last page, commit returns new fileUrl
-      return await rest.child("/${fileId}/commit").get();
-    } else {
-      // file URL is not known, we need to continue
-      return null;
-    }
-  }
-
-  @override
-  ngAfterViewInit() {
-    control.updateValueAndValidity();
-  }
-}
-
- */

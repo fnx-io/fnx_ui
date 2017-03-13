@@ -3,6 +3,7 @@
 
 import 'package:angular2/core.dart';
 import 'package:fnx_ui/errors.dart';
+import 'package:fnx_ui/src/util/global_messages.dart';
 import 'package:logging/logging.dart';
 import 'package:angular2/common.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
@@ -68,7 +69,7 @@ class FnxApp implements OnInit {
   FnxError errorToShow;
 
   void showError(FnxError error) {
-    log.info("Showing error $error on U I");
+    log.info("Showing error $error on UI");
     this.errorToShow = error;
     _changeDetector.detectChanges();
   }
@@ -77,36 +78,39 @@ class FnxApp implements OnInit {
   ///
   /// Plain old window.alert style dialog. Nonblocking.
   ///
-  Future alert(String message, {String headline: "Message"}) {
+  Future alert(String message, {String headline: null}) {
+    headline = headline??GlobalMessages.appDefaultAlertHeadline();
     _ModalContent m = new _ModalContent()
       ..headline = headline
       ..message = message
-      ..ok="ok";
+      ..ok=GlobalMessages.ok();
     return _modal(m);
   }
 
   ///
   /// Plain old window.confirm style dialog. Nonblocking.
   ///
-  Future<bool> confirm(String message, {String headline: "Confirm"}) {
+  Future<bool> confirm(String message, {String headline: null}) {
+    headline = headline??GlobalMessages.appDefaultConfirmHeadline();
     _ModalContent m = new _ModalContent()
       ..headline = headline
       ..message = message
-      ..ok="yes"
-      ..cancel="no";
+      ..ok=GlobalMessages.yes()
+      ..cancel=GlobalMessages.no();
     return _modal(m);
   }
 
   ///
   /// Plain old window.input style dialog. Nonblocking.
   ///
-  Future<Object> input(String message, {String headline: "Input value", String prefilledValue: null}) {
+  Future<Object> input(String message, {String headline: null, String prefilledValue: null}) {
+    headline = headline??GlobalMessages.appDefaultInputHeadline();
     _ModalContent m = new _ModalContent()
       ..headline = headline
       ..message = message
       ..input = "text"
-      ..ok="ok"
-      ..cancel="cancel"
+      ..ok=GlobalMessages.ok()
+      ..cancel=GlobalMessages.cancel()
       ..value=prefilledValue;
     return _modal(m);
   }
@@ -120,12 +124,6 @@ class FnxApp implements OnInit {
   }
 
   void closeModal(String id, bool closingResult) {
-    print("Closing $closingResult");
-    try {
-      throw "ssa";
-    } catch (_, st ) {
-      print(st);
-    }
     _ModalContent mc = modalWindows[id];
     if (mc == null) return;
     modalWindows.remove(id);

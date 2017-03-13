@@ -32,6 +32,7 @@ class FnxForm extends FnxValidatorComponent {
     }
 
     markAsTouched();
+    
     if (isValid()) {
       submit.emit(event);
     }

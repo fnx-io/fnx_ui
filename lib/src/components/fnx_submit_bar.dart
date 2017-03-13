@@ -45,7 +45,7 @@ class FnxSubmitBar {
   ///
   /// Input - use it to change label on back button.
   ///
-  @Input() String goBackLabel = "Back";
+  @Input() String goBackLabel = GlobalMessages.formBackLabelMessage();
 
   ///
   /// Input - Is back button allowed

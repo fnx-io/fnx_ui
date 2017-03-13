@@ -1,5 +1,6 @@
 import 'package:angular2/core.dart';
 import 'package:angular2/common.dart';
+import 'package:fnx_ui/src/util/global_messages.dart';
 import 'package:fnx_ui/src/util/ui.dart';
 import 'dart:html';
 import 'dart:async';
@@ -30,10 +31,10 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 
   List<FnxOptionValue> options = [];
 
-  @Input() String selectionEmptyLabel = "Select...";
-  @Input() String optionsEmptyLabel = "No options to choose from";
-  @Input() String optionsEmptySearchLabel = "No option matches your search";
-  @Input() String filterPlaceholder = "Search...";
+  @Input() String selectionEmptyLabel = GlobalMessages.selectSelectionEmptyLabel();// "Select...";
+  @Input() String optionsEmptyLabel = GlobalMessages.selectOptionsEmptyLabel();//"No options to choose from";
+  @Input() String optionsEmptySearchLabel = GlobalMessages.selectOptionsEmptySearchLabel(); //"No option matches your search";
+  @Input() String filterPlaceholder = GlobalMessages.selectFilterPlaceholder(); //"Search...";
 
   bool open = false;
   bool openUp = false;
