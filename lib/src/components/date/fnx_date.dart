@@ -1,10 +1,10 @@
 import 'package:angular2/angular2.dart';
 import 'package:angular2/common.dart';
 import 'package:angular2/core.dart';
+import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/date/fnx_date_picker.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/util/date.dart' as date;
-import 'package:fnx_ui/fnx_ui.dart';
 
 export 'package:fnx_ui/src/components/date/fnx_date_picker.dart';
 

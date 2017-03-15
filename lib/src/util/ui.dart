@@ -1,6 +1,7 @@
-import 'package:angular2/common.dart';
-import 'dart:html';
 import 'dart:async';
+import 'dart:html';
+
+import 'package:angular2/common.dart';
 import 'package:async/async.dart';
 
 int idCounter = 1;

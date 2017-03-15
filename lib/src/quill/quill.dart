@@ -2,8 +2,6 @@
 library quill;
 
 import "package:js/js.dart";
-import "package:func/func.dart";
-import "dart:html" show Element;
 
 /// Type definitions for Quill
 /// Project: https://github.com/quilljs/quill/

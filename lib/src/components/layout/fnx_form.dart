@@ -1,13 +1,15 @@
 // Copyright (c) 2016, <your name>. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-import 'package:angular2/core.dart';
-import 'package:logging/logging.dart';
-import 'package:angular2/common.dart';
-import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'dart:html';
+
+import 'package:angular2/core.dart';
+import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'package:fnx_ui/src/validator.dart';
-import 'dart:async';
+import 'package:logging/logging.dart';
+
+
+typedef String formValidatorFunction();
 
 @Component(
   selector: 'fnx-form',
@@ -17,10 +19,23 @@ class FnxForm extends FnxValidatorComponent {
 
   final Logger log = new Logger("FnxForm");
 
+  ///
+  /// Use to disable form (no submit event will be generated).
+  /// Example:
+  /// 
+  ///     <fnx-form [disabled]="rest.working"></fnx-form>
+  ///
+  @Input()
+  bool disabled = false;
+
   @Output()
   final EventEmitter<Event> submit = new EventEmitter<Event>();
 
   String id = ui.uid('form-');
+
+  List<formValidatorFunction> _validators = [];
+
+  List<String> errorMessages = [];
 
   /// Handles submitting the underlying form event.
   /// Only propagates the submit event when this form is valid.
@@ -30,17 +45,37 @@ class FnxForm extends FnxValidatorComponent {
       event.preventDefault();
       event.stopPropagation();
     }
+    if (disabled) return;
 
     markAsTouched();
+    errorMessages = [];
+
+    for (formValidatorFunction f in _validators) {
+      String error = f();
+      if (error != null) {
+        errorMessages.add(error);
+      }
+    }
     
-    if (isValid()) {
+    if (isValid() && errorMessages.isEmpty) {
       submit.emit(event);
+      
+    } else {
+      // there are some complex validation errors
     }
   }
 
   @override
   bool hasValidValue() {
     return true;
+  }
+
+  void addValidator(formValidatorFunction f) {
+    _validators.add(f);
+  }
+
+  void removeValidator(formValidatorFunction f) {
+    _validators.remove(f);
   }
 
 }

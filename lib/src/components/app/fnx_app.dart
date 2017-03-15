@@ -1,13 +1,13 @@
 // Copyright (c) 2016, <your name>. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
+import 'dart:async';
+
 import 'package:angular2/core.dart';
 import 'package:fnx_ui/errors.dart';
 import 'package:fnx_ui/src/util/global_messages.dart';
-import 'package:logging/logging.dart';
-import 'package:angular2/common.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
-import 'dart:async';
+import 'package:logging/logging.dart';
 
 ///
 /// Provides usefull methods for toast, simple 'alert' style dialogs, manages exceptions.

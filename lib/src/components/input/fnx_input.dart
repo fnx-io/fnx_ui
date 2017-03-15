@@ -1,11 +1,9 @@
-import 'package:angular2/core.dart';
 import 'package:angular2/common.dart';
+import 'package:angular2/core.dart';
+import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/util/global_messages.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
-import 'dart:async';
-import 'package:angular2/src/common/forms/directives/validators.dart';
 import 'package:fnx_ui/src/validator.dart';
-import 'package:fnx_ui/fnx_ui.dart';
 
 @Component(
     selector: 'fnx-input',

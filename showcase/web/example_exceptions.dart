@@ -2,10 +2,10 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular2/core.dart';
-import 'package:logging/logging.dart';
-import 'package:angular2/common.dart';
-import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/errors.dart';
+import 'package:fnx_ui/fnx_ui.dart';
+import 'package:logging/logging.dart';
+
 import 'example_buttons_renderer.dart';
 
 @Component(

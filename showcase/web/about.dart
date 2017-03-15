@@ -2,12 +2,8 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular2/core.dart';
-import 'package:logging/logging.dart';
-import 'package:angular2/common.dart';
-import 'package:fnx_ui/src/components/modal/fnx_modal.dart';
-import 'package:fnx_ui/src/components/app/fnx_app.dart';
+
 import 'example_buttons_renderer.dart';
-import 'dart:html';
 
 @Component(
     selector: 'example-about',

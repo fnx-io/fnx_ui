@@ -4,26 +4,23 @@
 import 'dart:async';
 import 'dart:html';
 
-import 'package:angular2/platform/browser.dart';
-import 'package:fnx_ui/errors.dart';
-import 'package:fnx_ui/fnx_ui.dart';
-import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:logging/logging.dart';
-import 'example_app.dart';
-import 'package:angular2/router.dart';
 import 'package:angular2/core.dart';
+import 'package:angular2/platform/browser.dart';
 import 'package:angular2/platform/common.dart';
+import 'package:angular2/router.dart';
+import 'package:fnx_ui/errors.dart';
+import 'package:logging/logging.dart';
+
+import 'example_app.dart';
 import 'example_buttons_renderer.dart';
-import 'package:fnx_ui/i18n/fnx_messages_all.dart';
 
 Future<Null> main() async {
 
-/*
-  Intl.defaultLocale = 'cs_CZ';
-  await initializeMessages('cs_CZ');
-  await initializeDateFormatting("cs_CZ", null);
-*/
+  /*
+    Intl.defaultLocale = 'cs_CZ';
+    await initializeMessages('cs_CZ');
+    await initializeDateFormatting("cs_CZ", null);
+  */
 
   // logování
   Logger.root.level = Level.ALL;
@@ -37,7 +34,6 @@ Future<Null> main() async {
   });
 
   /*
-  // info o startu
   Logger r = new Logger("admin.dart");
   r.info("================================================================");
   r.info(" Starting NanoEnvi admin:");
@@ -48,10 +44,10 @@ Future<Null> main() async {
 
   // START!
   bootstrap(ExampleApp, [
-      ROUTER_PROVIDERS,
-      [ExampleButtonsRenderer],
-      provide(LocationStrategy, useClass: HashLocationStrategy),
-      provide(ExceptionHandler, useValue: new FnxExceptionHandler())
+    ROUTER_PROVIDERS,
+    [ExampleButtonsRenderer],
+    provide(LocationStrategy, useClass: HashLocationStrategy),
+    provide(ExceptionHandler, useValue: new FnxExceptionHandler())
   ]);
 
 }

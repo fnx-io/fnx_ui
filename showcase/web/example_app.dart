@@ -1,33 +1,30 @@
 // Copyright (c) 2016, <your name>. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-import 'cookbook/cookbook_select_or_create.dart';
-import 'cookbook/cookbook_tags.dart';
-import 'cookbook/cookbook_wizard.dart';
+import 'cookbook/cookbook_form_validation.dart';
+import 'dart:math';
+
 import 'package:angular2/core.dart';
-import 'package:logging/logging.dart';
-import 'package:angular2/common.dart';
 import 'package:angular2/router.dart';
-import 'package:fnx_ui/src/components/modal/fnx_modal.dart';
-import 'package:fnx_ui/src/components/app/fnx_app.dart';
 
 import 'about.dart';
 import 'cookbook/cookbook_3step.dart';
+import 'cookbook/cookbook_crop.dart';
 import 'cookbook/cookbook_dashboard.dart';
 import 'cookbook/cookbook_dynarows.dart';
 import 'cookbook/cookbook_master_detail.dart';
-import 'cookbook/cookbook_table.dart';
-import 'cookbook/cookbook_crop.dart';
-import 'example_exceptions.dart';
-import 'example_testing.dart';
-import 'example_panels.dart';
-import 'example_buttons_renderer.dart';
-import 'example_modals.dart';
-import 'example_tabs.dart';
 import 'cookbook/cookbook_preloader.dart';
+import 'cookbook/cookbook_select_or_create.dart';
+import 'cookbook/cookbook_table.dart';
+import 'cookbook/cookbook_tags.dart';
+import 'cookbook/cookbook_wizard.dart';
+import 'example_buttons_renderer.dart';
+import 'example_exceptions.dart';
 import 'example_form.dart';
-
-import 'dart:math';
+import 'example_modals.dart';
+import 'example_panels.dart';
+import 'example_tabs.dart';
+import 'example_testing.dart';
 
 @Component(
     selector: 'example-app',
@@ -53,8 +50,8 @@ import 'dart:math';
   const Route(path: "/Cookbook/MasterDetail", name: "Cookbook-MasterDetail", component: CookbookMasterDetail),
   const Route(path: "/Cookbook/Tags", name: "Cookbook-Tags", component: CookbookTags),
   const Route(path: "/Cookbook/SelectOrCreate", name: "Cookbook-SelectOrCreate", component: CookbookSelectOrCreate),
-  const Route(path: "/Cookbook/Wizard", name: "Cookbook-Wizard", component: CookbookWizard)
-
+  const Route(path: "/Cookbook/Wizard", name: "Cookbook-Wizard", component: CookbookWizard),
+  const Route(path: "/Cookbook/FormValidation", name: "Cookbook-FormValidation", component: CookbookFormValidation)
 ])
 class ExampleApp {
 

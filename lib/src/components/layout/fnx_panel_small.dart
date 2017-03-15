@@ -3,10 +3,6 @@
 
 import 'package:angular2/core.dart';
 import 'package:fnx_ui/fnx_ui.dart';
-import 'package:logging/logging.dart';
-import 'package:angular2/common.dart';
-import 'package:fnx_ui/src/util/ui.dart' as ui;
-import 'dart:html';
 
 ///
 /// Nice "fieldset", smaller and less contrasting then fnx-panel.. It should have a header, defined with attribute 'header'. Like this:

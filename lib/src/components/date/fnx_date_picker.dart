@@ -1,9 +1,10 @@
-import 'package:angular2/core.dart';
-import 'package:intl/intl.dart';
-import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'dart:async';
-import 'package:fnx_ui/src/util/date.dart';
 import 'dart:html';
+
+import 'package:angular2/core.dart';
+import 'package:fnx_ui/src/util/date.dart';
+import 'package:fnx_ui/src/util/ui.dart' as ui;
+import 'package:intl/intl.dart';
 
 @Component(
     selector: 'fnx-date-picker',

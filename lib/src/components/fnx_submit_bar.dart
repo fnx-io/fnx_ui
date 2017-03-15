@@ -1,9 +1,9 @@
+import 'dart:html';
+
 import 'package:angular2/angular2.dart';
+import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/util/global_messages.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
-import 'dart:html';
-import 'package:fnx_ui/fnx_ui.dart';
-import 'package:fnx_ui/src/validator.dart';
 
 ///
 /// Standardized set of buttons at the bottom of the `fnx-form`. Renders submit button which is enabled only if the

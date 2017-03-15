@@ -2,10 +2,8 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular2/core.dart';
-import 'package:logging/logging.dart';
-import 'package:angular2/common.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
-import 'dart:html';
+import 'package:logging/logging.dart';
 
 @Component(
   selector: 'fnx-tabs',
