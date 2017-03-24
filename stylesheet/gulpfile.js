@@ -25,6 +25,7 @@ var releasing = false;
 // files configuration
 var FILES = {
 	lessToStart: sourcesRoot + 'css/fnx_ui.less',
+	lessToStartCore: sourcesRoot + 'css/fnx_ui_core.less',
 	lessDemo: sourcesRoot + 'css/demo.less',
 	lessThemes: sourcesRoot + 'css/theme_*.less',
 	lessToWatch: sourcesRoot + 'css/**/*.less',
@@ -62,6 +63,10 @@ function buildCss(files) {
 
 gulp.task('less', function () {
 	buildCss(FILES.lessToStart);
+});
+
+gulp.task('less-core', function () {
+	buildCss(FILES.lessToStartCore);
 });
 
 gulp.task('less-themes', function () {
@@ -108,7 +113,7 @@ gulp.task('watch', function () {
 	gulp.watch(FILES.copy, ['copy']);
 });
 
-gulp.task('devel', ['server', 'less', 'less-themes', 'less-demo', 'images', 'html', 'copy', 'watch'], function() {
+gulp.task('devel', ['server', 'less', 'less-core', 'less-themes', 'less-demo', 'images', 'html', 'copy', 'watch'], function() {
 	asciify('Watching changes', {color:'yellow', font: 'smshadow'}, function(err, res){ console.log(res); });
 });
 
