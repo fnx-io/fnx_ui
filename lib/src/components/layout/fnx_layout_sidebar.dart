@@ -25,6 +25,9 @@ class FnxLayoutSidebar implements OnInit {
   @Input()
   int widthPx = 250;
 
+  @Input()
+  bool sidebarVisible = true;
+
   bool open = false;
 
   String id = ui.uid('layout-');
@@ -36,6 +39,5 @@ class FnxLayoutSidebar implements OnInit {
   void toggle() {
     open = !open;
   }
-
 
 }

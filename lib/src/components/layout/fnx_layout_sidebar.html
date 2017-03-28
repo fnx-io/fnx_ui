@@ -1,5 +1,5 @@
 <div class="layout--sidebar responsive">
-    <aside class="layout__sidebar" [style.width.px]="widthPx" [class.open]="open" [class.shadow]="open">
+    <aside class="layout__sidebar" [style.width.px]="widthPx" [class.open]="open" [class.shadow]="open" *ngIf="sidebarVisible">
         <ng-content select="[sidebar]"></ng-content>
     </aside>
     <main class="layout__main">
