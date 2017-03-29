@@ -331,7 +331,7 @@ class FnxOptionValue {
     templateUrl: 'fnx_option.html',
     preserveWhitespace: false
 )
-class FnxOption implements OnInit {
+class FnxOption implements OnInit, OnDestroy {
 
   final String id = uid('ov_');
 
@@ -345,27 +345,41 @@ class FnxOption implements OnInit {
 
   FnxOption(this.parent);
 
+  bool _visibilityCache = null;
+  int _cacheHashCode = null;
+
   bool get visible {
     List<FnxOptionValue> opts = parent?.filteredOptions;
     if (opts == null) return false;
-    FnxOptionValue found = opts.firstWhere((FnxOptionValue el) {
-      return el != null && el.id == id;
-    }, orElse: () => null);
-    return found != null;
+    if (opts.isEmpty) return false;
+    if (parent.options.length == opts.length) return true;
+    if (opts.hashCode == _cacheHashCode && _visibilityCache != null) return _visibilityCache;
+    _cacheHashCode = opts.hashCode;
+    _visibilityCache = opts.contains(_myValue);
+    return _visibilityCache;
   }
+
+  FnxOptionValue _myValue;
 
   @override
   ngOnInit() {
-    parent.options.add(new FnxOptionValue(id, value, label));
+    _myValue = new FnxOptionValue(id, value, label);
+    parent.options.add(_myValue);
+  }
+
+
+  @override
+  ngOnDestroy() {
+    parent.options.remove(_myValue);
   }
 
   void optionSelected(Event event) {
     event?.preventDefault();
-
     parent?.selectOption(value);
   }
 
   get selected => parent != null && parent.isSelected(value);
+
 }
 
 const FNX_SELECT_DIRECTIVES = const [FnxSelect, FnxOption];
