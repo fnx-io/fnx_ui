@@ -22,12 +22,7 @@ class ExampleForm {
   bool readonly = false;
 
   ExampleForm(this.app) {
-    for (int a=0;a<1000;a++) {
-      mnogo.add("$a dasdsdsd dsadas");
-    }
   }
-
-  List<String> mnogo = [];
 
   void postRecord() {
     app.toast("And I'm posting your data right now: ${record}", duration: new Duration(milliseconds: 3000));

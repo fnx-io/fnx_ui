@@ -6,6 +6,7 @@
 /// More dartdocs go here.
 library fnx_ui;
 
+import 'src/components/fnx_reorder.dart';
 import 'src/components/auto_focus.dart';
 import 'src/components/fnx_form_errors.dart';
 import 'src/components/app/fnx_app.dart';
@@ -53,28 +54,33 @@ export 'src/components/layout/fnx_tabs.dart';
 export 'src/components/modal/fnx_modal.dart';
 export 'src/components/select/fnx_select.dart';
 export 'src/components/fnx_form_errors.dart';
+export 'src/components/fnx_reorder.dart';
 
-const List FNX_UI_COMPONENTS = const [FnxApp,
-                                      FnxPanel,
-                                      FnxPanelSmall,
-                                      FnxModal,
-                                      FnxLayoutSidebar,
-                                      FnxScrollPanel,
-                                      FnxForm,
-                                      FnxCheck,
-                                      FnxText,
-                                      FnxFile,
-                                      FnxTextarea,
-                                      FnxAlert,
-                                      FnxTabs,
-                                      FnxTab,
-                                      FnxImageCrop,
-                                      FnxFormErrors,
-                                      FnxWysiwygPoor,
-                                      FnxWysiwygRich,
-                                      AutoFocus,
-                                      FNX_INPUT_DIRECTIVES,
-                                      FNX_SELECT_DIRECTIVES,
-                                      FNX_DATE_DIRECTIVES,
-                                      FNX_ICON_DIRECTIVES,
-                                      FNX_BUTTON_DIRECTIVES];
+const List FNX_UI_COMPONENTS = const [
+  FnxApp,
+  FnxPanel,
+  FnxPanelSmall,
+  FnxModal,
+  FnxLayoutSidebar,
+  FnxScrollPanel,
+  FnxForm,
+  FnxCheck,
+  FnxText,
+  FnxFile,
+  FnxTextarea,
+  FnxAlert,
+  FnxTabs,
+  FnxTab,
+  FnxImageCrop,
+  FnxFormErrors,
+  FnxWysiwygPoor,
+  FnxWysiwygRich,
+  AutoFocus,
+  FnxReorderContainerVertical,
+  FnxReorderItem,
+  FNX_INPUT_DIRECTIVES,
+  FNX_SELECT_DIRECTIVES,
+  FNX_DATE_DIRECTIVES,
+  FNX_ICON_DIRECTIVES,
+  FNX_BUTTON_DIRECTIVES
+];

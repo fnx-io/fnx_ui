@@ -24,6 +24,8 @@ class ExampleTesting implements OnInit {
 
   PickImageUrl dumbImagePicker;
 
+  List reorderItems = ["jedna", "dva", "tri", "ctyri", "pet"];
+
   Map user = {
     'name': 'Ferda',
     'surname': 'Mravenec',
@@ -57,6 +59,10 @@ class ExampleTesting implements OnInit {
     this.userForm = fb.group({"name": userName, 'mood': mood});
 
     this.dumbImagePicker = () => (app.input("Image url please") as Future<String>);
+  }
+
+  void doReorder(ReorderEvent ev) {
+    ev.applyToList(reorderItems);
   }
 
   ngOnInit() {
