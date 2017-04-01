@@ -48,7 +48,7 @@ typedef void ShowErrorHookType(FnxError errorToShow);
 /// This type of function can be used to customize exception handling in case you throw
 /// your own exceptions.
 ///
-typedef FnxError ErrorProcessorType(Object exception, StackTrace stacktrace);
+typedef FnxError ErrorProcessorType(dynamic exception, dynamic stacktrace);
 
 ///
 ///
@@ -61,7 +61,7 @@ class FnxExceptionHandler implements ExceptionHandler {
 
   FnxExceptionHandler([this._rethrowException = false]) {
 
-    registerErrorProcessor(String, (Object exception, StackTrace stacktrace) {
+    registerErrorProcessor(String, (dynamic exception, dynamic stacktrace) {
       return new FnxError(exception.toString());
     });
 
