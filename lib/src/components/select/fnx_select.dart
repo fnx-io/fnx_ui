@@ -303,8 +303,8 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 
 class FnxOptionValue {
   final String id;
-  final String label;
-  final dynamic value;
+  String label;
+  dynamic value;
 
   FnxOptionValue(this.id, this.value, this.label);
 
@@ -333,7 +333,7 @@ class FnxOptionValue {
     templateUrl: 'fnx_option.html',
     preserveWhitespace: false
 )
-class FnxOption implements OnInit, OnDestroy {
+class FnxOption implements OnInit, OnDestroy, OnChanges {
 
   final String id = uid('ov_');
 
@@ -369,6 +369,13 @@ class FnxOption implements OnInit, OnDestroy {
     parent.options.add(_myValue);
   }
 
+  @override
+  ngOnChanges(Map<String, SimpleChange> changes) {
+    if (_myValue != null) {
+      _myValue.value = value;
+      _myValue.label = label;
+    }
+  }
 
   @override
   ngOnDestroy() {
@@ -381,6 +388,7 @@ class FnxOption implements OnInit, OnDestroy {
   }
 
   get selected => parent != null && parent.isSelected(value);
+
 
 }
 
