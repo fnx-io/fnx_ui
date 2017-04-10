@@ -189,8 +189,10 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
     }
     if (value.contains(v)) {
       value.remove(v);
+      notifyNgModel();
     } else {
       value.add(v);
+      notifyNgModel();
     }
   }
   @Input()
