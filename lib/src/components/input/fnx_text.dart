@@ -26,6 +26,7 @@ const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useEx
   (keyup)="markAsTouched()"
   [class.error]="isTouchedAndInvalid()"
   [attr.step]="decimalsAttr"
+  [attr.placeholder]="placeholder"
   #input
 />
 ''',
@@ -33,6 +34,7 @@ const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useEx
       CUSTOM_INPUT_TEXT_VALUE_ACCESSOR,
       const Provider(Focusable, useExisting: FnxText, multi: false)
     ],
+    styles: const [":host input { text-align: inherit;}"],
     preserveWhitespace: false
 )
 class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
@@ -54,6 +56,9 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
 
   @Input()
   String type = 'text';
+
+  @Input()
+  String placeholder = null;
 
   @Input()
   bool autocomplete = true;

@@ -22,6 +22,11 @@
             </fnx-input>
         </p>
         <p>
+            <fnx-input label="Napravo" errorMessage="Toto je povinna hodnota!">
+                <fnx-text [required]="true" [(ngModel)]="user['name']" class="text--right" placeholder="Jmeno"></fnx-text>
+            </fnx-input>
+        </p>
+        <p>
             <fnx-check label="Zaskrtni me" [(ngModel)]="user['dead']"></fnx-check>
         </p>
         <p>
