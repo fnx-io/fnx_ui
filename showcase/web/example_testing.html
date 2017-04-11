@@ -31,7 +31,7 @@
         </p>
         <p>
             <fnx-input label="Je mrtev?" errorMessage="Zive nebereme!">
-                <fnx-check [required]="true" [(ngModel)]="user['dead']"></fnx-check>
+                <fnx-check [required]="true" [(ngModel)]="user['dead']" [disabled]="true"></fnx-check>
             </fnx-input>
         </p>
 
@@ -88,10 +88,6 @@
         </fnx-input>
 
         <fnx-submit-bar [back]="true"></fnx-submit-bar>
-
-
-
-
 
     </fnx-form>
 

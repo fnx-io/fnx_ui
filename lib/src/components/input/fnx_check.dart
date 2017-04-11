@@ -14,6 +14,8 @@ const CUSTOM_INPUT_CHECK_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
     <input type="checkbox" attr.id="{{componentId}}" [(ngModel)]="value"
     (focus)="markAsTouched()"
     (click)="markAsTouched()"
+    [disabled]="disabled"
+    [class.disabled]="disabled"
     ><label attr.for="{{componentId}}"
     (focus)="markAsTouched()"
     (click)="markAsTouched()"
@@ -27,6 +29,7 @@ class FnxCheck extends FnxInputComponent implements ControlValueAccessor, OnInit
 
   @Input() bool required = false;
   @Input() bool readonly = false;
+  @Input() bool disabled = false;
   @Input() String label;
 
   FnxCheck(@Optional() FnxForm form, @Optional() FnxInput wrapper): super(form, wrapper);

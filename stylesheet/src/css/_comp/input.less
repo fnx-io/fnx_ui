@@ -153,7 +153,6 @@ textarea {
     }
   }
 }
-
 .check {
   position: relative;
   display: flex;
@@ -194,6 +193,12 @@ textarea {
     }
     &:checked + label:before {
       content: 'radio_button_checked';
+    }
+  }
+  input[type=checkbox][disabled]:not([disabled=false]), input.disabled[type=checkbox] {
+    & + label {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
   }
 }
