@@ -34,6 +34,8 @@ class ExampleTesting implements OnInit {
     'dead': false,
     'birthday': '2016-06-22T15:22:30.638489'};
 
+  int shoeSize;
+
   static dynamic moodValidator = (AbstractControl c) {
     if (c.value == null) return null;
     List selected;

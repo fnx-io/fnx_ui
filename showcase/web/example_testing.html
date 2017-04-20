@@ -27,6 +27,12 @@
             </fnx-input>
         </p>
         <p>
+            <fnx-input label="Shoe size" errorMessage="Please provide a valid shoe size">
+                <fnx-int [(ngModel)]="shoeSize"></fnx-int>
+            </fnx-input>
+        </p>
+
+        <p>
             <fnx-check label="Zaskrtni me" [(ngModel)]="user['dead']"></fnx-check>
         </p>
         <p>
@@ -92,5 +98,6 @@
     </fnx-form>
 
     <p>{{user}}</p>
+    <p>{{shoeSize}}</p>
 
 </div>
