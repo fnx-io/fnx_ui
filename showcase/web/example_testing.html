@@ -28,9 +28,17 @@
         </p>
         <p>
             <fnx-input label="Shoe size" errorMessage="Please provide a valid shoe size">
-                <fnx-int [(ngModel)]="shoeSize"></fnx-int>
+                <fnx-int [(ngModel)]="shoeSize" [min]="35" [max]="48.5"></fnx-int>
             </fnx-input>
         </p>
+
+        <p>
+            <fnx-input label="What is the airspeed velocity of an unladen swallow?"
+                       errorMessage="You have to know these things when you're a king, you know">
+                <fnx-double [(ngModel)]="velocity" [min]="99" [max]="199.9"></fnx-double>
+            </fnx-input>
+        </p>
+
 
         <p>
             <fnx-check label="Zaskrtni me" [(ngModel)]="user['dead']"></fnx-check>
@@ -99,5 +107,6 @@
 
     <p>{{user}}</p>
     <p>{{shoeSize}}</p>
+    <p>{{velocity}}</p>
 
 </div>

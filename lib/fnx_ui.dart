@@ -6,6 +6,7 @@
 /// More dartdocs go here.
 library fnx_ui;
 
+import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_int.dart';
 import 'src/components/fnx_reorder.dart';
 import 'src/components/auto_focus.dart';
@@ -43,6 +44,7 @@ export 'src/components/input/fnx_file.dart';
 export 'src/components/input/fnx_input.dart';
 export 'src/components/input/fnx_text.dart';
 export 'src/components/input/fnx_int.dart';
+export 'src/components/input/fnx_double.dart';
 export 'src/components/input/fnx_textarea.dart';
 export 'src/components/input/fnx_wysiwyg_poor.dart';
 export 'src/components/input/fnx_wysiwyg_rich.dart';
@@ -69,6 +71,7 @@ const List FNX_UI_COMPONENTS = const [
   FnxCheck,
   FnxText,
   FnxInt,
+  FnxDouble,
   FnxFile,
   FnxTextarea,
   FnxAlert,

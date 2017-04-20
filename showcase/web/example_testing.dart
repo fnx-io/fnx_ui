@@ -35,6 +35,7 @@ class ExampleTesting implements OnInit {
     'birthday': '2016-06-22T15:22:30.638489'};
 
   int shoeSize;
+  double velocity;
 
   static dynamic moodValidator = (AbstractControl c) {
     if (c.value == null) return null;

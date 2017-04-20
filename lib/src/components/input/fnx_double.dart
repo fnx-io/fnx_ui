@@ -3,14 +3,15 @@ import 'package:angular2/core.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 
-const CUSTOM_INPUT_INT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExisting: FnxInt, multi: true);
+const CUSTOM_INPUT_DOUBLE_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExisting: FnxDouble, multi: true);
 
 @Component(
-    selector: 'fnx-int',
+    selector: 'fnx-double',
     template: r'''
-<input id="{{ componentId }}" type="{{ htmlType }}" [(ngModel)]="value" [readonly]="readonly"
+<input id="{{ componentId }}" type="number" [(ngModel)]="value" [readonly]="readonly"
   [attr.min]="min"
   [attr.max]="max"
+  [attr.step]="step"
   [attr.autocomplete]="autocompleteAttr"
   (keyup)="markAsTouched()"
   [class.error]="isTouchedAndInvalid()"
@@ -19,13 +20,13 @@ const CUSTOM_INPUT_INT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExi
 />
 ''',
     providers: const [
-      CUSTOM_INPUT_INT_VALUE_ACCESSOR,
+      CUSTOM_INPUT_DOUBLE_VALUE_ACCESSOR,
       const Provider(Focusable, useExisting: FnxInt, multi: false)
     ],
     styles: const [":host input { text-align: inherit;}"],
     preserveWhitespace: false
 )
-class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
+class FnxDouble extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
 
   @Input()
   bool required = false;
@@ -35,6 +36,9 @@ class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, 
 
   @Input()
   num max = null;
+
+  @Input()
+  num step = 1.0;
 
   @Input()
   String placeholder = null;
@@ -48,14 +52,9 @@ class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, 
   @ViewChild("input")
   ElementRef elementRef;
 
-  FnxInt(@Optional() FnxForm form, @Optional() FnxInput wrapper) : super(form, wrapper);
-
-  // 'number' must not be a constant in the html template !
-  String get htmlType => 'number';
+  FnxDouble(@Optional() FnxForm form, @Optional() FnxInput wrapper) : super(form, wrapper);
 
   String get autocompleteAttr => (autocomplete) ? 'on' : 'off';
-
-  var rawValue;
 
   @override
   ngOnInit() {
@@ -69,27 +68,23 @@ class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, 
   /// Is this a valid number within min/max limits?
   ///
   bool hasValidNumberImpl() {
-    if (rawValue != null && rawValue is String) {
-      if (value.toString() != rawValue) return false;
-    }
-
     if (min == null && max == null) return true;
-    int v = parseInt(value);
+    double v = parseDouble(value);
     if (v == null) return true;
 
     if (v == null && value != null && value.toString().length > 0) return false; // not a number
     if (required && v == null) return false;
-    if (min != null && v < min.toInt()) return false;
-    if (max != null && v > max.toInt()) return false;
+    if (min != null && v < min.toDouble()) return false;
+    if (max != null && v > max.toDouble()) return false;
     return true;
   }
 
-  int parseInt(value) {
+  double parseDouble(value) {
     if (value == null) return null;
-    if (value is int) {
+    if (value is num) {
       return value;
     } else {
-      return int.parse(value, onError: (_) => null);
+      return double.parse(value, (_) => null);
     }
   }
 
@@ -102,15 +97,11 @@ class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, 
 
   @override
   set value(dynamic v) {
-    rawValue = v;
-
     if (v == null) {
       super.value = null;
     } else {
-      int parsed = parseInt(v);
-      if (parsed != null) {
-        super.value = parsed;
-      }
+      double parsed = parseDouble(v);
+      super.value = parsed;
     }
   }
 
