@@ -79,6 +79,7 @@ class DropdownTracker {
 
   int top = 10000;
   int left = 10000;
+  String dropdownHeight = "auto";
 
   StreamSubscription<Event> subscription;
 
@@ -101,6 +102,7 @@ class DropdownTracker {
 
   void updatePosition([_]) {
     int scrHeight = window.innerHeight.toInt();
+    int dropdownH = _dropdown.getBoundingClientRect().height.toInt();
     if (_element != null) {
       Rectangle<num> el = _element.getBoundingClientRect();
 
@@ -113,13 +115,22 @@ class DropdownTracker {
         return;
       }
       left = el.left.toInt();
-      if (el.top < scrHeight/2) {
+
+      bool up = false;
+
+      if (dropdownH + el.top + el.height < scrHeight) {
+        // vejde se dolu
+      } else {
+        up = true;
+      }
+
+      if (up) {
+        // open up
+        top = el.top.toInt() - dropdownH;
+
+      } else {
         // open down
         top = el.top.toInt() + el.height.toInt();
-        
-      } else {
-        // open up
-        top = el.top.toInt() - _dropdown.getBoundingClientRect().height.toInt();
 
       }
     }
