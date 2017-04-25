@@ -68,6 +68,7 @@ class FnxDouble extends FnxInputComponent implements ControlValueAccessor, OnIni
   /// Is this a valid number within min/max limits?
   ///
   bool hasValidNumberImpl() {
+    if (required && value == null) return false;
     if (min == null && max == null) return true;
     double v = parseDouble(value);
     if (v == null) return true;

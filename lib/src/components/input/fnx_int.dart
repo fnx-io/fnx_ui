@@ -69,6 +69,7 @@ class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, 
   /// Is this a valid number within min/max limits?
   ///
   bool hasValidNumberImpl() {
+    if (required && value == null) return false;
     if (rawValue != null && rawValue is String) {
       if (value.toString() != rawValue) return false;
     }
