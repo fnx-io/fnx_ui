@@ -39,6 +39,9 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 
   bool open = false;
   bool openUp = false;
+  bool get dropDownVisible => open && !readonly;
+
+  DropdownTracker dropdownTracker = new DropdownTracker();
 
   bool _multi = false;
 
@@ -53,15 +56,13 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   StreamSubscription<String> navigationActions;
 
   Node container;
-
-  StreamSubscription<double> _positionSubscription;
+  
+  @ViewChild("dropdown")
+  ElementRef dropdown;
 
   FnxSelect(ElementRef el, @Optional() FnxInput wrapper, @Optional() FnxForm form): super(form, wrapper) {
     if (el != null) {
       container = el.nativeElement;
-      _positionSubscription = verticalElementPositionStream(container).listen((double position) {
-         openUp = position > 0.6;
-      });
     }
   }
 
@@ -83,6 +84,8 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 
   void showOptions() {
     open = true;
+    dropdownTracker.updatePosition();
+    later(dropdownTracker.updatePosition);
   }
 
   bool get showFilter {
@@ -277,16 +280,17 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
       hideOptions();
     });
     this.navigationActions = bindKeyHandler(document.onKeyDown);
+    dropdownTracker.init(container, dropdown.nativeElement, ()=>open=false);
   }
 
   @override
   ngOnDestroy() {
     super.ngOnDestroy();
     cancelSubscription(globalClicks);
-    cancelSubscription(_positionSubscription);
     globalClicks = null;
     cancelSubscription(navigationActions);
     navigationActions = null;
+    dropdownTracker.destroy();
   }
 
 

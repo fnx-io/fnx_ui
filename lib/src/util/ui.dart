@@ -3,6 +3,7 @@ import 'dart:html';
 
 import 'package:angular2/common.dart';
 import 'package:async/async.dart';
+import 'package:fnx_ui/src/util/async.dart';
 
 int idCounter = 1;
 /// Generates unique string each time called. When called with a prefix param
@@ -25,6 +26,7 @@ bool isParentNodeOf(Node target, Node potentialParent) {
     if (target == potentialParent) return true;
     target = target.parentNode;
   }
+  
   return false;
 }
 
@@ -67,4 +69,60 @@ Stream<double> verticalElementPositionStream(Element e) {
           }
       )
   );
+}
+
+class DropdownTracker {
+
+  Element _element;
+  Element _dropdown;
+  Function _onHide;
+
+  int top = 10000;
+  int left = 10000;
+
+  StreamSubscription<Event> subscription;
+
+  DropdownTracker() {
+  }
+
+  void init(Element container, Element dropdown, Function onHide) {
+    this._element = container;
+    this._dropdown = dropdown;
+    this._onHide = onHide;
+    Stream<Event> mergedRelevant = StreamGroup.merge([window.onMouseWheel, window.onResize, window.onScroll]);
+    FnxStreamDebouncer db = new FnxStreamDebouncer(new Duration(milliseconds: 20));
+    subscription = mergedRelevant.transform(db).listen(updatePosition);
+  }
+
+  void destroy() {
+    this._element = null;
+    subscription.cancel();
+  }
+
+  void updatePosition([_]) {
+    int scrHeight = window.innerHeight.toInt();
+    if (_element != null) {
+      Rectangle<num> el = _element.getBoundingClientRect();
+
+      if (el.top < 0) {
+        _onHide();
+        return;
+      }
+      if (el.top > scrHeight) {
+        _onHide();
+        return;
+      }
+      left = el.left.toInt();
+      if (el.top < scrHeight/2) {
+        // open down
+        top = el.top.toInt() + el.height.toInt();
+        
+      } else {
+        // open up
+        top = el.top.toInt() - _dropdown.getBoundingClientRect().height.toInt();
+
+      }
+    }
+  }
+
 }
