@@ -21,7 +21,7 @@ const CUSTOM_INPUT_DOUBLE_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, use
 ''',
     providers: const [
       CUSTOM_INPUT_DOUBLE_VALUE_ACCESSOR,
-      const Provider(Focusable, useExisting: FnxInt, multi: false)
+      const Provider(Focusable, useExisting: FnxDouble, multi: false)
     ],
     styles: const [":host input { text-align: inherit;}"],
     preserveWhitespace: false
