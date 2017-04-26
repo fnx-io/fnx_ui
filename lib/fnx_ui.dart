@@ -6,8 +6,9 @@
 /// More dartdocs go here.
 library fnx_ui;
 
-import 'package:fnx_ui/fnx_ui.dart';
-import 'package:fnx_ui/src/components/input/fnx_int.dart';
+import 'src/components/app/fnx_cc.dart';
+import 'src/components/input/fnx_double.dart';
+import 'src/components/input/fnx_int.dart';
 import 'src/components/fnx_reorder.dart';
 import 'src/components/auto_focus.dart';
 import 'src/components/fnx_form_errors.dart';
@@ -33,6 +34,7 @@ import 'src/components/layout/fnx_tabs.dart';
 import 'src/components/modal/fnx_modal.dart';
 import 'src/components/select/fnx_select.dart';
 
+export 'src/components/app/fnx_cc.dart';
 export 'src/components/app/fnx_app.dart';
 export 'src/components/auto_focus.dart';
 export 'src/components/date/fnx_date.dart';
@@ -84,6 +86,7 @@ const List FNX_UI_COMPONENTS = const [
   AutoFocus,
   FnxReorderContainerVertical,
   FnxReorderItem,
+  FnxCC,
   FNX_INPUT_DIRECTIVES,
   FNX_SELECT_DIRECTIVES,
   FNX_DATE_DIRECTIVES,

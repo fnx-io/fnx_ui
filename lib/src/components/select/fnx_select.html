@@ -5,10 +5,18 @@
      [attr.readonly]="readonly"
      [class.open--up]="openUp"
      [class.open]="open"
-     [class.error]="isTouchedAndInvalid()">
+     [class.error]="isTouchedAndInvalid()"
+     #select>
 
-    <span class="clickable">{{ renderValueDescription() }}</span>
-    <div class="select__dropdown" [hidden]="!open || readonly">
+    <span class="clickable pointer">{{ renderValueDescription() }}</span>
+    <div class="select__dropdown bg--white"
+         #dropdown
+         [hidden]="!dropDownVisible"
+         [style.position]="'fixed'"
+         [style.top.px]="dropdownTracker.top"
+         [style.left.px]="dropdownTracker.left"
+         [style.height]="dropdownTracker.dropdownHeight"
+        >
         <div *ngIf="showFilter" class="input" (click)="$event.stopPropagation()">
             <input id="{{componentId}}-search" type="text" [placeholder]="filterPlaceholder" [(ngModel)]="filter">
             <label attr.for="{{componentId}}-search" class="icon">search</label>

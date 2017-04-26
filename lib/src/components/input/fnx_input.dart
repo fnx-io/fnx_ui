@@ -12,7 +12,7 @@ import 'package:fnx_ui/src/validator.dart';
   <label *ngIf="label != null"
     [attr.for]="componentId"
     [class.required]="hasRequiredChildren()"
-    (click)="markAsTouched()">{{ label }}</label>
+    (click)="markAsTouched()" [innerHtml]="label"></label>
   <ng-content></ng-content>
   <label *ngIf="isTouchedAndInvalid()" class="error" [attr.for]="componentId">{{ errorMessage }}</label>
 </div>

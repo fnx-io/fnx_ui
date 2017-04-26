@@ -73,8 +73,8 @@ class ModuleGenerator implements GeneratedSet {
       html.template = """
 <div class="layout--header">
     <header>
-        <nav class="navbar padding--fab bg--theme">
-            <h1>${i.camelCase}</h1>
+        <nav class="navbar padding--fab bg--theme" style="opacity: 0.9">
+            <h2>${i.camelCase}</h2>
             <!--<a [routerLink]="['CreateSomething']" class="btn--fab">add</a>-->
             <a href="#TODO" class="btn--fab">add</a>
         </nav>
