@@ -38,7 +38,7 @@ class FnxDouble extends FnxInputComponent implements ControlValueAccessor, OnIni
   num max = null;
 
   @Input()
-  num step = 1.0;
+  num step = 0.1;
 
   @Input()
   String placeholder = null;
