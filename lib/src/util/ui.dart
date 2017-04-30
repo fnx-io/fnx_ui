@@ -71,6 +71,9 @@ Stream<double> verticalElementPositionStream(Element e) {
   );
 }
 
+///
+/// Nejakym takovym chytristikou bysme meli delat vsechny dropdowny.
+///
 class DropdownTracker {
 
   Element _element;
@@ -91,7 +94,7 @@ class DropdownTracker {
     this._dropdown = dropdown;
     this._onHide = onHide;
     Stream<Event> mergedRelevant = StreamGroup.merge([window.onMouseWheel, window.onResize, window.onScroll]);
-    FnxStreamDebouncer db = new FnxStreamDebouncer(new Duration(milliseconds: 20));
+    FnxStreamDebouncer db = new FnxStreamDebouncer(new Duration(milliseconds: 10));
     subscription = mergedRelevant.transform(db).listen(updatePosition);
   }
 
@@ -116,22 +119,18 @@ class DropdownTracker {
       }
       left = el.left.toInt();
 
-      bool up = false;
-
       if (dropdownH + el.top + el.height < scrHeight) {
         // vejde se dolu
-      } else {
-        up = true;
-      }
-
-      if (up) {
-        // open up
-        top = el.top.toInt() - dropdownH;
-
-      } else {
-        // open down
         top = el.top.toInt() + el.height.toInt();
 
+      } else {
+        if (el.top - dropdownH > 0) {
+          // vejde se nahoru
+          top = el.top.toInt() - dropdownH;
+
+        } else {
+          top = (scrHeight - dropdownH)~/2;
+        }
       }
     }
   }
