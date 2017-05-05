@@ -4,11 +4,11 @@
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita quaerat quo reiciendis suscipit velit voluptatibus! Adipisci, at expedita iste magni minus nisi porro provident quas rerum sit velit veniam voluptates.</p>
 
 
-    <ul class="ul--flat margin--vertical" reorderContainerVertical (reorder)="doReorder($event)" >
+    <ul class="ul--flat margin--vertical" reorderContainer (reorder)="doReorder($event)" >
         <li reorderItem *ngFor="let item of reorderItems" class="item">{{item}}</li>
     </ul>
 
-    <div class="margin--vertical" reorderContainerHorizontal (reorder)="doReorder($event)" >
+    <div class="margin--vertical" reorderContainer (reorder)="doReorder($event)" >
         <p style="float: left;" reorderItem *ngFor="let item of reorderItems" class="padding--big">{{item}}</p>
     </div>
 
