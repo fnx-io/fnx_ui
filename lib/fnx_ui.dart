@@ -85,6 +85,7 @@ const List FNX_UI_COMPONENTS = const [
   FnxWysiwygRich,
   AutoFocus,
   FnxReorderContainerVertical,
+  FnxReorderContainerHorizontal,
   FnxReorderItem,
   FnxCC,
   FNX_INPUT_DIRECTIVES,

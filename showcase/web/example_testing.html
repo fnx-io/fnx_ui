@@ -8,6 +8,12 @@
         <li reorderItem *ngFor="let item of reorderItems" class="item">{{item}}</li>
     </ul>
 
+    <div class="margin--vertical" reorderContainerHorizontal (reorder)="doReorder($event)" >
+        <p style="float: left;" reorderItem *ngFor="let item of reorderItems" class="padding--big">{{item}}</p>
+    </div>
+
+    <br style="clear: both">
+
     <fnx-form>
 
         <p>
