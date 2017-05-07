@@ -5,11 +5,11 @@
 
 
     <ul class="ul--flat margin--vertical" reorderContainer (reorder)="doReorder($event)" >
-        <li reorderItem *ngFor="let item of reorderItems" class="item">{{item}}</li>
+        <li [reorderItem]="i" *ngFor="let item of reorderItems; let i = index" class="item">{{item}}</li>
     </ul>
 
     <div class="margin--vertical" reorderContainer (reorder)="doReorder($event)" >
-        <p style="float: left;" reorderItem *ngFor="let item of reorderItems" class="padding--big">{{item}}</p>
+        <p style="float: left;" [reorderItem]="i" *ngFor="let item of reorderItems; let i = index" class="padding--big border">{{item}}</p>
     </div>
 
     <br style="clear: both">

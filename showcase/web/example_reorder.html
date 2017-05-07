@@ -1,0 +1,25 @@
+<example-buttons-renderer name="example_reorder"></example-buttons-renderer>
+
+<div reorderContainer (reorder)="onReorder($event)" class="margin--big--vertical">
+    <p class="border padding margin"
+        *ngFor="let item of items; let i = index"
+        [reorderItem]="i">{{item}}</p>
+</div>
+
+<hr>
+
+<div reorderContainer (reorder)="onReorder($event)" class="margin--big--vertical">
+
+    <p class="border padding margin bg--theme" [reorderItem]="0" style="width: 10rem">{{firstItem}}</p>
+
+    <p class="border padding margin" style="float: left"
+       *ngFor="let item of restOfTheItems; let i = index"
+       [reorderItem]="i+1">{{item}}</p>
+
+</div>
+
+<br style="clear: both">
+
+<p class="margin--big--vertical">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aperiam,
+aut corporis doloribus ducimus ea error fugiat harum minima molestias officia perspiciatis quis quod rem repudiandae sapiente. Distinctio, rem.</p>
+

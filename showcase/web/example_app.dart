@@ -4,6 +4,7 @@
 import 'cookbook/cookbook_form_validation.dart';
 import 'dart:math';
 
+import 'example_reorder.dart';
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
 
@@ -38,6 +39,7 @@ import 'example_testing.dart';
   const Route(path: "/About", name: "About", component: About, useAsDefault: true),
   const Route(path: "/Panels", name: "Panels", component: ExamplePanels),
   const Route(path: "/Modals", name: "Modals", component: ExampleModals),
+  const Route(path: "/Reorder", name: "Reorder", component: ExampleReorder),
   const Route(path: "/Exceptions", name: "Exceptions", component: ExampleExceptions),
   const Route(path: "/Tabs/...", name: "Tabs", component: ExampleTabs),
 

@@ -17,31 +17,46 @@ class FnxReorderContainer {
     container = element.nativeElement;
   }
 
-  HtmlElement _dragged = null;
-  
-  HtmlElement get dragged => _dragged;
+  FnxReorderItem _dragged = null;
+  int _draggedIndex;
 
-  set dragged(HtmlElement value) {
+  FnxReorderItem get dragged => _dragged;
+  int get draggedIndex => _draggedIndex;
+
+  set dragged(FnxReorderItem value) {
     if (value == null) {
       // removing element from dragging
       if (_dragged != null) {
-        _dragged.style.opacity = null;
+        _dragged.itemElement.style.opacity = null;
+        _draggedIndex = null;
       }
     }
     _dragged = value;
     if (_dragged != null) {
       // element is dragged, hide it
-      _dragged.style.opacity = "0.6";
+      _dragged.itemElement.style.opacity = "0.6";
+      _draggedIndex = _dragged.reorderItem;
     }
+    print("Dragged: $_dragged  $draggedIndex");
   }
 
   @Output()
   EventEmitter<ReorderEvent> reorder = new EventEmitter();
 
-  void emit(HtmlElement e) {
-    int from = container.children.indexOf(dragged);
-    int to = container.children.indexOf(e);
+  void emitReorder(FnxReorderItem target) {
+    if (_dragged == null) {
+      // we are not dragging anything, probably other reorderContainer on page
+      return;
+    }
+    int from = _draggedIndex;
+    int to = target.reorderItem;
+    if (from == to) {
+      // unnecessary
+      return;
+    }
+    print("Reorder from=$from to=$to");
     reorder.emit(new ReorderEvent(from, to));
+    _draggedIndex = to;
   }
 
 }
@@ -75,10 +90,13 @@ class ReorderEvent {
 )
 class FnxReorderItem {
 
+  @Input()
+  int reorderItem;
+
   FnxReorderContainer parent;
   HtmlElement itemElement;
 
-  bool get beingDragged => parent.dragged == itemElement;
+  bool get beingDragged => parent.draggedIndex == reorderItem;
 
   FnxReorderItem(ElementRef elementRef, this.parent) {
     itemElement = (elementRef.nativeElement as HtmlElement);
@@ -88,7 +106,11 @@ class FnxReorderItem {
 
     itemElement.onDragStart.listen((MouseEvent ev) {
       // I'm being dragged somewhere.
-      parent.dragged = itemElement;
+      if (reorderItem == null) {
+        throw "You must specify index of reorderItem: [reorderItem]='1'";
+      }
+      ev.dataTransfer.dropEffect="none";
+      parent.dragged = this;
     });
 
     itemElement.onDragEnd.listen((MouseEvent ev) {
@@ -99,10 +121,9 @@ class FnxReorderItem {
     itemElement.onDragEnter.listen((MouseEvent ev) {
       if (beingDragged) return;
       // something is dragged over me, and it's not me
-      parent.emit(itemElement);
+      parent.emitReorder(this);
     });
 
   }
-  
 
 }
