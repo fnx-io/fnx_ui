@@ -1,0 +1,27 @@
+.tooltip {
+  margin-top: @paddingSmall;
+  position: relative;
+  display: block;
+  padding: @padding;
+  border-radius: (@borderRadius * 2);
+  background-color: #333;
+  color: white;
+  .shadow--huge;
+}
+.tooltip:after {
+  bottom: 100%;
+  right: @padding;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.tooltip:after {
+  border-color: transparent;
+  border-bottom-color: #333;
+  border-width: @paddingSmall;
+  margin-left: -@paddingSmall;
+}
