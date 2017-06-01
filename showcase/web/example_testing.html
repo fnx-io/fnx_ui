@@ -56,7 +56,7 @@
         </p>
 
         <fnx-input label="Jakou ma naladu?">
-            <fnx-select [(ngModel)]="user['mood']" [ngFormControl]="mood" [multi]="true">
+            <fnx-select [(ngModel)]="user['mood']" [ngFormControl]="mood" [multi]="true" [alwaysShowFilter]="true">
                 <fnx-option *ngFor="let i of moods"
                             label="{{i['name']}}" [value]="i['id']"></fnx-option>
             </fnx-select>

@@ -41,13 +41,59 @@ Please note, most of the css classes here are pretty vital for this example. Be 
 
     <fnx-scroll-panel class="flex--grow flex--shrink margin--bottom" (loadMore)="loadMore()">
         <table [class.table--borders]="bordersOn" [class.table--lines]="linesOn" [class.table--stripes]="stripesOn" [class.table--active]="activeOn">
-            <tr *ngFor="let row of list">
+            <tr>
+                <th><span class="spacer">ID</span>
+                    <span class="dropdown">
+                        <ul class="menu--vertical">
+                            <li><span>item</span></li>
+                            <li><span>item</span></li>
+                            <li><span>item</span></li>
+                            <li><span>item</span></li>
+                        </ul>
+                    </span>
+                </th>
+                <th><span class="spacer">jmeno</span>
+
+                    <span class="dropdown">
+                        <ul class="menu--vertical">
+                            <li><span>item</span></li>
+                            <li><span>item</span></li>
+                            <li><span>item</span></li>
+                            <li><span>item</span></li>
+                        </ul>
+                    </span>
+
+                </th>
+                <th><span class="spacer">email</span>
+
+                    <span class="dropdown">
+                        <ul class="menu--vertical">
+                            <li><span>item</span></li>
+                            <li><span>item</span></li>
+                            <li><span>item</span></li>
+                            <li><span>item</span></li>
+                        </ul>
+                    </span>
+
+                </th>
+            </tr>
+            <tr *ngFor="let row of list" (click)="selectedRow = row">
                 <td>{{row["id"]}}</td>
                 <td>{{row["name"]}}</td>
                 <td>{{row["email"]}}</td>
             </tr>
         </table>
     </fnx-scroll-panel>
+
+    <fnx-modal (close)="selectedRow = null" *ngIf="selectedRow != null">
+        <h3 header>{{selectedRow["name"]}}</h3>
+        <div main>
+            {{selectedRow}}
+        </div>
+        <div footer class="text--right padding">
+            <button (click)="selectedRow = null" class="btn">close</button>
+        </div>
+    </fnx-modal>
 
     <p class="text--red">Fixed footer here, thank you ... lorem ipsum.</p>
 

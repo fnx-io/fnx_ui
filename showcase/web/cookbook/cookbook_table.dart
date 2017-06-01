@@ -20,9 +20,11 @@ class CookbookTable {
   bool bordersOn = false;
   bool linesOn = false;
   bool stripesOn = false;
-  bool activeOn = false;
+  bool activeOn = true;
 
   CookbookTable(this.app);
+
+  Map selectedRow = null;
 
   ngOnInit() {
     loadMore();

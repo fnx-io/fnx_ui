@@ -29,7 +29,6 @@ class AutoFocus implements OnInit {
   @override
   ngOnInit() {
     if (focusable != null) {
-
       focusable.focus();
 
     } else if (element.nativeElement is HtmlElement) {

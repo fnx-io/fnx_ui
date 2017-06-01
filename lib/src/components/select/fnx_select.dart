@@ -19,7 +19,8 @@ const CUSTOM_SELECT_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
     selector: 'fnx-select',
     templateUrl: 'fnx_select.html',
     providers: const [CUSTOM_SELECT_VALUE_ACCESSOR],
-    preserveWhitespace: false
+    preserveWhitespace: false,
+    directives: const [ AutoFocus ]
 )
 class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
 
@@ -59,6 +60,9 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   
   @ViewChild("dropdown")
   ElementRef dropdown;
+
+  @ViewChild("select")
+  ElementRef select;
 
   FnxSelect(ElementRef el, @Optional() FnxInput wrapper, @Optional() FnxForm form): super(form, wrapper) {
     if (el != null) {
@@ -124,7 +128,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   }
 
   bool isHighlighted(FnxOptionValue opt) {
-    return _highlighted != null && _highlighted == opt;
+    return _highlighted == opt;
   }
 
   /// returns label constructed from all selected option labels joined by ','
@@ -181,6 +185,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
       } else {
         this.value = value;
       }
+      hideOptions();
     }
   }
 
@@ -227,7 +232,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
                                 KeyCode.UP: 'UP',
                                 KeyCode.DOWN: 'DOWN'};
     Set<int> supportedKeys = new Set.from(actions.keys);
-    Stream<KeyboardEvent> onlyWhenExpanded = stream.where((event) => open && !isActiveElement(event.target));
+    Stream<KeyboardEvent> onlyWhenExpanded = stream.where((event) => isEventFromSubtree(event, select.nativeElement));
     Stream<KeyboardEvent> onlySupported = onlyWhenExpanded.where((event) => supportedKeys.contains(event.keyCode));
     Stream<KeyboardEvent> cancelled = onlySupported.map((event) {
       event.preventDefault();
@@ -237,11 +242,21 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 
     return result.listen((action) {
       if (action == 'UP') {
-        selectNext(_highlighted, filteredOptions.reversed);
+        if (dropDownVisible) {
+          selectNext(_highlighted, filteredOptions.reversed);
+        }
       } else if (action  == 'DOWN') {
-        selectNext(_highlighted, filteredOptions);
+        if (!dropDownVisible) {
+          showOptions();
+        } else {
+          selectNext(_highlighted, filteredOptions);
+        }
       } else if (action == 'SELECT') {
-        if (_highlighted != null) doSelectOption(_highlighted.value);
+        if (!dropDownVisible) {
+          showOptions();
+        } else {
+          if (_highlighted != null) doSelectOption(_highlighted.value);
+        }
       } else if (action == 'HIDE') {
         hideOptions();
       }
@@ -353,6 +368,8 @@ class FnxOption implements OnInit, OnDestroy, OnChanges {
 
   bool _visibilityCache = null;
   int _cacheHashCode = null;
+
+  bool get highlighted => parent.isHighlighted(_myValue);
 
   bool get visible {
     List<FnxOptionValue> opts = parent?.filteredOptions;

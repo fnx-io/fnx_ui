@@ -17,8 +17,8 @@
          [style.left.px]="dropdownTracker.left"
          [style.height]="dropdownTracker.dropdownHeight"
         >
-        <div *ngIf="showFilter" class="input" (click)="$event.stopPropagation()">
-            <input id="{{componentId}}-search" type="text" [placeholder]="filterPlaceholder" [(ngModel)]="filter">
+        <div *ngIf="showFilter && dropDownVisible" class="input" (click)="$event.stopPropagation()">
+            <input id="{{componentId}}-search" type="text" [placeholder]="filterPlaceholder" [(ngModel)]="filter" autoFocus >
             <label attr.for="{{componentId}}-search" class="icon">search</label>
         </div>
         <div class="select__items">
