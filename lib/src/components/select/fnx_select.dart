@@ -405,6 +405,7 @@ class FnxOption implements OnInit, OnDestroy, OnChanges {
 
   void optionSelected(Event event) {
     event?.preventDefault();
+    event?.stopPropagation();
     parent?.selectOption(value);
   }
 
