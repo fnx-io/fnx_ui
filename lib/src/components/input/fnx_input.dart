@@ -105,7 +105,9 @@ abstract class FnxInputComponent extends FnxValidatorComponent implements OnInit
 
   @override
   void writeValue(obj) {
+    print(obj);
     _value = obj;
+
     // notifyNgModel(); //we shouldn't do this, no need to notify NgModel about changes it already knows
   }
 

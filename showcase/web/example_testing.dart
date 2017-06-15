@@ -3,10 +3,12 @@
 
 import 'dart:async';
 
+import 'dart:math';
 import 'package:angular2/common.dart';
 import 'package:angular2/core.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/app/fnx_app.dart';
+import 'package:fnx_ui/src/util/pair.dart';
 import 'package:logging/logging.dart';
 
 import 'example_buttons_renderer.dart';
@@ -58,10 +60,15 @@ class ExampleTesting implements OnInit {
 
   List<Map> moods = [{'id': 'happy', 'name': 'Being 😀'}, {'id': 'sad', 'name': 'Being 😑'}, {'id': 'troll', 'name': 'Be not ⚠️'}];
 
+  List<String> allOptions;
+
   ExampleTesting(this.app, FormBuilder fb) {
     this.userForm = fb.group({"name": userName, 'mood': mood});
 
     this.dumbImagePicker = () => (app.input("Image url please") as Future<String>);
+
+    Random r = new Random();
+    allOptions = new List.generate(1000, (_)=>r.nextInt(10e8.toInt()).toString());
   }
 
   void doReorder(ReorderEvent ev) {
@@ -70,6 +77,16 @@ class ExampleTesting implements OnInit {
 
   ngOnInit() {
     log.fine("App started");
+  }
+
+  Future<List<Pair>> optionsProvider(String filledText) {
+    return new Future.delayed(new Duration(milliseconds: 90)).then((_) {
+      return allOptions
+          .where((String opt) => opt.contains(filledText))
+          .take(30)
+          .map((String s) => new Pair(s, "$s"))
+          .toList();
+    });
   }
 
 }

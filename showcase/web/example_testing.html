@@ -16,6 +16,13 @@
 
     <fnx-form>
 
+        <fnx-input label="Autocomplete (test with numbers)" errorMessage="Vyberte hodnotu z nabízeného seznamu">
+            <fnx-autocomplete [required]="true"
+                          [(ngModel)]="user['group']"
+                          [optionsProvider]="optionsProvider"
+            ></fnx-autocomplete>
+        </fnx-input>
+
         <p>
             bez
             <fnx-text [required]="true" [(ngModel)]="user['name']" autoFocus></fnx-text>

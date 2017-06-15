@@ -6,6 +6,7 @@
 /// More dartdocs go here.
 library fnx_ui;
 
+import 'src/components/select/fnx_autocomplete.dart';
 import 'src/components/app/fnx_cc.dart';
 import 'src/components/input/fnx_double.dart';
 import 'src/components/input/fnx_int.dart';
@@ -34,6 +35,7 @@ import 'src/components/layout/fnx_tabs.dart';
 import 'src/components/modal/fnx_modal.dart';
 import 'src/components/select/fnx_select.dart';
 
+export 'src/components/select/fnx_autocomplete.dart';
 export 'src/components/app/fnx_cc.dart';
 export 'src/components/app/fnx_app.dart';
 export 'src/components/auto_focus.dart';
@@ -84,6 +86,7 @@ const List FNX_UI_COMPONENTS = const [
   FnxWysiwygPoor,
   FnxWysiwygRich,
   AutoFocus,
+  FnxAutocomplete,
   FnxReorderContainer,
   FnxReorderItem,
   FnxCC,

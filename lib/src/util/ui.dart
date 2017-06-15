@@ -83,10 +83,11 @@ class DropdownTracker {
   int top = 10000;
   int left = 10000;
   String dropdownHeight = "auto";
+  bool downOnly;
 
   StreamSubscription<Event> subscription;
 
-  DropdownTracker() {
+  DropdownTracker({this.downOnly : false}) {
   }
 
   void init(Element container, Element dropdown, Function onHide) {
@@ -119,7 +120,7 @@ class DropdownTracker {
       }
       left = el.left.toInt();
 
-      if (dropdownH + el.top + el.height < scrHeight) {
+      if (downOnly || dropdownH + el.top + el.height < scrHeight) {
         // vejde se dolu
         top = el.top.toInt() + el.height.toInt();
 
