@@ -6,7 +6,7 @@
      style="display: inline-block; width: 100%"
      #select>
 
-    <input id="{{ componentId }}" type="text" [(ngModel)]="filledText" [readonly]="readonly"
+    <input id="{{ componentId }}" type="text" [(ngModel)]="text" [readonly]="readonly"
            (keyup)="markAsTouched()"
            (focus)="showOptions()"
            (blur)="hideOptions()"
