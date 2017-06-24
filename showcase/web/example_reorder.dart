@@ -5,7 +5,6 @@ import 'package:angular2/core.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:logging/logging.dart';
 
-import 'example_app.dart';
 import 'example_buttons_renderer.dart';
 
 @Component(

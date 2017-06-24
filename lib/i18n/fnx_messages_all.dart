@@ -4,12 +4,11 @@
 
 import 'dart:async';
 
+import 'package:fnx_ui/i18n/fnx_messages_cs_CZ.dart' deferred as messages_cs_CZ;
+import 'package:fnx_ui/i18n/fnx_messages_en_US.dart' deferred as messages_en_US;
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 import 'package:intl/src/intl_helpers.dart';
-
-import 'package:fnx_ui/i18n/fnx_messages_en_US.dart' deferred as messages_en_US;
-import 'package:fnx_ui/i18n/fnx_messages_cs_CZ.dart' deferred as messages_cs_CZ;
 
 Map<String, Function> _deferredLibraries = {
   'en_US': () => messages_en_US.loadLibrary(),

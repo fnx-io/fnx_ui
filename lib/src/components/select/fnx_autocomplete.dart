@@ -36,7 +36,7 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
   String _text;
 
   bool open = false;
-  bool get dropDownVisible => open && !readonly && options.isNotEmpty;
+  bool get dropDownVisible => open && !isReadonly && options.isNotEmpty;
 
   DropdownTracker dropdownTracker = new DropdownTracker(downOnly: true);
 
@@ -75,7 +75,6 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
   }
 
   void hideOptions() {
-    print("dsda");
     open = false;
     if (value != null) {
       _text = options.firstWhere((Pair p) => p.value == value, orElse: ()=>null)?.label;
@@ -97,7 +96,6 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
   }
 
   void selectOption(Pair pair) {
-    print(pair);
     value = pair.value;
     _text = pair.label;
     hideOptions();
@@ -194,12 +192,10 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
 
   Future<Null> loadFreshOptions(String data) async {
     version++;
-    print("Loading");
     int loadingFor = version;
     List<Pair> loaded = await optionsProvider(data);
     if (loadingFor == version) {
       // we will use this
-      print(loaded);
       loadedOptions = loaded??const[];
       updateOptionsFromSearch();
     } else {

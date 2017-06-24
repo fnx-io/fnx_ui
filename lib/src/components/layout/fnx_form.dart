@@ -28,6 +28,12 @@ class FnxForm extends FnxValidatorComponent {
   @Input()
   bool disabled = false;
 
+  @Input()
+  bool readonly = false;
+  
+  @override
+  bool get required => false;
+
   @Output()
   final EventEmitter<Event> submit = new EventEmitter<Event>();
 
@@ -77,5 +83,7 @@ class FnxForm extends FnxValidatorComponent {
   void removeValidator(formValidatorFunction f) {
     _validators.remove(f);
   }
+
+  bool get isReadonly => (readonly??false);
 
 }

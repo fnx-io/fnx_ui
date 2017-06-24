@@ -2,10 +2,9 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular2/core.dart';
-import 'package:fnx_ui/src/util/global_messages.dart';
-import 'package:fnx_ui/src/util/ui.dart' as ui;
-import 'package:logging/logging.dart';
 import 'package:cookie/cookie.dart' as cookie;
+import 'package:fnx_ui/src/util/global_messages.dart';
+import 'package:logging/logging.dart';
 
 ///
 /// Cookies consent.

@@ -8,7 +8,7 @@ const CUSTOM_INPUT_DOUBLE_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, use
 @Component(
     selector: 'fnx-double',
     template: r'''
-<input id="{{ componentId }}" type="number" [(ngModel)]="value" [readonly]="readonly"
+<input id="{{ componentId }}" type="number" [(ngModel)]="value" [readonly]="isReadonly"
   [attr.min]="min"
   [attr.max]="max"
   [attr.step]="step"

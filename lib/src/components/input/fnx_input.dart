@@ -26,6 +26,9 @@ class FnxInput extends FnxValidatorComponent {
   String _errorMessage;
   String _defaultErrorMessage;
 
+  bool _required = false;
+  bool _readonly = false;
+
   @Input()
   void set errorMessage(String err) {
     this._errorMessage = err;
@@ -51,6 +54,21 @@ class FnxInput extends FnxValidatorComponent {
   set setDefaultErrorMessage(String msg) {
     _defaultErrorMessage = msg;
   }
+
+  bool get readonly => _readonly;
+
+  set readonly(bool value) {
+    throw "You are setting 'readonly' attribute to fnx-input, that's not what you want";
+  }
+
+  bool get required => _required;
+
+  set required(bool value) {
+    throw "You are setting 'required' attribute to fnx-input, that's not what you want";
+  }
+
+  bool get isReadonly => (readonly??false);
+
 
 }
 
@@ -105,9 +123,7 @@ abstract class FnxInputComponent extends FnxValidatorComponent implements OnInit
 
   @override
   void writeValue(obj) {
-    print(obj);
     _value = obj;
-
     // notifyNgModel(); //we shouldn't do this, no need to notify NgModel about changes it already knows
   }
 
@@ -138,6 +154,14 @@ abstract class FnxInputComponent extends FnxValidatorComponent implements OnInit
       _form.deregisterChild(this);
     }
   }
+
+  bool get isParentReadonly {
+    if (_wrapper != null && _wrapper.readonly) return true;
+    if (_form != null && _form.readonly) return true;
+    return false;
+  }
+
+  bool get isReadonly => (readonly??false) || isParentReadonly;
 
 }
 

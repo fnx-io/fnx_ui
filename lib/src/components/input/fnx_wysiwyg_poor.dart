@@ -21,7 +21,7 @@ const CUSTOM_INPUT_WYSIWYG_POOR_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCES
       </div>
       <div #wysiwyg
            class="input--component flex--grow flex--shrink"
-           [class.readonly]="readonly"
+           [class.readonly]="isReadonly"
            [attr.contenteditable]="!readonly"
            (blur)="edited()"
            (keyup)="edited()"

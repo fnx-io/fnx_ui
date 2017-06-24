@@ -14,20 +14,20 @@ const CUSTOM_INPUT_FILE_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
     selector: 'fnx-file',
     template: r'''
 <div class="input__file">
-  <span class="input__file__dropzone" [class.drag--here]="possibleDrop()" [class.readonly]="readonly"
+  <span class="input__file__dropzone" [class.drag--here]="possibleDrop()" [class.readonly]="isReadonly"
       (dragenter)="onDrag($event, true)"
       (dragleave)="onDrag($event, false)"
       (dragover)="onDragOver($event)"
       (drop)="onDrop($event)">
       {{renderDescription}}
   </span>
-  <a *ngIf="!isEmpty" class="input__file__delete btn icon margin--small--right" [style.visibility]="readonly ? 'hidden' : 'visible'" (click)="deleteFiles()">delete</a>
-  <span *ngIf="isEmpty" class="input__file__delete btn icon margin--small--right disabled" [style.visibility]="readonly ? 'hidden' : 'visible'" >delete</span>
+  <a *ngIf="!isEmpty" class="input__file__delete btn icon margin--small--right" [style.visibility]="isReadonly ? 'hidden' : 'visible'" (click)="deleteFiles()">delete</a>
+  <span *ngIf="isEmpty" class="input__file__delete btn icon margin--small--right disabled" [style.visibility]="isReadonly ? 'hidden' : 'visible'" >delete</span>
   <span class="input__file__browse" data-suffix="search"
     (focus)="markAsTouched()"
     (click)="markAsTouched()"
     [class.error]="isTouchedAndInvalid()"
-    [style.visibility]="readonly ? 'hidden' : 'visible'"
+    [style.visibility]="isReadonly ? 'hidden' : 'visible'"
     >
       {{browseLabel}}
       <input type="file" id="{{ componentId }}"
@@ -94,17 +94,17 @@ class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit,
   }
 
   void onFileSelected(event) {
-    if (readonly) return;
+    if (isReadonly) return;
     processFiles(event.target.files);
   }
 
   void onDrag(MouseEvent event, bool enter) {
-    if (readonly) return;
+    if (isReadonly) return;
     draggingOver = enter && isCompatibleDataTransfer(event);
   }
 
   bool isCompatibleDataTransfer(MouseEvent event) {
-    if (readonly) return false;
+    if (isReadonly) return false;
     return true;//event.dataTransfer.files != null && event.dataTransfer.files.isNotEmpty;
   }
 
@@ -115,12 +115,12 @@ class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit,
   void onDrop(MouseEvent event) {
     event.preventDefault();
     event.stopImmediatePropagation();
-    if (readonly) return;
+    if (isReadonly) return;
     processFiles(event.dataTransfer.files);
   }
 
   void processFiles(List<File> filesInput) {
-    if (readonly) return;
+    if (isReadonly) return;
     log.info("Processing files: ${filesInput}");
     if (filesInput == null || filesInput.isEmpty) {
       log.warning("No files on input");
@@ -138,7 +138,7 @@ class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit,
   }
 
   void deleteFiles() {
-    if (readonly) return;
+    if (isReadonly) return;
     value = null;
     files.emit(null);
   }

@@ -33,6 +33,9 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
   @Input()
   bool dateTime = false;
 
+  @Input()
+  bool readonly = false;
+
   bool _focused = false;
 
   EventEmitter _openDatePicker = new EventEmitter();
@@ -45,7 +48,7 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
 
   set focused(bool focused) {
     _focused = focused;
-    if (focused) {
+    if (focused && !isReadonly) {
       _openDatePicker.emit(true);
     }
   }
@@ -186,7 +189,9 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
 
   void ensurePickerOpened() {
     markAsTouched();
-    _openDatePicker.emit(true);
+    if (!isReadonly) {
+      _openDatePicker.emit(true);
+    }
   }
 
   @override

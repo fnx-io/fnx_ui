@@ -40,7 +40,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 
   bool open = false;
   bool openUp = false;
-  bool get dropDownVisible => open && !readonly;
+  bool get dropDownVisible => open && !isReadonly;
 
   DropdownTracker dropdownTracker = new DropdownTracker();
 

@@ -8,8 +8,11 @@ abstract class FnxValidatorComponent {
 
   bool _touched = false;
 
-  // this is universal rule, used to render "star" in component's label
-  bool required = false;
+  bool get required; // abstract
+
+  bool get readonly; // abstract
+
+  bool get isReadonly; // abstract
 
   List<FnxValidatorComponent> _validatorChildren = [];
 
@@ -17,6 +20,7 @@ abstract class FnxValidatorComponent {
   /// User interacted with this component.
   ///
   void markAsTouched() {
+    if (isReadonly) return;
     _touched = true;
     _validatorChildren.forEach((FnxValidatorComponent c) => c.markAsTouched());
   }
@@ -25,6 +29,7 @@ abstract class FnxValidatorComponent {
   /// Remove user interaction flag.
   ///
   void markAsNotTouched() {
+    if (isReadonly) return;
     _touched = false;
     _validatorChildren.forEach((FnxValidatorComponent c) => c.markAsNotTouched());
   }

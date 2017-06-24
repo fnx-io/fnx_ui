@@ -1,12 +1,12 @@
 <div
      tabindex="0"
-     [attr.readonly]="readonly"
+     [attr.readonly]="isReadonly"
      [class.open]="open"
      [class.error]="isTouchedAndInvalid()"
      style="display: inline-block; width: 100%"
      #select>
 
-    <input id="{{ componentId }}" type="text" [(ngModel)]="text" [readonly]="readonly"
+    <input id="{{ componentId }}" type="text" [(ngModel)]="text" [readonly]="isReadonly"
            (keyup)="markAsTouched()"
            (focus)="showOptions()"
            (blur)="hideOptions()"

@@ -8,7 +8,7 @@ const CUSTOM_INPUT_INT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExi
 @Component(
     selector: 'fnx-int',
     template: r'''
-<input id="{{ componentId }}" type="{{ htmlType }}" [(ngModel)]="value" [readonly]="readonly"
+<input id="{{ componentId }}" type="{{ htmlType }}" [(ngModel)]="value" [readonly]="isReadonly"
   [attr.min]="min"
   [attr.max]="max"
   [attr.autocomplete]="autocompleteAttr"
