@@ -1,3 +1,10 @@
+<fnx-date-picker
+        style="display: block; width:0px;"
+        [value]="value"
+        [open]="openDatePicker"
+        [hourFormat24]="true"
+        [dateTime]="dateTime"
+        (datePicked)="datePicked($event)"></fnx-date-picker>
 <input type="text" class="form-control" [attr.id]="componentId"
        [ngModel]="dateStr"
        (ngModelChange)="onChangeInput($event)"
@@ -6,9 +13,3 @@
        (blur)="focused = false"
        (click)="ensurePickerOpened()"/>
 <label class="icon" [attr.for]="componentId">date_range</label>
-<fnx-date-picker
-        [value]="value"
-        [open]="openDatePicker"
-        [hourFormat24]="true"
-        [dateTime]="dateTime"
-        (datePicked)="datePicked($event)"></fnx-date-picker>

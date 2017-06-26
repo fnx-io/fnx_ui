@@ -1,4 +1,8 @@
-<div class="picker--date" [hidden]="!shown">
+<div class="picker--date" [hidden]="!shown" #dropdown
+     [style.position]="'fixed'"
+     [style.top.px]="dropdownTracker.top"
+     [style.left.px]="dropdownTracker.left"
+     [style.height]="dropdownTracker.dropdownHeight">
     <div class="picker__content">
         <header class="picker__header" (click)="$event.preventDefault()">
             <a tabindex="-1" href="#" (click)="decYear()"><i class="icon">first_page</i></a>

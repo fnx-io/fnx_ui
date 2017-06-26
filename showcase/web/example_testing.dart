@@ -39,6 +39,8 @@ class ExampleTesting implements OnInit {
   int shoeSize;
   double velocity;
 
+  bool readonly = false;
+
   static dynamic moodValidator = (AbstractControl c) {
     if (c.value == null) return null;
     List selected;

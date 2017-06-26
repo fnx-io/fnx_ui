@@ -14,7 +14,7 @@
 
     <br style="clear: both">
 
-    <fnx-form>
+    <fnx-form [readonly]="readonly">
 
         <fnx-input label="Autocomplete (test with numbers)" errorMessage="Vyberte hodnotu z nabízeného seznamu">
             <fnx-autocomplete [required]="true"
@@ -92,6 +92,8 @@
             </div>
         </div>
 
+        <fnx-check label="Do you agree?"></fnx-check>
+
         <!--
         <fnx-input label="Account balance" errorMessage="Please enter your account balance (max 3 decimals)">
             <fnx-text [(ngModel)]="user['accountBalance']" type="decimal" [decimals]="3"></fnx-text>
@@ -114,7 +116,9 @@
             <fnx-wysiwyg-poor [(ngModel)]="user['wysiwyg_poor']" [required]="true"></fnx-wysiwyg-poor>
         </fnx-input>
 
-        <fnx-submit-bar [back]="true"></fnx-submit-bar>
+        <fnx-submit-bar [back]="true">
+            <a class="btn" (click)="readonly=!readonly">readonly</a>
+        </fnx-submit-bar>
 
     </fnx-form>
 

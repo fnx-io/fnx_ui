@@ -23,7 +23,7 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
   /// This is the model for the DOM input field, user types here the date and
   /// we try to parse it and sync it to model
   @Output() String dateStr = null;
-
+  
   Control control = null;
 
   @Optional()

@@ -44,6 +44,7 @@ const CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCES
       <div class="input--component" [style.max-width]="maxWidth" [style.height]="height">
         <div #wysiwyg
              [class.readonly]="isReadonly"
+             [attr.contenteditable]="!readonly"             
              (blur)="edited()"
              (keyup)="edited()"
              ></div>

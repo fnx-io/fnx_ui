@@ -2,8 +2,10 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:angular2/core.dart';
+import 'package:fnx_ui/src/util/async.dart';
 import 'package:fnx_ui/src/util/date.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
+import 'package:fnx_ui/src/util/ui.dart';
 import 'package:intl/intl.dart';
 
 @Component(
@@ -19,6 +21,8 @@ class FnxDatePicker implements OnInit, OnDestroy {
   /// have been requested to be opened
   static final EventEmitter<FnxDatePicker> ON_PICKER_OPENED = new EventEmitter<FnxDatePicker>();
   StreamSubscription<FnxDatePicker> _pickerOpenedSubscription;
+
+  DropdownTracker dropdownTracker = new DropdownTracker();
 
   bool _shown = false;
 
@@ -46,6 +50,9 @@ class FnxDatePicker implements OnInit, OnDestroy {
   Node container;
 
   StreamSubscription<MouseEvent> _globalClicks;
+
+  @ViewChild("dropdown")
+  ElementRef dropdown;
 
   /// Constructor used to create instance of Datepicker.
   FnxDatePicker(ElementRef el) {
@@ -242,6 +249,8 @@ class FnxDatePicker implements OnInit, OnDestroy {
 
   void ensureOpened() {
     shown = true;
+    dropdownTracker.updatePosition();
+    later(dropdownTracker.updatePosition);
   }
 
   @override
@@ -255,6 +264,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
       if (ui.isEventFromSubtree(event, container.parentNode)) return;
       shown = false;
     });
+    dropdownTracker.init(container, dropdown.nativeElement, ()=>shown=false);
   }
 
   void somePickerOpened(FnxDatePicker picker) {
@@ -269,6 +279,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
     if (_openSubscription != null) _openSubscription.cancel();
     if (_pickerOpenedSubscription != null) _pickerOpenedSubscription.cancel();
     if (_globalClicks != null) _globalClicks.cancel();
+    dropdownTracker.destroy();
   }
 
   void killEvent(Event event) {
