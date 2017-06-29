@@ -10,9 +10,10 @@ import 'package:logging/logging.dart';
   template: '''
     <div class="menu--tabs">
         <a class="item" *ngFor="let tab of tabs"
-        (click)="selectedId = tab.id"
+        (click)="tab.selectTab()"
         [class.tab--active]="selectedId == tab.id"
         >{{tab.title}}</a>
+        <span style="flex-grow: 4; flex-shrink: 1" *ngIf="left"></span>
     </div>
     <div class="relative">
         <ng-content></ng-content>
@@ -27,6 +28,9 @@ class FnxTabs implements OnInit {
   String id = ui.uid('tabs-');
   String selectedId = null;
 
+  @Input()
+  bool left = false;
+
   List<FnxTab> tabs = [];
 
   @override
@@ -38,7 +42,7 @@ class FnxTabs implements OnInit {
     if (fnxTab.id == selectedId) {
       // trouble!
       if (tabs.isNotEmpty) {
-        selectedId = tabs[0].id;
+        tabs[0].selectTab();
       } else {
         selectedId = null;
       }
@@ -47,7 +51,7 @@ class FnxTabs implements OnInit {
 
   void register(FnxTab fnxTab) {
     tabs.add(fnxTab);
-    if (selectedId == null) selectedId = fnxTab.id;
+    if (selectedId == null) fnxTab.selectTab();
   }
 
 }
@@ -73,9 +77,13 @@ class FnxTab implements OnInit, OnDestroy {
 
   FnxTab(this.parent);
 
+  @Output()
+  EventEmitter<bool> select = new EventEmitter();
+
   void selectTab() {
     if (parent == null) return;
     parent.selectedId = id;
+    select.emit(true);
   }
 
   @override

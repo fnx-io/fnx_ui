@@ -23,6 +23,10 @@ class ExampleTabs {
 
   final Logger log = new Logger("ExampleTabs");
 
+  void debug(String name) {
+    print(name);
+  }
+
 }
 
 @Component(

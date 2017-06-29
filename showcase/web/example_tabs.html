@@ -24,14 +24,14 @@
 
     <p>These tabs are build using fnx-tabs element and they simply flip DOM content.</p>
 
-    <fnx-tabs>
-        <fnx-tab title="Tab 1">
+    <fnx-tabs [left]="true">
+        <fnx-tab title="Tab 1" (select)="debug('Tab 1')">
             <p class="padding--big">Yes, I'm tab 1.</p>
         </fnx-tab>
-        <fnx-tab title="Tab 2">
+        <fnx-tab title="Tab 2" (select)="debug('Tab 2')">
             <p class="padding--big">I'm NOT tab 2. Nobody saw me, they cannot prove anything!</p>
         </fnx-tab>
-        <fnx-tab title="Tab 3">
+        <fnx-tab title="Tab 3" (select)="debug('Tab 3')">
             <p class="padding--big">I'm tab 2, LOOOL.</p>
         </fnx-tab>
     </fnx-tabs>
