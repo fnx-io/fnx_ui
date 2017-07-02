@@ -34,6 +34,7 @@ class ExampleTesting implements OnInit {
     'address': {'street': 'Pod Pampeliskou'},
     'mood': 'sad',
     'dead': false,
+    'wysiwyg_poor': "<p>Nalevna v plenéru. Najdete tam <strong>všechno</strong>:</p><ul><li>pivo</li><li>víno</li><li>limo</li><li>ovo</li></ul><h1>Must see!</h1>",
     'birthday': '2016-06-22T15:22:30.638489'};
 
   int shoeSize;
@@ -79,6 +80,9 @@ class ExampleTesting implements OnInit {
 
   ngOnInit() {
     log.fine("App started");
+    new Future.delayed(new Duration(milliseconds: 2500)).then((_) {
+       user['wysiwyg_poor'] = '<p>Nalevna v plenéru. Najdete tam <strong>všechno</strong>:</p><ul><li>pivo</li><li>víno</li><li>limo</li><li>ovo</li></ul><h1>Must see!</h1>';
+    });
   }
 
   Future<List<Pair>> optionsProvider(String filledText) {

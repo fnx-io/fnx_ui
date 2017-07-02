@@ -104,17 +104,20 @@
         </fnx-input>
         -->
 
+        <!--
         <fnx-input label="Wysiwyg rich">
             <fnx-wysiwyg-rich [(ngModel)]="user['wysiwyg_poor']" [imagePicker]="dumbImagePicker" [required]="true"></fnx-wysiwyg-rich>
         </fnx-input>
-
+            -->
         <fnx-input label="Wysiwyg rich 2">
             <fnx-wysiwyg-rich [(ngModel)]="user['wysiwyg_poor']" height="15em" maxWidth="25em"></fnx-wysiwyg-rich>
         </fnx-input>
 
+        <!--
         <fnx-input label="Wysiwyg poor">
             <fnx-wysiwyg-poor [(ngModel)]="user['wysiwyg_poor']" [required]="true"></fnx-wysiwyg-poor>
         </fnx-input>
+        -->
 
         <fnx-submit-bar [back]="true">
             <a class="btn" (click)="readonly=!readonly">readonly</a>

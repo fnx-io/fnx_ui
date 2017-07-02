@@ -116,7 +116,7 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
   void writeValue(obj) {
     super.writeValue(obj);
     quill.pasteHTML(value == null ? "" : value);
-    //((editor.nativeElement as Element).firstChild as Element).innerHtml = value == null ? "" : value;
+    ((wysiwyg.nativeElement as Element).firstChild as Element).innerHtml = value == null ? "" : value;
   }
 
   void doFormatText(String command, [var param = true]) {
