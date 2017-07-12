@@ -10,6 +10,7 @@ import 'package:fnx_ui/src/util/pair.dart';
 import 'package:fnx_ui/src/util/ui.dart';
 
 typedef Future<List<Pair>> OptionsProvider(String filledText);
+typedef Future<Pair> DefaultOptionProvider(var initialValue);
 
 const CUSTOM_AUTOCOMPLETE_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
                                                       useExisting: FnxAutocomplete,
@@ -32,7 +33,10 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
 
   @Input()
   OptionsProvider optionsProvider;
-  
+
+  @Input()
+  DefaultOptionProvider defaultOptionProvider;
+
   String _text;
 
   bool open = false;
@@ -164,10 +168,11 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
   }
 
   @override
-  ngOnInit() {
+  ngOnInit() async {
     super.ngOnInit();
     this.navigationActions = bindKeyHandler(document.onKeyDown);
     dropdownTracker.init(container, dropdown.nativeElement, ()=>open=false);
+    await loadInitialOption();
   }
 
   @override
@@ -190,13 +195,30 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
 
   int version = 0;
 
+  Future<Null> loadInitialOption() async {
+    if (defaultOptionProvider == null) return;
+    version++;
+    int loadingFor = version;
+    Pair loaded = await defaultOptionProvider(value);
+    if (loadingFor == version) {
+      // we will use this
+      if (loaded != null) {
+        loadedOptions = [loaded];
+        _text = loaded.value.toString();
+        filledTextChanged.add(loaded.value.toString());
+      }
+    } else {
+      // too old next batch is comming
+    }
+  }
+
   Future<Null> loadFreshOptions(String data) async {
     version++;
     int loadingFor = version;
     List<Pair> loaded = await optionsProvider(data);
     if (loadingFor == version) {
       // we will use this
-      loadedOptions = loaded??const[];
+      loadedOptions = loaded ?? const[];
       updateOptionsFromSearch();
     } else {
       // too old next batch is comming
