@@ -205,7 +205,7 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
       if (loaded != null) {
         loadedOptions = [loaded];
         _text = loaded.value.toString();
-        filledTextChanged.add(loaded.value.toString());
+        filledTextChanged.add(loaded.label);
       }
     } else {
       // too old next batch is comming
