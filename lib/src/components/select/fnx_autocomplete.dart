@@ -172,7 +172,9 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
     super.ngOnInit();
     this.navigationActions = bindKeyHandler(document.onKeyDown);
     dropdownTracker.init(container, dropdown.nativeElement, ()=>open=false);
-    await loadInitialOption();
+    if (defaultOptionProvider != null) {
+      await loadInitialOption();
+    }
   }
 
   @override
@@ -196,16 +198,15 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
   int version = 0;
 
   Future<Null> loadInitialOption() async {
-    if (defaultOptionProvider == null) return;
     version++;
     int loadingFor = version;
     Pair loaded = await defaultOptionProvider(value);
     if (loadingFor == version) {
       // we will use this
       if (loaded != null) {
-        loadedOptions = [loaded];
         _text = loaded.label;
-        filledTextChanged.add(loaded.value.toString());
+        loadedOptions = [loaded];
+        updateOptionsFromSearch();
       }
     } else {
       // too old next batch is comming

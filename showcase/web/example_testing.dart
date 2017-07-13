@@ -34,7 +34,6 @@ class ExampleTesting implements OnInit {
     'address': {'street': 'Pod Pampeliskou'},
     'mood': 'sad',
     'dead': false,
-    'group': 1,
     'wysiwyg_poor': "<p>Nalevna v plenéru. Najdete tam <strong>všechno</strong>:</p><ul><li>pivo</li><li>víno</li><li>limo</li><li>ovo</li></ul><h1>Must see!</h1>",
     'birthday': '2016-06-22T15:22:30.638489'};
 
@@ -84,6 +83,7 @@ class ExampleTesting implements OnInit {
     new Future.delayed(new Duration(milliseconds: 2500)).then((_) {
        user['wysiwyg_poor'] = '<p>Nalevna v plenéru. Najdete tam <strong>všechno</strong>:</p><ul><li>pivo</li><li>víno</li><li>limo</li><li>ovo</li></ul><h1>Must see!</h1>';
     });
+    user['group'] = allOptions.first;
   }
 
   Future<Pair> defaultOptionProvider(var initialValue) =>
