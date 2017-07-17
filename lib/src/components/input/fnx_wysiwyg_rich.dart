@@ -70,6 +70,7 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
   @Input() String height = "15";
   @Input() String maxWidth = "50";
   @Input() PickImageUrl imagePicker = null;
+  @Input() bool safe = true;
 
   Quill quill;
 
@@ -109,13 +110,20 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
   void edited() {
     String html = editor.innerHtml;
     value = (html == EMPTY_STRING_VALUE ? null : html);
+    print("Edited: "+value);
     markAsTouched();
   }
 
   void writeValue(obj) {
     super.writeValue(obj);
     quill.pasteHTML(value == null ? "" : value);
-    ((wysiwyg.nativeElement as Element).firstChild as Element).innerHtml = value == null ? "" : value;
+    if (safe) {
+      ((wysiwyg.nativeElement as Element).firstChild as Element).innerHtml = value == null ? "" : value;
+      
+    } else {
+      print("Not safe: $value");
+      ((wysiwyg.nativeElement as Element).firstChild as Element).setInnerHtml(value == null ? "" : value, treeSanitizer: NodeTreeSanitizer.trusted);
+    }
   }
 
   void doFormatText(String command, [var param = true]) {
