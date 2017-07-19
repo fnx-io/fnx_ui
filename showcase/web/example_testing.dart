@@ -33,6 +33,7 @@ class ExampleTesting implements OnInit {
     'surname': 'Mravenec',
     'address': {'street': 'Pod Pampeliskou'},
     'mood': 'sad',
+    'double': 21.2,
     'dead': false,
     'wysiwyg_poor': "<p>Nalevna v plenéru. Najdete tam <strong>všechno</strong>:</p><ul><li>pivo</li><li>víno</li><li>limo</li><li>ovo</li></ul><h1>Must see!"
         "<a href='http://www.seznam.cz/'>Seznam</a> <a href='ftp://www.neznam.cz/'>Neznam</a>"

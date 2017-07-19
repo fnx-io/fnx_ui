@@ -17,6 +17,7 @@ import 'src/components/fnx_submit_bar.dart';
 import 'src/components/image/fnx_image_crop.dart';
 import 'src/components/input/fnx_check.dart';
 import 'src/components/input/fnx_double.dart';
+import 'src/components/input/fnx_formatted_double.dart';
 import 'src/components/input/fnx_file.dart';
 import 'src/components/input/fnx_input.dart';
 import 'src/components/input/fnx_int.dart';
@@ -46,6 +47,7 @@ export 'src/components/fnx_submit_bar.dart';
 export 'src/components/image/fnx_image_crop.dart';
 export 'src/components/input/fnx_check.dart';
 export 'src/components/input/fnx_double.dart';
+export 'src/components/input/fnx_formatted_double.dart';
 export 'src/components/input/fnx_file.dart';
 export 'src/components/input/fnx_input.dart';
 export 'src/components/input/fnx_int.dart';
@@ -76,6 +78,7 @@ const List FNX_UI_COMPONENTS = const [
   FnxText,
   FnxInt,
   FnxDouble,
+  FnxFormattedDouble,
   FnxFile,
   FnxTextarea,
   FnxAlert,

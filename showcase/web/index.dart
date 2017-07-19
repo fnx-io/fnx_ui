@@ -9,18 +9,19 @@ import 'package:angular2/platform/browser.dart';
 import 'package:angular2/platform/common.dart';
 import 'package:angular2/router.dart';
 import 'package:fnx_ui/errors.dart';
+import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
+import 'package:fnx_ui/i18n/fnx_messages_all.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 import 'example_app.dart';
 import 'example_buttons_renderer.dart';
 
 Future<Null> main() async {
 
-  /*
-    Intl.defaultLocale = 'cs_CZ';
-    await initializeMessages('cs_CZ');
-    await initializeDateFormatting("cs_CZ", null);
-  */
+  Intl.defaultLocale = 'cs_CZ';
+  await initializeMessages('cs_CZ');
+  await initializeDateFormatting("cs_CZ", null);
 
   // logování
   Logger.root.level = Level.ALL;
