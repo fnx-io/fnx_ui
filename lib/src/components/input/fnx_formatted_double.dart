@@ -20,7 +20,6 @@ const CUSTOM_INPUT_FDOUBLE_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, us
   (blur)="onBlur()"
   #input
 />
-{{value}} X {{valueStr}}
 ''',
     providers: const [
       CUSTOM_INPUT_FDOUBLE_VALUE_ACCESSOR,
@@ -90,7 +89,7 @@ class FnxFormattedDouble extends FnxInputComponent implements ControlValueAccess
   double parseDouble(value) {
     if (value == null) return null;
     if (value is num) {
-      return value;
+      return value.toDouble();
     } else {
       return double.parse(value.toString().replaceAll(",","."), (_) => null);
     }
@@ -105,7 +104,6 @@ class FnxFormattedDouble extends FnxInputComponent implements ControlValueAccess
 
   @override
   set value(dynamic v) {
-    print("Setting value $v");
     if (v == null) {
       super.value = null;
     } else {
@@ -118,7 +116,6 @@ class FnxFormattedDouble extends FnxInputComponent implements ControlValueAccess
   void writeValue(obj) {
     value = obj;
     if (!focused) {
-      print("Setting $value");
       if (value == null) {
         _valueStr = "";
       } else {
