@@ -78,6 +78,12 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
     filledTextChangedSubscription = filledTextChanged.stream.transform(new FnxStreamDebouncer(new Duration(milliseconds: 50))).listen(loadFreshOptions);
   }
 
+  void writeValue(obj) {
+    // pricestovala nova hodnota z modelu
+    super.writeValue(obj);
+    loadInitialOption();
+  }
+
   void hideOptions() {
     open = false;
     if (value != null) {
