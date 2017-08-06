@@ -81,7 +81,17 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
   void writeValue(obj) {
     // pricestovala nova hodnota z modelu
     super.writeValue(obj);
-    loadInitialOption();
+    _text = null;
+    if (value == null) return;
+    if (loadedOptions != null || loadedOptions.isNotEmpty) {
+      Pair p = loadedOptions.firstWhere((Pair p) => p.value == obj, orElse: ()=>null);
+      if (p != null) {
+        _text = p.label;
+      }
+    }
+    if (_text == null) {
+      loadInitialOption();
+    }
   }
 
   void hideOptions() {
@@ -178,9 +188,6 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
     super.ngOnInit();
     this.navigationActions = bindKeyHandler(document.onKeyDown);
     dropdownTracker.init(container, dropdown.nativeElement, ()=>open=false);
-    if (defaultOptionProvider != null) {
-      await loadInitialOption();
-    }
   }
 
   @override
@@ -204,6 +211,7 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
   int version = 0;
 
   Future<Null> loadInitialOption() async {
+    if (defaultOptionProvider == null) return;
     version++;
     int loadingFor = version;
     Pair loaded = await defaultOptionProvider(value);

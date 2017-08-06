@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html';
 
 ///
@@ -28,17 +29,24 @@ class AutoFocus implements OnInit {
   ElementRef element;
   Focusable focusable;
 
+  @Input()
+  dynamic autoFocus;
+
   AutoFocus(this.element, @Optional() this.focusable);
 
   @override
   ngOnInit() {
+    doFocus();
+    new Future.delayed(new Duration(milliseconds: 50)).then(doFocus);
+  }
+
+  void doFocus([_]) {
+    if (autoFocus == false) return;
     if (focusable != null) {
       focusable.focus();
-
     } else if (element.nativeElement is HtmlElement) {
       element.nativeElement.focus();
     }
-
   }
 
 }
