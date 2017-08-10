@@ -70,6 +70,7 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
   @Input() String height = "15";
   @Input() String maxWidth = "50";
   @Input() PickImageUrl imagePicker = null;
+  @Input() bool safe = true;
 
   Quill quill;
 
@@ -115,26 +116,33 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
   void writeValue(obj) {
     super.writeValue(obj);
     quill.pasteHTML(value == null ? "" : value);
-    ((wysiwyg.nativeElement as Element).firstChild as Element).innerHtml = value == null ? "" : value;
+    if (safe) {
+      ((wysiwyg.nativeElement as Element).firstChild as Element).innerHtml = value == null ? "" : value;
+      
+    } else {
+      ((wysiwyg.nativeElement as Element).firstChild as Element).setInnerHtml(value == null ? "" : value, treeSanitizer: NodeTreeSanitizer.trusted);
+    }
   }
 
   void doFormatText(String command, [var param = true]) {
-    List<Range> selection = saveSelection();
     RangeStatic range = quill.getSelection();
     if (range != null) {
-      JsObject format = new JsObject.fromBrowserObject(quill.getFormat());
+      JsObject format = new JsObject.fromBrowserObject(quill.getFormat(range.index, range.length));
+      if (format.hasProperty("o")) {
+        format = format['o'];
+      }
       if ( format != null && format.hasProperty(command)) {
         quill.formatText(range.index, range.length, command, false);
       } else {
         quill.formatText(range.index, range.length, command, param);
       }
+      edited();
+      focus().then((_) => restoreSelection(range));
     }
-    edited();
-    focus().then((_) => restoreSelection(selection));
   }
 
   void doFormatLine(dynamic command, dynamic param) {
-    List<Range> selection = saveSelection();
+    RangeStatic selection = quill.getSelection();
     RangeStatic range = quill.getSelection();
     if (range != null) {
       quill.formatLine(range.index, range.length, command, param);
@@ -145,7 +153,7 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
 
 
   Future<Null> doCreateLink() async {
-    List<Range> selection = saveSelection();
+    RangeStatic selection = quill.getSelection();
     String link = await app.input("Insert link, including http://", headline: "Link");
     if (link != null) {
       restoreSelection(selection);
@@ -185,26 +193,8 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
     return true;
   }
 
-  List saveSelection() {
-    Selection sel = window.getSelection();
-    if (sel.rangeCount > 0) {
-      List<Range> ranges = [];
-      for (var i = 0; i < sel.rangeCount; ++i) {
-        ranges.add(sel.getRangeAt(i));
-      }
-      return ranges;
-    }
-  }
-
-  void restoreSelection(List<Range> savedSel) {
-    if (savedSel == null) return;
-    Selection sel = window.getSelection();
-    if (sel.rangeCount > 0) {
-      sel.removeAllRanges();
-    }
-    for (var i = 0, len = savedSel.length; i < len; ++i) {
-      sel.addRange(savedSel[i]);
-    }
+  void restoreSelection(RangeStatic savedSel) {
+    quill.setSelection(savedSel.index, savedSel.length);
   }
 
 }

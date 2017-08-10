@@ -16,6 +16,16 @@
 
     <fnx-form [readonly]="readonly">
 
+        <div>
+            <fnx-input label="Double">
+                <fnx-formatted-double [required]="true" [(ngModel)]="user['double']" format="0.000"></fnx-formatted-double>
+            </fnx-input>
+            <fnx-input label="Double 2">
+                <fnx-formatted-double [required]="true" [(ngModel)]="user['double']" format="#,##0.00"></fnx-formatted-double>
+            </fnx-input>
+            <p>{{user['double']}}</p>
+        </div>
+
         <fnx-input label="Autocomplete (test with numbers)" errorMessage="Vyberte hodnotu z nabízeného seznamu">
             <fnx-autocomplete [required]="true"
                           [(ngModel)]="user['group']"
@@ -111,7 +121,7 @@
         </fnx-input>
             -->
         <fnx-input label="Wysiwyg rich 2">
-            <fnx-wysiwyg-rich [(ngModel)]="user['wysiwyg_poor']" height="15em" maxWidth="25em"></fnx-wysiwyg-rich>
+            <fnx-wysiwyg-rich [(ngModel)]="user['wysiwyg_poor']" height="15em" maxWidth="25em" [safe]="false"></fnx-wysiwyg-rich>a
         </fnx-input>
 
         <!--

@@ -1,6 +1,7 @@
 @JS()
 library quill;
 
+import 'dart:html';
 import "package:js/js.dart";
 
 /// Type definitions for Quill
@@ -120,8 +121,7 @@ abstract class DeltaStatic {
   external DeltaStatic transformPosition(num index, dynamic priority);
 }
 
-@anonymous
-@JS()
+@JS("Range")
 abstract class RangeStatic {
   // Constructors on anonymous interfaces are not yet supported.
   /*external factory RangeStatic();*/
