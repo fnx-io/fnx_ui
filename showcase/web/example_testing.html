@@ -30,13 +30,14 @@
             <fnx-autocomplete [required]="true"
                           [(ngModel)]="user['group']"
                           [optionsProvider]="optionsProvider"
+                          autoFocus
                           [defaultOptionProvider]="defaultOptionProvider"
             ></fnx-autocomplete>
         </fnx-input>
 
         <p>
             bez
-            <fnx-text [required]="true" [(ngModel)]="user['name']" autoFocus></fnx-text>
+            <fnx-text [required]="true" [(ngModel)]="user['name']"  ></fnx-text>
             labelu
         </p>
 
@@ -82,7 +83,7 @@
 
 
         <fnx-input label="Areja" errorMessage="Toto je povinna hodnota!">
-            <fnx-textarea [required]="true" [(ngModel)]="user['name']"></fnx-textarea>
+            <fnx-textarea [required]="true" [(ngModel)]="user['name']" ></fnx-textarea>
         </fnx-input>
 
         <div class="row--gutter">

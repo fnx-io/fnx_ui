@@ -18,11 +18,14 @@ const CUSTOM_AUTOCOMPLETE_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
 @Component(
     selector: 'fnx-autocomplete',
     templateUrl: 'fnx_autocomplete.html',
-    providers: const [CUSTOM_AUTOCOMPLETE_VALUE_ACCESSOR],
+    providers: const [
+      CUSTOM_AUTOCOMPLETE_VALUE_ACCESSOR,
+      const Provider(Focusable, useExisting: FnxAutocomplete, multi: false)
+    ],
     preserveWhitespace: false,
     directives: const [ AutoFocus ]
 )
-class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
+class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
 
   @Input() bool required = false;
   @Input() bool readonly = false;
@@ -59,6 +62,9 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
 
   @ViewChild("select")
   ElementRef select;
+
+  @ViewChild("input")
+  ElementRef input;
 
   String get text => _text;
 
@@ -272,6 +278,15 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
         value = p.value;
       }
     }
+  }
+
+  @override
+  void focus() {
+    later(() {
+      if (input != null && input.nativeElement != null) {
+        input.nativeElement.focus();
+      }
+    });
   }
 
 }

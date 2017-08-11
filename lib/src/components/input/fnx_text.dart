@@ -223,10 +223,12 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
       throw "The only possible types at this moment are 'text', 'number', 'decimal', 'email', 'http' and 'password'";
     }
   }
+
   @override
   void focus() {
     if (elementRef != null && elementRef.nativeElement != null) {
       elementRef.nativeElement.focus();
     }
   }
+  
 }

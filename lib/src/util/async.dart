@@ -9,7 +9,7 @@ Future cancelSubscription(StreamSubscription subscription) {
 }
 
 void later(Function f) {
-  new Future.delayed(new Duration(milliseconds: 10)).then((_)=>f());
+  new Future.delayed(new Duration(milliseconds: 30)).then((_)=>f());
 }
 
 /// FnxStreamDebouncer is a Stream transformer which will wait for specified amount of time
