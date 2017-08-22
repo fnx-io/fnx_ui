@@ -8,7 +8,7 @@ const CUSTOM_INPUT_DOUBLE_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, use
 @Component(
     selector: 'fnx-double',
     template: r'''
-<input id="{{ componentId }}" type="number" [(ngModel)]="value" [readonly]="isReadonly"
+<input id="{{ componentId }}" type="{{ htmlType }}" [(ngModel)]="value" [readonly]="isReadonly"
   [attr.min]="min"
   [attr.max]="max"
   [attr.step]="step"
@@ -55,6 +55,9 @@ class FnxDouble extends FnxInputComponent implements ControlValueAccessor, OnIni
   FnxDouble(@Optional() FnxForm form, @Optional() FnxInput wrapper) : super(form, wrapper);
 
   String get autocompleteAttr => (autocomplete) ? 'on' : 'off';
+
+  // 'number' must not be a constant in the html template !
+  String get htmlType => 'number';
 
   @override
   ngOnInit() {
