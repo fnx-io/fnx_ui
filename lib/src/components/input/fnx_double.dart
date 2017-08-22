@@ -72,7 +72,7 @@ class FnxDouble extends FnxInputComponent implements ControlValueAccessor, OnIni
     if (min == null && max == null) return true;
     double v = parseDouble(value);
     if (v == null) return true;
-    if (v == double.NAN) return false;
+    if (v.isNaN) return false;
     if (v == null && value != null && value.toString().length > 0) return false; // not a number
     if (required && v == null) return false;
     if (min != null && v < min.toDouble()) return false;
