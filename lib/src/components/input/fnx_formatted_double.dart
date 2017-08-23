@@ -9,7 +9,7 @@ const CUSTOM_INPUT_FDOUBLE_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, us
 @Component(
     selector: 'fnx-formatted-double',
     template: r'''
-<input id="{{ componentId }}" type="text"
+<input id="{{ componentId }}" type="{{ htmlType }}"
   [(ngModel)]="valueStr"
   [readonly]="isReadonly"
   [attr.autocomplete]="autocompleteAttr"
@@ -32,6 +32,9 @@ class FnxFormattedDouble extends FnxInputComponent implements ControlValueAccess
 
   @Input()
   bool required = false;
+
+  // 'text' must not be a constant in the html template !
+  String get htmlType => 'text';
 
   @Input()
   num min = null;
