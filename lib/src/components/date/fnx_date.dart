@@ -178,6 +178,8 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
       super.writeValue(parsed);
       if (parsed != null) {
         setStrDate(parsed);
+      } else {
+        setStrDate(null);
       }
     }
   }
