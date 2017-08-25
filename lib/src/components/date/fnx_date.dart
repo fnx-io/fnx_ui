@@ -176,11 +176,7 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
     } else {
       var parsed = tryParseDate(obj);
       super.writeValue(parsed);
-      if (parsed != null) {
-        setStrDate(parsed);
-      } else {
-        setStrDate(null);
-      }
+      setStrDate(parsed);
     }
   }
 
