@@ -30,6 +30,15 @@
                 <li>i kockam</li>
             </ul>
         </div>
+        <fnx-input label="Datum">
+            <fnx-date></fnx-date>
+        </fnx-input>
+        <fnx-input label="Možnosti">
+            <fnx-select [multi]="true" [(ngModel)]="selectData">
+                <fnx-option label="První" value="first"></fnx-option>
+                <fnx-option label="Druhá" value="second"></fnx-option>
+            </fnx-select>
+        </fnx-input>
         <fnx-panel-small class="s7">
             <h5 header>Don't mind me</h5>
             <p>... I'm just a panel. Nobody likes me.</p>

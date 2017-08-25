@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:angular2/core.dart';
+import 'package:fnx_ui/src/components/modal/fnx_modal.dart';
 import 'package:fnx_ui/src/util/async.dart';
 import 'package:fnx_ui/src/util/date.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
@@ -54,8 +55,12 @@ class FnxDatePicker implements OnInit, OnDestroy {
   @ViewChild("dropdown")
   ElementRef dropdown;
 
+  StreamSubscription<KeyboardEvent> keyDownSubscription;
+
+  FnxModal modal;
+
   /// Constructor used to create instance of Datepicker.
-  FnxDatePicker(ElementRef el) {
+  FnxDatePicker(ElementRef el, @Optional() this.modal) {
     if (el != null) {
       container = el.nativeElement;
     }
@@ -81,6 +86,12 @@ class FnxDatePicker implements OnInit, OnDestroy {
     if (toShow && !alreadyShown) {
       // broadcast, that we are opening this widget
       ON_PICKER_OPENED.emit(this);
+    }
+
+    if (shown == true) {
+      modal?.activeChilds?.add(this);
+    } else {
+      modal?.activeChilds?.removeWhere((dynamic x) => x == this);
     }
   }
 
@@ -153,7 +164,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
   }
 
   void hidePicker() {
-    _shown = false;
+    shown = false;
     closed.emit(true);
   }
 
@@ -260,12 +271,20 @@ class FnxDatePicker implements OnInit, OnDestroy {
       _openSubscription = open.listen((_) => ensureOpened());
     }
     _globalClicks = document.onClick.listen((event) {
-      if (!shown) return;
+      if (shown != true) return;
       if (ui.isEventFromSubtree(event, container.parentNode)) return;
       shown = false;
     });
     dropdownTracker.init(container, dropdown.nativeElement, ()=>shown=false);
+
+    keyDownSubscription = document.onKeyDown
+        .where((KeyboardEvent e) => e.keyCode == KeyCode.ESC)
+        .listen((KeyboardEvent e) {
+      ui.killEvent(e);
+      shown = false;
+    });
   }
+
 
   void somePickerOpened(FnxDatePicker picker) {
     // if any other picker has been opened, ensure this one gets closed
@@ -280,6 +299,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
     if (_pickerOpenedSubscription != null) _pickerOpenedSubscription.cancel();
     if (_globalClicks != null) _globalClicks.cancel();
     dropdownTracker.destroy();
+    keyDownSubscription.cancel();
   }
 
   void killEvent(Event event) {

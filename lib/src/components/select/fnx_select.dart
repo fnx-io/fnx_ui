@@ -7,7 +7,7 @@ import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/util/async.dart';
 import 'package:fnx_ui/src/util/global_messages.dart';
-import 'package:fnx_ui/src/util/ui.dart';
+import 'package:fnx_ui/src/util/ui.dart' as ui;
 
 
 typedef String ValueDescriptionRenderer();
@@ -42,7 +42,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   bool openUp = false;
   bool get dropDownVisible => open && !isReadonly;
 
-  DropdownTracker dropdownTracker = new DropdownTracker();
+  ui.DropdownTracker dropdownTracker = new ui.DropdownTracker();
 
   bool _multi = false;
 
@@ -64,7 +64,9 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   @ViewChild("select")
   ElementRef select;
 
-  FnxSelect(ElementRef el, @Optional() FnxInput wrapper, @Optional() FnxForm form): super(form, wrapper) {
+  FnxModal modal;
+
+  FnxSelect(ElementRef el, @Optional() FnxInput wrapper, @Optional() FnxForm form, @Optional() this.modal): super(form, wrapper) {
     if (el != null) {
       container = el.nativeElement;
     }
@@ -82,11 +84,13 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   }
 
   void hideOptions() {
+    modal?.activeChilds?.removeWhere((dynamic x) => x == this);
     open = false;
     filter = null;
   }
 
   void showOptions() {
+    modal?.activeChilds?.add(this);
     open = true;
     dropdownTracker.updatePosition();
     later(dropdownTracker.updatePosition);
@@ -232,7 +236,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
                                 KeyCode.UP: 'UP',
                                 KeyCode.DOWN: 'DOWN'};
     Set<int> supportedKeys = new Set.from(actions.keys);
-    Stream<KeyboardEvent> onlyWhenExpanded = stream.where((event) => isEventFromSubtree(event, select.nativeElement));
+    Stream<KeyboardEvent> onlyWhenExpanded = stream.where((event) => ui.isEventFromSubtree(event, select.nativeElement));
     Stream<KeyboardEvent> onlySupported = onlyWhenExpanded.where((event) => supportedKeys.contains(event.keyCode));
     Stream<KeyboardEvent> cancelled = onlySupported.map((event) {
       event.preventDefault();
@@ -291,11 +295,11 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
     var self = this;
     this.globalClicks = document.onClick.listen((event) {
       if (!self.open) return;
-      if (isEventFromSubtree(event, container)) return;
+      if (ui.isEventFromSubtree(event, container)) return;
       hideOptions();
     });
     this.navigationActions = bindKeyHandler(document.onKeyDown);
-    dropdownTracker.init(container, dropdown.nativeElement, ()=>open=false);
+    dropdownTracker.init(container, dropdown.nativeElement, hideOptions);
   }
 
   @override
@@ -307,7 +311,6 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
     navigationActions = null;
     dropdownTracker.destroy();
   }
-
 
   @override
   bool hasValidValue() {
@@ -354,7 +357,7 @@ class FnxOptionValue {
 )
 class FnxOption implements OnInit, OnDestroy, OnChanges {
 
-  final String id = uid('ov_');
+  final String id = ui.uid('ov_');
 
   FnxSelect parent;
 

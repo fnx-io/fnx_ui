@@ -15,12 +15,13 @@ import 'example_buttons_renderer.dart';
     directives: const [ExampleButtonsRenderer]
 )
 class ExampleModals {
-
   FnxApp app;
 
   final Logger log = new Logger("ExampleModals");
 
   bool customModalVisible = false;
+
+  List<String> selectData = [];
 
   ExampleModals(this.app);
 

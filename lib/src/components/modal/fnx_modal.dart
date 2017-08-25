@@ -28,6 +28,8 @@ import 'package:logging/logging.dart';
 )
 class FnxModal implements OnInit, OnDestroy {
 
+  List<dynamic> activeChilds = [];
+
   static List<FnxModal> _stack = [];
 
   final Logger log = new Logger("FnxModal");
@@ -56,6 +58,7 @@ class FnxModal implements OnInit, OnDestroy {
     _stack.add(this);
     keyDownSubscription = document.onKeyDown
         .where((KeyboardEvent e) => this == _stack.last)
+        .where((KeyboardEvent e) => activeChilds.isEmpty)
         .where((KeyboardEvent e) => e.keyCode == KeyCode.ESC)
         .listen((KeyboardEvent e) {
       ui.killEvent(e);
@@ -68,5 +71,4 @@ class FnxModal implements OnInit, OnDestroy {
     keyDownSubscription.cancel();
     _stack.remove(this);
   }
-
 }

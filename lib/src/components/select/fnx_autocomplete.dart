@@ -77,7 +77,9 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
     }
   }
 
-  FnxAutocomplete(ElementRef el, @Optional() FnxInput wrapper, @Optional() FnxForm form): super(form, wrapper) {
+  FnxModal modal;
+
+  FnxAutocomplete(ElementRef el, @Optional() FnxInput wrapper, @Optional() FnxForm form, @Optional() this.modal): super(form, wrapper) {
     if (el != null) {
       container = el.nativeElement;
     }
@@ -101,6 +103,7 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
   }
 
   void hideOptions() {
+    modal?.activeChilds?.removeWhere((dynamic x) => x == this);
     open = false;
     if (value != null) {
       _text = options.firstWhere((Pair p) => p.value == value, orElse: ()=>null)?.label;
@@ -108,6 +111,7 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
   }
 
   void showOptions() {
+    modal?.activeChilds?.add(this);
     open = true;
     dropdownTracker.updatePosition();
     later(dropdownTracker.updatePosition);
@@ -193,7 +197,7 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
   ngOnInit() async {
     super.ngOnInit();
     this.navigationActions = bindKeyHandler(document.onKeyDown);
-    dropdownTracker.init(container, dropdown.nativeElement, ()=>open=false);
+    dropdownTracker.init(container, dropdown.nativeElement, hideOptions);
   }
 
   @override
@@ -204,7 +208,6 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
     navigationActions = null;
     dropdownTracker.destroy();
   }
-
 
   @override
   bool hasValidValue() {
