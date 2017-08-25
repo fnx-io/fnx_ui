@@ -14,6 +14,13 @@
             <a tabindex="-1" href="#" (click)="incYear()"><i class="icon">last_page</i></a>
         </header>
         <p class="picker__current">{{year}}/{{formatNumber(month)}}</p>
+        <style>
+            .picker--date td.date-is-empty {
+                cursor: default !important;
+                background: none !important;
+                padding: 5px !important;
+            }
+        </style>
         <table>
             <tr>
                 <th>Mo</th>
@@ -27,7 +34,8 @@
             <tr *ngFor="let week of days">
                 <td *ngFor="let day of week"
                     (click)="pickDay(year, month, day)"
-                    [class.important]="isSelected(year, month, day)">
+                    [class.important]="isSelected(year, month, day)"
+                    [class.date-is-empty]="!isDay(day)">
                     {{day}}
                 </td>
             </tr>

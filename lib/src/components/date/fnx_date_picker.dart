@@ -158,7 +158,13 @@ class FnxDatePicker implements OnInit, OnDestroy {
     return new DateFormat("dd.MM.yyyy").format(today);
   }
 
-  void pickDay(int year, int month, int day) {
+  bool isDay(dynamic day) => day is int;
+
+  void pickDay(dynamic year, dynamic month, dynamic day) {
+    if (year is! int || month is! int || day is! int) {
+      return;
+    }
+
     datePicked.emit(new DateTime(year, month, day, _value.hour, _value.minute));
     hidePicker();
   }
