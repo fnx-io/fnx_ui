@@ -28,7 +28,7 @@ import 'package:logging/logging.dart';
 )
 class FnxModal implements OnInit, OnDestroy {
 
-  List<dynamic> activeChilds = [];
+  Set<dynamic> activeChilds = new Set();
 
   static List<FnxModal> _stack = [];
 

@@ -91,7 +91,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
     if (shown == true) {
       modal?.activeChilds?.add(this);
     } else {
-      modal?.activeChilds?.removeWhere((dynamic x) => x == this);
+      modal?.activeChilds?.remove(this);
     }
   }
 

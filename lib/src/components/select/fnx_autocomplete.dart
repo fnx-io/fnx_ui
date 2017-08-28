@@ -103,7 +103,7 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
   }
 
   void hideOptions() {
-    modal?.activeChilds?.removeWhere((dynamic x) => x == this);
+    modal?.activeChilds?.remove(this);
     open = false;
     if (value != null) {
       _text = options.firstWhere((Pair p) => p.value == value, orElse: ()=>null)?.label;
