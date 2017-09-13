@@ -57,12 +57,14 @@ class FnxInput extends FnxValidatorComponent {
 
   bool get readonly => _readonly;
 
+  @Input()
   set readonly(bool value) {
     throw "You are setting 'readonly' attribute to fnx-input, that's not what you want";
   }
 
   bool get required => _required;
 
+  @Input()
   set required(bool value) {
     throw "You are setting 'required' attribute to fnx-input, that's not what you want";
   }
