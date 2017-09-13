@@ -48,8 +48,9 @@ class FnxApp implements OnInit {
   ///
   /// Shows simple 'flash message': 'User created', 'Record deleted', etc.
   ///
-  void toast(String text, {Duration duration: const Duration(milliseconds: 4000 )}) {
+  void toast(String text, {Duration duration: const Duration(milliseconds: 4000 ), String cssClass: ""}) {
     _ToastContent t = new _ToastContent()
+        ..cssClass = cssClass
         ..message = text;
     toasts.add(t);
     new Future.delayed(duration).then((_) {
@@ -160,4 +161,5 @@ class _ModalContent {
 class _ToastContent {
   String message;
   bool hide = false;
+  String cssClass = "";
 }

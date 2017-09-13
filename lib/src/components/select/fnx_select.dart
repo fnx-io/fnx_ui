@@ -18,11 +18,14 @@ const CUSTOM_SELECT_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
 @Component(
     selector: 'fnx-select',
     templateUrl: 'fnx_select.html',
-    providers: const [CUSTOM_SELECT_VALUE_ACCESSOR],
+    providers: const [
+      CUSTOM_SELECT_VALUE_ACCESSOR,
+      const Provider(Focusable, useExisting: FnxSelect, multi: false),
+    ],
     preserveWhitespace: false,
     directives: const [ AutoFocus ]
 )
-class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
+class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
 
   @Input() bool required = false;
   @Input() bool neverShowFilter = false;
@@ -321,6 +324,10 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
     return true;
   }
 
+  @override
+  void focus() {
+    select.nativeElement.focus();
+  }
 }
 
 class FnxOptionValue {

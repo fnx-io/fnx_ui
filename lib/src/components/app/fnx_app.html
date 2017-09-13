@@ -39,7 +39,7 @@
 
 <!-- Toasts -->
 <div class="toast__container">
-    <div *ngFor="let toast of toasts" class="toast" [class.hide]="toast.hide" (click)="toast.hide = true">
+    <div *ngFor="let toast of toasts" class="toast {{toast.cssClass}}" [class.hide]="toast.hide" (click)="toast.hide = true">
         <p>{{toast.message}}</p>
     </div>
 </div>
