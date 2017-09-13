@@ -5,25 +5,27 @@ import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/date/fnx_date_picker.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/util/date.dart' as date;
+import 'package:fnx_ui/src/validator.dart';
 
 export 'package:fnx_ui/src/components/date/fnx_date_picker.dart';
 
+const CUSTOM_DATE_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExisting: FnxDate, multi: true);
 
-const CUSTOM_DATE_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
-                                                    useExisting: FnxDate,
-                                                    multi: true);
 @Component(
-    selector: 'fnx-date',
-    providers: const [CUSTOM_DATE_VALUE_ACCESSOR],
-    templateUrl: 'fnx_date.html',
-    preserveWhitespace: false
+  selector: 'fnx-date',
+  providers: const [
+    CUSTOM_DATE_VALUE_ACCESSOR,
+    const Provider(FnxValidatorComponent, useClass: FnxDate, multi: false),
+  ],
+  templateUrl: 'fnx_date.html',
+  preserveWhitespace: false,
 )
 class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
-
   /// This is the model for the DOM input field, user types here the date and
   /// we try to parse it and sync it to model
-  @Output() String dateStr = null;
-  
+  @Output()
+  String dateStr = null;
+
   Control control = null;
 
   @Optional()
@@ -42,8 +44,8 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
 
   FnxInput _inputWrapper;
 
-  FnxDate(@Optional() FnxInput wrapper, @Optional() FnxForm form): super(form, wrapper) {
-    _inputWrapper = wrapper;
+  FnxDate(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent) {
+    _inputWrapper = parent;
   }
 
   set focused(bool focused) {
@@ -52,6 +54,7 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
       _openDatePicker.emit(true);
     }
   }
+
   get focused => _focused;
 
   get openDatePicker => _openDatePicker;
@@ -65,7 +68,6 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
   bool get showError => false; //!control.valid && !control.root.pristine;
 
   bool validFormattedDate = true;
-
 
   @override
   ngOnInit() {
@@ -87,7 +89,7 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
     if (required && valueEmpty) {
       return "Required value, expected format ${applicableFormat.toLowerCase()}";
     } else {
-      return  "Invalid value, expected format ${applicableFormat.toLowerCase()}";
+      return "Invalid value, expected format ${applicableFormat.toLowerCase()}";
     }
   }
 
@@ -109,12 +111,12 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
     setSuggestedErrorMessage(dateStr);
   }
 
-  String get applicableFormat => dateTime ? date.DATETIME_FORMAT: date.DATE_FORMAT;
+  String get applicableFormat => dateTime ? date.DATETIME_FORMAT : date.DATE_FORMAT;
 
   void datePicked(DateTime picked) {
     if (picked == null) {
       value = null;
-    } else if (value == null || !(value is DateTime)){
+    } else if (value == null || !(value is DateTime)) {
       value = picked;
     } else {
       DateTime original = value as DateTime;

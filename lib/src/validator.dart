@@ -1,10 +1,11 @@
+import 'dart:async';
 import 'package:angular2/core.dart';
 
 ///
 /// Base class for all components which support validation (extend or mix-in).
 ///
 ///
-abstract class FnxValidatorComponent {
+abstract class FnxValidatorComponent implements OnInit, OnDestroy {
 
   bool _touched = false;
 
@@ -15,6 +16,25 @@ abstract class FnxValidatorComponent {
   bool get isReadonly; // abstract
 
   List<FnxValidatorComponent> _validatorChildren = [];
+  List<FnxValidatorComponent> get validatorChildren => _validatorChildren;
+
+  FnxValidatorComponent _parent;
+  FnxValidatorComponent(@SkipSelf() @Optional() FnxValidatorComponent this._parent);
+
+  @override
+  ngOnInit() {
+    if (_parent != null) {
+      print('me: ${this.runtimeType} (${this.required}), parent: ${_parent.runtimeType}');
+      _parent.registerChild(this);
+    }
+  }
+
+  @override
+  ngOnDestroy() {
+    if (_parent != null) {
+      _parent.deregisterChild(this);
+    }
+  }
 
   ///
   /// User interacted with this component.
@@ -93,5 +113,4 @@ abstract class FnxValidatorComponent {
   void deregisterChild(FnxValidatorComponent child) {
     _validatorChildren.remove(child);
   }
-
 }

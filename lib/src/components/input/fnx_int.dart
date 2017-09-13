@@ -2,12 +2,13 @@ import 'package:angular2/common.dart';
 import 'package:angular2/core.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
+import 'package:fnx_ui/src/validator.dart';
 
 const CUSTOM_INPUT_INT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExisting: FnxInt, multi: true);
 
 @Component(
-    selector: 'fnx-int',
-    template: r'''
+  selector: 'fnx-int',
+  template: r'''
 <input id="{{ componentId }}" type="{{ htmlType }}" [(ngModel)]="value" [readonly]="isReadonly"
   [attr.min]="min"
   [attr.max]="max"
@@ -18,15 +19,15 @@ const CUSTOM_INPUT_INT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExi
   #input
 />
 ''',
-    providers: const [
-      CUSTOM_INPUT_INT_VALUE_ACCESSOR,
-      const Provider(Focusable, useExisting: FnxInt, multi: false)
-    ],
-    styles: const [":host input { text-align: inherit;}"],
-    preserveWhitespace: false
+  providers: const [
+    CUSTOM_INPUT_INT_VALUE_ACCESSOR,
+    const Provider(Focusable, useExisting: FnxInt, multi: false),
+    const Provider(FnxValidatorComponent, useClass: FnxInt, multi: false),
+  ],
+  styles: const [":host input { text-align: inherit;}"],
+  preserveWhitespace: false,
 )
 class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
-
   @Input()
   bool required = false;
 
@@ -48,7 +49,7 @@ class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, 
   @ViewChild("input")
   ElementRef elementRef;
 
-  FnxInt(@Optional() FnxForm form, @Optional() FnxInput wrapper) : super(form, wrapper);
+  FnxInt(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
 
   // 'number' must not be a constant in the html template !
   String get htmlType => 'number';
@@ -119,5 +120,4 @@ class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, 
   get value {
     return super.value;
   }
-
 }

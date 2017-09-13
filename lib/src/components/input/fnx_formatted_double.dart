@@ -2,13 +2,15 @@ import 'package:angular2/common.dart';
 import 'package:angular2/core.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
+import 'package:fnx_ui/src/validator.dart';
 import 'package:intl/intl.dart';
 
-const CUSTOM_INPUT_FDOUBLE_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExisting: FnxFormattedDouble, multi: true);
+const CUSTOM_INPUT_FDOUBLE_VALUE_ACCESSOR =
+    const Provider(NG_VALUE_ACCESSOR, useExisting: FnxFormattedDouble, multi: true);
 
 @Component(
-    selector: 'fnx-formatted-double',
-    template: r'''
+  selector: 'fnx-formatted-double',
+  template: r'''
 <input id="{{ componentId }}" type="{{ htmlType }}"
   [(ngModel)]="valueStr"
   [readonly]="isReadonly"
@@ -21,15 +23,15 @@ const CUSTOM_INPUT_FDOUBLE_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, us
   #input
 />
 ''',
-    providers: const [
-      CUSTOM_INPUT_FDOUBLE_VALUE_ACCESSOR,
-      const Provider(Focusable, useExisting: FnxFormattedDouble, multi: false)
-    ],
-    styles: const [":host input { text-align: inherit;}"],
-    preserveWhitespace: false
+  providers: const [
+    CUSTOM_INPUT_FDOUBLE_VALUE_ACCESSOR,
+    const Provider(Focusable, useExisting: FnxFormattedDouble, multi: false),
+    const Provider(FnxValidatorComponent, useClass: FnxFormattedDouble, multi: false),
+  ],
+  styles: const [":host input { text-align: inherit;}"],
+  preserveWhitespace: false,
 )
 class FnxFormattedDouble extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
-
   @Input()
   bool required = false;
 
@@ -61,7 +63,7 @@ class FnxFormattedDouble extends FnxInputComponent implements ControlValueAccess
 
   bool focused = false;
 
-  FnxFormattedDouble(@Optional() FnxForm form, @Optional() FnxInput wrapper) : super(form, wrapper);
+  FnxFormattedDouble(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
 
   String get autocompleteAttr => (autocomplete) ? 'on' : 'off';
 
@@ -94,7 +96,7 @@ class FnxFormattedDouble extends FnxInputComponent implements ControlValueAccess
     if (value is num) {
       return value.toDouble();
     } else {
-      return double.parse(value.toString().replaceAll(",","."), (_) => null);
+      return double.parse(value.toString().replaceAll(",", "."), (_) => null);
     }
   }
 
@@ -159,5 +161,4 @@ class FnxFormattedDouble extends FnxInputComponent implements ControlValueAccess
       value = parseDouble(nf.parse(_valueStr));
     }
   }
-
 }

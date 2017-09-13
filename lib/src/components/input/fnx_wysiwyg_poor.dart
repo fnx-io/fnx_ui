@@ -5,13 +5,14 @@ import 'package:angular2/common.dart';
 import 'package:angular2/core.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
+import 'package:fnx_ui/src/validator.dart';
 
-const CUSTOM_INPUT_WYSIWYG_POOR_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
-    useExisting: FnxWysiwygPoor,
-    multi: true);
+const CUSTOM_INPUT_WYSIWYG_POOR_VALUE_ACCESSOR =
+    const Provider(NG_VALUE_ACCESSOR, useExisting: FnxWysiwygPoor, multi: true);
+
 @Component(
-    selector: 'fnx-wysiwyg-poor',
-    template: r'''
+  selector: 'fnx-wysiwyg-poor',
+  template: r'''
     <div class="wysiwyg--wrapper flex--column">
       <div class="margin--small--bottom">
           <span class="pointer icon margin--small--right" (mousedown)="doCommand('undo')">undo</span>
@@ -28,28 +29,32 @@ const CUSTOM_INPUT_WYSIWYG_POOR_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCES
            ></div>
      </div>
 ''',
-    styles: const [
-      ":host { display: block; height: 10em; }",
-      ":host .wysiwyg--wrapper { height: 100% }",
-      ":host .input--component { overflow-y: scroll; }",
-      ":host .input--component a {text-decoration: underline;}",
-      ":host .input--component div {margin-top: 0.6em;}",
-      ":host .input--component p {margin-top: 0.6em;}",
-    ],
-    providers: const [CUSTOM_INPUT_WYSIWYG_POOR_VALUE_ACCESSOR],
-    preserveWhitespace: false
+  styles: const [
+    ":host { display: block; height: 10em; }",
+    ":host .wysiwyg--wrapper { height: 100% }",
+    ":host .input--component { overflow-y: scroll; }",
+    ":host .input--component a {text-decoration: underline;}",
+    ":host .input--component div {margin-top: 0.6em;}",
+    ":host .input--component p {margin-top: 0.6em;}",
+  ],
+  providers: const [
+    CUSTOM_INPUT_WYSIWYG_POOR_VALUE_ACCESSOR,
+    const Provider(FnxValidatorComponent, useClass: FnxWysiwygPoor, multi: false),
+  ],
+  preserveWhitespace: false,
 )
 class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
-
-  @Input() bool required = false;
-  @Input() bool readonly = false;
+  @Input()
+  bool required = false;
+  @Input()
+  bool readonly = false;
 
   @ViewChild("wysiwyg")
   ElementRef editor;
 
   FnxApp app;
 
-  FnxWysiwygPoor(@Optional() this.app, @Optional() FnxForm form, @Optional() FnxInput wrapper) : super(form, wrapper) {
+  FnxWysiwygPoor(@Optional() this.app, @SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent) {
     if (app == null) {
       throw "Wysiwyg must be wrapped in <fxn-app> element - use this element in your root element's template.";
     }
@@ -92,7 +97,6 @@ class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, 
     edited();
   }
 
-
   List saveSelection() {
     Selection sel = window.getSelection();
     if (sel.rangeCount > 0) {
@@ -113,5 +117,4 @@ class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, 
       sel.addRange(savedSel[i]);
     }
   }
-
 }

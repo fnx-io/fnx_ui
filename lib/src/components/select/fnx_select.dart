@@ -8,41 +8,51 @@ import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/util/async.dart';
 import 'package:fnx_ui/src/util/global_messages.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
-
+import 'package:fnx_ui/src/validator.dart';
 
 typedef String ValueDescriptionRenderer();
 
-const CUSTOM_SELECT_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
-                                                      useExisting: FnxSelect,
-                                                      multi: true);
+const CUSTOM_SELECT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExisting: FnxSelect, multi: true);
+
 @Component(
-    selector: 'fnx-select',
-    templateUrl: 'fnx_select.html',
-    providers: const [
-      CUSTOM_SELECT_VALUE_ACCESSOR,
-      const Provider(Focusable, useExisting: FnxSelect, multi: false),
-    ],
-    preserveWhitespace: false,
-    directives: const [ AutoFocus ]
+  selector: 'fnx-select',
+  templateUrl: 'fnx_select.html',
+  providers: const [
+    CUSTOM_SELECT_VALUE_ACCESSOR,
+    const Provider(Focusable, useExisting: FnxSelect, multi: false),
+    const Provider(FnxValidatorComponent, useClass: FnxSelect, multi: false),
+  ],
+  preserveWhitespace: false,
+  directives: const [AutoFocus],
 )
 class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
-
-  @Input() bool required = false;
-  @Input() bool neverShowFilter = false;
-  @Input() bool alwaysShowFilter = false;
-  @Input() bool readonly = false;
-  @Input() bool nullable = false;
-  @Input() ValueDescriptionRenderer valueDescriptionRenderer;
+  @Input()
+  bool required = false;
+  @Input()
+  bool neverShowFilter = false;
+  @Input()
+  bool alwaysShowFilter = false;
+  @Input()
+  bool readonly = false;
+  @Input()
+  bool nullable = false;
+  @Input()
+  ValueDescriptionRenderer valueDescriptionRenderer;
 
   List<FnxOptionValue> options = [];
 
-  @Input() String selectionEmptyLabel = GlobalMessages.selectSelectionEmptyLabel();// "Select...";
-  @Input() String optionsEmptyLabel = GlobalMessages.selectOptionsEmptyLabel();//"No options to choose from";
-  @Input() String optionsEmptySearchLabel = GlobalMessages.selectOptionsEmptySearchLabel(); //"No option matches your search";
-  @Input() String filterPlaceholder = GlobalMessages.selectFilterPlaceholder(); //"Search...";
+  @Input()
+  String selectionEmptyLabel = GlobalMessages.selectSelectionEmptyLabel(); // "Select...";
+  @Input()
+  String optionsEmptyLabel = GlobalMessages.selectOptionsEmptyLabel(); //"No options to choose from";
+  @Input()
+  String optionsEmptySearchLabel = GlobalMessages.selectOptionsEmptySearchLabel(); //"No option matches your search";
+  @Input()
+  String filterPlaceholder = GlobalMessages.selectFilterPlaceholder(); //"Search...";
 
   bool open = false;
   bool openUp = false;
+
   bool get dropDownVisible => open && !isReadonly;
 
   ui.DropdownTracker dropdownTracker = new ui.DropdownTracker();
@@ -54,13 +64,14 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   String _filter = null;
   List<FnxOptionValue> _cachedFilteredOptions = null;
 
-  @ContentChild(NgFormControl) NgFormControl state;
+  @ContentChild(NgFormControl)
+  NgFormControl state;
 
   StreamSubscription<MouseEvent> globalClicks;
   StreamSubscription<String> navigationActions;
 
   Node container;
-  
+
   @ViewChild("dropdown")
   ElementRef dropdown;
 
@@ -69,7 +80,8 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 
   FnxModal modal;
 
-  FnxSelect(ElementRef el, @Optional() FnxInput wrapper, @Optional() FnxForm form, @Optional() this.modal): super(form, wrapper) {
+  FnxSelect(ElementRef el, @Optional() this.modal, @SkipSelf() @Optional() FnxValidatorComponent parent)
+      : super(parent) {
     if (el != null) {
       container = el.nativeElement;
     }
@@ -210,6 +222,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
       notifyNgModel();
     }
   }
+
   @Input()
   set filter(String value) {
     if (value != null) {
@@ -218,11 +231,12 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
     _cachedFilteredOptions = null;
     _filter = value;
   }
+
   get filter => _filter;
 
   List<FnxOptionValue> get filteredOptions {
     if (_filter != null) {
-      if (_cachedFilteredOptions != null ) return _cachedFilteredOptions;
+      if (_cachedFilteredOptions != null) return _cachedFilteredOptions;
       var result = options.where((option) {
         return option.label != null && option.label.toLowerCase().contains(filter);
       }).toList();
@@ -234,12 +248,10 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   }
 
   StreamSubscription<String> bindKeyHandler(Stream<KeyboardEvent> stream) {
-    Map<int, String> actions = {KeyCode.ENTER: 'SELECT',
-                                KeyCode.ESC: 'HIDE',
-                                KeyCode.UP: 'UP',
-                                KeyCode.DOWN: 'DOWN'};
+    Map<int, String> actions = {KeyCode.ENTER: 'SELECT', KeyCode.ESC: 'HIDE', KeyCode.UP: 'UP', KeyCode.DOWN: 'DOWN'};
     Set<int> supportedKeys = new Set.from(actions.keys);
-    Stream<KeyboardEvent> onlyWhenExpanded = stream.where((event) => ui.isEventFromSubtree(event, select.nativeElement));
+    Stream<KeyboardEvent> onlyWhenExpanded =
+        stream.where((event) => ui.isEventFromSubtree(event, select.nativeElement));
     Stream<KeyboardEvent> onlySupported = onlyWhenExpanded.where((event) => supportedKeys.contains(event.keyCode));
     Stream<KeyboardEvent> cancelled = onlySupported.map((event) {
       event.preventDefault();
@@ -252,7 +264,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
         if (dropDownVisible) {
           selectNext(_highlighted, filteredOptions.reversed);
         }
-      } else if (action  == 'DOWN') {
+      } else if (action == 'DOWN') {
         if (!dropDownVisible) {
           showOptions();
         } else {
@@ -279,7 +291,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
     // we have nowhere to navigate
     if (all == null || all.isEmpty) return null;
     // current is empty, return first option
-    if (current == null)  return options.first;
+    if (current == null) return options.first;
     // drop all items until we find current in the collection of all
     var currentAndRest = all.skipWhile((option) => option != current);
     // current has not been found in the collection of all options, return first
@@ -342,8 +354,7 @@ class FnxOptionValue {
     if (identical(this, other)) {
       return true;
     }
-    return other is FnxOptionValue &&
-        this.value == other.value;
+    return other is FnxOptionValue && this.value == other.value;
   }
 
   @override
@@ -357,13 +368,8 @@ class FnxOptionValue {
   }
 }
 
-@Component(
-    selector: 'fnx-option',
-    templateUrl: 'fnx_option.html',
-    preserveWhitespace: false
-)
+@Component(selector: 'fnx-option', templateUrl: 'fnx_option.html', preserveWhitespace: false)
 class FnxOption implements OnInit, OnDestroy, OnChanges {
-
   final String id = ui.uid('ov_');
 
   FnxSelect parent;
@@ -420,8 +426,6 @@ class FnxOption implements OnInit, OnDestroy, OnChanges {
   }
 
   get selected => parent != null && parent.isSelected(value);
-
-
 }
 
 const FNX_SELECT_DIRECTIVES = const [FnxSelect, FnxOption];

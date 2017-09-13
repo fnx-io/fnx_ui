@@ -2,6 +2,7 @@ import 'package:angular2/common.dart';
 import 'package:angular2/core.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
+import 'package:fnx_ui/src/validator.dart';
 
 const CUSTOM_INPUT_DOUBLE_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExisting: FnxDouble, multi: true);
 
@@ -21,10 +22,11 @@ const CUSTOM_INPUT_DOUBLE_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, use
 ''',
     providers: const [
       CUSTOM_INPUT_DOUBLE_VALUE_ACCESSOR,
-      const Provider(Focusable, useExisting: FnxDouble, multi: false)
+      const Provider(Focusable, useExisting: FnxDouble, multi: false),
+      const Provider(FnxValidatorComponent, useClass: FnxDouble, multi: false),
     ],
     styles: const [":host input { text-align: inherit;}"],
-    preserveWhitespace: false
+    preserveWhitespace: false,
 )
 class FnxDouble extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
 
@@ -52,7 +54,7 @@ class FnxDouble extends FnxInputComponent implements ControlValueAccessor, OnIni
   @ViewChild("input")
   ElementRef elementRef;
 
-  FnxDouble(@Optional() FnxForm form, @Optional() FnxInput wrapper) : super(form, wrapper);
+  FnxDouble(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
 
   String get autocompleteAttr => (autocomplete) ? 'on' : 'off';
 

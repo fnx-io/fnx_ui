@@ -8,6 +8,7 @@ import 'package:angular2/core.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/quill/quill.dart';
+import 'package:fnx_ui/src/validator.dart';
 
 const EMPTY_STRING_VALUE = "<p><br></p>";
 
@@ -15,8 +16,8 @@ const CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR =
     const Provider(NG_VALUE_ACCESSOR, useExisting: FnxWysiwygRich, multi: true);
 
 @Component(
-    selector: 'fnx-wysiwyg-rich',
-    template: r'''
+  selector: 'fnx-wysiwyg-rich',
+  template: r'''
     <div class="wysiwyg--wrapper">
       <div #toolbar>
           <span class="icon-container" [class.is--html]="htmlView == true">
@@ -61,17 +62,22 @@ const CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR =
      </div>
    </div>
 ''',
-    styles: const [
-      ":host { display: block;}",
-      ":host .input--component { padding: 0;}",
-      ":host .input--component a {text-decoration: underline;}",
-      ":host .ql-container.ql-snow {border:0;}",
-      ":host .ql-toolbar.ql-snow {display: none;}",
-      ":host fnx-textarea, :host fnx-textarea textarea {min-width: 100%; width: 100%; max-width: 100%; min-height: 100%; height: 100%; max-height: 100%;}",
-      ":host .icon-container.is--html {color: #777 !important; pointer-events: none;}"
-    ],
-    providers: const [CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR, const Provider(Focusable, useExisting: FnxWysiwygRich)],
-    preserveWhitespace: false)
+  styles: const [
+    ":host { display: block;}",
+    ":host .input--component { padding: 0;}",
+    ":host .input--component a {text-decoration: underline;}",
+    ":host .ql-container.ql-snow {border:0;}",
+    ":host .ql-toolbar.ql-snow {display: none;}",
+    ":host fnx-textarea, :host fnx-textarea textarea {min-width: 100%; width: 100%; max-width: 100%; min-height: 100%; height: 100%; max-height: 100%;}",
+    ":host .icon-container.is--html {color: #777 !important; pointer-events: none;}"
+  ],
+  providers: const [
+    CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR,
+    const Provider(Focusable, useExisting: FnxWysiwygRich),
+    const Provider(FnxValidatorComponent, useClass: FnxWysiwygRich, multi: false),
+  ],
+  preserveWhitespace: false,
+)
 class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
   @Input()
   bool required = false;
@@ -101,7 +107,7 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
 
   FnxApp app;
 
-  FnxWysiwygRich(@Optional() this.app, @Optional() FnxForm form, @Optional() FnxInput wrapper) : super(form, wrapper) {
+  FnxWysiwygRich(@Optional() this.app, @SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent) {
     if (app == null) {
       throw "Wysiwyg must be wrapped in <fxn-app> element - use this element in your root element's template.";
     }

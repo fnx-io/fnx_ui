@@ -8,12 +8,14 @@ import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'package:fnx_ui/src/validator.dart';
 import 'package:logging/logging.dart';
 
-
 typedef String formValidatorFunction();
 
 @Component(
   selector: 'fnx-form',
-  templateUrl: 'fnx_form.html'
+  templateUrl: 'fnx_form.html',
+  providers: const [
+    const Provider(FnxValidatorComponent, useClass: FnxForm, multi: false),
+  ],
 )
 class FnxForm extends FnxValidatorComponent {
 
@@ -30,6 +32,8 @@ class FnxForm extends FnxValidatorComponent {
 
   @Input()
   bool readonly = false;
+
+  FnxForm() : super(null);
   
   @override
   bool get required => false;
@@ -85,5 +89,4 @@ class FnxForm extends FnxValidatorComponent {
   }
 
   bool get isReadonly => (readonly??false);
-
 }

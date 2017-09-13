@@ -6,23 +6,39 @@ import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'package:fnx_ui/src/validator.dart';
 
 @Component(
-    selector: 'fnx-input',
-    template: r'''
+  selector: 'fnx-input',
+  template: r'''
 <div class="input">
   <label *ngIf="label != null"
-    [attr.for]="componentId"
-    [class.required]="hasRequiredChildren()"
-    (click)="markAsTouched()" [innerHtml]="label"></label>
+         [attr.for]="componentId"
+         [class.required]="hasRequiredChildren()"
+         (click)="markAsTouched()" [innerHtml]="label"></label>
   <ng-content></ng-content>
   <label *ngIf="isTouchedAndInvalid()" class="error" [attr.for]="componentId">{{ errorMessage }}</label>
 </div>
 ''',
-    preserveWhitespace: false)
-class FnxInput extends FnxValidatorComponent {
+  preserveWhitespace: false,
+  providers: const [
+    const Provider(FnxValidatorComponent, useClass: FnxInput, multi: false),
+  ],
+)
+class FnxInput extends FnxValidatorComponent implements OnInit, OnDestroy {
+  FnxInput(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
+
+  @override
+  ngOnInit() {
+    super.ngOnInit();
+  }
+
+  @override
+  ngOnDestroy() {
+    super.ngOnDestroy();
+  }
 
   final String componentId = ui.uid('comp_');
 
-  @Input() String label;
+  @Input()
+  String label;
   String _errorMessage;
   String _defaultErrorMessage;
 
@@ -69,30 +85,26 @@ class FnxInput extends FnxValidatorComponent {
     throw "You are setting 'required' attribute to fnx-input, that's not what you want";
   }
 
-  bool get isReadonly => (readonly??false);
-
-
+  bool get isReadonly => (readonly ?? false);
 }
 
 ///
 /// Ads support for custom validation and ngModel.
 ///
-abstract class FnxInputComponent extends FnxValidatorComponent implements OnInit, ControlValueAccessor {
-
-  FnxInput _wrapper;
-  FnxForm _form;
-
+abstract class FnxInputComponent extends FnxValidatorComponent implements OnInit, OnDestroy, ControlValueAccessor {
   final String _privComponentId = ui.uid("comp_");
 
   Control componentControl;
 
-  FnxInputComponent(this._form, this._wrapper);
+  FnxValidatorComponent _parent;
+  FnxInputComponent(this._parent) : super(_parent);
 
   dynamic _value;
 
   get value => _value;
 
-  @Output() EventEmitter valueChange = new EventEmitter();
+  @Output()
+  EventEmitter valueChange = new EventEmitter();
 
   @Input()
   set value(dynamic v) {
@@ -130,8 +142,8 @@ abstract class FnxInputComponent extends FnxValidatorComponent implements OnInit
   }
 
   String get componentId {
-    if (_wrapper != null) {
-      return _wrapper.componentId;
+    if (_parent != null && _parent is FnxInput) {
+      return (_parent as FnxInput).componentId;
     } else {
       return _privComponentId;
     }
@@ -139,32 +151,20 @@ abstract class FnxInputComponent extends FnxValidatorComponent implements OnInit
 
   @override
   ngOnInit() {
-    if (_wrapper != null) {
-      _wrapper.registerChild(this);
-    }
-    if (_form != null) {
-      _form.registerChild(this);
-    }
+    super.ngOnInit();
   }
 
   @override
   ngOnDestroy() {
-    if (_wrapper != null) {
-      _wrapper.deregisterChild(this);
-    }
-    if (_form != null) {
-      _form.deregisterChild(this);
-    }
+    super.ngOnDestroy();
   }
 
   bool get isParentReadonly {
-    if (_wrapper != null && _wrapper.readonly) return true;
-    if (_form != null && _form.readonly) return true;
+    if (_parent != null && _parent.readonly) return true;
     return false;
   }
 
-  bool get isReadonly => (readonly??false) || isParentReadonly;
-
+  bool get isReadonly => (readonly ?? false) || isParentReadonly;
 }
 
 const FNX_INPUT_DIRECTIVES = const [FnxInput];

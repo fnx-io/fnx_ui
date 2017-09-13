@@ -4,6 +4,7 @@ import 'package:angular2/common.dart';
 import 'package:angular2/core.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
+import 'package:fnx_ui/src/validator.dart';
 
 const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExisting: FnxText, multi: true);
 
@@ -15,8 +16,8 @@ const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useEx
 /// - http (https or http URI)
 ///
 @Component(
-    selector: 'fnx-text',
-    template: r'''
+  selector: 'fnx-text',
+  template: r'''
 <input id="{{ componentId }}" type="{{ htmlType }}" [(ngModel)]="value" [readonly]="isReadonly"
   [attr.minlength]="minLength"
   [attr.maxlength]="maxLength"
@@ -30,15 +31,15 @@ const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useEx
   #input
 />
 ''',
-    providers: const [
-      CUSTOM_INPUT_TEXT_VALUE_ACCESSOR,
-      const Provider(Focusable, useExisting: FnxText, multi: false)
-    ],
-    styles: const [":host input { text-align: inherit;}"],
-    preserveWhitespace: false
+  providers: const [
+    CUSTOM_INPUT_TEXT_VALUE_ACCESSOR,
+    const Provider(Focusable, useExisting: FnxText, multi: false),
+    const Provider(FnxValidatorComponent, useClass: FnxText, multi: false),
+  ],
+  styles: const [":host input { text-align: inherit;}"],
+  preserveWhitespace: false,
 )
 class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
-
   @Input()
   bool required = false;
 
@@ -71,10 +72,10 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
 
   int _decimals = 0;
 
-  FnxText(@Optional() FnxForm form, @Optional() FnxInput wrapper) : super(form, wrapper);
+  FnxText(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
 
   String get htmlType {
-    switch(type) {
+    switch (type) {
       case 'password':
       case 'number':
         return type;
@@ -88,14 +89,16 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
   String get autocompleteAttr {
     if (autocomplete) {
       return 'on';
-    } else if (type == 'password') { // passwd autocomplete is different from text autocomplete
+    } else if (type == 'password') {
+      // passwd autocomplete is different from text autocomplete
       return "new-password";
     } else {
       return 'off';
     }
   }
 
-  static final RegExp _EMAIL_REGEXP = new RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
+  static final RegExp _EMAIL_REGEXP = new RegExp(
+      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
 
   @override
   ngOnInit() {
@@ -134,7 +137,6 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
 
     if (type == "text" || type == "http" || type == "email" || type == "password") {
       return hasValidTextImpl();
-
     } else if (type == "number") {
       return hasValidNumberImpl();
     } else if (type == "decimal") {
@@ -201,7 +203,6 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
 
         if ((u.host == null || u.host.isEmpty) && (u.path == null || u.path.isEmpty)) return false;
         return true;
-
       } catch (e) {
         return false;
       }
@@ -214,12 +215,12 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
   }
 
   void assertType() {
-    if (type != "text"
-        && type != "number"
-        && type != "email"
-        && type != "http"
-        && type != "password"
-        && type != "decimal") {
+    if (type != "text" &&
+        type != "number" &&
+        type != "email" &&
+        type != "http" &&
+        type != "password" &&
+        type != "decimal") {
       throw "The only possible types at this moment are 'text', 'number', 'decimal', 'email', 'http' and 'password'";
     }
   }
@@ -230,5 +231,4 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
       elementRef.nativeElement.focus();
     }
   }
-  
 }

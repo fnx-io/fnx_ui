@@ -5,14 +5,14 @@ import 'package:angular2/core.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/util/global_messages.dart';
+import 'package:fnx_ui/src/validator.dart';
 import 'package:logging/logging.dart';
 
-const CUSTOM_INPUT_FILE_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
-    useExisting: FnxFile,
-    multi: true);
+const CUSTOM_INPUT_FILE_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExisting: FnxFile, multi: true);
+
 @Component(
-    selector: 'fnx-file',
-    template: r'''
+  selector: 'fnx-file',
+  template: r'''
 <div class="input__file">
   <span class="input__file__dropzone" [class.drag--here]="possibleDrop()" [class.readonly]="isReadonly"
       (dragenter)="onDrag($event, true)"
@@ -38,17 +38,19 @@ const CUSTOM_INPUT_FILE_VALUE_ACCESSOR = const Provider(  NG_VALUE_ACCESSOR,
   </span>
 </div>
 ''',
-    styles: const [
-      ":host { display: block; flex-grow: 1; flex-shrink: 1; max-width: 100%}",
-      ".input__file { width: 100%; }",
-      ".input__file__delete { z-index: 0 }",
-      ".input__file__browse { cursor: pointer }"
-    ],
-    providers: const [CUSTOM_INPUT_FILE_VALUE_ACCESSOR],
-    preserveWhitespace: false
+  styles: const [
+    ":host { display: block; flex-grow: 1; flex-shrink: 1; max-width: 100%}",
+    ".input__file { width: 100%; }",
+    ".input__file__delete { z-index: 0 }",
+    ".input__file__browse { cursor: pointer }"
+  ],
+  providers: const [
+    CUSTOM_INPUT_FILE_VALUE_ACCESSOR,
+    const Provider(FnxValidatorComponent, useClass: FnxFile, multi: false),
+  ],
+  preserveWhitespace: false,
 )
 class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
-
   @Input()
   bool required = false;
 
@@ -72,12 +74,11 @@ class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit,
   @Input()
   String browseLabel = GlobalMessages.fileBrowse();
 
-
   //@Input() bool readonly = false;
 
   final Logger log = new Logger("FnxFile");
 
-  FnxFile(@Optional() FnxForm form, @Optional() FnxInput wrapper): super(form, wrapper);
+  FnxFile(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
 
   @override
   bool hasValidValue() {
@@ -105,7 +106,7 @@ class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit,
 
   bool isCompatibleDataTransfer(MouseEvent event) {
     if (isReadonly) return false;
-    return true;//event.dataTransfer.files != null && event.dataTransfer.files.isNotEmpty;
+    return true; //event.dataTransfer.files != null && event.dataTransfer.files.isNotEmpty;
   }
 
   void onDragOver(Event event) {
@@ -159,5 +160,4 @@ class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit,
     }
     return value.toString();
   }
-
 }
