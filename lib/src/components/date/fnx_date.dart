@@ -15,7 +15,7 @@ const CUSTOM_DATE_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExisting
   selector: 'fnx-date',
   providers: const [
     CUSTOM_DATE_VALUE_ACCESSOR,
-    const Provider(FnxValidatorComponent, useClass: FnxDate, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxDate, multi: false),
   ],
   templateUrl: 'fnx_date.html',
   preserveWhitespace: false,

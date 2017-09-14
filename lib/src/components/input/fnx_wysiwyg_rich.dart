@@ -74,7 +74,7 @@ const CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR =
   providers: const [
     CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR,
     const Provider(Focusable, useExisting: FnxWysiwygRich),
-    const Provider(FnxValidatorComponent, useClass: FnxWysiwygRich, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxWysiwygRich, multi: false),
   ],
   preserveWhitespace: false,
 )

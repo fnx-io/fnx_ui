@@ -23,17 +23,20 @@ const CUSTOM_INPUT_CHECK_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useE
 ''',
   providers: const [
     CUSTOM_INPUT_CHECK_VALUE_ACCESSOR,
-    const Provider(FnxValidatorComponent, useClass: FnxCheck, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxCheck, multi: false),
   ],
   preserveWhitespace: false,
 )
 class FnxCheck extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input()
   bool required = false;
+
   @Input()
   bool readonly = false;
+
   @Input()
   bool disabled = false;
+
   @Input()
   String label;
 

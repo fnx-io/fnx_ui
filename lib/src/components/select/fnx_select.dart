@@ -20,7 +20,7 @@ const CUSTOM_SELECT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExisti
   providers: const [
     CUSTOM_SELECT_VALUE_ACCESSOR,
     const Provider(Focusable, useExisting: FnxSelect, multi: false),
-    const Provider(FnxValidatorComponent, useClass: FnxSelect, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxSelect, multi: false),
   ],
   preserveWhitespace: false,
   directives: const [AutoFocus],

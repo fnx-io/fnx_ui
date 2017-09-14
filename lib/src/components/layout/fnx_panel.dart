@@ -3,6 +3,7 @@
 
 import 'package:angular2/core.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
+import 'package:fnx_ui/src/validator.dart';
 import 'package:logging/logging.dart';
 
 ///
@@ -18,9 +19,12 @@ import 'package:logging/logging.dart';
   selector: 'fnx-panel',
   templateUrl: 'fnx_panel.html',
   styles: const [":host {display: block;}"],
-  preserveWhitespace: false
+  preserveWhitespace: false,
+  providers: const [
+    const Provider(FnxValidatorComponent, useExisting: FnxPanel, multi: false),
+  ],
 )
-class FnxPanel implements OnInit {
+class FnxPanel extends FnxValidatorComponent implements OnInit, OnDestroy {
 
   final Logger log = new Logger("FnxPanel");
 
@@ -35,11 +39,23 @@ class FnxPanel implements OnInit {
 
   String id = ui.uid('panel-');
 
+  FnxPanel(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
+
   @override
   ngOnInit() {
+    super.ngOnInit();
     if (closable == null) closable = false;
     if (open == null) {
       open = !closable;
     }
   }
+
+  @override
+  bool hasValidValue() => true;
+
+  @override
+  bool get readonly => false;
+
+  @override
+  bool get required => false;
 }

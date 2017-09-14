@@ -46,7 +46,7 @@ const CUSTOM_INPUT_FILE_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useEx
   ],
   providers: const [
     CUSTOM_INPUT_FILE_VALUE_ACCESSOR,
-    const Provider(FnxValidatorComponent, useClass: FnxFile, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxFile, multi: false),
   ],
   preserveWhitespace: false,
 )

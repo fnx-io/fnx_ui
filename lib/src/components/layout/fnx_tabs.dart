@@ -3,6 +3,7 @@
 
 import 'package:angular2/core.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
+import 'package:fnx_ui/src/validator.dart';
 import 'package:logging/logging.dart';
 
 @Component(
@@ -19,10 +20,12 @@ import 'package:logging/logging.dart';
         <ng-content></ng-content>
     </div>
   ''',
-  preserveWhitespace: false
+  preserveWhitespace: false,
+  providers: const [
+    const Provider(FnxValidatorComponent, useExisting: FnxTabs, multi: false),
+  ],
 )
-class FnxTabs implements OnInit {
-
+class FnxTabs extends FnxValidatorComponent implements OnInit, OnDestroy {
   final Logger log = new Logger("FnxTabs");
 
   String id = ui.uid('tabs-');
@@ -33,9 +36,7 @@ class FnxTabs implements OnInit {
 
   List<FnxTab> tabs = [];
 
-  @override
-  ngOnInit() {
-  }
+  FnxTabs(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
 
   void deregister(FnxTab fnxTab) {
     tabs.remove(fnxTab);
@@ -54,47 +55,67 @@ class FnxTabs implements OnInit {
     if (selectedId == null) fnxTab.selectTab();
   }
 
+  @override
+  bool hasValidValue() => true;
+
+  @override
+  bool get readonly => false;
+
+  @override
+  bool get required => false;
 }
 
 @Component(
-  selector: 'fnx-tab',
-  template: '''
-  <div *ngIf="parent.selectedId == id">
+    selector: 'fnx-tab',
+    template: '''
+  <div *ngIf="tabParent.selectedId == id">
     <ng-content></ng-content>
   </div>
   ''',
-  styles: const [":host { display: block; } "],
-  preserveWhitespace: false
+    styles: const [":host { display: block; } "],
+    preserveWhitespace: false,
+  providers: const [
+    const Provider(FnxValidatorComponent, useExisting: FnxTab, multi: false),
+  ],
 )
-class FnxTab implements OnInit, OnDestroy {
-
+class FnxTab extends FnxValidatorComponent implements OnInit, OnDestroy {
   @Input()
   String title;
 
   String id = ui.uid('tab-');
 
-  FnxTabs parent;
+  FnxTabs tabParent;
 
-  FnxTab(this.parent);
+  FnxTab(this.tabParent, @SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
 
   @Output()
   EventEmitter<bool> select = new EventEmitter();
 
   void selectTab() {
-    if (parent == null) return;
-    parent.selectedId = id;
+    if (tabParent == null) return;
+    tabParent.selectedId = id;
     select.emit(true);
   }
 
   @override
   ngOnInit() {
+    super.ngOnInit();
     if (title == null) throw "Title attribute is mandatory!";
-    parent.register(this);
+    tabParent.register(this);
   }
-
 
   @override
   ngOnDestroy() {
-    parent.deregister(this);
+    super.ngOnDestroy();
+    tabParent.deregister(this);
   }
+
+  @override
+  bool hasValidValue() => true;
+
+  @override
+  bool get readonly => false;
+
+  @override
+  bool get required => false;
 }

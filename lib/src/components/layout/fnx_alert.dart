@@ -13,7 +13,7 @@ import 'package:logging/logging.dart';
 @Component(
   selector: 'fnx-alert',
   templateUrl: 'fnx_alert.html',
-  preserveWhitespace: false
+  preserveWhitespace: false,
 )
 class FnxAlert implements OnInit {
 

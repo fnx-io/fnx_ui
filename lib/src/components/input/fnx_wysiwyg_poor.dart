@@ -39,7 +39,7 @@ const CUSTOM_INPUT_WYSIWYG_POOR_VALUE_ACCESSOR =
   ],
   providers: const [
     CUSTOM_INPUT_WYSIWYG_POOR_VALUE_ACCESSOR,
-    const Provider(FnxValidatorComponent, useClass: FnxWysiwygPoor, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxWysiwygPoor, multi: false),
   ],
   preserveWhitespace: false,
 )
@@ -106,6 +106,7 @@ class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, 
       }
       return ranges;
     }
+    return [];
   }
 
   void restoreSelection(List<Range> savedSel) {

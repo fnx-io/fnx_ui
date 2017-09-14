@@ -17,7 +17,7 @@ const CUSTOM_INPUT_TEXTAREA_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, u
   providers: const [
     CUSTOM_INPUT_TEXTAREA_VALUE_ACCESSOR,
     const Provider(Focusable, useExisting: FnxTextarea, multi: false),
-    const Provider(FnxValidatorComponent, useClass: FnxTextarea, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxTextarea, multi: false),
   ],
   preserveWhitespace: false,
 )

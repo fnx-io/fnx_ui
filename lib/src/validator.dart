@@ -13,18 +13,15 @@ abstract class FnxValidatorComponent implements OnInit, OnDestroy {
 
   bool get readonly; // abstract
 
-  bool get isReadonly; // abstract
-
   List<FnxValidatorComponent> _validatorChildren = [];
-  List<FnxValidatorComponent> get validatorChildren => _validatorChildren;
 
   FnxValidatorComponent _parent;
+  FnxValidatorComponent get parent => _parent;
   FnxValidatorComponent(@SkipSelf() @Optional() FnxValidatorComponent this._parent);
 
   @override
   ngOnInit() {
     if (_parent != null) {
-      print('me: ${this.runtimeType} (${this.required}), parent: ${_parent.runtimeType}');
       _parent.registerChild(this);
     }
   }
@@ -94,10 +91,15 @@ abstract class FnxValidatorComponent implements OnInit, OnDestroy {
     return _validatorChildren.firstWhere((val) => val.required, orElse: () => null) != null;
   }
 
-  ///
+  bool get isParentReadonly {
+    if (_parent != null && _parent.isReadonly) return true;
+    return false;
+  }
+
+  bool get isReadonly => (readonly ?? false) || isParentReadonly;
+
   /// This component has some children, which should be part of this component
   /// validation (i.e. fnx-form has a lot of children, fnx-input has typicaly one)
-  ///
   void registerChild(FnxValidatorComponent child) {
     if (!_validatorChildren.contains(child)) {
       _validatorChildren.add(child);

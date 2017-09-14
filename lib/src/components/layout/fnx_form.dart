@@ -14,10 +14,10 @@ typedef String formValidatorFunction();
   selector: 'fnx-form',
   templateUrl: 'fnx_form.html',
   providers: const [
-    const Provider(FnxValidatorComponent, useClass: FnxForm, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxForm, multi: false),
   ],
 )
-class FnxForm extends FnxValidatorComponent {
+class FnxForm extends FnxValidatorComponent implements OnInit, OnDestroy {
 
   final Logger log = new Logger("FnxForm");
 
@@ -51,6 +51,7 @@ class FnxForm extends FnxValidatorComponent {
   /// Only propagates the submit event when this form is valid.
   /// Forces validation of all components inside this form.
   void submitForm(Event event) {
+    print(event);
     if (event != null) {
       event.preventDefault();
       event.stopPropagation();
@@ -76,9 +77,7 @@ class FnxForm extends FnxValidatorComponent {
   }
 
   @override
-  bool hasValidValue() {
-    return true;
-  }
+  bool hasValidValue() => true;
 
   void addValidator(formValidatorFunction f) {
     _validators.add(f);
@@ -87,6 +86,4 @@ class FnxForm extends FnxValidatorComponent {
   void removeValidator(formValidatorFunction f) {
     _validators.remove(f);
   }
-
-  bool get isReadonly => (readonly??false);
 }

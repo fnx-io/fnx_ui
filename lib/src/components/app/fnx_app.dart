@@ -18,10 +18,9 @@ import 'package:logging/logging.dart';
 @Component(
   selector: 'fnx-app',
   templateUrl: 'fnx_app.html',
-  preserveWhitespace: false
+  preserveWhitespace: false,
 )
 class FnxApp implements OnInit {
-
   final Logger log = new Logger("FnxApp");
 
   Map<String, _ModalContent> modalWindows = {};
@@ -34,7 +33,8 @@ class FnxApp implements OnInit {
       log.warning("There is no exception handler configured");
     }
     if (ex is! FnxExceptionHandler) {
-      log.warning("Configured exception handler is not FnxExceptionHandler, fnx_ui won't be able to show nice errors.\nConsider: provide(ExceptionHandler, useValue: new FnxExceptionHandler())");
+      log.warning(
+          "Configured exception handler is not FnxExceptionHandler, fnx_ui won't be able to show nice errors.\nConsider: provide(ExceptionHandler, useValue: new FnxExceptionHandler())");
     } else {
       (ex as FnxExceptionHandler).setShowErrorCallback(showError);
     }
@@ -48,10 +48,10 @@ class FnxApp implements OnInit {
   ///
   /// Shows simple 'flash message': 'User created', 'Record deleted', etc.
   ///
-  void toast(String text, {Duration duration: const Duration(milliseconds: 4000 ), String cssClass: ""}) {
+  void toast(String text, {Duration duration: const Duration(milliseconds: 4000), String cssClass: ""}) {
     _ToastContent t = new _ToastContent()
-        ..cssClass = cssClass
-        ..message = text;
+      ..cssClass = cssClass
+      ..message = text;
     toasts.add(t);
     new Future.delayed(duration).then((_) {
       t.hide = true;
@@ -80,11 +80,11 @@ class FnxApp implements OnInit {
   /// Plain old window.alert style dialog. Nonblocking.
   ///
   Future alert(String message, {String headline: null}) {
-    headline = headline??GlobalMessages.appDefaultAlertHeadline();
+    headline = headline ?? GlobalMessages.appDefaultAlertHeadline();
     _ModalContent m = new _ModalContent()
       ..headline = headline
       ..message = message
-      ..ok=GlobalMessages.ok();
+      ..ok = GlobalMessages.ok();
     return _modal(m);
   }
 
@@ -92,12 +92,12 @@ class FnxApp implements OnInit {
   /// Plain old window.confirm style dialog. Nonblocking.
   ///
   Future<bool> confirm(String message, {String headline: null}) {
-    headline = headline??GlobalMessages.appDefaultConfirmHeadline();
+    headline = headline ?? GlobalMessages.appDefaultConfirmHeadline();
     _ModalContent m = new _ModalContent()
       ..headline = headline
       ..message = message
-      ..ok=GlobalMessages.yes()
-      ..cancel=GlobalMessages.no();
+      ..ok = GlobalMessages.yes()
+      ..cancel = GlobalMessages.no();
     return _modal(m);
   }
 
@@ -105,14 +105,14 @@ class FnxApp implements OnInit {
   /// Plain old window.input style dialog. Nonblocking.
   ///
   Future<Object> input(String message, {String headline: null, String prefilledValue: null}) {
-    headline = headline??GlobalMessages.appDefaultInputHeadline();
+    headline = headline ?? GlobalMessages.appDefaultInputHeadline();
     _ModalContent m = new _ModalContent()
       ..headline = headline
       ..message = message
       ..input = "text"
-      ..ok=GlobalMessages.ok()
-      ..cancel=GlobalMessages.cancel()
-      ..value=prefilledValue;
+      ..ok = GlobalMessages.ok()
+      ..cancel = GlobalMessages.cancel()
+      ..value = prefilledValue;
     return _modal(m);
   }
 
@@ -138,13 +138,11 @@ class FnxApp implements OnInit {
         // cancel
         mc._completer.complete(null);
       }
-
     } else {
       // common alert
       mc._completer.complete(closingResult);
     }
   }
-
 }
 
 class _ModalContent {

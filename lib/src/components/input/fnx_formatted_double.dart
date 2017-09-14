@@ -26,7 +26,7 @@ const CUSTOM_INPUT_FDOUBLE_VALUE_ACCESSOR =
   providers: const [
     CUSTOM_INPUT_FDOUBLE_VALUE_ACCESSOR,
     const Provider(Focusable, useExisting: FnxFormattedDouble, multi: false),
-    const Provider(FnxValidatorComponent, useClass: FnxFormattedDouble, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxFormattedDouble, multi: false),
   ],
   styles: const [":host input { text-align: inherit;}"],
   preserveWhitespace: false,
@@ -66,11 +66,6 @@ class FnxFormattedDouble extends FnxInputComponent implements ControlValueAccess
   FnxFormattedDouble(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
 
   String get autocompleteAttr => (autocomplete) ? 'on' : 'off';
-
-  @override
-  ngOnInit() {
-    super.ngOnInit();
-  }
 
   @override
   bool hasValidValue() => hasValidNumberImpl();

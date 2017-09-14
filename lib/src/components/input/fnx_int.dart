@@ -22,7 +22,7 @@ const CUSTOM_INPUT_INT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExi
   providers: const [
     CUSTOM_INPUT_INT_VALUE_ACCESSOR,
     const Provider(Focusable, useExisting: FnxInt, multi: false),
-    const Provider(FnxValidatorComponent, useClass: FnxInt, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxInt, multi: false),
   ],
   styles: const [":host input { text-align: inherit;}"],
   preserveWhitespace: false,
@@ -57,11 +57,6 @@ class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, 
   String get autocompleteAttr => (autocomplete) ? 'on' : 'off';
 
   var rawValue;
-
-  @override
-  ngOnInit() {
-    super.ngOnInit();
-  }
 
   @override
   bool hasValidValue() => hasValidNumberImpl();

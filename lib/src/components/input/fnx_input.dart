@@ -19,21 +19,11 @@ import 'package:fnx_ui/src/validator.dart';
 ''',
   preserveWhitespace: false,
   providers: const [
-    const Provider(FnxValidatorComponent, useClass: FnxInput, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxInput, multi: false),
   ],
 )
 class FnxInput extends FnxValidatorComponent implements OnInit, OnDestroy {
   FnxInput(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
-
-  @override
-  ngOnInit() {
-    super.ngOnInit();
-  }
-
-  @override
-  ngOnDestroy() {
-    super.ngOnDestroy();
-  }
 
   final String componentId = ui.uid('comp_');
 
@@ -84,8 +74,6 @@ class FnxInput extends FnxValidatorComponent implements OnInit, OnDestroy {
   set required(bool value) {
     throw "You are setting 'required' attribute to fnx-input, that's not what you want";
   }
-
-  bool get isReadonly => (readonly ?? false);
 }
 
 ///
@@ -148,23 +136,6 @@ abstract class FnxInputComponent extends FnxValidatorComponent implements OnInit
       return _privComponentId;
     }
   }
-
-  @override
-  ngOnInit() {
-    super.ngOnInit();
-  }
-
-  @override
-  ngOnDestroy() {
-    super.ngOnDestroy();
-  }
-
-  bool get isParentReadonly {
-    if (_parent != null && _parent.readonly) return true;
-    return false;
-  }
-
-  bool get isReadonly => (readonly ?? false) || isParentReadonly;
 }
 
 const FNX_INPUT_DIRECTIVES = const [FnxInput];

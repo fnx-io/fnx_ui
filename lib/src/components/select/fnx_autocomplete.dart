@@ -21,7 +21,7 @@ const CUSTOM_AUTOCOMPLETE_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, use
   providers: const [
     CUSTOM_AUTOCOMPLETE_VALUE_ACCESSOR,
     const Provider(Focusable, useExisting: FnxAutocomplete, multi: false),
-    const Provider(FnxValidatorComponent, useClass: FnxAutocomplete, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxAutocomplete, multi: false),
   ],
   preserveWhitespace: false,
   directives: const [AutoFocus],
@@ -84,7 +84,8 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
 
   FnxModal modal;
 
-  FnxAutocomplete(ElementRef el, @Optional() this.modal, @SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent) {
+  FnxAutocomplete(ElementRef el, @Optional() this.modal, @SkipSelf() @Optional() FnxValidatorComponent parent)
+      : super(parent) {
     if (el != null) {
       container = el.nativeElement;
     }

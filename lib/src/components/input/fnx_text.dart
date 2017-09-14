@@ -34,7 +34,7 @@ const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useEx
   providers: const [
     CUSTOM_INPUT_TEXT_VALUE_ACCESSOR,
     const Provider(Focusable, useExisting: FnxText, multi: false),
-    const Provider(FnxValidatorComponent, useClass: FnxText, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxText, multi: false),
   ],
   styles: const [":host input { text-align: inherit;}"],
   preserveWhitespace: false,
