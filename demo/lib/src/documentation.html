@@ -2,7 +2,7 @@
 
 <h2>{{ component?.className }}</h2>
 
-<p style="color: #cf6a00">This component is <em>ngModel</em> compatible.</p>
+<p *ngIf="component?.ngModelCompatible == true" class="flex--row" style="align-items: center; color: #cf6a00"><span class="icon">star</span> This component is ngModel compatible.</p>
 <p>{{ component?.description }}</p>
 
 <code>{{ componentPreview }}</code>
