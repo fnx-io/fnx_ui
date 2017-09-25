@@ -5,35 +5,7 @@ import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
 
 import 'package:fnx_ui_demo/component.dart';
-import 'package:fnx_ui_demo/src/example/alert.dart';
-import 'package:fnx_ui_demo/src/example/app.dart';
-import 'package:fnx_ui_demo/src/example/autocomplete.dart';
-import 'package:fnx_ui_demo/src/example/cc.dart';
-import 'package:fnx_ui_demo/src/example/check.dart';
-import 'package:fnx_ui_demo/src/example/date.dart';
-import 'package:fnx_ui_demo/src/example/double.dart';
-import 'package:fnx_ui_demo/src/example/file.dart';
-import 'package:fnx_ui_demo/src/example/form.dart';
-import 'package:fnx_ui_demo/src/example/form_errors.dart';
-import 'package:fnx_ui_demo/src/example/formatted_double.dart';
-import 'package:fnx_ui_demo/src/example/icon.dart';
-import 'package:fnx_ui_demo/src/example/image_crop.dart';
-import 'package:fnx_ui_demo/src/example/input.dart';
-import 'package:fnx_ui_demo/src/example/int.dart';
-import 'package:fnx_ui_demo/src/example/layout_sidebar.dart';
-import 'package:fnx_ui_demo/src/example/modal.dart';
-import 'package:fnx_ui_demo/src/example/panel.dart';
-import 'package:fnx_ui_demo/src/example/panel_small.dart';
-import 'package:fnx_ui_demo/src/example/scroll_panel.dart';
-import 'package:fnx_ui_demo/src/example/select.dart';
-import 'package:fnx_ui_demo/src/example/submit-bar.dart';
-import 'package:fnx_ui_demo/src/example/tab.dart';
 import 'package:fnx_ui_demo/data.dart';
-import 'package:fnx_ui_demo/src/example/tabs.dart';
-import 'package:fnx_ui_demo/src/example/text.dart';
-import 'package:fnx_ui_demo/src/example/textarea.dart';
-import 'package:fnx_ui_demo/src/example/wysiwyg_poor.dart';
-import 'package:fnx_ui_demo/src/example/wysiwyg_rich.dart';
 
 @Component(
   selector: 'demo-app',
@@ -75,6 +47,7 @@ class DemoApp {
 
   String filter = '';
 
+  /// Determines if component by [tagName] is filtered and should be shown.
   bool isFiltered(String tagName) {
     String filterValue = transformText(filter);
 
@@ -93,7 +66,7 @@ class DemoApp {
             false) ||
         (component.ios?.any((IoModel input) => transformText(input.type)?.contains(filterValue) ?? false) ??
             false) ||
-        mayFilterNgModel(component.ngModelCompatible, filterValue)) {
+        mightFilterNgModel(component.ngModelCompatible, filterValue)) {
       return true;
     }
 
@@ -106,8 +79,8 @@ class DemoApp {
     return text?.toLowerCase()?.replaceAll(new RegExp(r'[.,\-_?! ]', caseSensitive: false), r'');
   }
 
-  /// If [ngModelCompatible] is [true], this determines if [filterValue] may be about ngModel.
-  bool mayFilterNgModel(bool ngModelCompatible, String filterValue) {
+  /// If [ngModelCompatible] is [true], this determines if [filterValue] might be about ngModel.
+  bool mightFilterNgModel(bool ngModelCompatible, String filterValue) {
     if (ngModelCompatible == null || filterValue == null) return false;
 
     if (ngModelCompatible == true && 'ngmodel'.contains(filterValue)) return true;

@@ -9,26 +9,10 @@ List<ComponentModel> componentsData = [
     linkName: 'Alert',
     description: 'Creates standardized (very visible) box with warning, error, important notice etc.',
     ios: const [
-      const IoModel.input(
-        name: 'type',
-        type: 'String',
-        description: 'One of possible predefined types: "info", "warning", "error", "success".',
-      ),
-      const IoModel.input(
-        name: 'closable',
-        type: 'bool',
-        description: 'Displays small cross icon which hides the message.',
-      ),
-      const IoModel.input(
-        name: 'colorClass',
-        type: 'String',
-        description: 'Use to customize colors: bg--red text--yellow.',
-      ),
-      const IoModel.input(
-        name: 'icon',
-        type: 'String',
-        description: 'Use to customize icon. Possible values are icon names from material design icons.',
-      ),
+      const IoModel.input(name: 'type', type: 'String'),
+      const IoModel.input(name: 'closable', type: 'bool'),
+      const IoModel.input(name: 'colorClass', type: 'String'),
+      const IoModel.input(name: 'icon', type: 'String'),
     ],
   ),
   const ComponentModel(
@@ -82,12 +66,7 @@ List<ComponentModel> componentsData = [
       const IoModel.input(name: 'required', type: 'bool'),
       const IoModel.input(name: 'readonly', type: 'bool'),
       const IoModel.input(name: 'dateTime', type: 'bool'),
-      const IoModel.output(
-        name: 'dateStr',
-        type: 'String',
-        description:
-            'This is the model for the DOM input field, user types here the date and we try to parse it and sync it to model.',
-      ),
+      const IoModel.output(name: 'dateStr', type: 'String'),
     ],
   ),
   const ComponentModel(
@@ -115,7 +94,7 @@ List<ComponentModel> componentsData = [
       const IoModel.input(name: 'readonly', type: 'bool'),
       const IoModel.input(name: 'multi', type: 'bool'),
       const IoModel.input(name: 'fileName', type: 'String'),
-      const IoModel.output(name: 'files', type: 'EventEmitter'),
+      const IoModel.output(name: 'files', type: 'dynamic'),
       const IoModel.input(name: 'browseLabel', type: 'String'),
     ],
   ),
@@ -126,7 +105,7 @@ List<ComponentModel> componentsData = [
     ios: const [
       const IoModel.input(name: 'disabled', type: 'bool'),
       const IoModel.input(name: 'readonly', type: 'bool'),
-      const IoModel.output(name: 'submit', type: 'EventEmitter<Event>'),
+      const IoModel.output(name: 'submit', type: 'Event'),
     ],
   ),
   const ComponentModel(
@@ -143,7 +122,7 @@ List<ComponentModel> componentsData = [
       const IoModel.input(name: 'required', type: 'bool'),
       const IoModel.input(name: 'min', type: 'num'),
       const IoModel.input(name: 'max', type: 'num'),
-      const IoModel.input(name: 'format', description: 'Default is "#,##0.00".', type: 'String'),
+      const IoModel.input(name: 'format', type: 'String'),
       const IoModel.input(name: 'placeholder', type: 'String'),
       const IoModel.input(name: 'autocomplete', type: 'bool'),
       const IoModel.input(name: 'readonly', type: 'bool'),
@@ -162,9 +141,9 @@ List<ComponentModel> componentsData = [
     className: 'FnxImageCrop',
     linkName: 'ImageCrop',
     ios: const [
-      const IoModel.input(name: 'ratio', description: 'Required crop ratio - width:height.', type: 'double'),
+      const IoModel.input(name: 'ratio', type: 'double'),
       const IoModel.input(name: 'src', type: 'String'),
-      const IoModel.output(name: 'crop', type: 'EventEmitter<Rectangle<double>>'),
+      const IoModel.output(name: 'crop', type: 'Rectangle<double>'),
     ],
   ),
   const ComponentModel(
@@ -206,11 +185,7 @@ List<ComponentModel> componentsData = [
     linkName: 'Modal',
     ios: const [
       const IoModel.input(name: 'width', type: 'String'),
-      const IoModel.input(
-        name: 'close',
-        type: 'EventEmitter<bool>',
-        description: 'Catch it and hide this window, user clicked the "close" icon.',
-      ),
+      const IoModel.input(name: 'close', type: 'bool'),
     ],
   ),
   const ComponentModel(
@@ -228,11 +203,7 @@ List<ComponentModel> componentsData = [
     linkName: 'Panel',
     description: 'Nice "fieldset". It should have a header, defined with attribute "header".',
     ios: const [
-      const IoModel.input(
-        name: 'closable',
-        type: 'bool',
-        description: 'Can by collapsed or expanded by user. Default = false = always open.',
-      ),
+      const IoModel.input(name: 'closable', type: 'bool'),
       const IoModel.input(name: 'open', type: 'bool'),
     ],
   ),
@@ -240,13 +211,10 @@ List<ComponentModel> componentsData = [
     tag: 'fnx-panel-small',
     className: 'FnxPanelSmall',
     linkName: 'PanelSmall',
-    description: 'Nice "fieldset", smaller and less contrasting then fnx-panel... It should have a header, defined with attribute "header".',
+    description:
+        'Nice "fieldset", smaller and less contrasting then fnx-panel... It should have a header, defined with attribute "header".',
     ios: const [
-      const IoModel.input(
-        name: 'closable',
-        type: 'bool',
-        description: 'Can by collapsed or expanded by user. Default = false = always open.',
-      ),
+      const IoModel.input(name: 'closable', type: 'bool'),
       const IoModel.input(name: 'open', type: 'bool'),
     ],
   ),
@@ -254,10 +222,11 @@ List<ComponentModel> componentsData = [
     tag: 'fnx-scroll-panel',
     className: 'FnxScrollPanel',
     linkName: 'ScrollPanel',
-    description: 'Srollable panel which emits (loadMore) event whenever the user scrolls to the bottom of current content. Make sure the panel has some height, either set it to some value (style="height: 20em") or place the panel into `<div class="flex--column">` etc.',
+    description:
+        'Srollable panel which emits (loadMore) event whenever the user scrolls to the bottom of current content. Make sure the panel has some height, either set it to some value (style="height: 20em") or place the panel into `<div class="flex--column">` etc.',
     ios: const [
-      const IoModel.input(name: 'debounceMs', type: 'int', description: 'Events might be emmited very frequently. "200" might be a reasonable value, default is 80.'),
-      const IoModel.output(name: 'loadMore', type: 'EventEmitter'),
+      const IoModel.input(name: 'debounceMs', type: 'int'),
+      const IoModel.output(name: 'loadMore', type: 'dynamic'),
     ],
   ),
   const ComponentModel(
@@ -285,9 +254,9 @@ List<ComponentModel> componentsData = [
     className: 'FnxSubmitBar',
     linkName: 'SubmitBar',
     ios: const [
-      const IoModel.input(name: 'label', type: 'String', description: 'Use it to change label on submit button.'),
-      const IoModel.input(name: 'goBackLabel', type: 'String', description: 'Use it to change label on back button.'),
-      const IoModel.input(name: 'back', type: 'bool', description: 'Determines if back button is allowed.'),
+      const IoModel.input(name: 'label', type: 'String'),
+      const IoModel.input(name: 'goBackLabel', type: 'String'),
+      const IoModel.input(name: 'back', type: 'bool'),
     ],
   ),
   const ComponentModel(
@@ -296,7 +265,7 @@ List<ComponentModel> componentsData = [
     linkName: 'Tab',
     ios: const [
       const IoModel.input(name: 'title', type: 'String'),
-      const IoModel.output(name: 'select', type: 'EventEmitter<bool>'),
+      const IoModel.output(name: 'select', type: 'bool'),
     ],
   ),
   const ComponentModel(
@@ -319,7 +288,7 @@ List<ComponentModel> componentsData = [
       const IoModel.input(name: 'maxLength', type: 'int'),
       const IoModel.input(name: 'min', type: 'int'),
       const IoModel.input(name: 'max', type: 'int'),
-      const IoModel.input(name: 'type', type: 'String', description: 'Possible values are "text", "number", "email", "http".'),
+      const IoModel.input(name: 'type', type: 'String'),
       const IoModel.input(name: 'placeholder', type: 'String'),
       const IoModel.input(name: 'autocomplete', type: 'bool'),
       const IoModel.input(name: 'readonly', type: 'bool'),

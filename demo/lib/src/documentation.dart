@@ -5,12 +5,19 @@ import 'package:fnx_ui_demo/data.dart';
 @Component(
   selector: 'documentation',
   templateUrl: 'documentation.html',
+  styles: const ['''
+  :host .link {
+      border-bottom: 1px dotted #777;
+  }
+  '''],
 )
 class Documentation implements OnInit {
   @Input()
   String componentTag;
 
   ComponentModel component;
+  
+  final String dartDocLink = 'http://demo.fnx.io/fnx_ui/doc/fnx_ui';
 
   String get componentPreview {
     StringBuffer sb = new StringBuffer();

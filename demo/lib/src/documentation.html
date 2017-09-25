@@ -1,50 +1,56 @@
-<h1>&lt;{{ component?.tag }}&gt;</h1>
+<template [ngIf]="component == null">
+    <h1 class="text--red">Component is not specified!</h1>
+</template>
 
-<h2>{{ component?.className }}</h2>
+<template [ngIf]="component != null">
+    <h1>&lt;{{ component?.tag }}&gt;</h1>
 
-<p *ngIf="component?.ngModelCompatible == true" class="flex--row" style="align-items: center; color: #cf6a00"><span class="icon">star</span> This component is ngModel compatible.</p>
-<p>{{ component?.description }}</p>
+    <h2><a class="link" href="{{ dartDocLink }}/{{ component?.className }}-class.html" target="_blank">{{ component?.className }}</a></h2>
 
-<code>{{ componentPreview }}</code>
+    <p *ngIf="component?.ngModelCompatible == true" class="flex--row" style="align-items: center; color: #cf6a00"><span class="icon">star</span> This component is ngModel compatible.</p>
+    <p>{{ component?.description }}</p>
 
-<div class="row margin--vertical">
-    <div class="s12 m6 padding--right">
-        <fnx-panel>
-            <h2 header>Inputs</h2>
+    <code>{{ componentPreview }}</code>
 
-            <template ngFor [ngForOf]="componentInputs" let-io>
-                <div class="panel margin--vertical padding--small" main>
-                    <div class="flex--row" style="align-items: baseline;">
-                        <h4>{{ io?.name }}</h4>
-                        <span class="margin--small--left">{{ io?.type }}</span>
+    <div class="row margin--vertical">
+        <div class="s12 m6 padding--right">
+            <fnx-panel>
+                <h2 header>Inputs</h2>
+
+                <template ngFor [ngForOf]="componentInputs" let-io>
+                    <div class="panel margin--vertical padding--small" main>
+                        <div class="flex--row" style="align-items: baseline;">
+                            <h4><a class="link" href="{{ dartDocLink }}/{{ component?.className }}/{{ io?.name }}.html" target="_blank">{{ io?.name }}</a></h4>
+                            <span class="margin--small--left">{{ io?.type }}</span>
+                        </div>
+                        <!--<div>{{ io?.description }}</div>-->
                     </div>
-                    <div>{{ io?.description }}</div>
+                </template>
+
+                <div *ngIf="componentInputs.isEmpty">
+                    No inputs.
                 </div>
-            </template>
+            </fnx-panel>
+        </div>
 
-            <div *ngIf="componentInputs.isEmpty">
-                No inputs.
-            </div>
-        </fnx-panel>
-    </div>
+        <div class="s12 m6 padding--left">
+            <fnx-panel>
+                <h2 header>Outputs</h2>
 
-    <div class="s12 m6 padding--left">
-        <fnx-panel>
-            <h2 header>Outputs</h2>
-
-            <template ngFor [ngForOf]="componentOutputs" let-io>
-                <div class="panel margin--vertical padding--small" main>
-                    <div class="flex--row" style="align-items: baseline;">
-                        <h4>{{ io?.name }}</h4>
-                        <span class="margin--small--left">{{ io?.type }}</span>
+                <template ngFor [ngForOf]="componentOutputs" let-io>
+                    <div class="panel margin--vertical padding--small" main>
+                        <div class="flex--row" style="align-items: baseline;">
+                            <h4><a class="link" href="{{ dartDocLink }}/{{ component?.className }}/{{ io?.name }}.html" target="_blank">{{ io?.name }}</a></h4>
+                            <span class="margin--small--left">{{ io?.type }}</span>
+                        </div>
+                        <!--<div>{{ io?.description }}</div>-->
                     </div>
-                    <div>{{ io?.description }}</div>
-                </div>
-            </template>
+                </template>
 
-            <div *ngIf="componentOutputs.isEmpty">
-                No outputs.
-            </div>
-        </fnx-panel>
+                <div *ngIf="componentOutputs.isEmpty">
+                    No outputs.
+                </div>
+            </fnx-panel>
+        </div>
     </div>
-</div>
+</template>
