@@ -43,4 +43,12 @@ class Documentation implements OnInit {
     component =
         componentsData?.firstWhere((ComponentModel component) => component.tag == componentTag, orElse: ([_]) => null);
   }
+
+  List<IoModel> get componentInputs {
+    return component?.ios?.where((IoModel io) => io?.isInput == true)?.toList() ?? [];
+  }
+
+  List<IoModel> get componentOutputs {
+    return component?.ios?.where((IoModel io) => io?.isOutput == true)?.toList() ?? [];
+  }
 }

@@ -12,8 +12,8 @@
         <fnx-panel>
             <h2 header>Inputs</h2>
 
-            <template ngFor [ngForOf]="component?.ios" let-io>
-                <div *ngIf="io?.isInput == true" class="panel margin--vertical padding--small" main>
+            <template ngFor [ngForOf]="componentInputs" let-io>
+                <div class="panel margin--vertical padding--small" main>
                     <div class="flex--row" style="align-items: baseline;">
                         <h4>{{ io?.name }}</h4>
                         <span class="margin--small--left">{{ io?.type }}</span>
@@ -21,6 +21,10 @@
                     <div>{{ io?.description }}</div>
                 </div>
             </template>
+
+            <div *ngIf="componentInputs.isEmpty">
+                No inputs.
+            </div>
         </fnx-panel>
     </div>
 
@@ -28,8 +32,8 @@
         <fnx-panel>
             <h2 header>Outputs</h2>
 
-            <template ngFor [ngForOf]="component?.ios" let-io>
-                <div *ngIf="io?.isOutput == true" class="panel margin--vertical padding--small" main>
+            <template ngFor [ngForOf]="componentOutputs" let-io>
+                <div class="panel margin--vertical padding--small" main>
                     <div class="flex--row" style="align-items: baseline;">
                         <h4>{{ io?.name }}</h4>
                         <span class="margin--small--left">{{ io?.type }}</span>
@@ -37,7 +41,10 @@
                     <div>{{ io?.description }}</div>
                 </div>
             </template>
+
+            <div *ngIf="componentOutputs.isEmpty">
+                No outputs.
+            </div>
         </fnx-panel>
     </div>
-
 </div>

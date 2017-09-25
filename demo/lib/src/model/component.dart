@@ -7,15 +7,15 @@ class ComponentModel {
   final String className;
   final String linkName;
   final String description;
-  final List<IoModel> ios;
   final bool ngModelCompatible;
+  final List<IoModel> ios;
 
   const ComponentModel({
     this.tag,
     this.description,
     this.className,
     this.linkName,
-    this.ios,
+    this.ios: const [],
     this.ngModelCompatible: false,
   });
 }

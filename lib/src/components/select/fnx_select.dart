@@ -368,7 +368,11 @@ class FnxOptionValue {
   }
 }
 
-@Component(selector: 'fnx-option', templateUrl: 'fnx_option.html', preserveWhitespace: false)
+@Component(
+  selector: 'fnx-option',
+  templateUrl: 'fnx_option.html',
+  preserveWhitespace: false,
+)
 class FnxOption implements OnInit, OnDestroy, OnChanges {
   final String id = ui.uid('ov_');
 
