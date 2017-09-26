@@ -42,6 +42,9 @@ class FnxForm extends FnxValidatorComponent implements OnInit, OnDestroy {
   @Output()
   final EventEmitter<Event> submit = new EventEmitter<Event>();
 
+  @Output()
+  final EventEmitter<BeforeFormSubmitEvent> beforeSubmit = new EventEmitter<BeforeFormSubmitEvent>(false);
+
   String id = ui.uid('form-');
 
   List<formValidatorFunction> _validators = [];
@@ -52,6 +55,8 @@ class FnxForm extends FnxValidatorComponent implements OnInit, OnDestroy {
   /// Only propagates the submit event when this form is valid.
   /// Forces validation of all components inside this form.
   void submitForm(Event event) {
+    beforeSubmit.emit(new BeforeFormSubmitEvent());
+
     if (event != null) {
       event.preventDefault();
       event.stopPropagation();
@@ -86,4 +91,8 @@ class FnxForm extends FnxValidatorComponent implements OnInit, OnDestroy {
   void removeValidator(formValidatorFunction f) {
     _validators.remove(f);
   }
+
+  bool get isReadonly => (readonly??false);
 }
+
+class BeforeFormSubmitEvent {}
