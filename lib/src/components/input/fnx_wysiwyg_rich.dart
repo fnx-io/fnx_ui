@@ -250,6 +250,9 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
       quill.setSelection(savedSel.index, savedSel.length);
     }
   }
+
+  @override
+  bool get disabled => false;
 }
 
 typedef Future<String> PickImageUrl();

@@ -200,6 +200,9 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
     if (required) requiredCheck = value != null;
     return requiredCheck && validFormattedDate;
   }
+
+  @override
+  bool get disabled => false;
 }
 
 const FNX_DATE_DIRECTIVES = const [FnxDate, FnxDatePicker];

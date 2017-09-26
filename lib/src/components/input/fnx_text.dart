@@ -231,4 +231,7 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
       elementRef.nativeElement.focus();
     }
   }
+
+  @override
+  bool get disabled => false;
 }

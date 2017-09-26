@@ -36,6 +36,7 @@ class FnxCheck extends FnxInputComponent implements ControlValueAccessor, OnInit
   bool readonly = false;
 
   @Input()
+  @override
   bool disabled = false;
 
   @Input()

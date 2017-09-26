@@ -34,4 +34,7 @@ class FnxPanelSmall extends FnxPanel implements OnInit, OnDestroy {
 
   @Input()
   bool open = null;
+
+  @override
+  bool get disabled => false;
 }

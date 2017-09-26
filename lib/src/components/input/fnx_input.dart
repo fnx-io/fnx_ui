@@ -74,6 +74,9 @@ class FnxInput extends FnxValidatorComponent implements OnInit, OnDestroy {
   set required(bool value) {
     throw "You are setting 'required' attribute to fnx-input, that's not what you want";
   }
+
+  @override
+  bool get disabled => false;
 }
 
 ///

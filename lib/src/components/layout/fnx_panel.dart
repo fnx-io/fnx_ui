@@ -58,4 +58,7 @@ class FnxPanel extends FnxValidatorComponent implements OnInit, OnDestroy {
 
   @override
   bool get required => false;
+
+  @override
+  bool get disabled => false;
 }

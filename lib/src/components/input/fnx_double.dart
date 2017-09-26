@@ -116,4 +116,6 @@ class FnxDouble extends FnxInputComponent implements ControlValueAccessor, OnIni
     return super.value;
   }
 
+  @override
+  bool get disabled => false;
 }

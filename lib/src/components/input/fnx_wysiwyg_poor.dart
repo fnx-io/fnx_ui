@@ -118,4 +118,7 @@ class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, 
       sel.addRange(savedSel[i]);
     }
   }
+
+  @override
+  bool get disabled => false;
 }

@@ -13,6 +13,8 @@ abstract class FnxValidatorComponent implements OnInit, OnDestroy {
 
   bool get readonly; // abstract
 
+  bool get disabled; // abstract
+
   List<FnxValidatorComponent> _validatorChildren = [];
 
   FnxValidatorComponent _parent;
@@ -92,11 +94,16 @@ abstract class FnxValidatorComponent implements OnInit, OnDestroy {
   }
 
   bool get isParentReadonly {
-    if (_parent != null && _parent.isReadonly) return true;
-    return false;
+    return _parent?.isReadonly == true;
   }
 
   bool get isReadonly => (readonly ?? false) || isParentReadonly;
+
+  bool get isParentDisabled {
+    return _parent?.isDisabled == true;
+  }
+
+  bool get isDisabled => (disabled ?? false) || isParentDisabled;
 
   /// This component has some children, which should be part of this component
   /// validation (i.e. fnx-form has a lot of children, fnx-input has typicaly one)

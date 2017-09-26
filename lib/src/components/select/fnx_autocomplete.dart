@@ -296,4 +296,7 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
       }
     });
   }
+
+  @override
+  bool get disabled => false;
 }

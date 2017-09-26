@@ -160,4 +160,7 @@ class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit,
     }
     return value.toString();
   }
+
+  @override
+  bool get disabled => false;
 }

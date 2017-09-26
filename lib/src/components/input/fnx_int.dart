@@ -115,4 +115,7 @@ class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, 
   get value {
     return super.value;
   }
+
+  @override
+  bool get disabled => false;
 }

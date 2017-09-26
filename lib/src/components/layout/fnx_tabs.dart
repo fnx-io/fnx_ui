@@ -63,6 +63,9 @@ class FnxTabs extends FnxValidatorComponent implements OnInit, OnDestroy {
 
   @override
   bool get required => false;
+
+  @override
+  bool get disabled => false;
 }
 
 @Component(
@@ -118,4 +121,7 @@ class FnxTab extends FnxValidatorComponent implements OnInit, OnDestroy {
 
   @override
   bool get required => false;
+
+  @override
+  bool get disabled => false;
 }

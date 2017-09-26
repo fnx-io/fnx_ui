@@ -4,7 +4,7 @@
 and we don't like repetitive tasks. See the dart source code.</p>
 
 <!-- Support for validation, smart submit button at the bottom -->
-<fnx-form (submit)="postRecord()" [readonly]="readonly">
+<fnx-form (submit)="postRecord()" [readonly]="readonly" [disabled]="disabled">
 
     <fnx-form-errors></fnx-form-errors>
     
@@ -76,6 +76,9 @@ and we don't like repetitive tasks. See the dart source code.</p>
     </p>
 
     <!-- smart submit button -->
-    <fnx-submit-bar [back]="true"><button class="btn" type="button" (click)="readonly = !readonly">{{readonly ? 'Make editable': 'Make readonly'}}</button> </fnx-submit-bar>
+    <fnx-submit-bar [back]="true">
+        <button class="btn" type="button" (click)="readonly = !readonly">{{readonly ? 'Make editable': 'Make readonly'}}</button>
+        <button class="btn" type="button" (click)="disabled = !disabled">{{disabled ? 'Make enabled': 'Make disabled'}}</button>
+    </fnx-submit-bar>
 
 </fnx-form>

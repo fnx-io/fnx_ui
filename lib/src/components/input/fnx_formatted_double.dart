@@ -156,4 +156,7 @@ class FnxFormattedDouble extends FnxInputComponent implements ControlValueAccess
       value = parseDouble(nf.parse(_valueStr));
     }
   }
+
+  @override
+  bool get disabled => false;
 }

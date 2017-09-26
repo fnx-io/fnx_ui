@@ -340,6 +340,9 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   void focus() {
     select.nativeElement.focus();
   }
+
+  @override
+  bool get disabled => false;
 }
 
 class FnxOptionValue {

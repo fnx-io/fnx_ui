@@ -44,4 +44,7 @@ class FnxTextarea extends FnxText implements OnInit, OnDestroy, Focusable {
       elementRef.nativeElement.focus();
     }
   }
+
+  @override
+  bool get disabled => false;
 }

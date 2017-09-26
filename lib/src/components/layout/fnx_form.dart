@@ -28,6 +28,7 @@ class FnxForm extends FnxValidatorComponent implements OnInit, OnDestroy {
   ///     <fnx-form [disabled]="rest.working"></fnx-form>
   ///
   @Input()
+  @override
   bool disabled = false;
 
   @Input()
@@ -51,7 +52,6 @@ class FnxForm extends FnxValidatorComponent implements OnInit, OnDestroy {
   /// Only propagates the submit event when this form is valid.
   /// Forces validation of all components inside this form.
   void submitForm(Event event) {
-    print(event);
     if (event != null) {
       event.preventDefault();
       event.stopPropagation();

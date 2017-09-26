@@ -28,7 +28,12 @@ import 'package:fnx_ui/src/util/ui.dart' as ui;
   <a *ngIf="back" href="#" class="btn " (click)="goBack($event)" data-prefix="arrow_back">{{ goBackLabel }}</a>
   <ng-content></ng-content>
   <span class="spacer"></span>
-  <button type="submit" class="btn bg--important" attr.data-prefix="{{formValid ? 'check' : 'not_interested'}}">
+  <button type="submit" 
+          class="btn bg--important" 
+          attr.data-prefix="{{ formValid ? 'check' : 'not_interested' }}" 
+          [disabled]="form?.disabled == true"
+          [class.opacity--07]="form?.disabled == true"
+          [class.disabled]="form?.disabled == true">
     {{ label }}
   </button>
 </div>
@@ -51,6 +56,8 @@ class FnxSubmitBar {
   /// Input - Is back button allowed
   ///
   @Input() bool back = false;
+
+  FnxForm get form => _form;
 
   final FnxForm _form;
 

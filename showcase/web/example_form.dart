@@ -20,9 +20,9 @@ class ExampleForm {
   FnxApp app;
 
   bool readonly = false;
+  bool disabled = false;
 
-  ExampleForm(this.app) {
-  }
+  ExampleForm(this.app);
 
   void postRecord() {
     app.toast("And I'm posting your data right now: ${record}", duration: new Duration(milliseconds: 3000));
