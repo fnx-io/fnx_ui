@@ -5,33 +5,33 @@ import 'package:angular2/core.dart';
   template: '''
   <documentation [componentTag]="'fnx-formatted-double'"></documentation>
 
-  <h2>Demo</h2>
+  <h1>Demo</h1>
 
-  <demo header="Standalone">
+  <demo label="Standalone">
     <fnx-formatted-double></fnx-formatted-double>
   </demo>
 
-  <demo header="Min and max <5; 10>">
+  <demo label="Min and max <5; 10>">
     <fnx-formatted-double [min]="5" [max]="10"></fnx-formatted-double>
   </demo>
 
-  <demo header="Step">
+  <demo label="Step">
     <fnx-formatted-double [step]="5"></fnx-formatted-double>
   </demo>
 
-  <demo header="Placeholder">
+  <demo label="Placeholder">
     <fnx-formatted-double placeholder="My double value"></fnx-formatted-double>
   </demo>
 
-  <demo header="Required">
+  <demo label="Required">
     <fnx-formatted-double [required]="true"></fnx-formatted-double>
   </demo>
 
-  <demo header="Read only">
+  <demo label="Read only">
     <fnx-formatted-double [ngModel]="12.6976" [readonly]="true"></fnx-formatted-double>
   </demo>
 
-  <demo header="Custom format">
+  <demo label="Custom format">
     <fnx-formatted-double [ngModel]="123456.123" format="#,##0.000"></fnx-formatted-double>
   </demo>
   ''',

@@ -5,25 +5,25 @@ import 'package:angular2/core.dart';
   template: '''
   <documentation [componentTag]="'fnx-check'"></documentation>
 
-  <h2>Demo</h2>
+  <h1>Demo</h1>
 
-  <demo header="Standalone">
+  <demo label="Standalone">
     <fnx-check></fnx-check>
   </demo>
 
-  <demo header="Inside of fnx-input">
+  <demo label="Inside of fnx-input">
     <fnx-input label="Label from input">
       <fnx-check></fnx-check>
     </fnx-input>
   </demo>
 
-  <demo header="Inside of fnx-input with own label">
+  <demo label="Inside of fnx-input with own label">
     <fnx-input label="Label from input">
       <fnx-check label="My own label"></fnx-check>
     </fnx-input>
   </demo>
 
-  <demo header="Multiple checkboxes">
+  <demo label="Multiple checkboxes">
     Each checkbox has to be in it's own &lt;fnx-input&gt;.
 
     <fnx-input>
@@ -37,17 +37,17 @@ import 'package:angular2/core.dart';
     </fnx-input>
   </demo>
 
-  <demo header="Required">
+  <demo label="Required">
     <fnx-input label="Required checkbox">
       <fnx-check [required]="true"></fnx-check>
     </fnx-input>
   </demo>
 
-  <demo header="Read only">
+  <demo label="Read only">
     <fnx-check [readonly]="true"></fnx-check>
   </demo>
 
-  <demo header="Disabled">
+  <demo label="Disabled">
     <fnx-check [disabled]="true"></fnx-check>
   </demo>
   ''',

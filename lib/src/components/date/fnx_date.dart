@@ -28,7 +28,6 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
 
   Control control = null;
 
-  @Optional()
   @Input()
   bool required = false;
 

@@ -5,27 +5,27 @@ import 'package:angular2/core.dart';
   template: '''
   <documentation [componentTag]="'fnx-text'"></documentation>
 
-  <h2>Demo</h2>
+  <h1>Demo</h1>
 
-  <demo header="Standalone">
+  <demo label="Standalone">
     <fnx-text></fnx-text>
   </demo>
 
-  <demo header="Min and max characters <5; 10>">
+  <demo label="Min and max characters <5; 10>">
     <fnx-text [minLength]="5" [maxLength]="10"></fnx-text>
   </demo>
 
-  <demo header="Placeholder">
+  <demo label="Placeholder">
     <fnx-text placeholder="Awesome text"></fnx-text>
   </demo>
 
-  <demo header="Required">
+  <demo label="Required">
     <fnx-input>
       <fnx-text [required]="true"></fnx-text>
     </fnx-input>
   </demo>
 
-  <demo header="Read only">
+  <demo label="Read only">
     <fnx-text ngModel="My text" [readonly]="true"></fnx-text>
   </demo>
   ''',

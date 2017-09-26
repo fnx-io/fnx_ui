@@ -5,23 +5,23 @@ import 'package:angular2/core.dart';
   template: '''
   <documentation [componentTag]="'fnx-textarea'"></documentation>
 
-  <h2>Demo</h2>
+  <h1>Demo</h1>
 
-  <demo header="Standalone">
+  <demo label="Standalone">
     <fnx-textarea></fnx-textarea>
   </demo>
 
-  <demo header="Min and max characters <5; 10>">
+  <demo label="Min and max characters <5; 10>">
     <fnx-textarea [minLength]="5" [maxLength]="10"></fnx-textarea>
   </demo>
 
-  <demo header="Required">
+  <demo label="Required">
     <fnx-input>
       <fnx-textarea [required]="true"></fnx-textarea>
     </fnx-input>
   </demo>
 
-  <demo header="Read only">
+  <demo label="Read only">
     <fnx-textarea ngModel="My textarea" [readonly]="true"></fnx-textarea>
   </demo>
   ''',

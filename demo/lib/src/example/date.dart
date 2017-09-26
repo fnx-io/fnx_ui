@@ -5,21 +5,27 @@ import 'package:angular2/core.dart';
   template: '''
   <documentation [componentTag]="'fnx-date'"></documentation>
 
-  <h2>Demo</h2>
+  <h1>Demo</h1>
 
-  <demo header="Standalone">
+  <demo label="Standalone">
     <fnx-date></fnx-date>
   </demo>
 
-  <demo header="Date and time">
+  <demo label="Date and time">
     <fnx-date [dateTime]="true"></fnx-date>
   </demo>
 
-  <demo header="Required">
+  <demo label="Required">
     <fnx-date [required]="true"></fnx-date>
   </demo>
 
-  <demo header="Read only">
+  <demo label="Required inside fnx-input">
+    <fnx-input label="My required date">
+      <fnx-date [required]="true"></fnx-date>
+    </fnx-input>
+  </demo>
+
+  <demo label="Read only">
     <fnx-date [(ngModel)]="value" [readonly]="true"></fnx-date>
   </demo>
   ''',

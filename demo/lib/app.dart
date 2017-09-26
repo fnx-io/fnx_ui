@@ -12,7 +12,7 @@ import 'package:fnx_ui_demo/data.dart';
   templateUrl: 'app.html',
 )
 @RouteConfig(const [
-  const Route(path: '/fnx-alert', name: 'Alert', component: AlertExample),
+  const Route(path: '/fnx-alert', name: 'Alert', component: AlertExample, useAsDefault: true),
   const Route(path: '/fnx-app', name: 'App', component: AppExample),
   const Route(path: '/fnx-autocomplete', name: 'Autocomplete', component: AutocompleteExample),
   const Route(path: '/fnx-cc', name: 'Cc', component: CcExample),

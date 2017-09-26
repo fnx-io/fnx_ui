@@ -5,9 +5,9 @@ import 'package:angular2/core.dart';
   template: '''
   <documentation [componentTag]="'fnx-modal'"></documentation>
 
-  <h2>Demo</h2>
+  <h1>Demo</h1>
 
-  <demo header="Toggle modal">
+  <demo label="Toggle modal">
     <button class="btn" type="button" (click)="modalActive = !modalActive">Toggle modal</button>
   </demo>
 

@@ -5,64 +5,64 @@ import 'package:angular2/core.dart';
   template: '''
   <documentation [componentTag]="'fnx-select'"></documentation>
 
-  <h2>Demo</h2>
+  <h1>Demo</h1>
 
-  <demo header="Standalone">
+  <demo label="Standalone">
     <fnx-select>
       <fnx-option *ngFor="let option of options" [label]="option" [value]="option"></fnx-option>
     </fnx-select>
   </demo>
 
-  <demo header="Required">
+  <demo label="Required">
     <fnx-select [required]="true">
       <fnx-option *ngFor="let option of options" [label]="option" [value]="option"></fnx-option>
     </fnx-select>
   </demo>
 
-  <demo header="Readonly">
-    <fnx-select [readonly]="true">
+  <demo label="Readonly">
+    <fnx-select [readonly]="true" [ngModel]="options?.first">
       <fnx-option *ngFor="let option of options" [label]="option" [value]="option"></fnx-option>
     </fnx-select>
   </demo>
 
-  <demo header="Always show filter">
+  <demo label="Always show filter">
     <fnx-select [alwaysShowFilter]="true">
       <fnx-option value="one" label="one"></fnx-option>
       <fnx-option value="two" label="two"></fnx-option>
     </fnx-select>
   </demo>
 
-  <demo header="Never show filter">
+  <demo label="Never show filter">
     <fnx-select [neverShowFilter]="true">
       <fnx-option *ngFor="let option of options" [label]="option" [value]="option"></fnx-option>
     </fnx-select>
   </demo>
 
-  <demo header="Nullable true">
+  <demo label="Nullable true">
     <fnx-select [nullable]="true">
       <fnx-option *ngFor="let option of options" [label]="option" [value]="option"></fnx-option>
     </fnx-select>
   </demo>
 
-  <demo header="Nullable false">
+  <demo label="Nullable false">
     <fnx-select [nullable]="false">
       <fnx-option *ngFor="let option of options" [label]="option" [value]="option"></fnx-option>
     </fnx-select>
   </demo>
 
-  <demo header="Multiselect">
+  <demo label="Multiselect">
     <fnx-select [multi]="true">
       <fnx-option *ngFor="let option of options" [label]="option" [value]="option"></fnx-option>
     </fnx-select>
   </demo>
 
-  <demo header="Labels 1">
+  <demo label="Labels 1">
     <fnx-select selectionEmptyLabel="Select an option" optionsEmptySearchLabel="No option found." filterPlaceholder="Search...">
       <fnx-option *ngFor="let option of options" [label]="option" [value]="option"></fnx-option>
     </fnx-select>
   </demo>
 
-  <demo header="Labels 2">
+  <demo label="Labels 2">
     <fnx-select selectionEmptyLabel="Select an option" optionsEmptyLabel="No options...">
     </fnx-select>
   </demo>

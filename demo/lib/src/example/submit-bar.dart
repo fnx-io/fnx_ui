@@ -5,7 +5,7 @@ import 'package:angular2/core.dart';
   template: '''
   <documentation [componentTag]="'fnx-submit-bar'"></documentation>
 
-  <demo header="Standalone">
+  <demo label="Standalone">
     <fnx-form>
       <fnx-input label="Fill this int">
         <fnx-int [required]="true" placeholder="Required int input"></fnx-int>
@@ -15,7 +15,7 @@ import 'package:angular2/core.dart';
     </fnx-form>
   </demo>
 
-  <demo header="Back button">
+  <demo label="Back button">
     <fnx-form>
       <fnx-input label="Fill this int">
         <fnx-int [required]="true" placeholder="Required int input"></fnx-int>
@@ -25,7 +25,7 @@ import 'package:angular2/core.dart';
     </fnx-form>
   </demo>
 
-  <demo header="Custom labels">
+  <demo label="Custom labels">
     <fnx-form>
       <fnx-input label="Fill this int">
         <fnx-int [required]="true" placeholder="Required int input"></fnx-int>

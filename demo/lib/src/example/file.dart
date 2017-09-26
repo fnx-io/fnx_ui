@@ -5,25 +5,25 @@ import 'package:angular2/core.dart';
   template: '''
   <documentation [componentTag]="'fnx-file'"></documentation>
 
-  <h2>Demo</h2>
+  <h1>Demo</h1>
 
-  <demo header="Standalone">
+  <demo label="Standalone">
     <fnx-file></fnx-file>
   </demo>
 
-  <demo header="Required">
+  <demo label="Required">
     <fnx-input>
       <fnx-file [required]="true"></fnx-file>
     </fnx-input>
   </demo>
 
-  <demo header="Read only">
+  <demo label="Read only">
     <fnx-input>
       <fnx-file [readonly]="true"></fnx-file>
     </fnx-input>
   </demo>
 
-  <demo header="Browse label">
+  <demo label="Browse label">
     <fnx-input>
       <fnx-file browseLabel="Browse label"></fnx-file>
     </fnx-input>

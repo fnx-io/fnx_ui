@@ -5,11 +5,11 @@ import 'package:angular2/core.dart';
   template: '''
   <documentation [componentTag]="'fnx-icon'"></documentation>
 
-  <demo header="Standalone">
+  <demo label="Standalone">
     <fnx-icon type="code"></fnx-icon>
   </demo>
 
-  <demo header="Multiple icons">
+  <demo label="Multiple icons">
     <fnx-icon type="code"></fnx-icon>
     <fnx-icon type="build"></fnx-icon>
     <fnx-icon type="book"></fnx-icon>
