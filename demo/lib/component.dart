@@ -1,3 +1,4 @@
+import 'package:fnx_ui_demo/src/demo.dart';
 import 'package:fnx_ui_demo/src/documentation.dart';
 import 'package:fnx_ui_demo/src/example/alert.dart';
 import 'package:fnx_ui_demo/src/example/app.dart';
@@ -29,6 +30,7 @@ import 'package:fnx_ui_demo/src/example/textarea.dart';
 import 'package:fnx_ui_demo/src/example/wysiwyg_poor.dart';
 import 'package:fnx_ui_demo/src/example/wysiwyg_rich.dart';
 
+export 'package:fnx_ui_demo/src/demo.dart';
 export 'package:fnx_ui_demo/src/documentation.dart';
 export 'package:fnx_ui_demo/src/example/alert.dart';
 export 'package:fnx_ui_demo/src/example/app.dart';
@@ -67,6 +69,7 @@ List<Type> components = [
   CcExample,
   CheckExample,
   DateExample,
+  Demo,
   Documentation,
   DoubleExample,
   FileExample,
