@@ -29,6 +29,8 @@ import 'package:fnx_ui_demo/src/example/text.dart';
 import 'package:fnx_ui_demo/src/example/textarea.dart';
 import 'package:fnx_ui_demo/src/example/wysiwyg_poor.dart';
 import 'package:fnx_ui_demo/src/example/wysiwyg_rich.dart';
+import 'package:fnx_ui_demo/src/screen/about.dart';
+import 'package:fnx_ui_demo/src/screen/get_started.dart';
 
 export 'package:fnx_ui_demo/src/demo.dart';
 export 'package:fnx_ui_demo/src/documentation.dart';
@@ -61,6 +63,8 @@ export 'package:fnx_ui_demo/src/example/text.dart';
 export 'package:fnx_ui_demo/src/example/textarea.dart';
 export 'package:fnx_ui_demo/src/example/wysiwyg_poor.dart';
 export 'package:fnx_ui_demo/src/example/wysiwyg_rich.dart';
+export 'package:fnx_ui_demo/src/screen/about.dart';
+export 'package:fnx_ui_demo/src/screen/get_started.dart';
 
 List<Type> components = [
   AlertExample,
@@ -94,4 +98,6 @@ List<Type> components = [
   TextareaExample,
   WysiwygPoorExample,
   WysiwygRichExample,
+  AboutScreen,
+  GetStartedScreen,
 ];

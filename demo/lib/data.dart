@@ -2,11 +2,11 @@ import 'package:fnx_ui_demo/src/model/component.dart';
 
 export 'package:fnx_ui_demo/src/model/component.dart';
 
-List<ComponentModel> componentsData = [
+const List<ComponentModel> componentsData = const [
   const ComponentModel(
     tag: 'fnx-alert',
     className: 'FnxAlert',
-    linkName: 'Alert',
+    linkName: 'AlertExample',
     description: 'Creates standardized (very visible) box with warning, error, important notice etc.',
     ios: const [
       const IoModel.input(name: 'type', type: 'String'),
@@ -18,13 +18,13 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-app',
     className: 'FnxApp',
-    linkName: 'App',
+    linkName: 'AppExample',
     description: 'Provides usefull methods for toast, simple "alert" style dialogs, manages exceptions.',
   ),
   const ComponentModel(
     tag: 'fnx-autocomplete',
     className: 'FnxAutocomplete',
-    linkName: 'Autocomplete',
+    linkName: 'AutocompleteExample',
     ngModelCompatible: true,
     ios: const [
       const IoModel.input(name: 'required', type: 'bool'),
@@ -39,7 +39,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-cc',
     className: 'FnxCc',
-    linkName: 'Cc',
+    linkName: 'CcExample',
     description: 'Cookies consent',
     ios: const [
       const IoModel.input(name: 'label', type: 'String'),
@@ -48,7 +48,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-check',
     className: 'FnxCheck',
-    linkName: 'Check',
+    linkName: 'CheckExample',
     ngModelCompatible: true,
     ios: const [
       const IoModel.input(name: 'required', type: 'bool'),
@@ -60,7 +60,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-date',
     className: 'FnxDate',
-    linkName: 'Date',
+    linkName: 'DateExample',
     ngModelCompatible: true,
     ios: const [
       const IoModel.input(name: 'required', type: 'bool'),
@@ -72,7 +72,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-double',
     className: 'FnxDouble',
-    linkName: 'Double',
+    linkName: 'DoubleExample',
     ngModelCompatible: true,
     ios: const [
       const IoModel.input(name: 'required', type: 'bool'),
@@ -87,7 +87,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-file',
     className: 'FnxFile',
-    linkName: 'File',
+    linkName: 'FileExample',
     ngModelCompatible: true,
     ios: const [
       const IoModel.input(name: 'required', type: 'bool'),
@@ -101,7 +101,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-form',
     className: 'FnxForm',
-    linkName: 'Form',
+    linkName: 'FormExample',
     ios: const [
       const IoModel.input(name: 'disabled', type: 'bool'),
       const IoModel.input(name: 'readonly', type: 'bool'),
@@ -111,12 +111,12 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-form-errors',
     className: 'FnxFormErrors',
-    linkName: 'FormErrors',
+    linkName: 'FormErrorsExample',
   ),
   const ComponentModel(
     tag: 'fnx-formatted-double',
     className: 'FnxFormattedDouble',
-    linkName: 'FormattedDouble',
+    linkName: 'FormattedDoubleExample',
     ngModelCompatible: true,
     ios: const [
       const IoModel.input(name: 'required', type: 'bool'),
@@ -131,7 +131,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-icon',
     className: 'FnxIcon',
-    linkName: 'Icon',
+    linkName: 'IconExample',
     ios: const [
       const IoModel.input(name: 'type', type: 'String'),
     ],
@@ -139,7 +139,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-image-crop',
     className: 'FnxImageCrop',
-    linkName: 'ImageCrop',
+    linkName: 'ImageCropExample',
     ios: const [
       const IoModel.input(name: 'ratio', type: 'double'),
       const IoModel.input(name: 'src', type: 'String'),
@@ -149,7 +149,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-input',
     className: 'FnxInput',
-    linkName: 'Input',
+    linkName: 'InputExample',
     ios: const [
       const IoModel.input(name: 'label', type: 'String'),
       const IoModel.input(name: 'errorMessage', type: 'String'),
@@ -158,7 +158,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-int',
     className: 'FnxInt',
-    linkName: 'Int',
+    linkName: 'IntExample',
     ngModelCompatible: true,
     ios: const [
       const IoModel.input(name: 'required', type: 'bool'),
@@ -172,7 +172,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-layout-sidebar',
     className: 'FnxLayoutSidebar',
-    linkName: 'LayoutSidebar',
+    linkName: 'LayoutSidebarExample',
     ios: const [
       const IoModel.input(name: 'responsive', type: 'bool'),
       const IoModel.input(name: 'widthPx', type: 'int'),
@@ -182,7 +182,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-modal',
     className: 'FnxModal',
-    linkName: 'Modal',
+    linkName: 'ModalExample',
     ios: const [
       const IoModel.input(name: 'width', type: 'String'),
       const IoModel.input(name: 'close', type: 'bool'),
@@ -191,7 +191,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-option',
     className: 'FnxOption',
-    linkName: 'Option',
+    linkName: 'OptionExample',
     ios: const [
       const IoModel.input(name: 'value', type: 'dynamic'),
       const IoModel.input(name: 'label', type: 'String'),
@@ -200,7 +200,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-panel',
     className: 'FnxPanel',
-    linkName: 'Panel',
+    linkName: 'PanelExample',
     description: 'Nice "fieldset". It should have a header, defined with attribute "header".',
     ios: const [
       const IoModel.input(name: 'closable', type: 'bool'),
@@ -210,7 +210,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-panel-small',
     className: 'FnxPanelSmall',
-    linkName: 'PanelSmall',
+    linkName: 'PanelSmallExample',
     description:
         'Nice "fieldset", smaller and less contrasting then fnx-panel... It should have a header, defined with attribute "header".',
     ios: const [
@@ -221,7 +221,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-scroll-panel',
     className: 'FnxScrollPanel',
-    linkName: 'ScrollPanel',
+    linkName: 'ScrollPanelExample',
     description:
         'Srollable panel which emits (loadMore) event whenever the user scrolls to the bottom of current content. Make sure the panel has some height, either set it to some value (style="height: 20em") or place the panel into `<div class="flex--column">` etc.',
     ios: const [
@@ -232,7 +232,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-select',
     className: 'FnxSelect',
-    linkName: 'Select',
+    linkName: 'SelectExample',
     ngModelCompatible: true,
     ios: const [
       const IoModel.input(name: 'required', type: 'bool'),
@@ -252,7 +252,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-submit-bar',
     className: 'FnxSubmitBar',
-    linkName: 'SubmitBar',
+    linkName: 'SubmitBarExample',
     ios: const [
       const IoModel.input(name: 'label', type: 'String'),
       const IoModel.input(name: 'goBackLabel', type: 'String'),
@@ -262,7 +262,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-tab',
     className: 'FnxTab',
-    linkName: 'Tab',
+    linkName: 'TabExample',
     ios: const [
       const IoModel.input(name: 'title', type: 'String'),
       const IoModel.output(name: 'select', type: 'bool'),
@@ -271,7 +271,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-tabs',
     className: 'FnxTabs',
-    linkName: 'Tabs',
+    linkName: 'TabsExample',
     ios: const [
       const IoModel.input(name: 'left', type: 'bool'),
     ],
@@ -279,7 +279,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-text',
     className: 'FnxText',
-    linkName: 'Text',
+    linkName: 'TextExample',
     description: 'Text input.',
     ngModelCompatible: true,
     ios: const [
@@ -297,7 +297,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-textarea',
     className: 'FnxTextarea',
-    linkName: 'Textarea',
+    linkName: 'TextareaExample',
     ngModelCompatible: true,
     ios: const [
       const IoModel.input(name: 'required', type: 'bool'),
@@ -309,7 +309,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-wysiwyg-poor',
     className: 'FnxWysiwygPoor',
-    linkName: 'WysiwygPoor',
+    linkName: 'WysiwygPoorExample',
     ngModelCompatible: true,
     ios: const [
       const IoModel.input(name: 'required', type: 'bool'),
@@ -319,7 +319,7 @@ List<ComponentModel> componentsData = [
   const ComponentModel(
     tag: 'fnx-wysiwyg-rich',
     className: 'FnxWysiwygRich',
-    linkName: 'WysiwygRich',
+    linkName: 'WysiwygRichExample',
     ngModelCompatible: true,
     ios: const [
       const IoModel.input(name: 'required', type: 'bool'),

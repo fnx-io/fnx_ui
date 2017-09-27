@@ -9,26 +9,32 @@
         <main>
             <fnx-layout-sidebar #layout>
                 <div sidebar class="flex--column bg--white--d1">
+                    <ul class="menu--vertical border--bottom">
+                        <li><a [routerLink]="['About']">About</a></li>
+                        <li><a [routerLink]="['GetStarted']">Get started</a></li>
+                    </ul>
+
                     <div class="padding--small--top padding--small--left padding--small--bottom flex--row">
                         <fnx-text class="flex--shrink" [(ngModel)]="filter" [autocomplete]="true"></fnx-text>
                         <span class="icon">search</span>
                     </div>
-                    <ul class="menu--vertical flex--grow">
+
+                    <ul class="menu--vertical flex--grow flex--shrink" style="overflow: hidden; overflow-y: auto">
                         <template ngFor [ngForOf]="components" let-component>
                             <li *ngIf="component.linkName != null && isFiltered(component.tag)">
                                 <a [routerLink]="[component.linkName]">{{ component.tag }}</a>
                             </li>
                         </template>
                     </ul>
+
                     <p class="text--center bg--fnx no-margin padding">
                         <a href="https://fnx.io/">fnx.io</a>
                     </p>
                 </div>
 
-                <main class="border--left padding--big--horizontal padding--vertical">
+                <main class="border--left padding--big--horizontal padding--vertical" style="overflow: hidden; overflow-y: auto">
                     <router-outlet></router-outlet>
                 </main>
-
             </fnx-layout-sidebar>
         </main>
 
