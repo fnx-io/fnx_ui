@@ -4,6 +4,7 @@ import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/util/global_messages.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'package:fnx_ui/src/validator.dart';
+import 'package:logging/logging.dart';
 
 @Component(
   selector: 'fnx-input',
@@ -23,6 +24,9 @@ import 'package:fnx_ui/src/validator.dart';
   ],
 )
 class FnxInput extends FnxValidatorComponent implements OnInit, OnDestroy {
+
+  static final Logger log = new Logger("FnxInput");
+
   FnxInput(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
 
   final String componentId = ui.uid('comp_');
@@ -65,14 +69,16 @@ class FnxInput extends FnxValidatorComponent implements OnInit, OnDestroy {
 
   @Input()
   set readonly(bool value) {
-    throw "You are setting 'readonly' attribute to fnx-input, that's not what you want";
+    log.shout("You are setting 'readonly' attribute to fnx-input, that's not what you want");
+//    throw "You are setting 'readonly' attribute to fnx-input, that's not what you want";
   }
 
   bool get required => _required;
 
   @Input()
   set required(bool value) {
-    throw "You are setting 'required' attribute to fnx-input, that's not what you want";
+     log.shout("You are setting 'required' attribute to fnx-input, that's not what you want");
+//    throw "You are setting 'required' attribute to fnx-input, that's not what you want";
   }
 
   @override
