@@ -12,6 +12,7 @@
                     <ul class="menu--vertical border--bottom">
                         <li><a [routerLink]="['About']">About</a></li>
                         <li><a [routerLink]="['GetStarted']">Get started</a></li>
+                        <li><a [routerLink]="['Documentation']">Documentation</a></li>
                     </ul>
 
                     <div class="padding--small--top padding--small--left padding--small--bottom flex--row">
@@ -21,8 +22,8 @@
 
                     <ul class="menu--vertical flex--grow flex--shrink" style="overflow: hidden; overflow-y: auto">
                         <template ngFor [ngForOf]="components" let-component>
-                            <li *ngIf="component.linkName != null && isFiltered(component.tag)">
-                                <a [routerLink]="[component.linkName]">{{ component.tag }}</a>
+                            <li *ngIf="component?.linkName != null && isFiltered(component.tag)">
+                                <a [routerLink]="[component?.linkName]">{{ component?.tag }}</a>
                             </li>
                         </template>
                     </ul>

@@ -106,6 +106,7 @@ const List<ComponentModel> componentsData = const [
       const IoModel.input(name: 'disabled', type: 'bool'),
       const IoModel.input(name: 'readonly', type: 'bool'),
       const IoModel.output(name: 'submit', type: 'Event'),
+      const IoModel.output(name: 'beforeSubmit', type: 'BeforeFormSubmitEvent'),
     ],
   ),
   const ComponentModel(
