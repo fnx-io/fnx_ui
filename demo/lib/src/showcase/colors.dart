@@ -1,9 +1,10 @@
 import 'dart:html';
+
 import 'package:angular2/core.dart';
 
 @Component(
   selector: 'colors-showcase',
-  styles: const ['''
+  styles: const [r'''
   .example-color {
     width: 13em;
     float: left;
@@ -21,7 +22,7 @@ import 'package:angular2/core.dart';
     margin: 0.2em 0;
   }
   '''],
-  template: '''
+  template: r'''
   <button type="submit" 
           class="btn margin--bottom" 
           data-prefix="arrow_back"

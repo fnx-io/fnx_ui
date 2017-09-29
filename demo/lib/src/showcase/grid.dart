@@ -2,7 +2,7 @@ import 'package:angular2/core.dart';
 
 @Component(
   selector: 'grid-showcase',
-  styles: const ['''
+  styles: const [r'''
   :host .row > * {
     border: 1px solid black;
   }
@@ -15,7 +15,7 @@ import 'package:angular2/core.dart';
     border: 1px solid black;
   }
   '''],
-  template: '''
+  template: r'''
   <button type="submit" 
           class="btn margin--bottom" 
           data-prefix="arrow_back"

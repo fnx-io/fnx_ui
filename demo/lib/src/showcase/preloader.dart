@@ -1,10 +1,8 @@
 import 'package:angular2/core.dart';
 
-import 'package:fnx_ui_demo/src/model/showcase.dart';
-
 @Component(
   selector: 'preloader-showcase',
-  template: '''
+  template: r'''
   <button type="submit" 
           class="btn margin--bottom" 
           data-prefix="arrow_back"

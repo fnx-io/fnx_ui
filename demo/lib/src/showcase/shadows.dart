@@ -2,13 +2,13 @@ import 'package:angular2/core.dart';
 
 @Component(
   selector: 'shadows-showcase',
-  styles: const ['''
+  styles: const [r'''
   :host p.bg--fnx {
     padding: 1em;
     margin: 1.5em;
   }
   '''],
-  template: '''
+  template: r'''
   <button type="submit" 
           class="btn margin--bottom" 
           data-prefix="arrow_back"

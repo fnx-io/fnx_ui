@@ -2,7 +2,7 @@ import 'package:angular2/core.dart';
 
 @Component(
   selector: 'icons-showcase',
-  template: '''
+  template: r'''
   <button type="submit" 
           class="btn margin--bottom" 
           data-prefix="arrow_back"

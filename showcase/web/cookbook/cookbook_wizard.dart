@@ -32,7 +32,6 @@ class CookbookWizard {
   CookbookWizard(this.app);
 
   Future<Null> nextStep() async {
-    print("next");
     if (step == maxStep) {
       await app.alert("Saved, thank you!");
       entity = {};

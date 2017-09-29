@@ -4,7 +4,7 @@ import 'package:fnx_ui_demo/src/model/showcase.dart';
 
 @Component(
   selector: 'default-showcase',
-  template: '''
+  template: r'''
   <div class="row--gutter">
     <template ngFor [ngForOf]="showcases" let-showcase>
       <a *ngIf="showcase?.link != null"

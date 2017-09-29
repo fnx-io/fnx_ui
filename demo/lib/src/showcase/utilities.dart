@@ -3,7 +3,7 @@ import 'package:angular2/core.dart';
 
 @Component(
   selector: 'utilities-showcase',
-  styles: const ['''
+  styles: const [r'''
   :host .demo--col {
     width: 12%;
     display: inline-block;
@@ -14,7 +14,7 @@ import 'package:angular2/core.dart';
     background: #fff;
   }
   '''],
-  template: '''
+  template: r'''
   <button type="submit" 
           class="btn margin--bottom" 
           data-prefix="arrow_back"
