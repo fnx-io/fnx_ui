@@ -3,6 +3,24 @@ import 'package:angular2/core.dart';
 
 @Component(
   selector: 'colors-showcase',
+  styles: const ['''
+  .example-color {
+    width: 13em;
+    float: left;
+    padding: 0.5em;
+  }
+  
+  .example-color * {
+    padding: 0.1em;
+    font-size: 0.8rem;
+    font-family: monospace;
+  }
+  
+  .example-color *:nth-child(5) {
+    padding: 0.8em 0.1em;
+    margin: 0.2em 0;
+  }
+  '''],
   template: '''
   <button type="submit" 
           class="btn margin--bottom" 
@@ -10,26 +28,7 @@ import 'package:angular2/core.dart';
           [routerLink]="['Default']"> 
     back to documentation
   </button>
-  
-  <style>
-    .example-color {
-      width: 13em;
-      float: left;
-      padding: 0.5em;
-    }
-  
-    .example-color * {
-      padding: 0.1em;
-      font-size: 0.8rem;
-      font-family: monospace;
-    }
-  
-    .example-color *:nth-child(5) {
-      padding: 0.8em 0.1em;
-      margin: 0.2em 0;
-    }
-  </style>
-  
+
   <h2>Colors</h2>
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam cum eligendi quod suscipit veritatis? Debitis modi mollitia optio provident quibusdam! Consequuntur illum quas suscipit ullam unde? Ipsa quaerat reprehenderit veniam?</p>
   

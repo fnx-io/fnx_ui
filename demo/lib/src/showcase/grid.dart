@@ -2,6 +2,19 @@ import 'package:angular2/core.dart';
 
 @Component(
   selector: 'grid-showcase',
+  styles: const ['''
+  :host .row > * {
+    border: 1px solid black;
+  }
+
+  :host .row--gutter > * {
+    border: 1px solid black;
+  }
+
+  :host .row--gutter--horizontal > * {
+    border: 1px solid black;
+  }
+  '''],
   template: '''
   <button type="submit" 
           class="btn margin--bottom" 
@@ -9,18 +22,6 @@ import 'package:angular2/core.dart';
           [routerLink]="['Default']"> 
     back to documentation
   </button>  
-    
-  <style>
-    .row > * {
-      border: 1px solid black;
-    }
-    .row--gutter > * {
-      border: 1px solid black;
-    }
-    .row--gutter--horizontal > * {
-      border: 1px solid black;
-    }
-  </style>
   
   <h2>Grid</h2>
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta expedita facilis iste maiores odit perspiciatis praesentium quo ratione velit veritatis. Autem beatae error, id neque obcaecati quae similique voluptate voluptates.</p>

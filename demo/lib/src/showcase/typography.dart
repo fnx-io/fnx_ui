@@ -12,7 +12,7 @@ import 'package:angular2/core.dart';
 
   <h1>Typography</h1>
   
-  <article>
+  <article class="panel margin--vertical padding">
     <h1>Importance of typography in the post-industrial era</h1>
   
     <h2>Lorem ipsum</h2>
@@ -37,7 +37,7 @@ import 'package:angular2/core.dart';
     <p>Lorem ipsum dolor sit amet, <a href="#">consectetur adipisicing elit</a>. Aut blanditiis et eveniet incidunt iusto laudantium quae quam, quasi. <a>Adipisci aperiam aut dicta</a> dolorum enim ipsam iure necessitatibus rerum, totam voluptatibus!</p>
   </article>
   
-  <article>
+  <article class="panel margin--vertical padding">
     <p class="fs-xs">fs-xs - Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
     <p class="fs-s">fs-s - Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
     <p class="fs-m">fs-m - Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
@@ -47,7 +47,7 @@ import 'package:angular2/core.dart';
     <p class="fs-xxxl">fs-xxxl - Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
   </article>
   
-  <article>
+  <article class="panel margin--vertical padding">
     <p class="border padding bold">bold - Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
     <p class="border padding underline">underline - Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
     <p class="border padding italics">italics - Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
@@ -59,7 +59,7 @@ import 'package:angular2/core.dart';
     <p class="border padding text--left">lorem ipsum</p>
   </article>
   
-  <article>
+  <article class="panel margin--vertical padding">
     <ul>
       <li>Lorem ipsum dolor sit amet</li>
       <li>consectetur adipisicing elit</li>

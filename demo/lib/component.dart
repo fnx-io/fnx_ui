@@ -32,6 +32,25 @@ import 'package:fnx_ui_demo/src/example/wysiwyg_rich.dart';
 import 'package:fnx_ui_demo/src/screen/about.dart';
 import 'package:fnx_ui_demo/src/screen/documentation.dart';
 import 'package:fnx_ui_demo/src/screen/get_started.dart';
+import 'package:fnx_ui_demo/src/showcase/colors.dart';
+import 'package:fnx_ui_demo/src/showcase/complex_validation.dart';
+import 'package:fnx_ui_demo/src/showcase/default.dart';
+import 'package:fnx_ui_demo/src/showcase/dynamic_rows.dart';
+import 'package:fnx_ui_demo/src/showcase/flex.dart';
+import 'package:fnx_ui_demo/src/showcase/grid.dart';
+import 'package:fnx_ui_demo/src/showcase/icons.dart';
+import 'package:fnx_ui_demo/src/showcase/image_crop.dart';
+import 'package:fnx_ui_demo/src/showcase/lazy_loading.dart';
+import 'package:fnx_ui_demo/src/showcase/master_detail.dart';
+import 'package:fnx_ui_demo/src/showcase/preloader.dart';
+import 'package:fnx_ui_demo/src/showcase/select_create.dart';
+import 'package:fnx_ui_demo/src/showcase/shadows.dart';
+import 'package:fnx_ui_demo/src/showcase/step_picker.dart';
+import 'package:fnx_ui_demo/src/showcase/tags_labels.dart';
+import 'package:fnx_ui_demo/src/showcase/tiled_dashboard.dart';
+import 'package:fnx_ui_demo/src/showcase/typography.dart';
+import 'package:fnx_ui_demo/src/showcase/utilities.dart';
+import 'package:fnx_ui_demo/src/showcase/wizard.dart';
 
 export 'package:fnx_ui_demo/src/demo.dart';
 export 'package:fnx_ui_demo/src/documentation.dart';
@@ -67,6 +86,25 @@ export 'package:fnx_ui_demo/src/example/wysiwyg_rich.dart';
 export 'package:fnx_ui_demo/src/screen/about.dart';
 export 'package:fnx_ui_demo/src/screen/documentation.dart';
 export 'package:fnx_ui_demo/src/screen/get_started.dart';
+export 'package:fnx_ui_demo/src/showcase/colors.dart';
+export 'package:fnx_ui_demo/src/showcase/complex_validation.dart';
+export 'package:fnx_ui_demo/src/showcase/default.dart';
+export 'package:fnx_ui_demo/src/showcase/dynamic_rows.dart';
+export 'package:fnx_ui_demo/src/showcase/flex.dart';
+export 'package:fnx_ui_demo/src/showcase/grid.dart';
+export 'package:fnx_ui_demo/src/showcase/icons.dart';
+export 'package:fnx_ui_demo/src/showcase/image_crop.dart';
+export 'package:fnx_ui_demo/src/showcase/lazy_loading.dart';
+export 'package:fnx_ui_demo/src/showcase/master_detail.dart';
+export 'package:fnx_ui_demo/src/showcase/preloader.dart';
+export 'package:fnx_ui_demo/src/showcase/select_create.dart';
+export 'package:fnx_ui_demo/src/showcase/shadows.dart';
+export 'package:fnx_ui_demo/src/showcase/step_picker.dart';
+export 'package:fnx_ui_demo/src/showcase/tags_labels.dart';
+export 'package:fnx_ui_demo/src/showcase/tiled_dashboard.dart';
+export 'package:fnx_ui_demo/src/showcase/typography.dart';
+export 'package:fnx_ui_demo/src/showcase/utilities.dart';
+export 'package:fnx_ui_demo/src/showcase/wizard.dart';
 
 List<Type> components = [
   AlertExample,
@@ -103,4 +141,23 @@ List<Type> components = [
   AboutScreen,
   DocumentationScreen,
   GetStartedScreen,
+  ColorsShowcase,
+  ComplexValidationShowcase,
+  DefaultShowcase,
+  DynamicRowsShowcase,
+  FlexShowcase,
+  GridShowcase,
+  IconsShowcase,
+  ImageCropShowcase,
+  LazyLoadingShowcase,
+  MasterDetailShowcase,
+  PreloaderShowcase,
+  SelectCreateShowcase,
+  ShadowsShowcase,
+  StepPickerShowcase,
+  TagsLabelsShowcase,
+  TiledDashboardShowcase,
+  TypographyShowcase,
+  UtilitiesShowcase,
+  WizardShowcase,
 ];
