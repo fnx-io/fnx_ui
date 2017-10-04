@@ -13,7 +13,7 @@ import 'package:logging/logging.dart';
         <a class="item" *ngFor="let tab of tabs"
         (click)="tab.selectTab()"
         [class.tab--active]="selectedId == tab.id"
-        >{{tab.title}}</a>
+        [innerHtml]="tab.title"></a>
         <span style="flex-grow: 4; flex-shrink: 1" *ngIf="left"></span>
     </div>
     <div class="relative">
