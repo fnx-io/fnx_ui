@@ -28,6 +28,7 @@ const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useEx
   [class.error]="isTouchedAndInvalid()"
   [attr.step]="decimalsAttr"
   [attr.placeholder]="placeholder"
+  [attr.tabindex]="(readonly || disabled) ? -1 : null"
   #input
 />
 ''',

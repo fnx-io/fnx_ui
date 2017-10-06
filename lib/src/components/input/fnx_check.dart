@@ -15,7 +15,7 @@ const CUSTOM_INPUT_CHECK_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useE
     (click)="markAsTouched()"
     [disabled]="disabled || isReadonly"
     [class.disabled]="disabled || isReadonly"
-    [tabIndex]="(disabled == true) ? '-1' : '0'"
+    [attr.tabindex]="(readonly || disabled) ? -1 : 0"    
     ><label attr.for="{{componentId}}"
     (focus)="markAsTouched()"
     (click)="markAsTouched()"

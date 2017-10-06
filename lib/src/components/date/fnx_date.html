@@ -8,6 +8,7 @@
 <input type="text" class="form-control" [attr.id]="componentId"
        [ngModel]="dateStr"
        (ngModelChange)="onChangeInput($event)"
+       [attr.tabindex]="(readonly || disabled) ? -1 : 0"
        [readonly]="isReadonly"
        (focus)="onFocus()"
        (blur)="focused = false"

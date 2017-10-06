@@ -27,12 +27,16 @@ const CUSTOM_AUTOCOMPLETE_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, use
   directives: const [AutoFocus],
 )
 class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
+
   @Input()
   bool required = false;
+
   @Input()
   bool readonly = false;
+
   @Input()
   bool nullable = false;
+
   @Input()
   String placeholder = null;
 
@@ -156,12 +160,14 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
       if (action == 'UP') {
         if (dropDownVisible) {
           highlightNext(_highlighted, options.reversed);
+          scrollToHighlighted();
         }
       } else if (action == 'DOWN') {
         if (!dropDownVisible) {
           showOptions();
         } else {
           highlightNext(_highlighted, options);
+          scrollToHighlighted();
         }
       } else if (action == 'SELECT') {
         if (!dropDownVisible) {
@@ -299,4 +305,13 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
 
   @override
   bool get disabled => false;
+
+  void scrollToHighlighted() {
+    new Future.delayed(new Duration(milliseconds: 100)).then((_) {
+      Element e = (select.nativeElement as Element).querySelector(".select__dropdown--selected");
+      if (e != null) {
+        e.scrollIntoView();
+      }
+    });
+  }
 }

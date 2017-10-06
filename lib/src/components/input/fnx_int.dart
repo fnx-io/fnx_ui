@@ -16,6 +16,7 @@ const CUSTOM_INPUT_INT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExi
   (keyup)="markAsTouched()"
   [class.error]="isTouchedAndInvalid()"
   [attr.placeholder]="placeholder"
+   [attr.tabindex]="(readonly || disabled) ? -1 : 0"  
   #input
 />
 ''',
