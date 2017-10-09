@@ -18,7 +18,7 @@ const CUSTOM_INPUT_FDOUBLE_VALUE_ACCESSOR =
   (keyup)="markAsTouched()"
   [class.error]="isTouchedAndInvalid()"
   [attr.placeholder]="placeholder"
-  [attr.tabindex]="(readonly || disabled) ? -1 : 0"  
+  [attr.tabindex]="(isReadonly || isDisabled) ? -1 : 0"  
   (focus)="onFocus()"
   (blur)="onBlur()"
   #input

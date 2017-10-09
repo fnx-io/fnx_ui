@@ -10,7 +10,7 @@ const CUSTOM_INPUT_TEXTAREA_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, u
   selector: 'fnx-textarea',
   template: r'''
 <textarea id="{{ componentId }}" [(ngModel)]="value" [readonly]="isReadonly"
-[attr.tabindex]="(readonly || disabled) ? -1 : 0"
+[attr.tabindex]="(isReadonly || isDisabled) ? -1 : 0"
 (focus)="markAsTouched()"
 (click)="markAsTouched()" #textarea></textarea>
 ''',

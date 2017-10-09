@@ -1,6 +1,6 @@
 <div id="{{ componentId }}"
      class="select"
-     [attr.tabindex]="(readonly || disabled) ? -1 : 0"
+     [attr.tabindex]="(isReadonly || isDisabled) ? -1 : 0"
      (click)="toggleDropdown()"
      [attr.readonly]="isReadonly"
      [class.open--up]="openUp"
