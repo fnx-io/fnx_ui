@@ -41,7 +41,7 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
 
   EventEmitter _openDatePicker = new EventEmitter();
 
-  FnxInput _inputWrapper;
+  FnxValidatorComponent _inputWrapper;
 
   FnxDate(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent) {
     _inputWrapper = parent;
@@ -75,8 +75,9 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
   }
 
   void setSuggestedErrorMessage(value) {
-    if (_inputWrapper != null) {
-      _inputWrapper.setDefaultErrorMessage = getSuggestedErrorMessage(value);
+    if (_inputWrapper != null && _inputWrapper is FnxInput) {
+      // TODO: suspicious
+      (_inputWrapper as FnxInput).setDefaultErrorMessage = getSuggestedErrorMessage(value);
     }
   }
 
