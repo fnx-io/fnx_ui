@@ -5,6 +5,7 @@ import 'dart:js';
 import 'package:angular2/common.dart';
 import 'package:angular2/core.dart';
 
+import 'package:async/async.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/quill/quill.dart';
@@ -13,7 +14,7 @@ import 'package:fnx_ui/src/validator.dart';
 const EMPTY_STRING_VALUE = "<p><br></p>";
 
 const CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR =
-    const Provider(NG_VALUE_ACCESSOR, useExisting: FnxWysiwygRich, multi: true);
+const Provider(NG_VALUE_ACCESSOR, useExisting: FnxWysiwygRich, multi: true);
 
 @Component(
   selector: 'fnx-wysiwyg-rich',
@@ -55,7 +56,6 @@ const CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR =
              ></div>
 
          <fnx-textarea [(ngModel)]="value"
-                       (ngModelChange)="updateText($event)"
                        [hidden]="htmlView == false" 
                        [class.readonly]="isReadonly"
                        ></fnx-textarea>
@@ -103,6 +103,8 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
   @ViewChild('toolbar')
   ElementRef toolbar;
 
+  StreamSubscription keySubscription;
+
   Element get editor => ((wysiwyg.nativeElement as Element).firstChild as Element);
 
   FnxApp app;
@@ -116,13 +118,28 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
   @override
   ngOnInit() {
     super.ngOnInit();
-    (wysiwyg.nativeElement as Element).innerHtml = value == null ? '' : value;
+    Element el = (wysiwyg.nativeElement as Element);
+    el.innerHtml = value == null ? '' : value;
 
     QuillOptionsStatic options = new QuillOptionsStatic();
     options.theme = "snow";
     options.readOnly = false;
     quill = new Quill(wysiwyg.nativeElement, options);
     quill.on("change", allowInterop(edited));
+
+    keySubscription = StreamGroup.merge([el.onDragEnd, el.onKeyUp]).listen((_) {
+      new Future.delayed(new Duration(milliseconds: 100), edited);
+    });
+  }
+
+
+  @override
+  ngOnDestroy() {
+    super.ngOnDestroy();
+    if (keySubscription != null) {
+      keySubscription.cancel();
+      keySubscription = null;
+    }
   }
 
   bool hasValidValue() {
@@ -138,7 +155,7 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
 
   void writeValue(obj) {
     super.writeValue(obj);
-    quill.pasteHTML(value == null ? '' : value);
+    quill.pasteHTML(value??'');
     if (safe) {
       ((wysiwyg.nativeElement as Element).firstChild as Element).innerHtml = value == null ? '' : value;
     } else {
@@ -150,6 +167,12 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
   void toggleView() {
     htmlView ??= false;
     htmlView = !htmlView;
+
+    if (htmlView) {
+      edited();
+    } else {
+      quill.pasteHTML(value??'');
+    }
   }
 
   Future doFormatText(String command, [var param = true]) async {
@@ -203,10 +226,6 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
     edited();
     await focus();
     restoreSelection(selection);
-  }
-
-  void updateText(String value) {
-    quill.pasteHTML(value);
   }
 
   Future<Null> doCreateImage() async {
