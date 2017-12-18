@@ -35,7 +35,7 @@ class FnxModal implements OnInit, OnDestroy {
   final Logger log = new Logger("FnxModal");
 
   String id = ui.uid('modal-');
-
+  
   ///
   /// Optional CSS width of this modal window. Possibly 90vw etc.
   @Input()
@@ -61,8 +61,11 @@ class FnxModal implements OnInit, OnDestroy {
         .where((KeyboardEvent e) => activeChilds.isEmpty)
         .where((KeyboardEvent e) => e.keyCode == KeyCode.ESC)
         .listen((KeyboardEvent e) {
-      ui.killEvent(e);
-      close.emit(false);
+      if (_stack.isEmpty || _stack.last == this) {
+        print("Closing!");
+        ui.killEvent(e);
+        close.emit(false);
+      }
     });
   }
 

@@ -227,6 +227,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
 
   void changeValueMonth(int by) {
     if (value == null) return;
+    int day = value.day;
     int month = value.month;
     int year = value.year;
     int yearsChange = (by / 12).floor();
@@ -234,7 +235,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
 
     // we intentionally do not emit datePicked event, since this signals that the picker
     // should rerender, not that new value has been picked
-    valueInternal = dateFrom(year + yearsChange, month + monthsChange, value.day, value.hour, value.minute, value.second, value.millisecond, value.isUtc);
+    valueInternal = dateFrom(year + yearsChange, month + monthsChange, 1, value.hour, value.minute, value.second, value.millisecond, value.isUtc);
   }
 
   void addDurationToValue(Duration dur) {
