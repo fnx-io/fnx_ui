@@ -22,9 +22,9 @@ import 'package:logging/logging.dart';
 ///
 ///
 @Component(
-  selector: 'fnx-modal',
-  templateUrl: 'fnx_modal.html',
-  preserveWhitespace: false
+    selector: 'fnx-modal',
+    templateUrl: 'fnx_modal.html',
+    preserveWhitespace: false
 )
 class FnxModal implements OnInit, OnDestroy {
 
@@ -35,7 +35,7 @@ class FnxModal implements OnInit, OnDestroy {
   final Logger log = new Logger("FnxModal");
 
   String id = ui.uid('modal-');
-  
+
   ///
   /// Optional CSS width of this modal window. Possibly 90vw etc.
   @Input()
@@ -57,9 +57,9 @@ class FnxModal implements OnInit, OnDestroy {
   ngOnInit() {
     _stack.add(this);
     keyDownSubscription = document.onKeyDown
-        .where((KeyboardEvent e) => this == _stack.last)
-        .where((KeyboardEvent e) => activeChilds.isEmpty)
-        .where((KeyboardEvent e) => e.keyCode == KeyCode.ESC)
+        .where(tryOrFalse((KeyboardEvent e) => this == _stack.last))
+        .where(tryOrFalse((KeyboardEvent e) => activeChilds.isEmpty))
+        .where(tryOrFalse((KeyboardEvent e) => e.keyCode == KeyCode.ESC))
         .listen((KeyboardEvent e) {
       if (_stack.isEmpty || _stack.last == this) {
         print("Closing!");
@@ -74,4 +74,16 @@ class FnxModal implements OnInit, OnDestroy {
     keyDownSubscription.cancel();
     _stack.remove(this);
   }
+
+  Function tryOrFalse(Function fnc) {
+    return (KeyboardEvent e) {
+      try {
+        return fnc(e);
+      } catch (ex) {
+        log.info("Very strange exception here: "+ex);
+        return false;
+      }
+    };
+  }
+
 }
