@@ -80,7 +80,7 @@ class FnxModal implements OnInit, OnDestroy {
       try {
         return fnc(e);
       } catch (ex) {
-        log.info("Very strange exception here: "+ex);
+        log.info("Very strange exception here: $ex");
         return false;
       }
     };
