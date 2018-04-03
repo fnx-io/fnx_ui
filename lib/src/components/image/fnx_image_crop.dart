@@ -191,20 +191,36 @@ class FnxImageCrop implements OnInit, OnChanges{
 
   void zoomIn(Event event) {
     killEvent(event);
+    Point<double> center = getCenter();
     zoom = zoom * 1.2;
     if (zoom > 5) zoom = 5.0;
     updateImage();
+    centerTo(center);
   }
 
   void zoomOut(Event event) {
     killEvent(event);
+    Point<double> center = getCenter();
     zoom = zoom / 1.2;
     if (zoom < 1) zoom = 1.0;
     updateImage();
+    centerTo(center);
   }
 
   void killEvent(Event event) {
     ui.killEvent(event);
+  }
+
+  Point<double> getCenter() {
+    double cx = (maskWidth/2.0 - imgOffsetX) / imgWidth.toDouble();
+    double cy = (maskHeight/2.0 - imgOffsetY)/ imgHeight.toDouble();
+    return new Point(cx, cy);
+  }
+
+  void centerTo(Point<double> center) {
+    imgOffsetX = (maskWidth/2.0) - (center.x * imgWidth);
+    imgOffsetY = (maskHeight/2.0) - (center.y * imgHeight);
+    trimOffsetToBoundaries();
   }
 
 }

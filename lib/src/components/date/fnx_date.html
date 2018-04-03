@@ -11,6 +11,6 @@
        [attr.tabindex]="(isReadonly || isDisabled) ? -1 : 0"
        [readonly]="isReadonly"
        (focus)="onFocus()"
-       (blur)="focused = false"
+       (blur)="onBlur()"
        (click)="ensurePickerOpened()"/>
 <label class="icon" [attr.for]="componentId">date_range</label>

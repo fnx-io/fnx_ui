@@ -145,11 +145,20 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
   }
 
   DateTime dateStrToDateTime(String pattern) {
-    if (pattern == null || pattern.trim().isEmpty) return null;
-    if (dateTime) {
-      return date.dateTimeFormat.parse(pattern);
-    } else {
-      return date.dateFormat.parse(pattern);
+    try {
+      if (pattern == null || pattern
+          .trim()
+          .isEmpty) return null;
+      if (dateTime) {
+        return date.dateTimeFormat.parse(pattern);
+      } else {
+        return date.dateFormat.parse(pattern);
+      }
+    } catch (e) {
+      if (pattern.contains(",")) {
+        pattern = pattern.replaceAll(",", ".");
+        return dateStrToDateTime(pattern);
+      }
     }
   }
 
@@ -185,6 +194,13 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
   void onFocus() {
     focused = true;
     markAsTouched();
+  }
+
+  void onBlur() {
+    focused = false;
+    if (value != null) {
+      setStrDate(value);
+    }
   }
 
   void ensurePickerOpened() {
