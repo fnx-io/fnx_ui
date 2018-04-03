@@ -221,6 +221,7 @@ class FnxImageCrop implements OnInit, OnChanges{
     imgOffsetX = (maskWidth/2.0) - (center.x * imgWidth);
     imgOffsetY = (maskHeight/2.0) - (center.y * imgHeight);
     trimOffsetToBoundaries();
+    emitCropResult();
   }
 
 }
