@@ -159,6 +159,10 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
         pattern = pattern.replaceAll(",", ".");
         return dateStrToDateTime(pattern);
       }
+      if (pattern.contains("/")) {
+        pattern = pattern.replaceAll("/", ".");
+        return dateStrToDateTime(pattern);
+      }
     }
   }
 
