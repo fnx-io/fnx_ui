@@ -25,7 +25,10 @@ import 'package:fnx_ui/src/util/ui.dart' as ui;
   [style.width.px]="imgWidth"
   [style.height.px]="imgHeight"
   (dragstart)="killEvent(\$event)"
-  (mousemove)="moveImage(\$event)"
+  (mousemove)="moveImageMouse(\$event)"
+  (touchmove)="moveImageTouch(\$event)"
+  (touchstart)="touchStart(\$event)"
+  (touchend)="touchEnd(\$event)"
 /><p class="text--center">
   <span class="btn icon margin--small--right" (mousedown)='zoomOut(\$event)'>zoom_out</span>
   <span class="btn icon" (mousedown)='zoomIn(\$event)'>zoom_in</span>
@@ -168,7 +171,7 @@ class FnxImageCrop implements OnInit, OnChanges{
     crop.emit(new Rectangle(left, top, width, height));
   }
 
-  void moveImage(MouseEvent event) {
+  void moveImageMouse(MouseEvent event) {
     // if mouse down
     if (event.buttons == 1) {
 
@@ -180,6 +183,54 @@ class FnxImageCrop implements OnInit, OnChanges{
 
     }
     killEvent(event);
+  }
+
+  void moveImageTouch(TouchEvent event) {
+    if (_lastTouch == null) {
+      _lastTouch = event;
+      killEvent(event);
+      return;
+    }
+
+    // move
+    try {
+      num dx = event.touches.first.client.x - _lastTouch.touches.first.client.x;
+      num dy = event.touches.first.client.y - _lastTouch.touches.first.client.y;
+
+      imgOffsetX += dx;
+      imgOffsetY += dy;
+
+      trimOffsetToBoundaries();
+      emitCropResult();
+      
+    } catch (e) {
+      // hmm ...
+    }
+    // scale
+    if (_lastTouch.touches.length == 2 && event.touches.length == 2) {
+      num distOrig = _lastTouch.touches[0].client.distanceTo(_lastTouch.touches[1].client);
+      num distNow = event.touches[0].client.distanceTo(event.touches[1].client);
+      double scale = distNow.toDouble() / distOrig.toDouble();
+      Point<double> center = getCenter();
+      zoom = zoom * scale;
+      if (zoom > 5) zoom = 5.0;
+      if (zoom < 1) zoom = 1.0;
+      updateImage();
+      centerTo(center);
+    }
+
+    _lastTouch = event;
+    killEvent(event);
+  }
+
+  TouchEvent _lastTouch = null;
+
+  void touchStart(TouchEvent t) {
+    _lastTouch = t;
+  }
+
+  void touchEnd(TouchEvent t) {
+    _lastTouch = null;
   }
 
   void trimOffsetToBoundaries() {
