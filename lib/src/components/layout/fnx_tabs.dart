@@ -1,7 +1,9 @@
 // Copyright (c) 2016, <your name>. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-import 'package:angular2/core.dart';
+import 'dart:async';
+
+import 'package:angular/angular.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'package:fnx_ui/src/validator.dart';
 import 'package:logging/logging.dart';
@@ -91,13 +93,14 @@ class FnxTab extends FnxValidatorComponent implements OnInit, OnDestroy {
 
   FnxTab(this.tabParent, @SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
 
+  StreamController<bool> _select = new StreamController();
   @Output()
-  EventEmitter<bool> select = new EventEmitter();
+  Stream<bool> get select => _select.stream;
 
   void selectTab() {
     if (tabParent == null) return;
     tabParent.selectedId = id;
-    select.emit(true);
+    _select.add(true);
   }
 
   @override

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:html';
 
-import 'package:angular2/common.dart';
+import 'package:angular_forms/angular_forms.dart';
 import 'package:async/async.dart';
 import 'package:fnx_ui/src/util/async.dart';
 
@@ -95,7 +95,7 @@ class DropdownTracker {
     this._dropdown = dropdown;
     this._onHide = onHide;
     Stream<Event> mergedRelevant = StreamGroup.merge([window.onMouseWheel, window.onResize, window.onScroll]);
-    FnxStreamDebouncer db = new FnxStreamDebouncer(new Duration(milliseconds: 10));
+    FnxStreamDebouncer<Event> db = new FnxStreamDebouncer(new Duration(milliseconds: 10));
     subscription = mergedRelevant.transform(db).listen(updatePosition);
   }
 

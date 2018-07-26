@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'dart:html';
 
-import 'package:angular2/common.dart';
-import 'package:angular2/core.dart';
+import 'package:angular/angular.dart';
+import 'package:angular_forms/angular_forms.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/validator.dart';
 
 const CUSTOM_INPUT_WYSIWYG_POOR_VALUE_ACCESSOR =
-    const Provider(NG_VALUE_ACCESSOR, useExisting: FnxWysiwygPoor, multi: true);
+    const Provider(ngValueAccessor, useExisting: FnxWysiwygPoor, multi: true);
 
 @Component(
   selector: 'fnx-wysiwyg-poor',
@@ -44,13 +44,18 @@ const CUSTOM_INPUT_WYSIWYG_POOR_VALUE_ACCESSOR =
   preserveWhitespace: false,
 )
 class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
+
   @Input()
   bool required = false;
+
   @Input()
   bool readonly = false;
 
+  @Input()
+  bool disabled = false;
+
   @ViewChild("wysiwyg")
-  ElementRef editor;
+  HtmlElement editor;
 
   FnxApp app;
 
@@ -63,7 +68,7 @@ class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, 
   @override
   ngOnInit() {
     super.ngOnInit();
-    (editor.nativeElement as Element).innerHtml = value == null ? EMPTY_STRING_VALUE : value;
+    editor.innerHtml = value == null ? EMPTY_STRING_VALUE : value;
   }
 
   bool hasValidValue() {
@@ -72,14 +77,14 @@ class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, 
   }
 
   void edited() {
-    String html = editor.nativeElement.innerHtml;
+    String html = editor.innerHtml;
     value = (html == EMPTY_STRING_VALUE ? null : html);
     markAsTouched();
   }
 
   void writeValue(obj) {
     super.writeValue(obj);
-    (editor.nativeElement as Element).innerHtml = (value == null || value.isEmpty) ? EMPTY_STRING_VALUE : value;
+    editor.innerHtml = (value == null || value.isEmpty) ? EMPTY_STRING_VALUE : value;
   }
 
   void doCommand(String command) {
@@ -119,6 +124,4 @@ class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, 
     }
   }
 
-  @override
-  bool get disabled => false;
 }

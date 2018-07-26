@@ -1,6 +1,7 @@
-import 'package:angular2/angular2.dart';
-import 'package:angular2/common.dart';
-import 'package:angular2/core.dart';
+import 'dart:async';
+
+import 'package:angular/angular.dart';
+import 'package:angular_forms/angular_forms.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/date/fnx_date_picker.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
@@ -9,7 +10,7 @@ import 'package:fnx_ui/src/validator.dart';
 
 export 'package:fnx_ui/src/components/date/fnx_date_picker.dart';
 
-const CUSTOM_DATE_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExisting: FnxDate, multi: true);
+const CUSTOM_DATE_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxDate, multi: true);
 
 @Component(
   selector: 'fnx-date',
@@ -37,9 +38,15 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
   @Input()
   bool readonly = false;
 
+  @Input()
+  bool disabled = false;
+
   bool _focused = false;
 
-  EventEmitter _openDatePicker = new EventEmitter();
+  final StreamController<bool> _openDatePicker = new StreamController();
+
+  @Output()
+  Stream<bool> get openDatePicker => _openDatePicker.stream;
 
   FnxValidatorComponent _inputWrapper;
 
@@ -50,13 +57,11 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
   set focused(bool focused) {
     _focused = focused;
     if (focused && !isReadonly) {
-      _openDatePicker.emit(true);
+      _openDatePicker.add(true);
     }
   }
 
   get focused => _focused;
-
-  get openDatePicker => _openDatePicker;
 
   bool get active {
     if (dateStr == null) return false;
@@ -210,7 +215,7 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
   void ensurePickerOpened() {
     markAsTouched();
     if (!isReadonly) {
-      _openDatePicker.emit(true);
+      _openDatePicker.add(true);
     }
   }
 
@@ -221,8 +226,6 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
     return requiredCheck && validFormattedDate;
   }
 
-  @override
-  bool get disabled => false;
 }
 
 const FNX_DATE_DIRECTIVES = const [FnxDate, FnxDatePicker];

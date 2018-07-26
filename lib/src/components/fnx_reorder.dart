@@ -1,6 +1,7 @@
+import 'dart:async';
 import 'dart:html';
 
-import 'package:angular2/core.dart';
+import 'package:angular/angular.dart';
 
 ///
 /// Dulezite poznamecky - itemy, ktere se pretahuji, nesmi mit nastavenou sirku, vysku nebo border.
@@ -13,9 +14,7 @@ class FnxReorderContainer {
   
   HtmlElement container;
 
-  FnxReorderContainer(ElementRef element) {
-    container = element.nativeElement;
-  }
+  FnxReorderContainer(this.container);
 
   FnxReorderItem _dragged = null;
   int _draggedIndex;
@@ -40,8 +39,9 @@ class FnxReorderContainer {
     print("Dragged: $_dragged  $draggedIndex");
   }
 
+  StreamController<ReorderEvent> _reorder = new StreamController();
   @Output()
-  EventEmitter<ReorderEvent> reorder = new EventEmitter();
+  Stream<ReorderEvent> get reorder => _reorder.stream;
 
   void emitReorder(FnxReorderItem target) {
     if (_dragged == null) {
@@ -55,7 +55,7 @@ class FnxReorderContainer {
       return;
     }
     print("Reorder from=$from to=$to");
-    reorder.emit(new ReorderEvent(from, to));
+    _reorder.add(new ReorderEvent(from, to));
     _draggedIndex = to;
   }
 
@@ -98,8 +98,7 @@ class FnxReorderItem {
 
   bool get beingDragged => parent.draggedIndex == reorderItem;
 
-  FnxReorderItem(ElementRef elementRef, this.parent) {
-    itemElement = (elementRef.nativeElement as HtmlElement);
+  FnxReorderItem(this.itemElement, this.parent) {
     itemElement.draggable = true;
 
     //if (e.parent != parent.container) throw "reorderItem MUST be direct child of reorderContainerVertical";

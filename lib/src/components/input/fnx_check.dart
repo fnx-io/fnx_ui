@@ -1,10 +1,10 @@
-import 'package:angular2/common.dart';
-import 'package:angular2/core.dart';
+import 'package:angular_forms/angular_forms.dart';
+import 'package:angular/angular.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/validator.dart';
 
-const CUSTOM_INPUT_CHECK_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExisting: FnxCheck, multi: true);
+const CUSTOM_INPUT_CHECK_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxCheck, multi: true);
 
 @Component(
   selector: 'fnx-check',

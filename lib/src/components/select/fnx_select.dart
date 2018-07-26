@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:html';
 
-import 'package:angular2/common.dart';
-import 'package:angular2/core.dart';
+import 'package:angular/angular.dart';
+import 'package:angular_forms/angular_forms.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/util/async.dart';
@@ -12,7 +12,7 @@ import 'package:fnx_ui/src/validator.dart';
 
 typedef String ValueDescriptionRenderer();
 
-const CUSTOM_SELECT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExisting: FnxSelect, multi: true);
+const CUSTOM_SELECT_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxSelect, multi: true);
 
 @Component(
   selector: 'fnx-select',
@@ -26,14 +26,20 @@ const CUSTOM_SELECT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExisti
   directives: const [AutoFocus],
 )
 class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
+
   @Input()
   bool required = false;
   @Input()
   bool neverShowFilter = false;
   @Input()
   bool alwaysShowFilter = false;
+
   @Input()
   bool readonly = false;
+
+  @Input()
+  bool disabled = false;
+
   @Input()
   bool nullable = false;
   @Input()
@@ -73,18 +79,15 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   Node container;
 
   @ViewChild("dropdown")
-  ElementRef dropdown;
+  HtmlElement dropdown;
 
   @ViewChild("select")
-  ElementRef select;
+  HtmlElement select;
 
   FnxModal modal;
 
-  FnxSelect(ElementRef el, @Optional() this.modal, @SkipSelf() @Optional() FnxValidatorComponent parent)
+  FnxSelect(this.container, @Optional() this.modal, @SkipSelf() @Optional() FnxValidatorComponent parent)
       : super(parent) {
-    if (el != null) {
-      container = el.nativeElement;
-    }
   }
 
   void toggleDropdown() {
@@ -251,7 +254,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
     Map<int, String> actions = {KeyCode.ENTER: 'SELECT', KeyCode.ESC: 'HIDE', KeyCode.UP: 'UP', KeyCode.DOWN: 'DOWN'};
     Set<int> supportedKeys = new Set.from(actions.keys);
     Stream<KeyboardEvent> onlyWhenExpanded =
-        stream.where((event) => ui.isEventFromSubtree(event, select.nativeElement));
+        stream.where((event) => ui.isEventFromSubtree(event, select));
     Stream<KeyboardEvent> onlySupported = onlyWhenExpanded.where((event) => supportedKeys.contains(event.keyCode));
     Stream<KeyboardEvent> cancelled = onlySupported.map((event) {
       event.preventDefault();
@@ -314,7 +317,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
       hideOptions();
     });
     this.navigationActions = bindKeyHandler(document.onKeyDown);
-    dropdownTracker.init(container, dropdown.nativeElement, hideOptions);
+    dropdownTracker.init(container, dropdown, hideOptions);
   }
 
   @override
@@ -338,11 +341,9 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 
   @override
   void focus() {
-    select.nativeElement.focus();
+    select.focus();
   }
 
-  @override
-  bool get disabled => false;
 }
 
 class FnxOptionValue {

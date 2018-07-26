@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:html';
 
-import 'package:angular2/common.dart';
-import 'package:angular2/core.dart';
+import 'package:angular/angular.dart';
+import 'package:angular_forms/angular_forms.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/util/async.dart';
@@ -13,7 +13,7 @@ import 'package:fnx_ui/src/validator.dart';
 typedef Future<List<Pair>> OptionsProvider(String filledText);
 typedef Future<Pair> DefaultOptionProvider(var initialValue);
 
-const CUSTOM_AUTOCOMPLETE_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExisting: FnxAutocomplete, multi: true);
+const CUSTOM_AUTOCOMPLETE_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxAutocomplete, multi: true);
 
 @Component(
   selector: 'fnx-autocomplete',
@@ -33,6 +33,9 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
 
   @Input()
   bool readonly = false;
+
+  @Input()
+  bool disabled = false;
 
   @Input()
   bool nullable = false;
@@ -67,13 +70,13 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
   Node container;
 
   @ViewChild("dropdown")
-  ElementRef dropdown;
+  HtmlElement dropdown;
 
   @ViewChild("select")
-  ElementRef select;
+  HtmlElement select;
 
   @ViewChild("input")
-  ElementRef input;
+  HtmlElement input;
 
   String get text => _text;
 
@@ -88,11 +91,8 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
 
   FnxModal modal;
 
-  FnxAutocomplete(ElementRef el, @Optional() this.modal, @SkipSelf() @Optional() FnxValidatorComponent parent)
+  FnxAutocomplete(this.container, @Optional() this.modal, @SkipSelf() @Optional() FnxValidatorComponent parent)
       : super(parent) {
-    if (el != null) {
-      container = el.nativeElement;
-    }
     filledTextChangedSubscription = filledTextChanged.stream
         .transform(new FnxStreamDebouncer(new Duration(milliseconds: 50)))
         .listen(loadFreshOptions);
@@ -148,7 +148,7 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
   StreamSubscription<String> bindKeyHandler(Stream<KeyboardEvent> stream) {
     Map<int, String> actions = {KeyCode.ENTER: 'SELECT', KeyCode.ESC: 'HIDE', KeyCode.UP: 'UP', KeyCode.DOWN: 'DOWN'};
     Set<int> supportedKeys = new Set.from(actions.keys);
-    Stream<KeyboardEvent> onlyWhenExpanded = stream.where((event) => isEventFromSubtree(event, select.nativeElement));
+    Stream<KeyboardEvent> onlyWhenExpanded = stream.where((event) => isEventFromSubtree(event, select));
     Stream<KeyboardEvent> onlySupported = onlyWhenExpanded.where((event) => supportedKeys.contains(event.keyCode));
     Stream<KeyboardEvent> cancelled = onlySupported.map((event) {
       event.preventDefault();
@@ -208,7 +208,7 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
   ngOnInit() async {
     super.ngOnInit();
     this.navigationActions = bindKeyHandler(document.onKeyDown);
-    dropdownTracker.init(container, dropdown.nativeElement, hideOptions);
+    dropdownTracker.init(container, dropdown, hideOptions);
   }
 
   @override
@@ -297,18 +297,15 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
   @override
   void focus() {
     later(() {
-      if (input != null && input.nativeElement != null) {
-        input.nativeElement.focus();
+      if (input != null && input != null) {
+        input.focus();
       }
     });
   }
 
-  @override
-  bool get disabled => false;
-
   void scrollToHighlighted() {
     new Future.delayed(new Duration(milliseconds: 100)).then((_) {
-      Element e = (select.nativeElement as Element).querySelector(".select__dropdown--selected");
+      Element e = select.querySelector(".select__dropdown--selected");
       if (e != null) {
         e.scrollIntoView();
       }

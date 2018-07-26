@@ -5,7 +5,11 @@ import 'dart:html';
 /// This element can request focus.
 ///
 
-import 'package:angular2/core.dart';
+import 'package:angular/angular.dart';
+///
+/// This element can request focus.
+///
+
 ///
 /// This element can request focus.
 ///
@@ -26,7 +30,7 @@ abstract class Focusable {
 )
 class AutoFocus implements OnInit {
 
-  ElementRef element;
+  HtmlElement element;
   Focusable focusable;
 
   @Input()
@@ -44,8 +48,8 @@ class AutoFocus implements OnInit {
     if (autoFocus == false) return;
     if (focusable != null) {
       focusable.focus();
-    } else if (element.nativeElement is HtmlElement) {
-      element.nativeElement.focus();
+    } else {
+      element.focus();
     }
   }
 

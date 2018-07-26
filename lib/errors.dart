@@ -16,9 +16,23 @@ library errors;
 ///
 ///
 
-import 'package:angular2/core.dart';
-import 'package:angular2/src/facade/base_wrapped_exception.dart';
+import 'package:angular/angular.dart';
 import 'package:logging/logging.dart';
+/// This class represents any error you need to display to the user.
+///
+/// Error must have a "message" and it can have "headline" and "details". "Details"
+/// is an "Iterable" which will be rendered as <ul><li>element.toString()</li> for each
+/// element.
+///
+/// You are supposed to register your own custom exception handlers like this:
+///
+///     (handler as FnxExceptionHandler).registerErrorProcessor(CustomException, processCustomException);
+///
+/// Where processCustomException receives exception of the specified type and can return either FnxError to show something to
+/// the user, or process exception completely and return null.
+///
+///
+
 /// This class represents any error you need to display to the user.
 ///
 /// Error must have a "message" and it can have "headline" and "details". "Details"
@@ -102,43 +116,13 @@ class FnxExceptionHandler implements ExceptionHandler {
   ///
   /// Process uncaught exception.
   ///
+  @override
   void call(dynamic exception,  [dynamic stackTrace = null, String reason = null]) {
-    var originalException = this._findOriginalException(exception);
-    var originalStack = this._findOriginalStack(exception);
-    var context = this._findContext(exception);
-
-
-    // ... first, let's render exception to the log
-    List<String> messages = [];
-
-    messages.add('''EXCEPTION: ${ this . _extractMessage ( exception )}''');
-    if (stackTrace != null && originalStack == null) {
-      messages.add("STACKTRACE:");
-      messages.add(this._longStackTrace(stackTrace));
-    }
-    if (reason != null) {
-      messages.add('''REASON: ${ reason}''');
-    }
-    if (originalException != null) {
-      messages.add('''ORIGINAL EXCEPTION: ${ this . _extractMessage ( originalException )}''');
-    }
-    if (originalStack != null) {
-      messages.add("ORIGINAL STACKTRACE:");
-      messages.add(this._longStackTrace(originalStack));
-    }
-    if (context != null) {
-      messages.add("ERROR CONTEXT:");
-      messages.add(context);
-    }
-    log.severe(messages.join("\n"));
+    log.severe(ExceptionHandler.exceptionToString(exception, stackTrace, reason));
 
     // ... and then try to display exception on UI
     FnxError errorToShow = null;
-    if (originalException != null) {
-      errorToShow = _processError(originalException, originalStack);
-    } else {
-      errorToShow = _processError(exception, stackTrace);
-    }
+    errorToShow = _processError(exception, stackTrace);
 
     if (errorToShow == null) {
       log.fine("Error to show is null, hopefully it got processed some other way");
@@ -156,60 +140,16 @@ class FnxExceptionHandler implements ExceptionHandler {
 
   }
 
-  FnxError _processError(originalException, originalStack) {
+  FnxError _processError(exception, stacktrace) {
     for (Type type in _errorBuilders.keys) {
-      if (originalException.runtimeType == type) {
+      if (exception.runtimeType == type) {
         if (_errorBuilders[type] == null) return null;
-        return _errorBuilders[type](originalException, originalStack);
+        return _errorBuilders[type](exception, stacktrace);
       }
     }
-    log.warning("Unknown FnxError builder for exception of type '${originalException.runtimeType}', use method registerErrorBuilder(...)");
-    return new FnxError(originalException.toString());
+    log.warning("Unknown FnxError builder for exception of type '${exception.runtimeType}', use method registerErrorBuilder(...)");
+    return new FnxError(exception.toString());
   }
 
-  String _extractMessage(dynamic exception) {
-    return exception is BaseWrappedException
-        ? exception.wrapperMessage
-        : exception.toString();
-  }
-
-  dynamic _longStackTrace(dynamic stackTrace) {
-    return stackTrace is Iterable
-        ? ((stackTrace as List<dynamic>)).join("\n\n-----async gap-----\n")
-        : stackTrace.toString();
-  }
-
-  dynamic _findContext(dynamic exception) {
-    try {
-      if (!(exception is BaseWrappedException)) return null;
-      return exception.context ??
-          this._findContext(exception.originalException);
-    } catch (e) {
-      // exception.context can throw an exception. if it happens, we ignore the context.
-      return null;
-    }
-  }
-
-  dynamic _findOriginalException(dynamic exception) {
-    if (!(exception is BaseWrappedException)) return null;
-    var e = exception.originalException;
-    while (e is BaseWrappedException && e.originalException != null) {
-      e = e.originalException;
-    }
-    return e;
-  }
-
-  dynamic _findOriginalStack(dynamic exception) {
-    if (!(exception is BaseWrappedException)) return null;
-    var e = exception;
-    var stack = exception.originalStack;
-    while (e is BaseWrappedException && e.originalException != null) {
-      e = e.originalException;
-      if (e is BaseWrappedException && e.originalException != null) {
-        stack = e.originalStack;
-      }
-    }
-    return stack;
-  }
 }
 

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:angular2/core.dart';
+import 'package:angular/angular.dart';
 
 ///
 /// Base class for all components which support validation (extend or mix-in).

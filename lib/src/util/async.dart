@@ -26,7 +26,7 @@ void later(Function f) {
 ///     debouncedStream.listen((data) {
 ///       print("$data");
 ///     }
-class FnxStreamDebouncer<T> implements StreamTransformer<T, T> {
+class FnxStreamDebouncer<T> extends StreamTransformerBase<T, T> {
 
   StreamController _controller;
 

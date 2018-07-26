@@ -4,7 +4,7 @@
 import 'dart:async';
 import 'dart:html';
 
-import 'package:angular2/core.dart';
+import 'package:angular/angular.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'package:logging/logging.dart';
 
@@ -41,30 +41,32 @@ class FnxModal implements OnInit, OnDestroy {
   @Input()
   String width = null;
 
+  StreamController<bool> _close = new StreamController();
+
   ///
   /// Output. Catch it and hide this window, user clicked the "close" icon.
   ///
   @Output()
-  EventEmitter<bool> close = new EventEmitter<bool>();
+  Stream<bool> get close => _close.stream;
 
   StreamSubscription<KeyboardEvent> keyDownSubscription;
 
   void emitClose() {
-    close.emit(false);
+    _close.add(false);
   }
 
   @override
   ngOnInit() {
     _stack.add(this);
     keyDownSubscription = document.onKeyDown
+        .where(tryOrFalse((KeyboardEvent e) => e.keyCode == KeyCode.ESC))
         .where(tryOrFalse((KeyboardEvent e) => this == _stack.last))
         .where(tryOrFalse((KeyboardEvent e) => activeChilds.isEmpty))
-        .where(tryOrFalse((KeyboardEvent e) => e.keyCode == KeyCode.ESC))
         .listen((KeyboardEvent e) {
       if (_stack.isEmpty || _stack.last == this) {
         print("Closing!");
         ui.killEvent(e);
-        close.emit(false);
+        emitClose();
       }
     });
   }

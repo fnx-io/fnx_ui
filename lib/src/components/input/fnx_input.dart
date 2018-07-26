@@ -1,5 +1,7 @@
-import 'package:angular2/common.dart';
-import 'package:angular2/core.dart';
+import 'dart:async';
+
+import 'package:angular_forms/angular_forms.dart';
+import 'package:angular/angular.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/util/global_messages.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
@@ -88,7 +90,7 @@ class FnxInput extends FnxValidatorComponent implements OnInit, OnDestroy {
 ///
 /// Ads support for custom validation and ngModel.
 ///
-abstract class FnxInputComponent extends FnxValidatorComponent implements OnInit, OnDestroy, ControlValueAccessor {
+abstract class FnxInputComponent<T> extends FnxValidatorComponent implements OnInit, OnDestroy, ControlValueAccessor<T> {
   final String _privComponentId = ui.uid("comp_");
 
   Control componentControl;
@@ -96,19 +98,22 @@ abstract class FnxInputComponent extends FnxValidatorComponent implements OnInit
   FnxValidatorComponent _parent;
   FnxInputComponent(this._parent) : super(_parent);
 
-  dynamic _value;
+  T _value;
 
-  get value => _value;
+  T get value => _value;
 
+  void set disabled(bool disabled); // abstract
+
+  StreamController<T> _valueChanged = new StreamController();
   @Output()
-  EventEmitter valueChange = new EventEmitter();
+  Stream<T> get valueChange => _valueChanged.stream;
 
   @Input()
-  set value(dynamic v) {
+  set value(T v) {
     if (v == "") v = null; // TODO: is it a good idea?
     if (v != this._value) {
       this._value = v;
-      this.valueChange.emit(v);
+      this._valueChanged.add(v);
       notifyNgModel();
     }
   }
@@ -119,17 +124,23 @@ abstract class FnxInputComponent extends FnxValidatorComponent implements OnInit
     }
   }
 
-  var onChange = (_) {};
-  var onTouched = (_) {};
+  ChangeFunction<T> onChange = (T t, {String rawValue}) {};
+  TouchFunction onTouched = () {};
 
   @override
-  void registerOnChange(fn) {
-    this.onChange = fn;
+  void registerOnChange(ChangeFunction<T> f) {
+    this.onChange = f;
   }
 
   @override
-  void registerOnTouched(fn) {
+  void registerOnTouched(TouchFunction fn) {
     this.onTouched = fn;
+  }
+
+
+  @override
+  void onDisabledChanged(bool isDisabled) {
+    disabled = isDisabled;
   }
 
   @override

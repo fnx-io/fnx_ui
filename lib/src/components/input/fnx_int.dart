@@ -1,10 +1,12 @@
-import 'package:angular2/common.dart';
-import 'package:angular2/core.dart';
+import 'dart:html';
+
+import 'package:angular/angular.dart';
+import 'package:angular_forms/angular_forms.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/validator.dart';
 
-const CUSTOM_INPUT_INT_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExisting: FnxInt, multi: true);
+const CUSTOM_INPUT_INT_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxInt, multi: true);
 
 @Component(
   selector: 'fnx-int',
@@ -47,8 +49,11 @@ class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, 
   @Input()
   bool readonly = false;
 
+  @Input()
+  bool disabled = false;
+
   @ViewChild("input")
-  ElementRef elementRef;
+  HtmlElement element;
 
   FnxInt(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
 
@@ -93,8 +98,8 @@ class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, 
 
   @override
   void focus() {
-    if (elementRef != null && elementRef.nativeElement != null) {
-      elementRef.nativeElement.focus();
+    if (element != null) {
+      element.focus();
     }
   }
 
@@ -117,6 +122,4 @@ class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, 
     return super.value;
   }
 
-  @override
-  bool get disabled => false;
 }

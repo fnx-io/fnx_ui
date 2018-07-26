@@ -1,9 +1,10 @@
 // Copyright (c) 2016, <your name>. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
+import 'dart:async';
 import 'dart:html';
 
-import 'package:angular2/core.dart';
+import 'package:angular/angular.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'package:fnx_ui/src/validator.dart';
 import 'package:logging/logging.dart';
@@ -39,11 +40,13 @@ class FnxForm extends FnxValidatorComponent implements OnInit, OnDestroy {
   @override
   bool get required => false;
 
+  StreamController<Event> _submit = new StreamController();
   @Output()
-  final EventEmitter<Event> submit = new EventEmitter<Event>();
+  Stream<Event> get submit => _submit.stream;
 
+  StreamController<BeforeFormSubmitEvent> _beforeSubmit = new StreamController();
   @Output()
-  final EventEmitter<BeforeFormSubmitEvent> beforeSubmit = new EventEmitter<BeforeFormSubmitEvent>(false);
+  Stream<BeforeFormSubmitEvent> get beforeSubmit => _beforeSubmit.stream;
 
   String id = ui.uid('form-');
 
@@ -55,7 +58,7 @@ class FnxForm extends FnxValidatorComponent implements OnInit, OnDestroy {
   /// Only propagates the submit event when this form is valid.
   /// Forces validation of all components inside this form.
   void submitForm(Event event) {
-    beforeSubmit.emit(new BeforeFormSubmitEvent());
+    _beforeSubmit.add(new BeforeFormSubmitEvent());
 
     if (event != null) {
       event.preventDefault();
@@ -74,7 +77,7 @@ class FnxForm extends FnxValidatorComponent implements OnInit, OnDestroy {
     }
     
     if (isValid() && errorMessages.isEmpty) {
-      submit.emit(event);
+      _submit.add(event);
       
     } else {
       // there are some complex validation errors

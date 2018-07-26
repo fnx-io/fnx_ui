@@ -1,9 +1,10 @@
 // Copyright (c) 2016, <your name>. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
+import 'dart:async';
 import 'dart:html';
 
-import 'package:angular2/core.dart';
+import 'package:angular/angular.dart';
 import 'package:fnx_ui/src/util/async.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
 
@@ -35,7 +36,7 @@ import 'package:fnx_ui/src/util/ui.dart' as ui;
 </p></div>
     """
 )
-class FnxImageCrop implements OnInit, OnChanges{
+class FnxImageCrop implements OnInit, OnChanges, OnDestroy {
 
   /// Required crop ratio - width:height
   @Input()
@@ -45,13 +46,16 @@ class FnxImageCrop implements OnInit, OnChanges{
   String src = null;
 
   @ViewChild('mask')
-  ElementRef maskRef;
+  DivElement mask;
 
   @ViewChild('img')
-  ElementRef imgRef;
+  ImageElement img;
 
+  StreamSubscription<Event> _resizeSubscription;
+
+  StreamController<Rectangle<double>> _crop = new StreamController();
   @Output()
-  EventEmitter<Rectangle<double>> crop = new EventEmitter();
+  Stream<Rectangle<double>> get crop => _crop.stream;
 
   int maskHeight = 0;
   int get maskWidth => mask?.getBoundingClientRect().width.ceil();
@@ -67,15 +71,9 @@ class FnxImageCrop implements OnInit, OnChanges{
 
   double zoom = 1.0;
 
-  DivElement mask;
-  ImageElement img;
-
   @override
   ngOnInit() {
-    mask = maskRef.nativeElement;
-    img = imgRef.nativeElement;
-
-    window.onResize.transform(new FnxStreamDebouncer(new Duration(milliseconds: 100))).listen(updateMask);
+    _resizeSubscription = window.onResize.transform(new FnxStreamDebouncer(new Duration(milliseconds: 100))).listen(updateMask);
 
     updateMask();
     loadImageDimensions();
@@ -168,7 +166,7 @@ class FnxImageCrop implements OnInit, OnChanges{
     double width = maskWidth / imgWidth;
     double height = maskHeight / imgHeight;
     if (top + height > 1) height = 1 -top;
-    crop.emit(new Rectangle(left, top, width, height));
+    _crop.add(new Rectangle(left, top, width, height));
   }
 
   void moveImageMouse(MouseEvent event) {
@@ -273,6 +271,11 @@ class FnxImageCrop implements OnInit, OnChanges{
     imgOffsetY = (maskHeight/2.0) - (center.y * imgHeight);
     trimOffsetToBoundaries();
     emitCropResult();
+  }
+
+  @override
+  void ngOnDestroy() {
+    _resizeSubscription.cancel();
   }
 
 }

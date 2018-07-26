@@ -1,14 +1,15 @@
+import 'dart:async';
 import 'dart:html';
 
-import 'package:angular2/common.dart';
-import 'package:angular2/core.dart';
+import 'package:angular/angular.dart';
+import 'package:angular_forms/angular_forms.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/util/global_messages.dart';
 import 'package:fnx_ui/src/validator.dart';
 import 'package:logging/logging.dart';
 
-const CUSTOM_INPUT_FILE_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExisting: FnxFile, multi: true);
+const CUSTOM_INPUT_FILE_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxFile, multi: true);
 
 @Component(
   selector: 'fnx-file',
@@ -57,6 +58,9 @@ class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit,
   @Input()
   bool readonly = false;
 
+  @Input()
+  bool disabled = false;
+
   /// Is it possible to drag and drop multiple files?
   @Input()
   bool multi = false;
@@ -68,8 +72,9 @@ class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit,
   @Input()
   String fileName = null;
 
+  StreamController _files = new StreamController();
   @Output()
-  EventEmitter files = new EventEmitter();
+  Stream get files => _files.stream;
 
   @Input()
   String browseLabel = GlobalMessages.fileBrowse();
@@ -132,16 +137,16 @@ class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit,
       return;
     }
     if (multi) {
-      files.emit(filesInput);
+      _files.add(filesInput);
     } else {
-      files.emit(filesInput[0]);
+      _files.add(filesInput[0]);
     }
   }
 
   void deleteFiles() {
     if (isReadonly) return;
     value = null;
-    files.emit(null);
+    _files.add(null);
   }
 
   bool get isEmpty {
@@ -161,6 +166,4 @@ class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit,
     return value.toString();
   }
 
-  @override
-  bool get disabled => false;
 }

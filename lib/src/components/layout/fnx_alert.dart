@@ -1,7 +1,7 @@
 // Copyright (c) 2016, <your name>. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-import 'package:angular2/core.dart';
+import 'package:angular/angular.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'package:logging/logging.dart';
 

@@ -3,8 +3,7 @@
 import 'dart:async';
 import 'dart:html';
 
-import 'package:angular2/angular2.dart';
-import 'package:angular2/core.dart';
+import 'package:angular/angular.dart';
 import 'package:fnx_ui/src/util/async.dart';
 import 'package:logging/logging.dart';
 
@@ -44,8 +43,9 @@ class FnxScrollPanel implements OnInit {
 
   final Logger log = new Logger("FnxScrollPanel");
 
+  StreamController<bool> _loadMore = new StreamController<bool>();
   @Output()
-  EventEmitter loadMore = new EventEmitter();
+  Stream<bool> get loadMore => _loadMore.stream;
 
   ///
   /// Input. Debounce of (loadMore) events in ms.
@@ -53,22 +53,19 @@ class FnxScrollPanel implements OnInit {
   @Input()
   int debounceMs = 80;
 
-  ElementRef template;
+  HtmlElement container;
 
-  Element container;
-
-  Element content;
+  HtmlElement content;
 
   static const int _LOAD_THRESHOLD = 100;
 
   StreamController<int> _debounceCtrl;
 
-  FnxScrollPanel(this.template);
+  FnxScrollPanel(this.container);
 
   @override
   ngOnInit() {
-    this.container = (template.nativeElement as Element);
-    this.content = (template.nativeElement as Element).querySelector(".scroll-panel-content");
+    this.content = content.querySelector(".scroll-panel-content");
 
     container.onScroll.listen(processScroll);
     content.onResize.listen(processScroll);
@@ -101,7 +98,7 @@ class FnxScrollPanel implements OnInit {
 
   void doEmit() {
     log.fine("Emiting load more event (with $debounceMs ms debounce)");
-    loadMore.emit(true);
+    _loadMore.add(true);
   }
 
 }

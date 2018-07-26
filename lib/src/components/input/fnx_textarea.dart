@@ -1,10 +1,11 @@
-import 'package:angular2/common.dart';
-import 'package:angular2/core.dart';
+import 'dart:html';
+
+import 'package:angular/angular.dart';
+import 'package:angular_forms/angular_forms.dart';
 import 'package:fnx_ui/fnx_ui.dart';
-import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/validator.dart';
 
-const CUSTOM_INPUT_TEXTAREA_VALUE_ACCESSOR = const Provider(NG_VALUE_ACCESSOR, useExisting: FnxTextarea, multi: true);
+const CUSTOM_INPUT_TEXTAREA_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxTextarea, multi: true);
 
 @Component(
   selector: 'fnx-textarea',
@@ -33,7 +34,7 @@ class FnxTextarea extends FnxText implements OnInit, OnDestroy, Focusable {
   bool readonly = false;
 
   @ViewChild("textarea")
-  ElementRef elementRef;
+  HtmlElement element;
 
   FnxTextarea(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent) {
     type = "text";
@@ -41,8 +42,8 @@ class FnxTextarea extends FnxText implements OnInit, OnDestroy, Focusable {
 
   @override
   void focus() {
-    if (elementRef != null && elementRef.nativeElement != null) {
-      elementRef.nativeElement.focus();
+    if (element != null) {
+      element.focus();
     }
   }
 

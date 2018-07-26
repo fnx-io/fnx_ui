@@ -2,9 +2,8 @@ import 'dart:async';
 import 'dart:html';
 import 'dart:js';
 
-import 'package:angular2/common.dart';
-import 'package:angular2/core.dart';
-
+import 'package:angular/angular.dart';
+import 'package:angular_forms/angular_forms.dart';
 import 'package:async/async.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
@@ -14,7 +13,7 @@ import 'package:fnx_ui/src/validator.dart';
 const EMPTY_STRING_VALUE = "<p><br></p>";
 
 const CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR =
-const Provider(NG_VALUE_ACCESSOR, useExisting: FnxWysiwygRich, multi: true);
+const Provider(ngValueAccessor, useExisting: FnxWysiwygRich, multi: true);
 
 @Component(
   selector: 'fnx-wysiwyg-rich',
@@ -79,16 +78,25 @@ const Provider(NG_VALUE_ACCESSOR, useExisting: FnxWysiwygRich, multi: true);
   preserveWhitespace: false,
 )
 class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
+
   @Input()
   bool required = false;
+
   @Input()
   bool readonly = false;
+
+  @Input()
+  bool disabled = false;
+
   @Input()
   String height = '15';
+
   @Input()
   String maxWidth = '50';
+
   @Input()
   PickImageUrl imagePicker = null;
+
   @Input()
   bool safe = true;
 
@@ -98,14 +106,14 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
   bool htmlView = false;
 
   @ViewChild('wysiwyg')
-  ElementRef wysiwyg;
+  HtmlElement wysiwyg;
 
   @ViewChild('toolbar')
-  ElementRef toolbar;
+  HtmlElement toolbar;
 
   StreamSubscription keySubscription;
 
-  Element get editor => ((wysiwyg.nativeElement as Element).firstChild as Element);
+  Element get editor => (wysiwyg.firstChild as Element);
 
   FnxApp app;
 
@@ -118,16 +126,15 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
   @override
   ngOnInit() {
     super.ngOnInit();
-    Element el = (wysiwyg.nativeElement as Element);
-    el.innerHtml = value == null ? '' : value;
+    wysiwyg.innerHtml = value == null ? '' : value;
 
     QuillOptionsStatic options = new QuillOptionsStatic();
     options.theme = "snow";
     options.readOnly = false;
-    quill = new Quill(wysiwyg.nativeElement, options);
+    quill = new Quill(wysiwyg, options);
     quill.on("change", allowInterop(edited));
 
-    keySubscription = StreamGroup.merge([el.onDragEnd, el.onKeyUp]).listen((_) {
+    keySubscription = StreamGroup.merge([wysiwyg.onDragEnd, wysiwyg.onKeyUp]).listen((_) {
       new Future.delayed(new Duration(milliseconds: 100), edited);
     });
   }
@@ -157,9 +164,9 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
     super.writeValue(obj);
     quill.pasteHTML(value??'');
     if (safe) {
-      ((wysiwyg.nativeElement as Element).firstChild as Element).innerHtml = value == null ? '' : value;
+      (wysiwyg.firstChild as Element).innerHtml = value == null ? '' : value;
     } else {
-      ((wysiwyg.nativeElement as Element).firstChild as Element)
+      (wysiwyg.firstChild as Element)
           .setInnerHtml(value == null ? '' : value, treeSanitizer: NodeTreeSanitizer.trusted);
     }
   }
@@ -270,8 +277,6 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
     }
   }
 
-  @override
-  bool get disabled => false;
 }
 
 typedef Future<String> PickImageUrl();

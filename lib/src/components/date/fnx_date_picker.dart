@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:html';
 
-import 'package:angular2/core.dart';
+import 'package:angular/angular.dart';
 import 'package:fnx_ui/src/components/modal/fnx_modal.dart';
 import 'package:fnx_ui/src/util/async.dart';
 import 'package:fnx_ui/src/util/date.dart';
@@ -20,7 +20,9 @@ class FnxDatePicker implements OnInit, OnDestroy {
 
   /// using this emitter instances of DatePickers broadcast, that they
   /// have been requested to be opened
-  static final EventEmitter<FnxDatePicker> ON_PICKER_OPENED = new EventEmitter<FnxDatePicker>();
+  static final StreamController<FnxDatePicker> _ON_PICKER_OPENED = new StreamController<FnxDatePicker>();
+  static Stream<FnxDatePicker> get ON_PICKER_OPENED => _ON_PICKER_OPENED.stream;
+
   StreamSubscription<FnxDatePicker> _pickerOpenedSubscription;
 
   DropdownTracker dropdownTracker = new DropdownTracker();
@@ -38,10 +40,14 @@ class FnxDatePicker implements OnInit, OnDestroy {
 
   List days;
 
-  @Output() EventEmitter closed = new EventEmitter();
-  @Output() EventEmitter datePicked = new EventEmitter();
+  StreamController<bool> _closed = new StreamController();
+  @Output() Stream<bool> get closed => _closed.stream;
 
-  @Input() EventEmitter open;
+  StreamController<DateTime> _datePicked = new StreamController();
+  @Output() Stream<DateTime> get datePicked => _datePicked.stream;
+
+  @Input() Stream<bool> open;
+
   StreamSubscription _openSubscription;
 
   DateTime today = new DateTime.now();
@@ -53,17 +59,14 @@ class FnxDatePicker implements OnInit, OnDestroy {
   StreamSubscription<MouseEvent> _globalClicks;
 
   @ViewChild("dropdown")
-  ElementRef dropdown;
+  HtmlElement dropdown;
 
   StreamSubscription<KeyboardEvent> keyDownSubscription;
 
   FnxModal modal;
 
   /// Constructor used to create instance of Datepicker.
-  FnxDatePicker(ElementRef el, @Optional() this.modal) {
-    if (el != null) {
-      container = el.nativeElement;
-    }
+  FnxDatePicker(this.container, @Optional() this.modal) {
     initPicker();
   }
 
@@ -85,7 +88,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
     this._shown = toShow;
     if (toShow && !alreadyShown) {
       // broadcast, that we are opening this widget
-      ON_PICKER_OPENED.emit(this);
+      _ON_PICKER_OPENED.add(this);
     }
 
     if (shown == true) {
@@ -165,13 +168,13 @@ class FnxDatePicker implements OnInit, OnDestroy {
       return;
     }
 
-    datePicked.emit(new DateTime(year, month, day, _value.hour, _value.minute));
+    _datePicked.add(new DateTime(year, month, day, _value.hour, _value.minute));
     hidePicker();
   }
 
   void hidePicker() {
     shown = false;
-    closed.emit(true);
+    _closed.add(true);
   }
 
   String formatNumber(int num) {
@@ -240,12 +243,12 @@ class FnxDatePicker implements OnInit, OnDestroy {
 
   void addDurationToValue(Duration dur) {
     valueInternal = _value.add(dur);
-    datePicked.emit(_value);
+    _datePicked.add(_value);
   }
 
   void subtractDurationFromValue(Duration dur) {
     valueInternal = _value.subtract(dur);
-    datePicked.emit(_value);
+    _datePicked.add(_value);
   }
 
   bool get isAm => AmPm.AM == amPm;
@@ -255,14 +258,14 @@ class FnxDatePicker implements OnInit, OnDestroy {
     var h = hour24ToAmPm(hour).hour;
     int convertedHour = hourAmPmTo24(new AmPmHour(h, AmPm.PM));
     valueInternal = setHour(_value, convertedHour);
-    datePicked.emit(_value);
+    _datePicked.add(_value);
   }
 
   void setAm() {
     var h = hour24ToAmPm(hour).hour;
     int convertedHour = hourAmPmTo24(new AmPmHour(h, AmPm.AM));
     valueInternal = setHour(_value, convertedHour);
-    datePicked.emit(_value);
+    _datePicked.add(_value);
   }
 
   void ensureOpened() {
@@ -282,7 +285,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
       if (ui.isEventFromSubtree(event, container.parentNode)) return;
       shown = false;
     });
-    dropdownTracker.init(container, dropdown.nativeElement, ()=>shown=false);
+    dropdownTracker.init(container, dropdown, ()=>shown=false);
 
     keyDownSubscription = document.onKeyDown
         .where((KeyboardEvent e) => e.keyCode == KeyCode.ESC)

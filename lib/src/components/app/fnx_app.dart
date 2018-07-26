@@ -3,7 +3,7 @@
 
 import 'dart:async';
 
-import 'package:angular2/core.dart';
+import 'package:angular/angular.dart';
 import 'package:fnx_ui/errors.dart';
 import 'package:fnx_ui/src/util/global_messages.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
