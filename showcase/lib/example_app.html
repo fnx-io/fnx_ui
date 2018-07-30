@@ -10,6 +10,32 @@
             <fnx-layout-sidebar #layout>
                 <div sidebar class="flex--column">
                     <ul class="menu--vertical flex--grow bg--white--d1">
+                        <li><a [routerLink]="routing.about.toUrl()">About</a></li>
+                        <li><a [routerLink]="routing.form.toUrl()">Form</a></li>
+                        <li><a [routerLink]="routing.panels.toUrl()">Panels</a></li>
+                        <li><a [routerLink]="routing.modals.toUrl()">Modals</a></li>
+                        <li><a [routerLink]="routing.tabs.toUrl()">Tabs</a></li>
+                        <li><a [routerLink]="routing.exceptions.toUrl()">Exceptions</a></li>
+                        <li><a [routerLink]="routing.reorder.toUrl()">Reorder</a></li>
+
+                        <li data-suffix="more_horiz"><span>Cookbook</span>
+                            <ul class="menu--vertical">
+                                <li><a [routerLink]="routing.cookbookwizard.toUrl()">Wizard</a></li>
+                                <li><a [routerLink]="routing.cookbookdynarows.toUrl()">Dynamic rows</a></li>
+                                <li><a [routerLink]="routing.cookbookformvalidation.toUrl()">Complex validation</a></li>
+                                <li><a [routerLink]="routing.cookbookmasterdetail.toUrl()">Master - Detail</a></li>
+                                <li><a [routerLink]="routing.cookbooktags.toUrl()">Tags and labels</a></li>
+                                <li><a [routerLink]="routing.cookbookpreloader.toUrl()">CookbookPreloader</a></li>
+                                <li><a [routerLink]="routing.cookbookdashboard.toUrl()">Tiled dashboard</a></li>
+                                <li><a [routerLink]="routing.cookbook3step.toUrl()">3-step picker</a></li>
+                                <li><a [routerLink]="routing.cookbookselectorcreate.toUrl()">Select or create</a></li>
+                                <li><a [routerLink]="routing.cookbooktable.toUrl()">Lazily loading table</a></li>
+                                <li><a [routerLink]="routing.cookbookcrop.toUrl()">Image crop</a></li>
+                            </ul>
+                        </li>
+                        <li><a [routerLink]="routing.testing.toUrl()">Testing</a></li>
+
+
                         <!--
                         <li><a routerLink]="About">About</a></li>
                         <li><a routerLink]="Form">Form</a></li>
@@ -35,7 +61,6 @@
                             </ul>
                         </li>
                         -->
-                        <li><a [routerLink]="routing.testing.toUrl()">Testing</a></li>
 
                     </ul>
                     <p class="text--center bg--fnx no-margin padding">

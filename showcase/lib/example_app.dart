@@ -19,6 +19,7 @@ import 'package:fnx_ui_showcase/routing.dart';
     formDirectives,
     appDirectives
   ],
+  visibility: Visibility.all
 )
 class ExampleApp {
 

@@ -9,6 +9,9 @@ import 'package:angular_forms/angular_forms.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'package:logging/logging.dart';
 
+
+typedef bool _KeyListener(KeyboardEvent e);
+
 ///
 /// Basic empty modal window. Show it with *ngIf="something". Window emits
 /// (close) event, use it to set something=false.
@@ -82,7 +85,7 @@ class FnxModal implements OnInit, OnDestroy {
     _stack.remove(this);
   }
 
-  Function tryOrFalse(Function fnc) {
+  _KeyListener tryOrFalse(_KeyListener fnc) {
     return (KeyboardEvent e) {
       try {
         return fnc(e);

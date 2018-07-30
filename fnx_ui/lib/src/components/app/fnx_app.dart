@@ -112,7 +112,7 @@ class FnxApp implements OnInit {
       ..message = message
       ..ok = GlobalMessages.yes()
       ..cancel = GlobalMessages.no();
-    return _modal(m);
+    return _modal<bool>(m);
   }
 
   ///
@@ -130,8 +130,8 @@ class FnxApp implements OnInit {
     return _modal(m);
   }
 
-  Future _modal(_ModalContent mc) {
-    Completer c = new Completer();
+  Future<T> _modal<T>(_ModalContent mc) {
+    Completer<T> c = new Completer<T>();
     mc._completer = c;
     modalWindows[mc.id] = mc;
     _changeDetector.detectChanges();

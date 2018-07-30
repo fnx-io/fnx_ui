@@ -9,8 +9,7 @@ import 'package:angular_forms/angular_forms.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/app/fnx_app.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
-
-import '../app_config.dart';
+import 'package:fnx_ui_showcase/app_config.dart';
 
 @Component(
   selector: 'cookbook-wizard',

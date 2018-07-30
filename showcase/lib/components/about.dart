@@ -4,8 +4,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:fnx_ui/fnx_ui.dart';
-
-import 'app_config.dart';
+import 'package:fnx_ui_showcase/app_config.dart';
 
 @Component(
   selector: 'example-about',

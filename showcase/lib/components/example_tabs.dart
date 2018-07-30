@@ -5,9 +5,9 @@ import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:fnx_ui/fnx_ui.dart';
+import 'package:fnx_ui_showcase/app_config.dart';
 import 'package:logging/logging.dart';
-
-import 'app_config.dart';
+import 'package:fnx_ui_showcase/components/example_tabs.template.dart';
 
 @Component(
   selector: 'example-tabs',
@@ -32,6 +32,23 @@ import 'app_config.dart';
 class ExampleTabs {
 
   final Logger log = new Logger("ExampleTabs");
+
+  RoutePath tabs1 = new RoutePath(path: "tabs1", parent:null);
+  RoutePath tabs2 = new RoutePath(path: "tabs2", parent:null);
+  RoutePath tabs3 = new RoutePath(path: "tabs3", parent:null);
+  RoutePath tabs4 = new RoutePath(path: "tabs4", parent:null);
+  RoutePath tabs5 = new RoutePath(path: "tabs5", parent:null);
+
+  List<RouteDefinition> routes;
+
+  ExampleTabs() {
+    routes = [];
+    routes.add(new RouteDefinition(routePath: tabs1, component: ExampleTabs1NgFactory));
+    routes.add(new RouteDefinition(routePath: tabs2, component: ExampleTabs2NgFactory));
+    routes.add(new RouteDefinition(routePath: tabs3, component: ExampleTabs3NgFactory));
+    routes.add(new RouteDefinition(routePath: tabs4, component: ExampleTabs4NgFactory));
+    routes.add(new RouteDefinition(routePath: tabs5, component: ExampleTabs5NgFactory));
+  }
 
   void debug(String name) {
     print(name);

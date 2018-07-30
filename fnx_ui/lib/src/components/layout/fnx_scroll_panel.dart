@@ -27,18 +27,17 @@ import 'package:logging/logging.dart';
 @Component(
   selector: 'fnx-scroll-panel',
   template: r'''
-<style>
-  :host {
-    overflow-y: auto;
-    display: block;
-    position: relative;
-  }
-</style>
-<div class="scroll-panel-content">
-  <ng-content></ng-content>
+<div class="scroll-panel-container fit" #container>
+  <div class="scroll-panel-content" #content>
+    <ng-content></ng-content>
+  </div>
 </div>
 ''',
   preserveWhitespace: false,
+  styles: [
+    ":host {display: block; position: relative;}",
+    ".scroll-panel-container { overflow-y: auto; }"
+  ],
   directives: [
     coreDirectives,
     formDirectives,
@@ -58,20 +57,20 @@ class FnxScrollPanel implements OnInit {
   @Input()
   int debounceMs = 80;
 
+  @ViewChild("container")
   HtmlElement container;
 
+  @ViewChild("content")
   HtmlElement content;
 
   static const int _LOAD_THRESHOLD = 100;
 
   StreamController<int> _debounceCtrl;
 
-  FnxScrollPanel(this.container);
+  FnxScrollPanel();
 
   @override
   ngOnInit() {
-    this.content = content.querySelector(".scroll-panel-content");
-
     container.onScroll.listen(processScroll);
     content.onResize.listen(processScroll);
     content.on["DOMNodeInserted"].listen(processScroll);
