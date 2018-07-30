@@ -1,0 +1,24 @@
+<example-buttons-renderer name="cookbook/cookbook_dashboard"></example-buttons-renderer>
+
+<style>
+    .badge {
+        width: 2em;
+        height: 2em;
+        line-height: 2em;
+        text-align: center;
+        position: absolute;
+        top: -0.5em;
+        right: -0.5em;
+        border-radius: 50%;
+    }
+</style>
+
+<div class="row--gutter text--center">
+
+    <a *ngFor="let tile of tiles" class="s6 m4 l2 card padding shadow--raising {{tile.color}}" (click)="doExampleFeedback(tile)">
+        <p>{{tile.text}}</p>
+        <p class="mi fs-xxxl">{{tile.icon}}</p>
+        <span class="badge bg--red" *ngIf="tile.count > 0">{{tile.count}}</span>
+    </a>
+
+</div>

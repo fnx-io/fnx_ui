@@ -6,6 +6,7 @@
 _dist
 _devel
 stylesheet/node_modules/
+.dart_tool
 
 # Files and directories created by pub
 .packages

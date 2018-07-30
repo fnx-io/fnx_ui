@@ -1,0 +1,41 @@
+<example-buttons-renderer name="example_tabs"></example-buttons-renderer>
+
+<div class="border padding margin--bottom">
+
+    <p>These tabs are build "by-hand" and they support native ng2 routing (different URL for each tab). It's actually quite easy, see the source!</p>
+
+    <div class="menu--tabs">
+        <!--
+        <a class="item" [routerLink]="['Tab1']">Tab 1</a>
+        <a class="item" [routerLink]="['Tab2']">Tab 2</a>
+        <a class="item" [routerLink]="['Tab3']">Tab three</a>
+        <a class="item" [routerLink]="['Tab4']">Tab 4</a>
+        <a class="item" [routerLink]="['Tab5']">Tab V</a>
+        -->
+    </div>
+
+    <div class="padding--big">
+        <router-outlet></router-outlet>
+    </div>
+
+</div>
+
+<!-- ======================================================================= -->
+
+<div class="border padding margin--bottom">
+
+    <p>These tabs are build using fnx-tabs element and they simply flip DOM content.</p>
+
+    <fnx-tabs [left]="true">
+        <fnx-tab title="Tab 1" (select)="debug('Tab 1')">
+            <p class="padding--big">Yes, I'm tab 1.</p>
+        </fnx-tab>
+        <fnx-tab title="Tab 2" (select)="debug('Tab 2')">
+            <p class="padding--big">I'm NOT tab 2. Nobody saw me, they cannot prove anything!</p>
+        </fnx-tab>
+        <fnx-tab title="Tab 3" (select)="debug('Tab 3')">
+            <p class="padding--big">I'm tab 2, LOOOL.</p>
+        </fnx-tab>
+    </fnx-tabs>
+
+</div>

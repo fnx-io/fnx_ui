@@ -1,0 +1,38 @@
+<!--
+
+Hi there fellow developer!
+
+Please note, most of the classes here are pretty vital for this example. Be sure to use:
+
+- fit and flex--column in wrapper
+- flex--grow and flex--shrink in fnx-scroll-panel
+
+-->
+<div class="flex--column fit padding">
+
+    <example-buttons-renderer name="cookbook/cookbook_master_detail"></example-buttons-renderer>
+
+    <fnx-scroll-panel class="flex--grow flex--shrink margin--bottom table--stripes table--lines" (loadMore)="loadMore()">
+        <table class="table--active">
+            <tr *ngFor="let row of list"
+                style="cursor: pointer"
+                [class.selected]="row == selected"
+                (click)="selected = row">
+                <td>{{row["id"]}}</td>
+                <td>{{row["name"]}}</td>
+                <td>{{row["email"]}}</td>
+            </tr>
+        </table>
+    </fnx-scroll-panel>
+
+    <div class="padding--vertical border--top" *ngIf="selected != null">
+        <h3>{{selected['name']}}</h3>
+        <p><a href="{{selected['email']}}">{{selected['email']}}</a></p>
+        <p class="text--right">
+            <a (click)="todo()" class="btn">delete</a>
+            <a (click)="todo()" class="btn">edit</a>
+            <a (click)="todo()" class="btn">confirm</a>
+        </p>
+    </div>
+
+</div>

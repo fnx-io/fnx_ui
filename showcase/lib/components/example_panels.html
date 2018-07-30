@@ -1,0 +1,102 @@
+<example-buttons-renderer name="example_panels"></example-buttons-renderer>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita quaerat quo reiciendis suscipit velit voluptatibus! Adipisci, at expedita iste magni minus nisi porro provident quas rerum sit velit veniam voluptates.</p>
+
+<fnx-panel [closable]="true" class="margin--bottom">
+    <h1 header>Click me and expect a lot of different panels</h1>
+
+    <div class="row--gutter">
+        <div class="s12 m6">
+            <h2>Big panels</h2>
+
+            <fnx-panel class="margin--bottom">
+                <h3 header>Hi, I'm a panel</h3>
+                <p>I came from a galaxy far far away.</p>
+            </fnx-panel>
+
+            <fnx-panel [closable]="true" class="margin--bottom">
+                <h3 header>Click me and observe</h3>
+                <p header>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet eius, labore laboriosam laborum porro reiciendis vel! Adipisci architecto at distinctio dolorem eligendi fuga fugit labore necessitatibus nesciunt qui tenetur, voluptatem?</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis cum cumque eaque eligendi error ex expedita explicabo laborum neque nisi, nulla optio porro quas quibusdam repellat, sapiente totam voluptates?</p>
+            </fnx-panel>
+
+
+            <fnx-panel [closable]="true" class="margin--bottom">
+                <h3 header>You can scroll here</h3>
+                <fnx-scroll-panel style="height: 15em" (loadMore)="loadMore()">
+                    <table>
+                        <tr *ngFor="let row of list">
+                            <td>{{row["id"]}}</td>
+                            <td>{{row["name"]}}</td>
+                            <td>{{row["email"]}}</td>
+                        </tr>
+                    </table>
+                </fnx-scroll-panel>
+            </fnx-panel>
+        </div>
+        <div class="s12 m6">
+            <h2>Small panels</h2>
+
+            <fnx-panel-small class="margin--bottom">
+                <h5 header>Hi, I'm a panel</h5>
+                <p>I came from a galaxy far far away.</p>
+            </fnx-panel-small>
+
+            <fnx-panel-small [closable]="true" class="margin--bottom">
+                <h5 header>Click me and observe</h5>
+                <p header>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet eius, labore laboriosam laborum porro reiciendis vel! Adipisci architecto at distinctio dolorem eligendi fuga fugit labore necessitatibus nesciunt qui tenetur, voluptatem?</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis cum cumque eaque eligendi error ex expedita explicabo laborum neque nisi, nulla optio porro quas quibusdam repellat, sapiente totam voluptates?</p>
+            </fnx-panel-small>
+
+
+            <fnx-panel-small [closable]="true" class="margin--bottom">
+                <h5 header>You can scroll here</h5>
+                <fnx-scroll-panel style="height: 15em" (loadMore)="loadMore()">
+                    <table>
+                        <tr *ngFor="let row of list">
+                            <td>{{row["id"]}}</td>
+                            <td>{{row["name"]}}</td>
+                            <td>{{row["email"]}}</td>
+                        </tr>
+                    </table>
+                </fnx-scroll-panel>
+            </fnx-panel-small>
+
+        </div>
+
+    </div>
+
+</fnx-panel>
+
+<div class="row--gutter">
+    <div class="s12">
+        <fnx-alert type="info" class="margin--bottom">
+            Some info Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium corporis eum impedit non
+            quod. Alias consequuntur eos excepturi, id illo laudantium mollitia necessitatibus odio
+            provident quidem rerum tempore vero voluptates!
+        </fnx-alert>
+
+        <fnx-alert type="success" class="margin--bottom">
+            Some success Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium corporis eum impedit non
+            quod. Alias consequuntur eos excepturi, id illo laudantium mollitia necessitatibus odio
+            provident quidem rerum tempore vero voluptates!
+        </fnx-alert>
+
+        <fnx-alert type="warning" class="margin--bottom" [closable]="false">
+            Some warning Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium corporis eum impedit non
+            quod. Alias consequuntur eos excepturi, id illo laudantium mollitia necessitatibus odio
+            provident quidem rerum tempore vero voluptates!
+        </fnx-alert>
+
+        <fnx-alert type="error" class="margin--bottom">
+            Some error Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium corporis eum impedit non
+            quod. Alias consequuntur eos excepturi, id illo laudantium mollitia necessitatibus odio
+            provident quidem rerum tempore vero voluptates!
+        </fnx-alert>
+
+    </div>
+</div>

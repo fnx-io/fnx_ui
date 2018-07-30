@@ -1,0 +1,42 @@
+<div
+     [attr.readonly]="isReadonly"
+     [class.open]="open"
+     [class.error]="isTouchedAndInvalid()"
+     style="display: inline-block; width: 100%"
+     #select>
+
+    <input id="{{ componentId }}" type="text" [(ngModel)]="text" [readonly]="isReadonly"
+           [attr.tabindex]="(isReadonly || isDisabled) ? -1 : 0"
+           (keyup)="markAsTouched()"
+           (focus)="showOptions()"
+           (blur)="hideOptions()"
+           [class.error]="isTouchedAndInvalid()"
+           [attr.placeholder]="placeholder"
+           autocomplete="off"
+           style="display: inline-block; width: 100%"
+           #input
+    />
+
+    <div class="select__dropdown bg--white"
+         #dropdown
+         [hidden]="!dropDownVisible"
+         [style.position]="'fixed'"
+         [style.top.px]="dropdownTracker.top"
+         [style.left.px]="dropdownTracker.left"
+         [style.height]="dropdownTracker.dropdownHeight"
+        >
+        <div class="select__items"
+             *ngIf="dropDownVisible"
+             style="max-height: 10em">
+
+            <div class="item pointer"
+                 *ngFor="let o of options"
+                 (mousedown)="selectOption(o)"
+                 [class.selected]="isSelected(o) && !isHighlighted(o)"
+                 [class.select__dropdown--selected]="isHighlighted(o)">
+                {{o.label}}
+            </div>
+
+        </div>
+    </div>
+</div>
