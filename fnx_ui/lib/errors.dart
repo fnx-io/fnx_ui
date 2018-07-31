@@ -63,6 +63,21 @@ import 'package:logging/logging.dart';
 ///
 ///
 
+/// This class represents any error you need to display to the user.
+///
+/// Error must have a "message" and it can have "headline" and "details". "Details"
+/// is an "Iterable" which will be rendered as <ul><li>element.toString()</li> for each
+/// element.
+///
+/// You are supposed to register your own custom exception handlers like this:
+///
+///     (handler as FnxExceptionHandler).registerErrorProcessor(CustomException, processCustomException);
+///
+/// Where processCustomException receives exception of the specified type and can return either FnxError to show something to
+/// the user, or process exception completely and return null.
+///
+///
+
 
 class FnxError {
 
@@ -92,7 +107,7 @@ typedef void ShowErrorHookType(FnxError errorToShow);
 /// This type of function can be used to customize exception handling in case you throw
 /// your own exceptions.
 ///
-typedef FnxError ErrorProcessorType(dynamic exception, dynamic stacktrace);
+typedef FnxError ErrorProcessorType(Object exception, StackTrace stacktrace);
 
 ///
 ///

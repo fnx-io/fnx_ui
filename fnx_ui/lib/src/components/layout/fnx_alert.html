@@ -1,4 +1,4 @@
-<div class="alert {{colorClass}} margin--bottom" *ngIf="open" [class.border]="type == 'info'">
+<div [ngClass]="classes" *ngIf="open">
     <span class="icon alert__close" *ngIf="closable" (click)="close()">close</span>
     <span class="icon alert__icon">{{icon}}</span>
     <div>

@@ -56,6 +56,8 @@ class FnxAlert implements OnInit {
 
   String id = ui.uid('alert-');
 
+  Map get classes => { 'alert':true, colorClass: true, 'margin--bottom': true, 'border': type == 'info'};
+
   @override
   ngOnInit() {
     if (type != null && !POSSIBLE_TYPES.contains(type)) {

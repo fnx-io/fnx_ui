@@ -26,10 +26,10 @@ class ExampleExceptions {
 
   bool customModalVisible = false;
 
-  ExampleExceptions(ExceptionHandler handler, this.app) {
+  ExampleExceptions(FnxExceptionHandler handler, this.app) {
     // register custom exception handler
-    (handler as FnxExceptionHandler).registerErrorProcessor(int, processIntException);
-    (handler as FnxExceptionHandler).registerErrorProcessor(CustomException, processCustomException);
+    handler.registerErrorProcessor(int, processIntException);
+    handler.registerErrorProcessor(CustomException, processCustomException);
   }
 
   void stringException() {

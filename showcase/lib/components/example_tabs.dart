@@ -6,8 +6,9 @@ import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui_showcase/app_config.dart';
-import 'package:logging/logging.dart';
 import 'package:fnx_ui_showcase/components/example_tabs.template.dart';
+import 'package:fnx_ui_showcase/routing.dart';
+import 'package:logging/logging.dart';
 
 @Component(
   selector: 'example-tabs',
@@ -33,17 +34,26 @@ class ExampleTabs {
 
   final Logger log = new Logger("ExampleTabs");
 
-  RoutePath tabs1 = new RoutePath(path: "tabs1", parent:null);
-  RoutePath tabs2 = new RoutePath(path: "tabs2", parent:null);
-  RoutePath tabs3 = new RoutePath(path: "tabs3", parent:null);
-  RoutePath tabs4 = new RoutePath(path: "tabs4", parent:null);
-  RoutePath tabs5 = new RoutePath(path: "tabs5", parent:null);
+  Routing routing;
+
+  RoutePath tabs1;
+  RoutePath tabs2;
+  RoutePath tabs3;
+  RoutePath tabs4;
+  RoutePath tabs5;
 
   List<RouteDefinition> routes;
 
-  ExampleTabs() {
+  ExampleTabs(this.routing) {
     routes = [];
-    routes.add(new RouteDefinition(routePath: tabs1, component: ExampleTabs1NgFactory));
+
+    tabs1 = new RoutePath(path: "tabs1", parent:routing.tabs);
+    tabs2 = new RoutePath(path: "tabs2", parent:routing.tabs);
+    tabs3 = new RoutePath(path: "tabs3", parent:routing.tabs);
+    tabs4 = new RoutePath(path: "tabs4", parent:routing.tabs);
+    tabs5 = new RoutePath(path: "tabs5", parent:routing.tabs);
+
+    routes.add(new RouteDefinition(routePath: tabs1, component: ExampleTabs1NgFactory, useAsDefault: true));
     routes.add(new RouteDefinition(routePath: tabs2, component: ExampleTabs2NgFactory));
     routes.add(new RouteDefinition(routePath: tabs3, component: ExampleTabs3NgFactory));
     routes.add(new RouteDefinition(routePath: tabs4, component: ExampleTabs4NgFactory));

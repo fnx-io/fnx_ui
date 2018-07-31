@@ -9,8 +9,10 @@ import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
+import 'package:fnx_ui/errors.dart';
 import 'package:fnx_ui/i18n/fnx_messages_all.dart';
 import 'package:fnx_ui_showcase/example_app.template.dart' as ng;
+import 'package:fnx_ui_showcase/routing.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
@@ -18,7 +20,11 @@ import 'package:logging/logging.dart';
 import 'index.template.dart' as self;
 
 @GenerateInjector(
-  routerProvidersHash, // You can use routerProviders in production
+    [routerProvidersHash, // You can use routerProviders in production
+    FactoryProvider<Routing>(Routing, routingFactory, multi: false),
+    FactoryProvider<FnxExceptionHandler>(FnxExceptionHandler, exceptionHandlerFactory, multi: false),
+    FactoryProvider<ExceptionHandler>(ExceptionHandler, exceptionHandlerFactory, multi: false),
+    ]
 )
 final InjectorFactory injector = self.injector$Injector;
 
@@ -47,4 +53,13 @@ Future main() async {
   // START!
   runApp(ng.ExampleAppNgFactory, createInjector: injector);
 
+}
+
+FnxExceptionHandler _excHandler;
+
+FnxExceptionHandler exceptionHandlerFactory() {
+  if (_excHandler == null) {
+    _excHandler = new FnxExceptionHandler();
+  }
+  return _excHandler;
 }

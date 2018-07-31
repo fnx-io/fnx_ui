@@ -95,3 +95,8 @@ class Routing {
     routes.add(new RouteDefinition(routePath: form, component: ExampleFormNgFactory));
   }
 }
+
+Routing routingFactory() {
+  print("dsadsadsada");
+  return new Routing();
+}

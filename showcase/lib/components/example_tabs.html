@@ -5,13 +5,11 @@
     <p>These tabs are build "by-hand" and they support native ng2 routing (different URL for each tab). It's actually quite easy, see the source!</p>
 
     <div class="menu--tabs">
-        <!--
-        <a class="item" [routerLink]="['Tab1']">Tab 1</a>
-        <a class="item" [routerLink]="['Tab2']">Tab 2</a>
-        <a class="item" [routerLink]="['Tab3']">Tab three</a>
-        <a class="item" [routerLink]="['Tab4']">Tab 4</a>
-        <a class="item" [routerLink]="['Tab5']">Tab V</a>
-        -->
+        <a class="item" [routerLink]="tabs1.toUrl()">Tab 1</a>
+        <a class="item" [routerLink]="tabs2.toUrl()">Tab 2</a>
+        <a class="item" [routerLink]="tabs3.toUrl()">Tab three</a>
+        <a class="item" [routerLink]="tabs4.toUrl()">Tab 4</a>
+        <a class="item" [routerLink]="tabs5.toUrl()">Tab V</a>
     </div>
 
     <div class="padding--big">

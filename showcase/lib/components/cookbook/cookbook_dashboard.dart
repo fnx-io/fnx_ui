@@ -18,6 +18,18 @@ import 'package:fnx_ui_showcase/app_config.dart';
     formDirectives,
     appDirectives
   ],
+  styles: ["""
+    .badge {
+        width: 2em;
+        height: 2em;
+        line-height: 2em;
+        text-align: center;
+        position: absolute;
+        top: -0.5em;
+        right: -0.5em;
+        border-radius: 50%;
+    }  
+  """]
 )
 class CookbookDashboard {
 
