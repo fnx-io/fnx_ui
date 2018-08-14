@@ -3,7 +3,7 @@
 
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
-import 'package:cookie/cookie.dart' as cookie;
+import 'package:cooky/cooky.dart' as cookie;
 import 'package:fnx_ui/src/util/global_messages.dart';
 import 'package:logging/logging.dart';
 
@@ -48,7 +48,7 @@ class FnxCC implements OnInit {
   String label = GlobalMessages.ok();
 
   void agree() {
-    cookie.set("fnxcc", "agreed", expires: 150, path: "/");
+    cookie.set("fnxcc", "agreed", expires: new DateTime.now().add(new Duration(days: 150)), path: "/");
     visible = false;
   }
 

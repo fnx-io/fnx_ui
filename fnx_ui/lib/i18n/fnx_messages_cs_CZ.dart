@@ -28,7 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "formSubmitLabelMessage" : MessageLookupByLibrary.simpleMessage("Odeslat"),
     "inputGenericError" : MessageLookupByLibrary.simpleMessage("Hodnota není platná"),
     "no" : MessageLookupByLibrary.simpleMessage("ne"),
-    "ok" : MessageLookupByLibrary.simpleMessage("Budiž"),
+    "ok" : MessageLookupByLibrary.simpleMessage("ok"),
     "selectFilterPlaceholder" : MessageLookupByLibrary.simpleMessage("Hledat..."),
     "selectOptionsEmptyLabel" : MessageLookupByLibrary.simpleMessage("Není z čeho vybírat"),
     "selectOptionsEmptySearchLabel" : MessageLookupByLibrary.simpleMessage("Vašemu hledání neodpovídá žádná z možností"),
