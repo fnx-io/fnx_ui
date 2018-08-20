@@ -35,17 +35,7 @@ a {
     }
 }
 
-.renderColorSettings(@hexa) {
-    &, &.menu--vertical, & .menu--vertical, &.menu--horizontal, & .menu--horizontal  {
-        .renderMenuColors(@hexa, 0);
-    }
-    .renderBgAndTextImportant(@hexa);
-    &.btn--fab, &.btn {
-        &:hover:not(:disabled):not(.disabled) {
-            .renderHoverImportant(@hexa);
-        }
-    }
-}
+
 .renderColorRules(@hexa, @name) {
 
     .bg--@{name} {
@@ -122,26 +112,26 @@ html {
     .renderColorRules(#fff, white);
     .renderColorRules(@colorFnxOrange, fnx);
     .renderColorRules(@colorRed, red);
-    .renderColorRules(@colorPink, pink);
-    .renderColorRules(@colorPurple, purple);
+    //.renderColorRules(@colorPink, pink);
+    //.renderColorRules(@colorPurple, purple);
 
-    .renderColorRules(@colorDeepPurple, deep-purple);
-    .renderColorRules(@colorIndigo, indigo);
+    //.renderColorRules(@colorDeepPurple, deep-purple);
+    //.renderColorRules(@colorIndigo, indigo);
     .renderColorRules(@colorBlue, blue);
-    .renderColorRules(@colorLightBlue, light-blue);
-    .renderColorRules(@colorCyan, cyan);
-    .renderColorRules(@colorTeal, teal);
+    //.renderColorRules(@colorLightBlue, light-blue);
+    //.renderColorRules(@colorCyan, cyan);
+    //.renderColorRules(@colorTeal, teal);
 
     .renderColorRules(@colorGreen, green);
-    .renderColorRules(@colorLightGreen, light-green);
-    .renderColorRules(@colorLime, lime);
+    //.renderColorRules(@colorLightGreen, light-green);
+    //.renderColorRules(@colorLime, lime);
 
     .renderColorRules(@colorYellow, yellow);
-    .renderColorRules(@colorAmber, amber);
+    //.renderColorRules(@colorAmber, amber);
     .renderColorRules(@colorOrange, orange);
-    .renderColorRules(@colorDeepOrange, deep-orange);
-    .renderColorRules(@colorBrown, brown);
+    //.renderColorRules(@colorDeepOrange, deep-orange);
+    //.renderColorRules(@colorBrown, brown);
     .renderColorRules(@colorGrey, grey);
-    .renderColorRules(@colorBlueGrey, blue-grey);
+    //.renderColorRules(@colorBlueGrey, blue-grey);
 
 }
