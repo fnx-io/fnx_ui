@@ -10,6 +10,7 @@
        (ngModelChange)="onChangeInput($event)"
        [attr.tabindex]="(isReadonly || isDisabled) ? -1 : 0"
        [readonly]="isReadonly"
+       autocomplete="off"
        (focus)="onFocus()"
        (blur)="onBlur()"
        (click)="ensurePickerOpened()"/>

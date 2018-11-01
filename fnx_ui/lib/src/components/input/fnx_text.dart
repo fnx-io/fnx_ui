@@ -68,7 +68,7 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
   String placeholder = null;
 
   @Input()
-  bool autocomplete = true;
+  bool autocomplete = false;
 
   @Input()
   bool readonly = false;
