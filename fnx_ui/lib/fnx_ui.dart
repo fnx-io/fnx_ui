@@ -6,6 +6,7 @@
 /// More dartdocs go here.
 library fnx_ui;
 
+import 'src/components/fnx_tooltip.dart';
 import 'src/components/app/fnx_app.dart';
 import 'src/components/app/fnx_cc.dart';
 import 'src/components/auto_focus.dart';
@@ -65,6 +66,7 @@ export 'src/components/layout/fnx_tabs.dart';
 export 'src/components/modal/fnx_modal.dart';
 export 'src/components/select/fnx_autocomplete.dart';
 export 'src/components/select/fnx_select.dart';
+export 'src/components/fnx_tooltip.dart';
 
 const List<Type> fnxUiDirectives = const [
   FnxApp,
@@ -99,5 +101,6 @@ const List<Type> fnxUiDirectives = const [
   FnxDate,
   FnxDatePicker,
   FnxIcon,
-  FnxSubmitBar
+  FnxSubmitBar,
+  FnxTooltip
 ];

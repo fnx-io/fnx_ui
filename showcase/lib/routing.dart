@@ -13,6 +13,7 @@ import 'package:fnx_ui_showcase/components/cookbook/cookbook_preloader.template.
 import 'package:fnx_ui_showcase/components/cookbook/cookbook_crop.template.dart';
 import 'package:fnx_ui_showcase/components/example_form.template.dart';
 import 'package:fnx_ui_showcase/components/example_tabs.template.dart';
+import 'package:fnx_ui_showcase/components/example_tooltip.template.dart';
 import 'package:fnx_ui_showcase/components/example_reorder.template.dart';
 import 'package:fnx_ui_showcase/components/example_exceptions.template.dart';
 import 'package:fnx_ui_showcase/components/cookbook/cookbook_form_validation.template.dart';
@@ -67,6 +68,7 @@ class Routing {
   RoutePath cookbookcrop = new RoutePath(path: "cookbookcrop", parent:null);
   RoutePath panels = new RoutePath(path: "panels", parent:null);
   RoutePath tabs = new RoutePath(path: "tabs", parent:null);
+  RoutePath tooltip = new RoutePath(path: "tooltip", parent:null);
   RoutePath exceptions = new RoutePath(path: "exceptions", parent:null);
   RoutePath reorder = new RoutePath(path: "reorder", parent:null);
   RoutePath form = new RoutePath(path: "form", parent:null);  
@@ -90,6 +92,7 @@ class Routing {
     routes.add(new RouteDefinition(routePath: cookbookcrop, component: CookbookCropNgFactory));
     routes.add(new RouteDefinition(routePath: panels, component: ExamplePanelsNgFactory));
     routes.add(new RouteDefinition(routePath: tabs, component: ExampleTabsNgFactory));
+    routes.add(new RouteDefinition(routePath: tooltip, component: ExampleTooltipNgFactory));
     routes.add(new RouteDefinition(routePath: exceptions, component: ExampleExceptionsNgFactory));
     routes.add(new RouteDefinition(routePath: reorder, component: ExampleReorderNgFactory));
     routes.add(new RouteDefinition(routePath: form, component: ExampleFormNgFactory));
