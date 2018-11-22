@@ -1,0 +1,37 @@
+<example-buttons-renderer name="example_tooltip"></example-buttons-renderer>
+
+<div class="padding margin--bottom">
+
+    <p class="flex--row">
+        <a href="#" fnxTooltip="Just a text">short</a>
+        &nbsp;
+        <a href="#" fnxTooltip="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex ipsam quos saepe sequi velit. Deserunt dignissimos dolorum esse illum officia officiis possimus qui repellendus sequi suscipit. Ab aliquid animi ut.">long</a>
+        <span class="spacer"></span>
+        <a href="#" fnxTooltip="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex ipsam quos saepe sequi velit. Deserunt dignissimos dolorum esse illum officia officiis possimus qui repellendus sequi suscipit. Ab aliquid animi ut.">long</a>
+    </p>
+
+
+    <p class="flex--row">
+        <a href="#" [fnxTooltip]="tooltipProvider">function</a> &nbsp;
+        <a href="#" [fnxTooltip]="tooltipClosure(17)">closure</a> &nbsp;
+        <a href="#" [fnxTooltip]="delayedTooltip">future</a> &nbsp;
+        <a href="#" [fnxTooltip]="delayedClosure(14)">future from closure</a> &nbsp;
+
+        <a href="#" [fnxTooltip]="htmlTooltip">html content</a> &nbsp;
+        
+        <span class="spacer"></span>
+
+        <a class="btn" [fnxTooltip]="htmlTooltip">html content</a> &nbsp;
+    </p>
+
+    <p>
+        <fnx-input label="Example input">
+            <fnx-text fnxTooltip="No one can help you!"></fnx-text>
+        </fnx-input>
+    </p>
+    <p>
+        <button class="btn icon" fnxTooltip="Do NOT press!">add</button>
+        <button class="btn icon" fnxTooltip="<span class=mi>warning</span> Do NOT press!">warning</button>
+    </p>
+
+</div>
