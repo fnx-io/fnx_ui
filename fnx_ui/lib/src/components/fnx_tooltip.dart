@@ -32,6 +32,7 @@ class FnxTooltip implements OnInit, OnDestroy {
   void ngOnDestroy() {
     if (subsEnter != null) subsEnter.cancel();
     if (subsExit != null) subsExit.cancel();
+    destroyTooltip();
   }
 
   @override
@@ -56,10 +57,7 @@ class FnxTooltip implements OnInit, OnDestroy {
 
   void mouseLeave(MouseEvent event) {
     mouseIn = false;
-    if (currentTooltip != null) {
-      currentTooltip.remove();
-      currentTooltip = null;
-    }
+    destroyTooltip();
   }
 
   void calculateTooltipPosition() {
@@ -117,6 +115,13 @@ class FnxTooltip implements OnInit, OnDestroy {
       currentTooltip.innerHtml = "<span class=preloader></span>";
       Object futureData = await content;
       setTooltipContent(futureData);
+    }
+  }
+
+  void destroyTooltip() {
+    if (currentTooltip != null) {
+      currentTooltip.remove();
+      currentTooltip = null;
     }
   }
 
