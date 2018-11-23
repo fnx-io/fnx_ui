@@ -71,8 +71,19 @@ class FnxTooltip implements OnInit, OnDestroy {
     currentTooltip.style.right=null;
     currentTooltip.style.transform=null;
 
+
+    // musi se do toho zahrnout i pripadny zoom
+    double zoom = double.parse(itemElement.getComputedStyle().zoom??"1");
+
+    parentBoundingBox = new Rectangle(
+      parentBoundingBox.left * zoom,
+      parentBoundingBox.top * zoom,
+      parentBoundingBox.width * zoom,
+      parentBoundingBox.height * zoom
+    );
+
     Point center = new Point(
-        parentBoundingBox.left + (parentBoundingBox.right-parentBoundingBox.left)/2,
+        parentBoundingBox.left + (parentBoundingBox.right - parentBoundingBox.left)/2,
         parentBoundingBox.top + (parentBoundingBox.bottom - parentBoundingBox.top)/2
     );
     if (center.x < window.innerWidth * 0.1) {
