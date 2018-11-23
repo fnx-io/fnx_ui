@@ -73,7 +73,7 @@ class FnxTooltip implements OnInit, OnDestroy {
 
 
     // musi se do toho zahrnout i pripadny zoom
-    double zoom = double.parse(itemElement.getComputedStyle().zoom??"1");
+    double zoom = double.tryParse(itemElement.getComputedStyle().zoom)??1;
 
     parentBoundingBox = new Rectangle(
       parentBoundingBox.left * zoom,
