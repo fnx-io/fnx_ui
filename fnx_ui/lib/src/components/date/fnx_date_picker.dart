@@ -171,13 +171,17 @@ class FnxDatePicker implements OnInit, OnDestroy {
 
   bool isDay(dynamic day) => day is int;
 
-  void pickDay(dynamic year, dynamic month, dynamic day) {
+  void pickDay(dynamic year, dynamic month, dynamic day, Event e) {
+    e.stopPropagation();
+    e.preventDefault();
     if (year is! int || month is! int || day is! int) {
       return;
     }
 
     _datePicked.add(new DateTime(year, month, day, _value.hour, _value.minute));
-    hidePicker();
+    if (!dateTime) {
+      hidePicker();
+    }
   }
 
   void hidePicker() {
@@ -291,7 +295,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
     _globalClicks = document.onClick.listen((event) {
       if (shown != true) return;
       if (ui.isEventFromSubtree(event, container.parentNode.parentNode)) return;
-      shown = false;
+      hidePicker();
     });
     dropdownTracker.init(container, dropdown, ()=>shown=false);
 
@@ -299,7 +303,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
         .where((KeyboardEvent e) => e.keyCode == KeyCode.ESC)
         .listen((KeyboardEvent e) {
       ui.killEvent(e);
-      shown = false;
+      hidePicker();
     });
   }
 
@@ -307,7 +311,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
   void somePickerOpened(FnxDatePicker picker) {
     // if any other picker has been opened, ensure this one gets closed
     if (picker != this && _shown) {
-      shown = false;
+      hidePicker();
     }
   }
 

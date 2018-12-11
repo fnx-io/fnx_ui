@@ -21,6 +21,7 @@ class FnxTooltip implements OnInit, OnDestroy {
   HtmlElement currentTooltip;
 
   bool mouseIn;
+  bool dead = false;
 
   StreamSubscription<MouseEvent> subsEnter;
   StreamSubscription<MouseEvent> subsExit;
@@ -30,6 +31,7 @@ class FnxTooltip implements OnInit, OnDestroy {
 
   @override
   void ngOnDestroy() {
+    dead = true;
     if (subsEnter != null) subsEnter.cancel();
     if (subsExit != null) subsExit.cancel();
     destroyTooltip();
@@ -45,10 +47,11 @@ class FnxTooltip implements OnInit, OnDestroy {
   void mouseEnter(MouseEvent event) async {
     mouseIn = true;
     await new Future.delayed(new Duration(milliseconds: 300));
-    if (mouseIn && currentTooltip == null && fnxTooltip != null) {
+    if (mouseIn && currentTooltip == null && fnxTooltip != null && !dead) {
       currentTooltip = new DivElement();
       currentTooltip.classes.add("arrow_box");
       currentTooltip.style.position="absolute";
+      currentTooltip.style.zIndex="100000";
       setTooltipContent(fnxTooltip);
       document.body.children.add(currentTooltip);
       calculateTooltipPosition();
