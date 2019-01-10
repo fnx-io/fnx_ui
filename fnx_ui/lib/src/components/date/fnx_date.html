@@ -1,3 +1,13 @@
+<input type="text" class="form-control" [attr.id]="componentId"
+       [ngModel]="dateStr"
+       (ngModelChange)="onChangeInput($event)"
+       [attr.tabindex]="(isReadonly || isDisabled) ? -1 : 0"
+       [readonly]="isReadonly"
+       autocomplete="off"
+       (focus)="onFocus()"
+       (blur)="onBlur()"
+       (click)="ensurePickerOpened()"/>
+<label class="icon" [attr.for]="componentId">date_range</label>
 <fnx-date-picker
         style="display: block; width:0px;"
         [value]="value"
@@ -5,12 +15,3 @@
         [hourFormat24]="true"
         [dateTime]="dateTime"
         (datePicked)="datePicked($event)"></fnx-date-picker>
-<input type="text" class="form-control" [attr.id]="componentId"
-       [ngModel]="dateStr"
-       (ngModelChange)="onChangeInput($event)"
-       [attr.tabindex]="(isReadonly || isDisabled) ? -1 : 0"
-       [readonly]="isReadonly"
-       (focus)="onFocus()"
-       (blur)="onBlur()"
-       (click)="ensurePickerOpened()"/>
-<label class="icon" [attr.for]="componentId">date_range</label>

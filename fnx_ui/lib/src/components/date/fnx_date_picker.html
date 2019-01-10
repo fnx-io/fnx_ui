@@ -27,7 +27,7 @@
                 </tr>
                 <tr *ngFor="let week of days">
                     <td *ngFor="let day of week"
-                        (click)="pickDay(year, month, day)"
+                        (click)="pickDay(year, month, day, $event)"
                         [class.important]="isSelected(year, month, day)"
                         [class.date-is-empty]="!isDay(day)">
                         {{day}}

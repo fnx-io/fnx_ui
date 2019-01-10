@@ -25,6 +25,10 @@ const CUSTOM_DATE_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: 
   ],
   templateUrl: 'fnx_date.html',
   preserveWhitespace: false,
+  styles: const [
+    ":host { position: relative; }",
+    "fnx-date-picker {position: absolute; left:0; bottom:0;}"
+  ]
 )
 class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
 

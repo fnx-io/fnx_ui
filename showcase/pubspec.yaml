@@ -5,16 +5,16 @@ author: Tomucha <tomucha@gmail.com>
 #homepage: https://www.example.com
 
 environment:
-  sdk: '^2.0.0'
+  sdk: '^2.1.0'
 
 dependencies:
-  angular: ^5.0.0
+  angular: ^5.1.0
   fnx_ui:
     path: ../fnx_ui/
 
 dev_dependencies:
   angular_test: ^2.0.0
-  build_runner: ^0.9.0
+  build_runner: ^1.1.2
   build_test: ^0.10.2
   build_web_compilers: ^0.4.0
   test: ^1.0.0
