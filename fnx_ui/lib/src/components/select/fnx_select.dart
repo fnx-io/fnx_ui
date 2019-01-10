@@ -260,6 +260,9 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
     Stream<KeyboardEvent> onlySupported = onlyWhenExpanded.where((event) => supportedKeys.contains(event.keyCode));
     Stream<KeyboardEvent> cancelled = onlySupported.map((event) {
       event.preventDefault();
+      if (dropDownVisible) {
+        event.stopPropagation();
+      }
       return event;
     });
     Stream<String> result = cancelled.map((event) => actions[event.keyCode]);
