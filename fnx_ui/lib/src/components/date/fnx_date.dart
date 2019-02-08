@@ -26,8 +26,8 @@ const CUSTOM_DATE_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: 
   templateUrl: 'fnx_date.html',
   preserveWhitespace: false,
   styles: const [
-    ":host { position: relative; }",
-    "fnx-date-picker {position: absolute; left:0; bottom:0;}"
+    ":host { position: relative; display: inline-block;}",
+    "fnx-date-picker { position: relative; display: block;}"
   ]
 )
 class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
@@ -120,9 +120,11 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
       parsed = null;
       validFormattedDate = false;
     }
-    value = parsed;
+    value = roundIfNeeded(parsed);
     setSuggestedErrorMessage(dateStr);
   }
+
+
 
   String get applicableFormat => dateTime ? date.DATETIME_FORMAT : date.DATE_FORMAT;
 
@@ -130,7 +132,7 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
     if (picked == null) {
       value = null;
     } else if (value == null || !(value is DateTime)) {
-      value = picked;
+      value = roundIfNeeded(picked);
     } else {
       DateTime original = value as DateTime;
       DateTime newVersion;
@@ -147,7 +149,7 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
       } else {
         newVersion = new DateTime(picked.year, picked.month, picked.day, hour, minute);
       }
-      value = newVersion;
+      value = roundIfNeeded(newVersion);
     }
     setStrDate(value);
     validFormattedDate = true;
@@ -233,6 +235,12 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
     bool requiredCheck = true;
     if (required) requiredCheck = value != null;
     return requiredCheck && validFormattedDate;
+  }
+
+  DateTime roundIfNeeded(DateTime d) {
+    if (d == null) return null;
+    if (dateTime) return d;
+    return new DateTime.utc(d.year, d.month, d.day, 12);
   }
 
 }

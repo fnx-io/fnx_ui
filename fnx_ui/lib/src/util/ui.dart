@@ -95,7 +95,7 @@ class DropdownTracker {
     this._dropdown = dropdown;
     this._onHide = onHide;
     Stream<Event> mergedRelevant = StreamGroup.merge([window.onMouseWheel, window.onResize, window.onScroll]);
-    FnxStreamDebouncer<Event> db = new FnxStreamDebouncer(new Duration(milliseconds: 10));
+    FnxStreamDebouncer<Event> db = new FnxStreamDebouncer(new Duration(milliseconds: 30));
     subscription = mergedRelevant.transform(db).listen(updatePosition);
   }
 

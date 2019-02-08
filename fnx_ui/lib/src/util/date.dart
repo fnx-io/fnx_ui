@@ -64,8 +64,8 @@ int hourAmPmTo24(AmPmHour hour) {
 }
 
 final String ISO_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
-final String DATE_FORMAT = 'dd.MM.yyyy';
-final String DATETIME_FORMAT = 'dd.MM.yyyy HH:mm';
+final String DATE_FORMAT = 'd.M.yyyy';
+final String DATETIME_FORMAT = 'd.M.yyyy HH:mm';
 
 final DateFormat dateFormat = new DateFormat(DATE_FORMAT);
 final DateFormat dateTimeFormat = new DateFormat(DATETIME_FORMAT);

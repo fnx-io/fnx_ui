@@ -59,6 +59,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
   StreamSubscription _openSubscription;
 
   DateTime today = new DateTime.now();
+  String todayString = dateFormat.format(new DateTime.now());
 
   DateTime get value => _value;
 
@@ -164,11 +165,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
         _originalValue.month == month &&
         _originalValue.day == day;
   }
-
-  String renderToday() {
-    return new DateFormat("dd.MM.yyyy").format(today);
-  }
-
+  
   bool isDay(dynamic day) => day is int;
 
   void pickDay(dynamic year, dynamic month, dynamic day, Event e) {
@@ -238,6 +235,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
       utc = value.isUtc;
     }
     valueInternal = dateFrom(today.year, today.month, today.day, h, m, s, ms, utc);
+    _datePicked.add(value);
   }
 
   void changeValueMonth(int by) {

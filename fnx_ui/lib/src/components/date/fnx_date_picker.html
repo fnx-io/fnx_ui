@@ -1,4 +1,5 @@
-<div #container>
+<div #container class="flex--row">
+    <ng-content></ng-content>
     <div class="picker--date" [hidden]="!shown" #dropdown
          [style.position]="'fixed'"
          [style.top.px]="dropdownTracker.top"
@@ -9,7 +10,7 @@
                 <a tabindex="-1" href="#" (click)="decYear()"><i class="icon">first_page</i></a>
                 <a tabindex="-1" href="#" (click)="decMonth()"><i class="icon">chevron_left</i></a>
 
-                <a tabindex="-1" href="#" (click)="showToday()" class="picker__today">{{ renderToday() }}</a>
+                <a tabindex="-1" href="#" (click)="showToday()" class="picker__today">{{ todayString }}</a>
 
                 <a tabindex="-1" href="#" (click)="incMonth()"><i class="icon">chevron_right</i></a>
                 <a tabindex="-1" href="#" (click)="incYear()"><i class="icon">last_page</i></a>
