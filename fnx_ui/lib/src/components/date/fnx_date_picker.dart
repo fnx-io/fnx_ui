@@ -3,6 +3,8 @@ import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
+import 'package:fnx_ui/src/components/input/fnx_int.dart';
+import 'package:fnx_ui/src/components/input/fnx_text.dart';
 import 'package:fnx_ui/src/components/modal/fnx_modal.dart';
 import 'package:fnx_ui/src/util/async.dart';
 import 'package:fnx_ui/src/util/date.dart';
@@ -14,11 +16,13 @@ import 'package:intl/intl.dart';
   selector: 'fnx-date-picker',
   templateUrl: 'fnx_date_picker.html',
   preserveWhitespace: false,
-  directives: [
+  directives: const [
     coreDirectives,
-    formDirectives
+    formDirectives,
+    FnxText,
+    FnxInt
   ],
-  styles: [
+  styles: const [
     ".picker--date td.date-is-empty { cursor: default !important; background: none !important; padding: 5px !important;}",
   ]
 )
@@ -116,16 +120,38 @@ class FnxDatePicker implements OnInit, OnDestroy {
   int get hour => _value.hour;
   int get minute => _value.minute;
 
-  String get minuteToShow {
-    if (minute < 10) return "0$minute";
-    return "$minute";
-  }
-  int get hourToShow {
+  String editingTime = null;
+
+  String get timeToShow {
+    if (editingTime != null) return editingTime;
     if (hourFormat24) {
-      return hour;
+      if (minute < 10) return "$hour:0$minute";
+      return "$hour:$minute";
     } else {
-      return hour24ToAmPm(hour).hour;
+      if (minute < 10) return "${hour24ToAmPm(hour)}:0$minute";
+      return "${hour24ToAmPm(hour)}:$minute";
     }
+  }
+
+  void set timeToShow(String a) {
+    if (_value == null) return;
+    if (a == null) return;
+    editingTime = a;
+    try {
+      List<String> p = a.trim().split(":");
+      int h = int.tryParse(p[0]);
+      int m = int.tryParse(p[1]);
+      if (h == null) return;
+      if (m == null) m = 0;
+      valueInternal = new DateTime(
+        _value.year,
+        _value.month,
+        _value.day,
+        h,
+        m,
+      );
+      _datePicked.add(_value);
+    } catch (e) { }
   }
 
   AmPm get amPm => amOrPm(hour);
