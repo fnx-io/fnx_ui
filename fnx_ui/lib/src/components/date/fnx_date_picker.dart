@@ -13,26 +13,25 @@ import 'package:fnx_ui/src/util/ui.dart';
 import 'package:intl/intl.dart';
 
 @Component(
-  selector: 'fnx-date-picker',
-  templateUrl: 'fnx_date_picker.html',
-  preserveWhitespace: false,
-  directives: const [
-    coreDirectives,
-    formDirectives,
-    FnxText,
-    FnxInt
-  ],
-  styles: const [
-    ".picker--date td.date-is-empty { cursor: default !important; background: none !important; padding: 5px !important;}",
-  ]
-)
+    selector: 'fnx-date-picker',
+    templateUrl: 'fnx_date_picker.html',
+    preserveWhitespace: false,
+    directives: const [
+      coreDirectives,
+      formDirectives,
+      FnxText,
+      FnxInt
+    ],
+    styles: const [
+      ".picker--date td.date-is-empty { cursor: default !important; background: none !important; padding: 5px !important;}",
+    ])
 class FnxDatePicker implements OnInit, OnDestroy {
-
   String componentId = ui.uid('datepicker-');
 
   /// using this emitter instances of DatePickers broadcast, that they
   /// have been requested to be opened
-  static final StreamController<FnxDatePicker> _ON_PICKER_OPENED = new StreamController<FnxDatePicker>.broadcast();
+  static final StreamController<FnxDatePicker> _ON_PICKER_OPENED =
+      new StreamController<FnxDatePicker>.broadcast();
   static Stream<FnxDatePicker> get ON_PICKER_OPENED => _ON_PICKER_OPENED.stream;
 
   StreamSubscription<FnxDatePicker> _pickerOpenedSubscription;
@@ -47,18 +46,23 @@ class FnxDatePicker implements OnInit, OnDestroy {
   DateTime _value;
   DateTime _originalValue;
 
-  @Input() bool hourFormat24 = true;
-  @Input() bool dateTime = false;
+  @Input()
+  bool hourFormat24 = true;
+  @Input()
+  bool dateTime = false;
 
   List days;
 
   StreamController<bool> _closed = new StreamController();
-  @Output() Stream<bool> get closed => _closed.stream;
+  @Output()
+  Stream<bool> get closed => _closed.stream;
 
   StreamController<DateTime> _datePicked = new StreamController();
-  @Output() Stream<DateTime> get datePicked => _datePicked.stream;
+  @Output()
+  Stream<DateTime> get datePicked => _datePicked.stream;
 
-  @Input() Stream<bool> open;
+  @Input()
+  Stream<bool> open;
 
   StreamSubscription _openSubscription;
 
@@ -151,7 +155,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
         m,
       );
       _datePicked.add(_value);
-    } catch (e) { }
+    } catch (e) {}
   }
 
   AmPm get amPm => amOrPm(hour);
@@ -187,11 +191,15 @@ class FnxDatePicker implements OnInit, OnDestroy {
 
   bool isSelected(var year, var month, var day) {
     if (_originalValue == null) return false;
-    return  _originalValue.year == year &&
+    return _originalValue.year == year &&
         _originalValue.month == month &&
         _originalValue.day == day;
   }
-  
+
+  bool isToday(var year, var month, var day) {
+    return today.year == year && today.month == month && today.day == day;
+  }
+
   bool isDay(dynamic day) => day is int;
 
   void pickDay(dynamic year, dynamic month, dynamic day, Event e) {
@@ -260,7 +268,8 @@ class FnxDatePicker implements OnInit, OnDestroy {
       ms = value.millisecond;
       utc = value.isUtc;
     }
-    valueInternal = dateFrom(today.year, today.month, today.day, h, m, s, ms, utc);
+    valueInternal =
+        dateFrom(today.year, today.month, today.day, h, m, s, ms, utc);
     _datePicked.add(value);
   }
 
@@ -274,7 +283,8 @@ class FnxDatePicker implements OnInit, OnDestroy {
 
     // we intentionally do not emit datePicked event, since this signals that the picker
     // should rerender, not that new value has been picked
-    valueInternal = dateFrom(year + yearsChange, month + monthsChange, 1, value.hour, value.minute, value.second, value.millisecond, value.isUtc);
+    valueInternal = dateFrom(year + yearsChange, month + monthsChange, 1,
+        value.hour, value.minute, value.second, value.millisecond, value.isUtc);
   }
 
   void addDurationToValue(Duration dur) {
@@ -312,7 +322,8 @@ class FnxDatePicker implements OnInit, OnDestroy {
 
   @override
   ngOnInit() {
-    _pickerOpenedSubscription = ON_PICKER_OPENED.listen((picker) => somePickerOpened(picker));
+    _pickerOpenedSubscription =
+        ON_PICKER_OPENED.listen((picker) => somePickerOpened(picker));
     if (open != null) {
       _openSubscription = open.listen((_) => ensureOpened());
     }
@@ -321,7 +332,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
       if (ui.isEventFromSubtree(event, container.parentNode.parentNode)) return;
       hidePicker();
     });
-    dropdownTracker.init(container, dropdown, ()=>shown=false);
+    dropdownTracker.init(container, dropdown, () => shown = false);
 
     keyDownSubscription = document.onKeyDown
         .where((KeyboardEvent e) => e.keyCode == KeyCode.ESC)
@@ -330,7 +341,6 @@ class FnxDatePicker implements OnInit, OnDestroy {
       hidePicker();
     });
   }
-
 
   void somePickerOpened(FnxDatePicker picker) {
     // if any other picker has been opened, ensure this one gets closed
