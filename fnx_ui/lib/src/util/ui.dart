@@ -15,6 +15,10 @@ String uid([String prefix]) {
   return prefix + id.toRadixString(16);
 }
 
+Stream<KeyboardEvent> get keyDownEvents => document.on['keydown']
+    .where((event) => event is KeyboardEvent)
+    .map((event) => event as KeyboardEvent);
+
 bool hasError(NgControl ctrl) {
   return ctrl != null && !ctrl.valid;
 }

@@ -323,7 +323,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
     });
     dropdownTracker.init(container, dropdown, ()=>shown=false);
 
-    keyDownSubscription = document.onKeyDown
+    keyDownSubscription = ui.keyDownEvents
         .where((KeyboardEvent e) => e.keyCode == KeyCode.ESC)
         .listen((KeyboardEvent e) {
       ui.killEvent(e);

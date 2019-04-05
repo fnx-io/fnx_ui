@@ -252,11 +252,14 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
     }
   }
 
-  StreamSubscription<String> bindKeyHandler(Stream<KeyboardEvent> stream) {
+  StreamSubscription<String> bindKeyHandler(Stream<Event> stream) {
     Map<int, String> actions = {KeyCode.ENTER: 'SELECT', KeyCode.ESC: 'HIDE', KeyCode.UP: 'UP', KeyCode.DOWN: 'DOWN'};
     Set<int> supportedKeys = new Set.from(actions.keys);
-    Stream<KeyboardEvent> onlyWhenExpanded =
-    stream.where((event) => ui.isEventFromSubtree(event, select));
+
+    Stream<KeyboardEvent> onlyWhenExpanded = stream
+        .where((var event) => event is KeyboardEvent)
+        .map((event) => event as KeyboardEvent)
+        .where((event) => ui.isEventFromSubtree(event, select));
     Stream<KeyboardEvent> onlySupported = onlyWhenExpanded.where((event) => supportedKeys.contains(event.keyCode));
     Stream<KeyboardEvent> cancelled = onlySupported.map((event) {
       event.preventDefault();
@@ -267,7 +270,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
     });
     Stream<String> result = cancelled.map((event) => actions[event.keyCode]);
 
-    return result.listen((action) {
+    return result.listen((var action) {
       if (action == 'UP') {
         if (dropDownVisible) {
           selectNext(_highlighted, filteredOptions.reversed);
@@ -321,7 +324,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
       if (ui.isEventFromSubtree(event, select)) return;
       hideOptions();
     });
-    this.navigationActions = bindKeyHandler(document.onKeyDown);
+    this.navigationActions = bindKeyHandler(ui.keyDownEvents);
     dropdownTracker.init(select, dropdown, hideOptions);
   }
 

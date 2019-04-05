@@ -7,7 +7,7 @@ import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/util/async.dart';
 import 'package:fnx_ui/src/util/pair.dart';
-import 'package:fnx_ui/src/util/ui.dart';
+import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'package:fnx_ui/src/validator.dart';
 
 typedef Future<List<Pair>> OptionsProvider(String filledText);
@@ -61,7 +61,7 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
 
   bool get dropDownVisible => open && !isReadonly && options.isNotEmpty;
 
-  DropdownTracker dropdownTracker = new DropdownTracker(downOnly: true);
+  ui.DropdownTracker dropdownTracker = new ui.DropdownTracker(downOnly: true);
 
   StreamSubscription<String> navigationActions;
   StreamSubscription<String> filledTextChangedSubscription;
@@ -150,7 +150,7 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
   StreamSubscription<String> bindKeyHandler(Stream<KeyboardEvent> stream) {
     Map<int, String> actions = {KeyCode.ENTER: 'SELECT', KeyCode.ESC: 'HIDE', KeyCode.UP: 'UP', KeyCode.DOWN: 'DOWN'};
     Set<int> supportedKeys = new Set.from(actions.keys);
-    Stream<KeyboardEvent> onlyWhenExpanded = stream.where((event) => isEventFromSubtree(event, select));
+    Stream<KeyboardEvent> onlyWhenExpanded = stream.where((event) => ui.isEventFromSubtree(event, select));
     Stream<KeyboardEvent> onlySupported = onlyWhenExpanded.where((event) => supportedKeys.contains(event.keyCode));
     Stream<KeyboardEvent> cancelled = onlySupported.map((event) {
       event.preventDefault();
@@ -212,7 +212,7 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
   @override
   ngOnInit() async {
     super.ngOnInit();
-    this.navigationActions = bindKeyHandler(document.onKeyDown);
+    this.navigationActions = bindKeyHandler(ui.keyDownEvents);
     dropdownTracker.init(select, dropdown, hideOptions);
   }
 

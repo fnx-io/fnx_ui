@@ -66,7 +66,7 @@ class FnxModal implements OnInit, OnDestroy {
   @override
   ngOnInit() {
     _stack.add(this);
-    keyDownSubscription = document.onKeyDown
+    keyDownSubscription = ui.keyDownEvents
         .where(tryOrFalse((KeyboardEvent e) => e.keyCode == KeyCode.ESC))
         .where(tryOrFalse((KeyboardEvent e) => this == _stack.last))
         .where(tryOrFalse((KeyboardEvent e) => activeChilds.isEmpty))

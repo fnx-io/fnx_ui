@@ -35,7 +35,12 @@ class FnxInput extends FnxValidatorComponent implements OnInit, OnDestroy {
 
   FnxInput(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
 
-  final String componentId = ui.uid('comp_');
+  final String _generatedId = ui.uid('comp_');
+  
+  @Input()
+  String assignedId;
+  
+  String get componentId => assignedId ?? _generatedId;
 
   @Input()
   String label;
