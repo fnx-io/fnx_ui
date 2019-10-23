@@ -45,7 +45,7 @@ import 'package:fnx_ui/src/util/ui.dart' as ui;
     formDirectives,
   ],
 )
-class FnxSubmitBar {
+class FnxSubmitBar implements AfterContentChecked {
 
   ///
   /// Input - use it to change label on submit button.
@@ -66,6 +66,8 @@ class FnxSubmitBar {
 
   final FnxForm _form;
 
+  bool _checkedFormValid = true;
+
   FnxSubmitBar(@Optional() this._form) {
     if (_form == null) {
       throw new Exception("To use fnx-submit-bar, please wrap your form into <fnx-form></fnx-form> component!");
@@ -73,13 +75,17 @@ class FnxSubmitBar {
   }
 
   bool get formValid {
-    if (_form == null) return true;
-    return _form.isValid();
+    return _checkedFormValid;
   }
 
   void goBack(Event event) {
     ui.killEvent(event);
     window.history.back();
+  }
+
+  @override
+  void ngAfterContentChecked(){
+    _checkedFormValid = (_form == null)?true:_form.isValid();
   }
   
 }
