@@ -35,6 +35,7 @@ const CUSTOM_INPUT_FILE_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExis
         (focus)="markAsTouched()"
         (click)="markAsTouched()"
         (change)="onFileSelected($event)"
+        [multiple]="multi"
       >
   </span>
 </div>
