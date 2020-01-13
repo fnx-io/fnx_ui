@@ -24,7 +24,7 @@ const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExis
   [attr.maxlength]="maxLength"
   [attr.min]="min"
   [attr.max]="max"
-  [attr.autocomplete]="autocompleteAttr"
+  [attr.autocomplete]="autocomplete"
   (keyup)="markAsTouched()"
   [class.error]="isTouchedAndInvalid()"
   [attr.step]="decimalsAttr"
@@ -40,10 +40,7 @@ const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExis
   ],
   styles: const [":host input { text-align: inherit;}"],
   preserveWhitespace: false,
-  directives: [
-    coreDirectives,
-    formDirectives
-  ],
+  directives: [coreDirectives, formDirectives],
 )
 class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
   @Input()
@@ -68,7 +65,7 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
   String placeholder = null;
 
   @Input()
-  bool autocomplete = false;
+  String autocomplete = "off";
 
   @Input()
   bool readonly = false;
@@ -95,19 +92,7 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
     }
   }
 
-  String get autocompleteAttr {
-    if (autocomplete) {
-      return 'on';
-    } else if (type == 'password') {
-      // passwd autocomplete is different from text autocomplete
-      return "new-password";
-    } else {
-      return 'off';
-    }
-  }
-
-  static final RegExp _EMAIL_REGEXP = new RegExp(
-      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
+  static final RegExp _EMAIL_REGEXP = new RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
 
   @override
   ngOnInit() {
@@ -224,12 +209,7 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
   }
 
   void assertType() {
-    if (type != "text" &&
-        type != "number" &&
-        type != "email" &&
-        type != "http" &&
-        type != "password" &&
-        type != "decimal") {
+    if (type != "text" && type != "number" && type != "email" && type != "http" && type != "password" && type != "decimal") {
       throw "The only possible types at this moment are 'text', 'number', 'decimal', 'email', 'http' and 'password'";
     }
   }
@@ -240,5 +220,4 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
       element.focus();
     }
   }
-
 }
