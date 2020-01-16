@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
@@ -23,18 +24,18 @@ import 'package:fnx_ui/src/util/ui.dart' as ui;
 /// Custom buttons are aligned to left (next to back button).
 ///
 @Component(
-    selector: 'fnx-submit-bar',
-    template: r'''
-<div class="buttonbar">
+  selector: 'fnx-submit-bar',
+  template: r'''
+<div class="buttonbar" [class.opacity--07]="isDisabled">
   <a *ngIf="back" href="#" class="btn " (click)="goBack($event)" data-prefix="arrow_back">{{ goBackLabel }}</a>
   <ng-content></ng-content>
   <span class="spacer"></span>
   <button type="submit" 
+          (click)="onSubmit($event)"
           class="btn bg--important" 
           attr.data-prefix="{{ formValid ? 'check' : 'not_interested' }}" 
-          [disabled]="form?.disabled == true"
-          [class.opacity--07]="form?.disabled == true"
-          [class.disabled]="form?.disabled == true">
+          [disabled]="isDisabled"          
+          [class.disabled]="isDisabled">
     {{ label }}
   </button>
 </div>
@@ -46,21 +47,47 @@ import 'package:fnx_ui/src/util/ui.dart' as ui;
   ],
 )
 class FnxSubmitBar implements AfterContentChecked {
-
   ///
   /// Input - use it to change label on submit button.
   ///
-  @Input() String label = GlobalMessages.formSubmitLabelMessage();
+  @Input()
+  String label = GlobalMessages.formSubmitLabelMessage();
 
   ///
   /// Input - use it to change label on back button.
   ///
-  @Input() String goBackLabel = GlobalMessages.formBackLabelMessage();
+  @Input()
+  String goBackLabel = GlobalMessages.formBackLabelMessage();
 
   ///
   /// Input - Is back button allowed
   ///
-  @Input() bool back = false;
+  @Input()
+  bool back = false;
+
+  static const int _visualWorkingTimeoutMilis = 300;
+
+  DateTime _lastSubmit;
+  static const int _doubleClickPreventionMilis = 400;
+
+  ///
+  /// Tell the submit bar if the form/app is working, so it can
+  /// disable itself.
+  ///
+  @Input()
+  set working(bool value) {
+    if (value == true) {
+      if (_startedWorking == null) {
+        _startedWorking = new DateTime.now();
+      }
+    } else {
+      _startedWorking = null;
+    }
+    checkWorkingStatus();
+    Timer(Duration(milliseconds: _visualWorkingTimeoutMilis + 1), checkWorkingStatus);
+  }
+
+  bool get isDisabled => form?.disabled == true || _longWorking;
 
   FnxForm get form => _form;
 
@@ -84,8 +111,38 @@ class FnxSubmitBar implements AfterContentChecked {
   }
 
   @override
-  void ngAfterContentChecked(){
-    _checkedFormValid = (_form == null)?true:_form.isValid();
+  void ngAfterContentChecked() {
+    _checkedFormValid = (_form == null) ? true : _form.isValid();
   }
-  
+
+  DateTime _startedWorking = null;
+  bool _longWorking = false;
+
+  void checkWorkingStatus() {
+    if (_startedWorking == null) {
+      _longWorking = false;
+    } else {
+      if (_startedWorking.add(Duration(milliseconds: _visualWorkingTimeoutMilis)).isBefore(DateTime.now())) {
+        // it's working for a long time!
+        _longWorking = true;
+      }
+    }
+  }
+
+  void onSubmit(Event e) {
+    if (_startedWorking != null) {
+      ui.killEvent(e);
+      return;
+    }
+    if (isDisabled) {
+      ui.killEvent(e);
+      return;
+    }
+    if (_lastSubmit != null && _lastSubmit.add(Duration(milliseconds: _doubleClickPreventionMilis)).isAfter(DateTime.now())) {
+      // too soon
+      ui.killEvent(e);
+      return;
+    }
+    _lastSubmit = DateTime.now();
+  }
 }
