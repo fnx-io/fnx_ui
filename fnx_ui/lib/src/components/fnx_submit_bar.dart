@@ -30,6 +30,7 @@ import 'package:fnx_ui/src/util/ui.dart' as ui;
   <a *ngIf="back" href="#" class="btn " (click)="goBack($event)" data-prefix="arrow_back">{{ goBackLabel }}</a>
   <ng-content></ng-content>
   <span class="spacer"></span>
+  <span *ngIf="isDisabledByWork" class="preloader bg--white"></span>
   <button type="submit" 
           (click)="onSubmit($event)"
           class="btn bg--important" 
@@ -88,6 +89,8 @@ class FnxSubmitBar implements AfterContentChecked {
   }
 
   bool get isDisabled => form?.disabled == true || _longWorking;
+  bool get isDisabledByWork => form?.disabled != true && _longWorking;
+
 
   FnxForm get form => _form;
 
