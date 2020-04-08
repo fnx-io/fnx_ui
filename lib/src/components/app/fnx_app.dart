@@ -33,8 +33,7 @@ class FnxApp implements OnInit {
       log.warning("There is no exception handler configured");
     }
     if (ex is! FnxExceptionHandler) {
-      log.warning(
-          "Configured exception handler is not FnxExceptionHandler, fnx_ui won't be able to show nice errors.\nConsider: provide(ExceptionHandler, useValue: new FnxExceptionHandler())");
+      log.warning("Configured exception handler is not FnxExceptionHandler, fnx_ui won't be able to show nice errors.\nConsider: provide(ExceptionHandler, useValue: new FnxExceptionHandler())");
     } else {
       (ex as FnxExceptionHandler).setShowErrorCallback(showError);
     }
@@ -71,6 +70,9 @@ class FnxApp implements OnInit {
 
   void showError(FnxError error) {
     log.info("Showing error $error on UI");
+    if (error.message.contains("NoSuchMethodError")) return;
+    if (error.headline.contains("NoSuchMethodError")) return;
+    if (error.details != null && error.details.join("-").contains("NoSuchMethodError")) return;
     this.errorToShow = error;
     _changeDetector.detectChanges();
   }
