@@ -12,21 +12,19 @@ import 'package:logging/logging.dart';
 typedef String formValidatorFunction();
 
 @Component(
-  selector: 'fnx-form',
-  templateUrl: 'fnx_form.html',
-  providers: const [
-    const Provider(FnxValidatorComponent, useExisting: FnxForm, multi: false),
-  ],
-  visibility: Visibility.all
-)
+    selector: 'fnx-form',
+    templateUrl: 'fnx_form.html',
+    providers: const [
+      const Provider(FnxValidatorComponent, useExisting: FnxForm, multi: false),
+    ],
+    visibility: Visibility.all)
 class FnxForm extends FnxValidatorComponent implements OnInit, OnDestroy {
-
   final Logger log = new Logger("FnxForm");
 
   ///
   /// Use to disable form (no submit event will be generated).
   /// Example:
-  /// 
+  ///
   ///     <fnx-form [disabled]="rest.working"></fnx-form>
   ///
   @Input()
@@ -37,7 +35,7 @@ class FnxForm extends FnxValidatorComponent implements OnInit, OnDestroy {
   bool readonly = false;
 
   FnxForm() : super(null);
-  
+
   @override
   bool get required => false;
 
@@ -58,12 +56,16 @@ class FnxForm extends FnxValidatorComponent implements OnInit, OnDestroy {
   /// Handles submitting the underlying form event.
   /// Only propagates the submit event when this form is valid.
   /// Forces validation of all components inside this form.
-  void submitForm(Event event) {
+  void submitForm(var event) {
     _beforeSubmit.add(new BeforeFormSubmitEvent());
 
     if (event != null) {
-      event.preventDefault();
-      event.stopPropagation();
+      try {
+        event.preventDefault();
+      } catch (e) {}
+      try {
+        event.stopPropagation();
+      } catch (e) {}
     }
     if (disabled) return;
 
@@ -76,10 +78,9 @@ class FnxForm extends FnxValidatorComponent implements OnInit, OnDestroy {
         errorMessages.add(error);
       }
     }
-    
+
     if (isValid() && errorMessages.isEmpty) {
-      _submit.add(event);
-      
+      _submit.add(new Event("submit"));
     } else {
       // there are some complex validation errors
     }
@@ -96,7 +97,7 @@ class FnxForm extends FnxValidatorComponent implements OnInit, OnDestroy {
     _validators.remove(f);
   }
 
-  bool get isReadonly => (readonly??false);
+  bool get isReadonly => (readonly ?? false);
 }
 
 class BeforeFormSubmitEvent {}

@@ -1,3 +1,3 @@
-<form (submit)="submitForm($event)">
+<form (submit)="submitForm($event)" onsubmit="return (event.preventDefault() || event.stopPropagation()) && false">
     <ng-content></ng-content>
 </form>
