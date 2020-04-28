@@ -1,7 +1,7 @@
 import 'dart:async';
 
 void later(Function f) {
-  new Future.delayed(new Duration(milliseconds: 30)).then((_)=>f());
+  new Future.delayed(new Duration(milliseconds: 30)).then((_) => f());
 }
 
 /// FnxStreamDebouncer is a Stream transformer which will wait for specified amount of time
@@ -19,7 +19,6 @@ void later(Function f) {
 ///       print("$data");
 ///     }
 class FnxStreamDebouncer<T> extends StreamTransformerBase<T, T> {
-
   StreamController _controller;
 
   StreamSubscription _subscription;
@@ -36,7 +35,8 @@ class FnxStreamDebouncer<T> extends StreamTransformerBase<T, T> {
   FnxStreamDebouncer(Duration duration, {bool sync: false, this.cancelOnError}) {
     this._duration = duration;
 
-    _controller = new StreamController<T>(onListen: _onListen,
+    _controller = new StreamController<T>(
+        onListen: _onListen,
         onCancel: _onCancel,
         onPause: () {
           _subscription.pause();
@@ -47,7 +47,7 @@ class FnxStreamDebouncer<T> extends StreamTransformerBase<T, T> {
         sync: sync);
   }
 
-  Duration get duration => _duration != null? _duration: new Duration(milliseconds: 100);
+  Duration get duration => _duration != null ? _duration : new Duration(milliseconds: 150);
 
   void _onCancel() {
     _subscription.cancel();
@@ -55,20 +55,21 @@ class FnxStreamDebouncer<T> extends StreamTransformerBase<T, T> {
   }
 
   void _onListen() {
-    _subscription = _stream.listen(onData,
-        onError: _controller.addError,
-        onDone: _controller.close,
-        cancelOnError: cancelOnError);
+    _subscription = _stream.listen(onData, onError: _controller.addError, onDone: _controller.close, cancelOnError: cancelOnError);
   }
 
   void onData(T data) {
     _debounce(data);
   }
 
-  void _debounce(T data) {
-    if (_timer != null) _timer.cancel();
+  var data;
+
+  void _debounce(T d) {
+    data = d;
+    if (_timer != null) return;
     _timer = new Timer(duration, () {
       if (_controller != null) _controller.add(data);
+      _timer = null;
     });
   }
 

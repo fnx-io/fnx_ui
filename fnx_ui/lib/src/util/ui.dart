@@ -6,6 +6,7 @@ import 'package:async/async.dart';
 import 'package:fnx_ui/src/util/async.dart';
 
 int idCounter = 1;
+
 /// Generates unique string each time called. When called with a prefix param
 /// the resulting String will be prefixed, the default prefix is gen__.
 String uid([String prefix]) {
@@ -15,9 +16,7 @@ String uid([String prefix]) {
   return prefix + id.toRadixString(16);
 }
 
-Stream<KeyboardEvent> get keyDownEvents => document.on['keydown']
-    .where((event) => event is KeyboardEvent)
-    .map((event) => event as KeyboardEvent);
+Stream<KeyboardEvent> get keyDownEvents => document.on['keydown'].where((event) => event is KeyboardEvent).map((event) => event as KeyboardEvent);
 
 bool hasError(NgControl ctrl) {
   return ctrl != null && !ctrl.valid;
@@ -30,7 +29,7 @@ bool isParentNodeOf(Node target, Node potentialParent) {
     if (target == potentialParent) return true;
     target = target.parentNode;
   }
-  
+
   return false;
 }
 
@@ -41,6 +40,7 @@ bool isEventFromSubtree(Event event, Node parent) {
 }
 
 Set<String> activeElementTags = new Set.from(["A", "INPUT", "TEXTAREA", "BUTTON"]);
+
 /// returns true if given node is "active" element.
 /// Active elements are those which have some user interaction when working with them.
 /// Inputs, buttons, links, ...
@@ -61,25 +61,19 @@ void killEvent(Event e) {
 /// or negative, if element is above the viewport, or bigger then 1
 /// if the element is below the viewport.
 Stream<double> verticalElementPositionStream(Element e) {
-
   Stream<Event> mergedRelevant = StreamGroup.merge([window.onMouseWheel, window.onResize]);
 
-  return mergedRelevant.transform(
-      new StreamTransformer<Event, double>.fromHandlers(
-          handleData: (Event event, EventSink<double> sink) {
-            Rectangle r = e.getBoundingClientRect();
-            double center = r.top + ((r.bottom - r.top) / 2.0);
-            sink.add(center / window.innerHeight.toDouble());
-          }
-      )
-  );
+  return mergedRelevant.transform(new StreamTransformer<Event, double>.fromHandlers(handleData: (Event event, EventSink<double> sink) {
+    Rectangle r = e.getBoundingClientRect();
+    double center = r.top + ((r.bottom - r.top) / 2.0);
+    sink.add(center / window.innerHeight.toDouble());
+  }));
 }
 
 ///
 /// Nejakym takovym chytristikou bysme meli delat vsechny dropdowny.
 ///
 class DropdownTracker {
-
   Element _element;
   Element _dropdown;
   Function _onHide;
@@ -91,16 +85,19 @@ class DropdownTracker {
 
   StreamSubscription<Event> subscription;
 
-  DropdownTracker({this.downOnly : false}) {
-  }
+  DropdownTracker({this.downOnly: false}) {}
 
   void init(Element container, Element dropdown, Function onHide) {
     this._element = container;
     this._dropdown = dropdown;
     this._onHide = onHide;
     Stream<Event> mergedRelevant = StreamGroup.merge([window.onMouseWheel, window.onResize, window.onScroll]);
-    FnxStreamDebouncer<Event> db = new FnxStreamDebouncer(new Duration(milliseconds: 30));
-    subscription = mergedRelevant.transform(db).listen(updatePosition);
+    FnxStreamDebouncer<Event> db = new FnxStreamDebouncer(new Duration(milliseconds: 250));
+    subscription = mergedRelevant.where(_isVisible).transform(db).listen(updatePosition);
+  }
+
+  bool _isVisible(Event event) {
+    return _dropdown != null && !_dropdown.hidden;
   }
 
   void destroy() {
@@ -109,6 +106,7 @@ class DropdownTracker {
   }
 
   void updatePosition([_]) {
+    print("Update");
     int scrHeight = window.innerHeight.toInt();
     int dropdownH = _dropdown.getBoundingClientRect().height.toInt();
     if (_element != null) {
@@ -127,17 +125,14 @@ class DropdownTracker {
       if (downOnly || dropdownH + el.top + el.height < scrHeight) {
         // vejde se dolu
         top = el.top.toInt() + el.height.toInt();
-
       } else {
         if (el.top - dropdownH > 0) {
           // vejde se nahoru
           top = el.top.toInt() - dropdownH;
-
         } else {
-          top = (scrHeight - dropdownH)~/2;
+          top = (scrHeight - dropdownH) ~/ 2;
         }
       }
     }
   }
-
 }
