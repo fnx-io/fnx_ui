@@ -23,14 +23,9 @@ const CUSTOM_SELECT_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting
     const Provider(FnxValidatorComponent, useExisting: FnxSelect, multi: false),
   ],
   preserveWhitespace: false,
-  directives: [
-    coreDirectives,
-    formDirectives,
-    AutoFocus
-  ],
+  directives: [coreDirectives, formDirectives, AutoFocus],
 )
 class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
-
   @Input()
   bool required = false;
   @Input()
@@ -88,9 +83,7 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
 
   FnxModal modal;
 
-  FnxSelect(@Optional() this.modal, @SkipSelf() @Optional() FnxValidatorComponent parent)
-      : super(parent) {
-  }
+  FnxSelect(@Optional() this.modal, @SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent) {}
 
   void toggleDropdown() {
     markAsTouched();
@@ -351,7 +344,6 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   void focus() {
     select.focus();
   }
-
 }
 
 class FnxOptionValue {
@@ -389,7 +381,7 @@ class FnxOptionValue {
     formDirectives,
   ],
 )
-class FnxOption implements OnInit, OnDestroy, OnChanges {
+class FnxOption implements OnInit, OnDestroy, AfterChanges {
   final String id = ui.uid('ov_');
 
   FnxSelect parent;
@@ -427,7 +419,7 @@ class FnxOption implements OnInit, OnDestroy, OnChanges {
   }
 
   @override
-  ngOnChanges(Map<String, SimpleChange> changes) {
+  void ngAfterChanges() {
     if (_myValue != null) {
       _myValue.value = value;
       _myValue.label = label;

@@ -72,17 +72,9 @@ class FnxTooltip implements OnInit, OnDestroy {
     // musi se do toho zahrnout i pripadny zoom
     double zoom = double.tryParse(itemElement.getComputedStyle().zoom) ?? 1;
 
-    parentBoundingBox = new Rectangle(
-        parentBoundingBox.left * zoom,
-        parentBoundingBox.top * zoom,
-        parentBoundingBox.width * zoom,
-        parentBoundingBox.height * zoom);
+    parentBoundingBox = new Rectangle(parentBoundingBox.left * zoom, parentBoundingBox.top * zoom, parentBoundingBox.width * zoom, parentBoundingBox.height * zoom);
 
-    Point center = new Point(
-        parentBoundingBox.left +
-            (parentBoundingBox.right - parentBoundingBox.left) / 2,
-        parentBoundingBox.top +
-            (parentBoundingBox.bottom - parentBoundingBox.top) / 2);
+    Point center = new Point(parentBoundingBox.left + (parentBoundingBox.right - parentBoundingBox.left) / 2, parentBoundingBox.top + (parentBoundingBox.bottom - parentBoundingBox.top) / 2);
     if (center.x < window.innerWidth * 0.1) {
       // jsme hodne u kraje vlevo
       currentTooltip.classes.add("--right");
@@ -92,8 +84,7 @@ class FnxTooltip implements OnInit, OnDestroy {
     } else if (center.x > window.innerWidth * 0.9) {
       // jsme hodne u kraje vpravo
       currentTooltip.classes.add("--left");
-      currentTooltip.style.right =
-          "${window.innerWidth - parentBoundingBox.left + 20}px";
+      currentTooltip.style.right = "${window.innerWidth - parentBoundingBox.left + 20}px";
       currentTooltip.style.top = "${center.y}px";
       currentTooltip.style.transform = "translateY(-50%)";
     } else {
@@ -106,8 +97,7 @@ class FnxTooltip implements OnInit, OnDestroy {
         currentTooltip.style.transform = "translateX(-50%)";
       } else {
         currentTooltip.classes.add("--top");
-        currentTooltip.style.bottom =
-            "${window.innerHeight - parentBoundingBox.top + 20}px";
+        currentTooltip.style.bottom = "${window.innerHeight - parentBoundingBox.top + 20}px";
         currentTooltip.style.left = "${center.x}px";
         currentTooltip.style.transform = "translateX(-50%)";
       }
@@ -122,7 +112,7 @@ class FnxTooltip implements OnInit, OnDestroy {
     } else if (content is Function) {
       setTooltipContent(content());
     } else if (content is Future) {
-      currentTooltip.innerHtml = "<span class=preloader></span>";
+      currentTooltip.innerHtml = '<span class="preloader"></span>';
       Object futureData = await content;
       setTooltipContent(futureData);
     }

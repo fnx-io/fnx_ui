@@ -10,15 +10,15 @@ import 'package:fnx_ui/src/util/async.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
 
 @Component(
-    selector: 'fnx-image-crop',
-    styles: const [
-      "div { overflow: hidden; position: relative; } ",
-      "img { position: absolute; cursor: move; } ",
-      "p { position: absolute; left:0; bottom:0; right:0}",
-      "p span { opacity: 0.7 }",
-      "p span:hover { opacity: 1 }",
-    ],
-    template: """
+  selector: 'fnx-image-crop',
+  styles: const [
+    "div { overflow: hidden; position: relative; } ",
+    "img { position: absolute; cursor: move; } ",
+    "p { position: absolute; left:0; bottom:0; right:0}",
+    "p span { opacity: 0.7 }",
+    "p span:hover { opacity: 1 }",
+  ],
+  template: """
 <div class="border" #mask
   [style.height.px]="maskHeight"
 ><img src="{{src}}" #img
@@ -36,13 +36,9 @@ import 'package:fnx_ui/src/util/ui.dart' as ui;
   <span class="btn icon" (mousedown)='zoomIn(\$event)'>zoom_in</span>
 </p></div>
     """,
-  directives: [
-    coreDirectives,
-    formDirectives
-  ],
+  directives: [coreDirectives, formDirectives],
 )
-class FnxImageCrop implements OnInit, OnChanges, OnDestroy {
-
+class FnxImageCrop implements OnInit, AfterChanges, OnDestroy {
   /// Required crop ratio - width:height
   @Input()
   double ratio = 1.0;
@@ -78,23 +74,17 @@ class FnxImageCrop implements OnInit, OnChanges, OnDestroy {
 
   @override
   ngOnInit() {
-    _resizeSubscription = window.onResize.transform(new FnxStreamDebouncer(new Duration(milliseconds: 100))).listen(updateMask);
+    _resizeSubscription =
+        window.onResize.transform(new FnxStreamDebouncer(new Duration(milliseconds: 100))).listen(updateMask);
 
     updateMask();
     loadImageDimensions();
   }
 
   @override
-  ngOnChanges(Map<String, SimpleChange> changes) {
-    changes.forEach((String propName, SimpleChange change) {
-      if (propName == "ratio") {
-        updateMask();
-      }
-      if (propName == "src") {
-        // image updated
-        loadImageDimensions();
-      }
-    });
+  void ngAfterChanges() {
+    updateMask();
+    loadImageDimensions();
   }
 
   void loadImageDimensions() {
@@ -155,7 +145,6 @@ class FnxImageCrop implements OnInit, OnChanges, OnDestroy {
         imgHeight = maskHeight;
         imgWidth = (imgWidth * resize).ceil();
       }
-
     }
     imgWidth = (imgWidth * zoom).floor();
     imgHeight = (imgHeight * zoom).floor();
@@ -170,20 +159,18 @@ class FnxImageCrop implements OnInit, OnChanges, OnDestroy {
     double top = (imgOffsetY / imgHeight).abs();
     double width = maskWidth / imgWidth;
     double height = maskHeight / imgHeight;
-    if (top + height > 1) height = 1 -top;
+    if (top + height > 1) height = 1 - top;
     _crop.add(new Rectangle(left, top, width, height));
   }
 
   void moveImageMouse(MouseEvent event) {
     // if mouse down
     if (event.buttons == 1) {
-
       imgOffsetX += event.movement.x;
       imgOffsetY += event.movement.y;
 
       trimOffsetToBoundaries();
       emitCropResult();
-
     }
     killEvent(event);
   }
@@ -205,7 +192,6 @@ class FnxImageCrop implements OnInit, OnChanges, OnDestroy {
 
       trimOffsetToBoundaries();
       emitCropResult();
-      
     } catch (e) {
       // hmm ...
     }
@@ -266,14 +252,14 @@ class FnxImageCrop implements OnInit, OnChanges, OnDestroy {
   }
 
   Point<double> getCenter() {
-    double cx = (maskWidth/2.0 - imgOffsetX) / imgWidth.toDouble();
-    double cy = (maskHeight/2.0 - imgOffsetY)/ imgHeight.toDouble();
+    double cx = (maskWidth / 2.0 - imgOffsetX) / imgWidth.toDouble();
+    double cy = (maskHeight / 2.0 - imgOffsetY) / imgHeight.toDouble();
     return new Point(cx, cy);
   }
 
   void centerTo(Point<double> center) {
-    imgOffsetX = (maskWidth/2.0) - (center.x * imgWidth);
-    imgOffsetY = (maskHeight/2.0) - (center.y * imgHeight);
+    imgOffsetX = (maskWidth / 2.0) - (center.x * imgWidth);
+    imgOffsetY = (maskHeight / 2.0) - (center.y * imgHeight);
     trimOffsetToBoundaries();
     emitCropResult();
   }
@@ -282,5 +268,4 @@ class FnxImageCrop implements OnInit, OnChanges, OnDestroy {
   void ngOnDestroy() {
     _resizeSubscription.cancel();
   }
-
 }
