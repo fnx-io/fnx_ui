@@ -9,7 +9,7 @@ import 'package:fnx_ui/src/util/global_messages.dart';
 import 'package:fnx_ui/src/validator.dart';
 import 'package:logging/logging.dart';
 
-const CUSTOM_INPUT_FILE_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxFile, multi: true);
+const CUSTOM_INPUT_FILE_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxFile);
 
 @Component(
   selector: 'fnx-file',
@@ -24,7 +24,7 @@ const CUSTOM_INPUT_FILE_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExis
   </span>
   <a *ngIf="!isEmpty" class="input__file__delete btn icon margin--small--right" [style.visibility]="isReadonly ? 'hidden' : 'visible'" (click)="deleteFiles()">delete</a>
   <span *ngIf="isEmpty" class="input__file__delete btn icon margin--small--right disabled" [style.visibility]="isReadonly ? 'hidden' : 'visible'" >delete</span>
-  <span class="input__file__browse" data-suffix="search"
+  <span class="input__file__browse" [attr.data-suffix]="'search'"
     (focus)="markAsTouched()"
     (click)="markAsTouched()"
     [class.error]="isTouchedAndInvalid()"
@@ -48,12 +48,9 @@ const CUSTOM_INPUT_FILE_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExis
   ],
   providers: const [
     CUSTOM_INPUT_FILE_VALUE_ACCESSOR,
-    const Provider(FnxValidatorComponent, useExisting: FnxFile, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxFile),
   ],
-  directives: [
-    coreDirectives,
-    formDirectives
-  ],
+  directives: [coreDirectives, formDirectives],
   preserveWhitespace: false,
 )
 class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
@@ -75,7 +72,7 @@ class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit,
   /// If there is already a selected file in the model, use this attribute to provide file name or description.
   ///
   @Input()
-  String fileName = null;
+  String? fileName = null;
 
   StreamController _files = new StreamController();
   @Output()
@@ -88,7 +85,7 @@ class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit,
 
   final Logger log = new Logger("FnxFile");
 
-  FnxFile(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
+  FnxFile(@SkipSelf() @Optional() FnxValidatorComponent? parent) : super(parent);
 
   @override
   bool hasValidValue() {
@@ -130,7 +127,7 @@ class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit,
     processFiles(event.dataTransfer.files);
   }
 
-  void processFiles(List<File> filesInput) {
+  void processFiles(List<File>? filesInput) {
     if (isReadonly) return;
     log.info("Processing files: ${filesInput}");
     if (filesInput == null || filesInput.isEmpty) {
@@ -158,7 +155,7 @@ class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit,
     return value == null || (value is List && (value as List).isEmpty);
   }
 
-  String get renderDescription {
+  String? get renderDescription {
     if (isEmpty) return GlobalMessages.fileDragAndDropHere();
     if (fileName != null) return fileName;
     if (value is List && value.length == 1) {
@@ -170,5 +167,4 @@ class FnxFile extends FnxInputComponent implements ControlValueAccessor, OnInit,
     }
     return value.toString();
   }
-
 }

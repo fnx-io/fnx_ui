@@ -15,7 +15,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m0(count) => "${count} soubory";
 
-  final messages = _notInlinedMessages(_notInlinedMessages);
+  final Map<String, dynamic> messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => {
     "appDefaultAlertHeadline" : MessageLookupByLibrary.simpleMessage("Upozornění"),
     "appDefaultConfirmHeadline" : MessageLookupByLibrary.simpleMessage("Potvrďte"),

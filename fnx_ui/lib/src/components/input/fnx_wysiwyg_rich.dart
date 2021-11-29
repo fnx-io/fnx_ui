@@ -12,8 +12,7 @@ import 'package:fnx_ui/src/validator.dart';
 
 const EMPTY_STRING_VALUE = "<p><br></p>";
 
-const CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR =
-const Provider(ngValueAccessor, useExisting: FnxWysiwygRich, multi: true);
+const CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxWysiwygRich);
 
 @Component(
   selector: 'fnx-wysiwyg-rich',
@@ -73,17 +72,12 @@ const Provider(ngValueAccessor, useExisting: FnxWysiwygRich, multi: true);
   providers: const [
     CUSTOM_INPUT_WYSIWYG_RICH_VALUE_ACCESSOR,
     const Provider(Focusable, useExisting: FnxWysiwygRich),
-    const Provider(FnxValidatorComponent, useExisting: FnxWysiwygRich, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxWysiwygRich),
   ],
-  directives: [
-    coreDirectives,
-    formDirectives,
-    FnxTextarea
-  ],
+  directives: [coreDirectives, formDirectives, FnxTextarea],
   preserveWhitespace: false,
 )
 class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
-
   @Input()
   bool required = false;
 
@@ -100,29 +94,29 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
   String maxWidth = '50';
 
   @Input()
-  PickImageUrl imagePicker = null;
+  PickImageUrl? imagePicker = null;
 
   @Input()
   bool safe = true;
 
-  Quill quill;
+  late Quill quill;
 
   @Input('initWithHtmlView')
   bool htmlView = false;
 
   @ViewChild('wysiwyg')
-  HtmlElement wysiwyg;
+  HtmlElement? wysiwyg;
 
   @ViewChild('toolbar')
-  HtmlElement toolbar;
+  HtmlElement? toolbar;
 
-  StreamSubscription keySubscription;
+  StreamSubscription? keySubscription;
 
-  Element get editor => (wysiwyg.firstChild as Element);
+  Element? get editor => (wysiwyg!.firstChild as Element?);
 
-  FnxApp app;
+  FnxApp? app;
 
-  FnxWysiwygRich(@Optional() this.app, @SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent) {
+  FnxWysiwygRich(@Optional() this.app, @SkipSelf() @Optional() FnxValidatorComponent? parent) : super(parent) {
     if (app == null) {
       throw "Wysiwyg must be wrapped in <fxn-app> element - use this element in your root element's template.";
     }
@@ -131,7 +125,7 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
   @override
   ngOnInit() {
     super.ngOnInit();
-    wysiwyg.innerHtml = value == null ? '' : value;
+    wysiwyg!.innerHtml = value == null ? '' : value;
 
     QuillOptionsStatic options = new QuillOptionsStatic();
     options.theme = "snow";
@@ -139,17 +133,16 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
     quill = new Quill(wysiwyg, options);
     quill.on("change", allowInterop(edited));
 
-    keySubscription = StreamGroup.merge([wysiwyg.onDragEnd, wysiwyg.onKeyUp]).listen((_) {
+    keySubscription = StreamGroup.merge([wysiwyg!.onDragEnd, wysiwyg!.onKeyUp]).listen((_) {
       new Future.delayed(new Duration(milliseconds: 100), edited);
     });
   }
-
 
   @override
   ngOnDestroy() {
     super.ngOnDestroy();
     if (keySubscription != null) {
-      keySubscription.cancel();
+      keySubscription!.cancel();
       keySubscription = null;
     }
   }
@@ -160,19 +153,18 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
   }
 
   void edited() {
-    String html = editor.innerHtml;
+    String? html = editor!.innerHtml;
     value = (html == EMPTY_STRING_VALUE ? null : html);
     markAsTouched();
   }
 
   void writeValue(obj) {
     super.writeValue(obj);
-    quill.pasteHTML(value??'');
+    quill.pasteHTML(value ?? '');
     if (safe) {
-      (wysiwyg.firstChild as Element).innerHtml = value == null ? '' : value;
+      (wysiwyg!.firstChild as Element).innerHtml = value == null ? '' : value;
     } else {
-      (wysiwyg.firstChild as Element)
-          .setInnerHtml(value == null ? '' : value, treeSanitizer: NodeTreeSanitizer.trusted);
+      (wysiwyg!.firstChild as Element).setInnerHtml(value == null ? '' : value, treeSanitizer: NodeTreeSanitizer.trusted);
     }
   }
 
@@ -183,7 +175,7 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
     if (htmlView) {
       edited();
     } else {
-      quill.pasteHTML(value??'');
+      quill.pasteHTML(value ?? '');
     }
   }
 
@@ -222,7 +214,7 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
   Future<Null> doCreateLink() async {
     RangeStatic selection = quill.getSelection();
 
-    String link = await app.input("Insert link, including http://", headline: "Link");
+    String link = await (app!.input("Insert link, including http://", headline: "Link") as FutureOr<String>);
 
     if (link != null) {
       if (selection != null) {
@@ -243,7 +235,7 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
   Future<Null> doCreateImage() async {
     RangeStatic selection = quill.getSelection();
 
-    String url = await imagePicker();
+    String url = await imagePicker!();
 
     if (url != null) {
       if (selection != null) {
@@ -272,7 +264,7 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
 
   Future<bool> focus() async {
     await new Future.delayed(new Duration(milliseconds: 20));
-    editor.focus();
+    editor!.focus();
     return true;
   }
 
@@ -281,7 +273,6 @@ class FnxWysiwygRich extends FnxInputComponent implements ControlValueAccessor, 
       quill.setSelection(savedSel.index, savedSel.length);
     }
   }
-
 }
 
 typedef Future<String> PickImageUrl();

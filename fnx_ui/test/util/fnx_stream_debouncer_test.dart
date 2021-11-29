@@ -8,11 +8,11 @@ void main() {
       StreamController<int> ctrl = new StreamController<int>(sync: true);
       Stream<int> stream = ctrl.stream;
       FnxStreamDebouncer<int> debouncer = new FnxStreamDebouncer(new Duration(milliseconds: 100), sync: true);
-      Stream<int> t = stream.transform(debouncer);
+      Stream<int?> t = stream.transform(debouncer);
       ctrl.add(1);
       ctrl.add(2);
       ctrl.add(3);
-      int result = await t.first;
+      int? result = await t.first;
       expect(result, equals(3));
     });
 
@@ -22,7 +22,7 @@ void main() {
       Duration duration = new Duration(milliseconds: 100);
       FnxStreamDebouncer<int> debouncer = new FnxStreamDebouncer(duration, sync: true);
       DateTime start = new DateTime.now();
-      Stream<int> t = stream.transform(debouncer);
+      Stream<int?> t = stream.transform(debouncer);
       ctrl.add(1);
       await t.first;
 

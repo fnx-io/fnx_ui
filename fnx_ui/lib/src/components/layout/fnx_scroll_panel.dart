@@ -34,17 +34,13 @@ import 'package:logging/logging.dart';
 </div>
 ''',
   preserveWhitespace: false,
-  styles: [
-    ":host {display: block; position: relative;}",
-    ".scroll-panel-container { overflow-y: auto; }"
-  ],
+  styles: [":host {display: block; position: relative;}", ".scroll-panel-container { overflow-y: auto; }"],
   directives: [
     coreDirectives,
     formDirectives,
   ],
 )
 class FnxScrollPanel implements OnInit {
-
   final Logger log = new Logger("FnxScrollPanel");
 
   StreamController<bool> _loadMore = new StreamController<bool>();
@@ -58,26 +54,26 @@ class FnxScrollPanel implements OnInit {
   int debounceMs = 80;
 
   @ViewChild("container")
-  HtmlElement container;
+  HtmlElement? container;
 
   @ViewChild("content")
-  HtmlElement content;
+  HtmlElement? content;
 
   static const int _LOAD_THRESHOLD = 100;
 
-  StreamController<int> _debounceCtrl;
+  late StreamController<int> _debounceCtrl;
 
   FnxScrollPanel();
 
   @override
   ngOnInit() {
-    container.onScroll.listen(processScroll);
-    content.onResize.listen(processScroll);
-    content.on["DOMNodeInserted"].listen(processScroll);
-    content.on["DOMNodeRemoved"].listen(processScroll);
+    container!.onScroll.listen(processScroll);
+    content!.onResize.listen(processScroll);
+    content!.on["DOMNodeInserted"].listen(processScroll);
+    content!.on["DOMNodeRemoved"].listen(processScroll);
 
     _debounceCtrl = new StreamController<int>();
-    Stream<int> eventStream = _debounceCtrl.stream;
+    Stream<int?> eventStream = _debounceCtrl.stream;
     // debounce the stream of load events if we have some duration
     if (debounceMs != null && debounceMs > 0) {
       FnxStreamDebouncer<int> debouncer = new FnxStreamDebouncer<int>(new Duration(milliseconds: debounceMs));
@@ -90,8 +86,8 @@ class FnxScrollPanel implements OnInit {
 
   void processScroll(event) {
     //log.finest("Checking scroll state, should we load more data?");
-    int bottom = container.scrollHeight - container.scrollTop;
-    if (bottom < container.clientHeight + _LOAD_THRESHOLD) {
+    int bottom = container!.scrollHeight - container!.scrollTop;
+    if (bottom < container!.clientHeight + _LOAD_THRESHOLD) {
       debounceEmitLoadMore();
     }
   }
@@ -104,5 +100,4 @@ class FnxScrollPanel implements OnInit {
     log.fine("Emiting load more event (with $debounceMs ms debounce)");
     _loadMore.add(true);
   }
-
 }

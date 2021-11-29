@@ -20,9 +20,9 @@ class CookbookCrop {
 
   ExampleApp app;
 
-  Rectangle<double> crop1;
-  Rectangle<double> crop2;
-  Rectangle<double> crop3;
+  Rectangle<double>? crop1;
+  Rectangle<double>? crop2;
+  Rectangle<double>? crop3;
 
   CookbookCrop(this.app);
 

@@ -9,7 +9,7 @@ int idCounter = 1;
 
 /// Generates unique string each time called. When called with a prefix param
 /// the resulting String will be prefixed, the default prefix is gen__.
-String uid([String prefix]) {
+String uid([String? prefix]) {
   if (prefix == null) prefix = "gen__";
   int id = idCounter;
   idCounter += 1;
@@ -19,11 +19,11 @@ String uid([String prefix]) {
 Stream<KeyboardEvent> get keyDownEvents => document.on['keydown'].where((event) => event is KeyboardEvent).map((event) => event as KeyboardEvent);
 
 bool hasError(NgControl ctrl) {
-  return ctrl != null && !ctrl.valid;
+  return ctrl != null && !ctrl.valid!;
 }
 
 /// returns true if target can be found in potentialParent's DOM subtree
-bool isParentNodeOf(Node target, Node potentialParent) {
+bool isParentNodeOf(Node? target, Node potentialParent) {
   var root = document;
   while (target != root && target != null) {
     if (target == potentialParent) return true;
@@ -34,9 +34,9 @@ bool isParentNodeOf(Node target, Node potentialParent) {
 }
 
 /// returns true, if event has been fired from DOM subtree of given parent
-bool isEventFromSubtree(Event event, Node parent) {
+bool isEventFromSubtree(Event event, Node? parent) {
   if (event == null || !(event.target is Node) || parent == null) return false;
-  return isParentNodeOf(event.target, parent);
+  return isParentNodeOf(event.target as Node?, parent);
 }
 
 Set<String> activeElementTags = new Set.from(["A", "INPUT", "TEXTAREA", "BUTTON"]);
@@ -46,7 +46,7 @@ Set<String> activeElementTags = new Set.from(["A", "INPUT", "TEXTAREA", "BUTTON"
 /// Inputs, buttons, links, ...
 bool isActiveElement(Node node) {
   if (!(node is Element)) return false;
-  Element el = node as Element;
+  Element el = node;
   return activeElementTags.contains(el.tagName);
 }
 
@@ -66,7 +66,7 @@ Stream<double> verticalElementPositionStream(Element e) {
   return mergedRelevant.transform(new StreamTransformer<Event, double>.fromHandlers(handleData: (Event event, EventSink<double> sink) {
     Rectangle r = e.getBoundingClientRect();
     double center = r.top + ((r.bottom - r.top) / 2.0);
-    sink.add(center / window.innerHeight.toDouble());
+    sink.add(center / window.innerHeight!.toDouble());
   }));
 }
 
@@ -74,20 +74,20 @@ Stream<double> verticalElementPositionStream(Element e) {
 /// Nejakym takovym chytristikou bysme meli delat vsechny dropdowny.
 ///
 class DropdownTracker {
-  Element _element;
-  Element _dropdown;
-  Function _onHide;
+  Element? _element;
+  Element? _dropdown;
+  late Function _onHide;
 
   int top = 10000;
   int left = 10000;
   String dropdownHeight = "auto";
   bool downOnly;
 
-  StreamSubscription<Event> subscription;
+  late StreamSubscription<Event?> subscription;
 
   DropdownTracker({this.downOnly: false}) {}
 
-  void init(Element container, Element dropdown, Function onHide) {
+  void init(Element? container, Element? dropdown, Function onHide) {
     this._element = container;
     this._dropdown = dropdown;
     this._onHide = onHide;
@@ -97,7 +97,7 @@ class DropdownTracker {
   }
 
   bool _isVisible(Event event) {
-    return _dropdown != null && !_dropdown.hidden;
+    return _dropdown != null && !_dropdown!.hidden;
   }
 
   void destroy() {
@@ -107,10 +107,10 @@ class DropdownTracker {
 
   void updatePosition([_]) {
     print("Update");
-    int scrHeight = window.innerHeight.toInt();
-    int dropdownH = _dropdown.getBoundingClientRect().height.toInt();
+    int scrHeight = window.innerHeight!.toInt();
+    int dropdownH = _dropdown!.getBoundingClientRect().height.toInt();
     if (_element != null) {
-      Rectangle<num> el = _element.getBoundingClientRect();
+      Rectangle<num> el = _element!.getBoundingClientRect();
 
       if (el.top < 0) {
         _onHide();

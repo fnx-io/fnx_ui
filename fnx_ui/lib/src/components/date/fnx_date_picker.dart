@@ -12,76 +12,70 @@ import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'package:fnx_ui/src/util/ui.dart';
 import 'package:intl/intl.dart';
 
-@Component(
-    selector: 'fnx-date-picker',
-    templateUrl: 'fnx_date_picker.html',
-    preserveWhitespace: false,
-    directives: const [
-      coreDirectives,
-      formDirectives,
-      FnxText,
-      FnxInt
-    ],
-    styles: const [
-      ".picker--date td.date-is-empty { cursor: default !important; background: none !important; padding: 5px !important;}",
-    ])
+@Component(selector: 'fnx-date-picker', templateUrl: 'fnx_date_picker.html', preserveWhitespace: false, directives: const [
+  coreDirectives,
+  formDirectives,
+  FnxText,
+  FnxInt
+], styles: const [
+  ".picker--date td.date-is-empty { cursor: default !important; background: none !important; padding: 5px !important;}",
+])
 class FnxDatePicker implements OnInit, OnDestroy {
   String componentId = ui.uid('datepicker-');
 
   /// using this emitter instances of DatePickers broadcast, that they
   /// have been requested to be opened
-  static final StreamController<FnxDatePicker> _ON_PICKER_OPENED =
-      new StreamController<FnxDatePicker>.broadcast();
+  static final StreamController<FnxDatePicker> _ON_PICKER_OPENED = new StreamController<FnxDatePicker>.broadcast();
   static Stream<FnxDatePicker> get ON_PICKER_OPENED => _ON_PICKER_OPENED.stream;
 
-  StreamSubscription<FnxDatePicker> _pickerOpenedSubscription;
+  StreamSubscription<FnxDatePicker>? _pickerOpenedSubscription;
 
   DropdownTracker dropdownTracker = new DropdownTracker();
 
   bool _shown = false;
 
   @Input()
-  String label;
+  String? label;
 
-  DateTime _value;
-  DateTime _originalValue;
+  DateTime? _value;
+  DateTime? _originalValue;
 
   @Input()
   bool hourFormat24 = true;
   @Input()
   bool dateTime = false;
 
-  List days;
+  List? days;
 
   StreamController<bool> _closed = new StreamController();
   @Output()
   Stream<bool> get closed => _closed.stream;
 
-  StreamController<DateTime> _datePicked = new StreamController();
+  StreamController<DateTime?> _datePicked = new StreamController();
   @Output()
-  Stream<DateTime> get datePicked => _datePicked.stream;
+  Stream<DateTime?> get datePicked => _datePicked.stream;
 
   @Input()
-  Stream<bool> open;
+  Stream<bool>? open;
 
-  StreamSubscription _openSubscription;
+  StreamSubscription? _openSubscription;
 
   DateTime today = new DateTime.now();
   String todayString = dateFormat.format(new DateTime.now());
 
-  DateTime get value => _value;
+  DateTime? get value => _value;
 
   @ViewChild("container")
-  HtmlElement container;
+  HtmlElement? container;
 
-  StreamSubscription<MouseEvent> _globalClicks;
+  StreamSubscription<MouseEvent>? _globalClicks;
 
   @ViewChild("dropdown")
-  HtmlElement dropdown;
+  HtmlElement? dropdown;
 
-  StreamSubscription<KeyboardEvent> keyDownSubscription;
+  late StreamSubscription<KeyboardEvent> keyDownSubscription;
 
-  FnxModal modal;
+  FnxModal? modal;
 
   /// Constructor used to create instance of Datepicker.
   FnxDatePicker(@Optional() this.modal) {
@@ -96,7 +90,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
 
   set valueInternal(var date) {
     if (date != null && !(date is DateTime)) return;
-    _value = date as DateTime;
+    _value = date as DateTime?;
     valueChanged();
   }
 
@@ -109,24 +103,24 @@ class FnxDatePicker implements OnInit, OnDestroy {
     }
 
     if (shown == true) {
-      modal?.activeChilds?.add(this);
+      modal!.activeChilds.add(this);
     } else {
-      modal?.activeChilds?.remove(this);
+      modal!.activeChilds.remove(this);
     }
   }
 
   bool get shown => _shown;
 
-  int get year => _value.year;
-  int get month => _value.month;
-  int get day => _value.day;
+  int get year => _value!.year;
+  int get month => _value!.month;
+  int get day => _value!.day;
 
-  int get hour => _value.hour;
-  int get minute => _value.minute;
+  int get hour => _value!.hour;
+  int get minute => _value!.minute;
 
-  String editingTime = null;
+  String? editingTime = null;
 
-  String get timeToShow {
+  String? get timeToShow {
     if (editingTime != null) return editingTime;
     if (hourFormat24) {
       if (minute < 10) return "$hour:0$minute";
@@ -137,20 +131,20 @@ class FnxDatePicker implements OnInit, OnDestroy {
     }
   }
 
-  void set timeToShow(String a) {
+  void set timeToShow(String? a) {
     if (_value == null) return;
     if (a == null) return;
     editingTime = a;
     try {
       List<String> p = a.trim().split(":");
-      int h = int.tryParse(p[0]);
-      int m = int.tryParse(p[1]);
+      int? h = int.tryParse(p[0]);
+      int? m = int.tryParse(p[1]);
       if (h == null) return;
       if (m == null) m = 0;
       valueInternal = new DateTime(
-        _value.year,
-        _value.month,
-        _value.day,
+        _value!.year,
+        _value!.month,
+        _value!.day,
         h,
         m,
       );
@@ -191,9 +185,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
 
   bool isSelected(var year, var month, var day) {
     if (_originalValue == null) return false;
-    return _originalValue.year == year &&
-        _originalValue.month == month &&
-        _originalValue.day == day;
+    return _originalValue!.year == year && _originalValue!.month == month && _originalValue!.day == day;
   }
 
   bool isToday(var year, var month, var day) {
@@ -209,7 +201,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
       return;
     }
 
-    _datePicked.add(new DateTime(year, month, day, _value.hour, _value.minute));
+    _datePicked.add(new DateTime(year, month, day, _value!.hour, _value!.minute));
     if (!dateTime) {
       hidePicker();
     }
@@ -221,7 +213,7 @@ class FnxDatePicker implements OnInit, OnDestroy {
   }
 
   String formatNumber(int num) {
-    if (num == null) return null;
+    //if (num == null) return null;
     var formatter = new NumberFormat('00');
     return formatter.format(num);
   }
@@ -259,41 +251,39 @@ class FnxDatePicker implements OnInit, OnDestroy {
   }
 
   void showToday() {
-    int h, m, s, ms = 0;
+    int? h, m, s, ms = 0;
     bool utc = today.isUtc;
     if (value != null) {
-      h = value.hour;
-      m = value.minute;
-      s = value.second;
-      ms = value.millisecond;
-      utc = value.isUtc;
+      h = value!.hour;
+      m = value!.minute;
+      s = value!.second;
+      ms = value!.millisecond;
+      utc = value!.isUtc;
     }
-    valueInternal =
-        dateFrom(today.year, today.month, today.day, h, m, s, ms, utc);
+    valueInternal = dateFrom(today.year, today.month, today.day, h, m, s, ms, utc);
     _datePicked.add(value);
   }
 
   void changeValueMonth(int by) {
     if (value == null) return;
     //int day = value.day;
-    int month = value.month;
-    int year = value.year;
+    int month = value!.month;
+    int year = value!.year;
     int yearsChange = (by / 12).floor();
     int monthsChange = by % 12;
 
     // we intentionally do not emit datePicked event, since this signals that the picker
     // should rerender, not that new value has been picked
-    valueInternal = dateFrom(year + yearsChange, month + monthsChange, 1,
-        value.hour, value.minute, value.second, value.millisecond, value.isUtc);
+    valueInternal = dateFrom(year + yearsChange, month + monthsChange, 1, value!.hour, value!.minute, value!.second, value!.millisecond, value!.isUtc);
   }
 
   void addDurationToValue(Duration dur) {
-    valueInternal = _value.add(dur);
+    valueInternal = _value!.add(dur);
     _datePicked.add(_value);
   }
 
   void subtractDurationFromValue(Duration dur) {
-    valueInternal = _value.subtract(dur);
+    valueInternal = _value!.subtract(dur);
     _datePicked.add(_value);
   }
 
@@ -301,16 +291,16 @@ class FnxDatePicker implements OnInit, OnDestroy {
   bool get isPm => AmPm.PM == amPm;
 
   void setPm() {
-    var h = hour24ToAmPm(hour).hour;
+    var h = hour24ToAmPm(hour)!.hour;
     int convertedHour = hourAmPmTo24(new AmPmHour(h, AmPm.PM));
-    valueInternal = setHour(_value, convertedHour);
+    valueInternal = setHour(_value!, convertedHour);
     _datePicked.add(_value);
   }
 
   void setAm() {
-    var h = hour24ToAmPm(hour).hour;
+    var h = hour24ToAmPm(hour)!.hour;
     int convertedHour = hourAmPmTo24(new AmPmHour(h, AmPm.AM));
-    valueInternal = setHour(_value, convertedHour);
+    valueInternal = setHour(_value!, convertedHour);
     _datePicked.add(_value);
   }
 
@@ -322,21 +312,18 @@ class FnxDatePicker implements OnInit, OnDestroy {
 
   @override
   ngOnInit() {
-    _pickerOpenedSubscription =
-        ON_PICKER_OPENED.listen((picker) => somePickerOpened(picker));
+    _pickerOpenedSubscription = ON_PICKER_OPENED.listen((picker) => somePickerOpened(picker));
     if (open != null) {
-      _openSubscription = open.listen((_) => ensureOpened());
+      _openSubscription = open!.listen((_) => ensureOpened());
     }
     _globalClicks = document.onClick.listen((event) {
       if (shown != true) return;
-      if (ui.isEventFromSubtree(event, container.parentNode.parentNode)) return;
+      if (ui.isEventFromSubtree(event, container!.parentNode!.parentNode)) return;
       hidePicker();
     });
     dropdownTracker.init(container, dropdown, () => shown = false);
 
-    keyDownSubscription = ui.keyDownEvents
-        .where((KeyboardEvent e) => e.keyCode == KeyCode.ESC)
-        .listen((KeyboardEvent e) {
+    keyDownSubscription = ui.keyDownEvents.where((KeyboardEvent e) => e.keyCode == KeyCode.ESC).listen((KeyboardEvent e) {
       ui.killEvent(e);
       hidePicker();
     });
@@ -351,9 +338,9 @@ class FnxDatePicker implements OnInit, OnDestroy {
 
   @override
   ngOnDestroy() {
-    if (_openSubscription != null) _openSubscription.cancel();
-    if (_pickerOpenedSubscription != null) _pickerOpenedSubscription.cancel();
-    if (_globalClicks != null) _globalClicks.cancel();
+    if (_openSubscription != null) _openSubscription!.cancel();
+    if (_pickerOpenedSubscription != null) _pickerOpenedSubscription!.cancel();
+    if (_globalClicks != null) _globalClicks!.cancel();
     dropdownTracker.destroy();
     keyDownSubscription.cancel();
   }

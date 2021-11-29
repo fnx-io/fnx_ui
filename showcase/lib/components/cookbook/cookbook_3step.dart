@@ -23,8 +23,8 @@ class Cookbook3Step {
 
   Cookbook3Step(this.app);
 
-  String selected1 = null;
-  String selected2 = null;
+  String? selected1 = null;
+  String? selected2 = null;
 
   List<String> step1 = ["A", "B", "C", "D", "E"];
   List<String> step2 = [];

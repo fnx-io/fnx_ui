@@ -16,21 +16,20 @@
         <p footer class="buttonbar">
             <button *ngIf="modal.cancel != null" class="btn" (click)="closeModal(modal.id, false)"
                     type="button"
-                    data-prefix="clear">{{modal.cancel}}</button>
+                    [attr.data-prefix]="'clear'">{{modal.cancel}}</button>
             <span class="spacer"></span>
 
             <!-- We have input, it will request focus -->
             <button
                 *ngIf="modal.input != null"
                 type="submit"
-                class="btn bg--important" (click)="closeModal(modal.id, true)" data-prefix="check">{{modal.ok}}</button>
+                class="btn bg--important" (click)="closeModal(modal.id, true)" [attr.data-prefix]="'check'">{{modal.ok}}</button>
 
             <!-- We don't have input, we will request focus -->
             <button
                 *ngIf="modal.input == null" autoFocus
                 type="submit"
-                class="btn bg--important" (click)="closeModal(modal.id, true)" data-prefix="check">{{modal.ok}}</button>
-
+                class="btn bg--important" (click)="closeModal(modal.id, true)" [attr.data-prefix]="'check'">{{modal.ok}}</button>
         </p>
 
     </fnx-modal>
@@ -46,10 +45,10 @@
 
 <!-- Uncaught exceptions -->
 <fnx-modal (close)="errorToShow = null" *ngIf="errorToShow != null">
-    <h3 header>{{errorToShow.headline}}</h3>
-    <p main>{{errorToShow.message}}</p>
-    <ul main *ngIf="errorToShow.details.isNotEmpty">
-        <li *ngFor="let e of errorToShow.details">{{e}}</li>
+    <h3 header>{{errorToShow!.headline}}</h3>
+    <p main>{{errorToShow!.message}}</p>
+    <ul main *ngIf="errorToShow!.details?.isNotEmpty ?? false">
+        <li *ngFor="let e of errorToShow!.details">{{e}}</li>
     </ul>
     <p footer class="buttonbar">
         <span class="spacer"></span>

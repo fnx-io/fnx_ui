@@ -27,7 +27,7 @@ import 'package:fnx_ui/src/util/ui.dart' as ui;
   selector: 'fnx-submit-bar',
   template: r'''
 <div class="buttonbar" [class.opacity--07]="isDisabled">
-  <a *ngIf="back" href="#" class="btn " (click)="goBack($event)" data-prefix="arrow_back">{{ goBackLabel }}</a>
+  <a *ngIf="back" href="#" class="btn " (click)="goBack($event)" [attr.data-prefix]="'arrow_back'">{{ goBackLabel }}</a>
   <ng-content></ng-content>
   <span class="spacer"></span>
   <span *ngIf="isDisabledByWork" class="preloader bg--white"></span>
@@ -68,7 +68,7 @@ class FnxSubmitBar implements AfterContentChecked {
 
   static const int _visualWorkingTimeoutMilis = 300;
 
-  DateTime _lastSubmit;
+  DateTime? _lastSubmit;
   static const int _doubleClickPreventionMilis = 400;
 
   ///
@@ -91,10 +91,9 @@ class FnxSubmitBar implements AfterContentChecked {
   bool get isDisabled => form?.disabled == true || _longWorking;
   bool get isDisabledByWork => form?.disabled != true && _longWorking;
 
+  FnxForm? get form => _form;
 
-  FnxForm get form => _form;
-
-  final FnxForm _form;
+  final FnxForm? _form;
 
   bool _checkedFormValid = true;
 
@@ -115,17 +114,17 @@ class FnxSubmitBar implements AfterContentChecked {
 
   @override
   void ngAfterContentChecked() {
-    _checkedFormValid = (_form == null) ? true : _form.isValid();
+    _checkedFormValid = (_form == null) ? true : _form!.isValid();
   }
 
-  DateTime _startedWorking = null;
+  DateTime? _startedWorking = null;
   bool _longWorking = false;
 
   void checkWorkingStatus() {
     if (_startedWorking == null) {
       _longWorking = false;
     } else {
-      if (_startedWorking.add(Duration(milliseconds: _visualWorkingTimeoutMilis)).isBefore(DateTime.now())) {
+      if (_startedWorking!.add(Duration(milliseconds: _visualWorkingTimeoutMilis)).isBefore(DateTime.now())) {
         // it's working for a long time!
         _longWorking = true;
       }
@@ -141,7 +140,7 @@ class FnxSubmitBar implements AfterContentChecked {
       ui.killEvent(e);
       return;
     }
-    if (_lastSubmit != null && _lastSubmit.add(Duration(milliseconds: _doubleClickPreventionMilis)).isAfter(DateTime.now())) {
+    if (_lastSubmit != null && _lastSubmit!.add(Duration(milliseconds: _doubleClickPreventionMilis)).isAfter(DateTime.now())) {
       // too soon
       ui.killEvent(e);
       return;

@@ -1,11 +1,11 @@
 import 'package:angular/angular.dart';
+import 'package:collection/collection.dart' show IterableExtension;
 
 ///
 /// Base class for all components which support validation (extend or mix-in).
 ///
 ///
 abstract class FnxValidatorComponent implements OnInit, OnDestroy {
-
   bool _touched = false;
 
   bool get required; // abstract
@@ -16,21 +16,21 @@ abstract class FnxValidatorComponent implements OnInit, OnDestroy {
 
   List<FnxValidatorComponent> _validatorChildren = [];
 
-  FnxValidatorComponent _parent;
-  FnxValidatorComponent get parent => _parent;
-  FnxValidatorComponent(@SkipSelf() @Optional() FnxValidatorComponent this._parent);
+  FnxValidatorComponent? _parent;
+  FnxValidatorComponent? get parent => _parent;
+  FnxValidatorComponent(@SkipSelf() @Optional() FnxValidatorComponent? this._parent);
 
   @override
   ngOnInit() {
     if (_parent != null) {
-      _parent.registerChild(this);
+      _parent!.registerChild(this);
     }
   }
 
   @override
   ngOnDestroy() {
     if (_parent != null) {
-      _parent.deregisterChild(this);
+      _parent!.deregisterChild(this);
     }
   }
 
@@ -74,7 +74,7 @@ abstract class FnxValidatorComponent implements OnInit, OnDestroy {
   bool isTouched() {
     if (_touched) return true;
     if (_validatorChildren.isEmpty) return false;
-    return _validatorChildren.firstWhere((val) => val.isTouched(), orElse: () => null) != null;
+    return _validatorChildren.firstWhereOrNull((val) => val.isTouched()) != null;
   }
 
   ///
@@ -84,12 +84,12 @@ abstract class FnxValidatorComponent implements OnInit, OnDestroy {
 
   bool hasValidChildren() {
     if (_validatorChildren.isEmpty) return true;
-    return _validatorChildren.firstWhere((val) => !val.isValid(), orElse: () => null) == null;
+    return _validatorChildren.firstWhereOrNull((val) => !val.isValid()) == null;
   }
 
   bool hasRequiredChildren() {
     if (_validatorChildren.isEmpty) return false;
-    return _validatorChildren.firstWhere((val) => val.required, orElse: () => null) != null;
+    return _validatorChildren.firstWhereOrNull((val) => val.required) != null;
   }
 
   bool get isParentReadonly {

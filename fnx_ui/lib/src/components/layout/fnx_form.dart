@@ -15,7 +15,7 @@ typedef String formValidatorFunction();
     selector: 'fnx-form',
     templateUrl: 'fnx_form.html',
     providers: const [
-      const Provider(FnxValidatorComponent, useExisting: FnxForm, multi: false),
+      const Provider(FnxValidatorComponent, useExisting: FnxForm),
     ],
     visibility: Visibility.all)
 class FnxForm extends FnxValidatorComponent implements OnInit, OnDestroy {

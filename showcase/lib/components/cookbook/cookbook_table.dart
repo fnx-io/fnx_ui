@@ -21,7 +21,7 @@ class CookbookTable {
 
   ExampleApp app;
 
-  String search = null;
+  String? search = null;
 
   bool bordersOn = false;
   bool linesOn = false;
@@ -30,7 +30,7 @@ class CookbookTable {
 
   CookbookTable(this.app);
 
-  Map selectedRow = null;
+  Map? selectedRow = null;
 
   ngOnInit() {
     loadMore();
@@ -42,7 +42,7 @@ class CookbookTable {
   }
 
   bool containsSearch(Map<String,Object> row) {
-    return row["name"].toString().contains(search) || row["email"].toString().contains(search);
+    return row["name"].toString().contains(search!) || row["email"].toString().contains(search!);
   }
 
   void loadMore() {

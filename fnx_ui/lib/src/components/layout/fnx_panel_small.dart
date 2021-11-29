@@ -21,7 +21,7 @@ import 'package:fnx_ui/src/validator.dart';
   styles: const [":host {display: block;}"],
   preserveWhitespace: false,
   providers: const [
-    const Provider(FnxValidatorComponent, useExisting: FnxPanelSmall, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxPanelSmall),
   ],
   directives: [
     coreDirectives,
@@ -30,7 +30,7 @@ import 'package:fnx_ui/src/validator.dart';
   visibility: Visibility.all,
 )
 class FnxPanelSmall extends FnxPanel implements OnInit, OnDestroy {
-  FnxPanelSmall(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
+  FnxPanelSmall(@SkipSelf() @Optional() FnxValidatorComponent? parent) : super(parent);
 
   ///
   /// Input. Can by collapsed or expanded by user. Default = false = always open.
@@ -39,7 +39,7 @@ class FnxPanelSmall extends FnxPanel implements OnInit, OnDestroy {
   bool closable = false;
 
   @Input()
-  bool open = null;
+  bool open = false;
 
   @override
   bool get disabled => false;

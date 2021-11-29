@@ -29,7 +29,7 @@ class ExampleExceptions {
   ExampleExceptions(FnxExceptionHandler handler, this.app) {
     // register custom exception handler
     handler.registerErrorProcessor(int, processIntException);
-    handler.registerErrorProcessor(CustomException, processCustomException);
+    handler.registerErrorProcessor(CustomException, processCustomException as FnxError Function(Object, StackTrace?));
   }
 
   void stringException() {
@@ -47,7 +47,7 @@ class ExampleExceptions {
   ///
   /// Custom exception handler.
   ///
-  FnxError processIntException(Object exception, StackTrace stacktrace) {
+  FnxError processIntException(Object exception, StackTrace? stacktrace) {
     int code = (exception as int);
     return new FnxError("This is error code ${code}",
         headline: "Custom headline",
@@ -57,7 +57,7 @@ class ExampleExceptions {
   ///
   /// Custom exception handler.
   ///
-  FnxError processCustomException(Object exception, StackTrace stacktrace) {
+  FnxError? processCustomException(Object exception, StackTrace? stacktrace) {
     app.toast("Custom exception, yay!");
     return null;
   }

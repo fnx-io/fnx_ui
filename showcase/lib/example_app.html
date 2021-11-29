@@ -19,7 +19,7 @@
                         <li><a [routerLink]="routing.reorder.toUrl()">Reorder</a></li>
                         <li><a [routerLink]="routing.tooltip.toUrl()">Tooltips</a></li>
 
-                        <li data-suffix="more_horiz"><span>Cookbook</span>
+                        <li [attr.data-suffix]="'more_horiz'"><span>Cookbook</span>
                             <ul class="menu--vertical">
                                 <li><a [routerLink]="routing.cookbookwizard.toUrl()">Wizard</a></li>
                                 <li><a [routerLink]="routing.cookbookdynarows.toUrl()">Dynamic rows</a></li>

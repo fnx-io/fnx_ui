@@ -44,28 +44,28 @@ class FnxImageCrop implements OnInit, AfterChanges, OnDestroy {
   double ratio = 1.0;
 
   @Input()
-  String src = null;
+  String? src = null;
 
   @ViewChild('mask')
-  DivElement mask;
+  DivElement? mask;
 
   @ViewChild('img')
-  ImageElement img;
+  HtmlElement? img;
 
-  StreamSubscription<Event> _resizeSubscription;
+  late StreamSubscription<Event?> _resizeSubscription;
 
   StreamController<Rectangle<double>> _crop = new StreamController();
   @Output()
   Stream<Rectangle<double>> get crop => _crop.stream;
 
   int maskHeight = 0;
-  int get maskWidth => mask?.getBoundingClientRect()?.width?.ceil();
+  int? get maskWidth => mask?.getBoundingClientRect()?.width?.ceil();
 
   int imgSourceWidth = 0;
   int imgSourceHeight = 0;
 
-  int imgWidth = null;
-  int imgHeight = null;
+  int? imgWidth = null;
+  int? imgHeight = null;
 
   double imgOffsetX = 0.0;
   double imgOffsetY = 0.0;
@@ -74,8 +74,7 @@ class FnxImageCrop implements OnInit, AfterChanges, OnDestroy {
 
   @override
   ngOnInit() {
-    _resizeSubscription =
-        window.onResize.transform(new FnxStreamDebouncer(new Duration(milliseconds: 100))).listen(updateMask);
+    _resizeSubscription = window.onResize.transform(new FnxStreamDebouncer(new Duration(milliseconds: 100))).listen(updateMask);
 
     updateMask();
     loadImageDimensions();
@@ -89,9 +88,9 @@ class FnxImageCrop implements OnInit, AfterChanges, OnDestroy {
 
   void loadImageDimensions() {
     if (img == null) return;
-    img.onLoad.listen((Event e) {
-      imgSourceWidth = img.clientWidth;
-      imgSourceHeight = img.clientHeight;
+    img!.onLoad.listen((Event e) {
+      imgSourceWidth = img!.clientWidth;
+      imgSourceHeight = img!.clientHeight;
       updateImage();
     });
   }
@@ -103,7 +102,7 @@ class FnxImageCrop implements OnInit, AfterChanges, OnDestroy {
     if (ratio == null || ratio <= 0) {
       ratio = 1.0;
     }
-    return (maskWidth / ratio).round();
+    return (maskWidth! / ratio).round();
   }
 
   void updateMask([_]) {
@@ -118,47 +117,47 @@ class FnxImageCrop implements OnInit, AfterChanges, OnDestroy {
     imgWidth = imgSourceWidth;
     imgHeight = imgSourceHeight;
 
-    if (imgWidth < maskWidth || imgHeight < maskHeight) {
+    if (imgWidth! < maskWidth! || imgHeight! < maskHeight) {
       // moc malej, musi se zvetsit!
-      if (imgWidth < maskWidth) {
+      if (imgWidth! < maskWidth!) {
         // moc uzkej!
-        double resize = maskWidth / imgSourceWidth;
+        double resize = maskWidth! / imgSourceWidth;
         imgWidth = maskWidth;
         imgHeight = (imgSourceHeight * resize).ceil();
       }
 
-      if (imgHeight < maskHeight) {
+      if (imgHeight! < maskHeight) {
         // moc nizkej!
-        double resize = maskHeight / imgHeight;
+        double resize = maskHeight / imgHeight!;
         imgHeight = maskHeight;
-        imgWidth = (imgWidth * resize).ceil();
+        imgWidth = (imgWidth! * resize).ceil();
       }
     } else {
       // moc velkej, musi se zmensit
-      double resize = maskWidth / imgSourceWidth;
+      double resize = maskWidth! / imgSourceWidth;
       imgWidth = maskWidth;
       imgHeight = (imgSourceHeight * resize).ceil();
 
-      if (imgHeight < maskHeight) {
+      if (imgHeight! < maskHeight) {
         // no, to se zmensil moc!
-        double resize = maskHeight / imgHeight;
+        double resize = maskHeight / imgHeight!;
         imgHeight = maskHeight;
-        imgWidth = (imgWidth * resize).ceil();
+        imgWidth = (imgWidth! * resize).ceil();
       }
     }
-    imgWidth = (imgWidth * zoom).floor();
-    imgHeight = (imgHeight * zoom).floor();
+    imgWidth = (imgWidth! * zoom).floor();
+    imgHeight = (imgHeight! * zoom).floor();
 
     trimOffsetToBoundaries();
     emitCropResult();
   }
 
   void emitCropResult() {
-    if (imgWidth <= 0 || imgHeight <= 0) return;
-    double left = (imgOffsetX / imgWidth).abs();
-    double top = (imgOffsetY / imgHeight).abs();
-    double width = maskWidth / imgWidth;
-    double height = maskHeight / imgHeight;
+    if (imgWidth! <= 0 || imgHeight! <= 0) return;
+    double left = (imgOffsetX / imgWidth!).abs();
+    double top = (imgOffsetY / imgHeight!).abs();
+    double width = maskWidth! / imgWidth!;
+    double height = maskHeight / imgHeight!;
     if (top + height > 1) height = 1 - top;
     _crop.add(new Rectangle(left, top, width, height));
   }
@@ -184,8 +183,8 @@ class FnxImageCrop implements OnInit, AfterChanges, OnDestroy {
 
     // move
     try {
-      num dx = event.touches.first.client.x - _lastTouch.touches.first.client.x;
-      num dy = event.touches.first.client.y - _lastTouch.touches.first.client.y;
+      num dx = event.touches!.first.client.x - _lastTouch!.touches!.first.client.x;
+      num dy = event.touches!.first.client.y - _lastTouch!.touches!.first.client.y;
 
       imgOffsetX += dx;
       imgOffsetY += dy;
@@ -196,9 +195,9 @@ class FnxImageCrop implements OnInit, AfterChanges, OnDestroy {
       // hmm ...
     }
     // scale
-    if (_lastTouch.touches.length == 2 && event.touches.length == 2) {
-      num distOrig = _lastTouch.touches[0].client.distanceTo(_lastTouch.touches[1].client);
-      num distNow = event.touches[0].client.distanceTo(event.touches[1].client);
+    if (_lastTouch!.touches!.length == 2 && event.touches!.length == 2) {
+      num distOrig = _lastTouch!.touches![0].client.distanceTo(_lastTouch!.touches![1].client);
+      num distNow = event.touches![0].client.distanceTo(event.touches![1].client);
       double scale = distNow.toDouble() / distOrig.toDouble();
       Point<double> center = getCenter();
       zoom = zoom * scale;
@@ -212,7 +211,7 @@ class FnxImageCrop implements OnInit, AfterChanges, OnDestroy {
     killEvent(event);
   }
 
-  TouchEvent _lastTouch = null;
+  TouchEvent? _lastTouch = null;
 
   void touchStart(TouchEvent t) {
     _lastTouch = t;
@@ -224,9 +223,9 @@ class FnxImageCrop implements OnInit, AfterChanges, OnDestroy {
 
   void trimOffsetToBoundaries() {
     if (imgOffsetY > 0) imgOffsetY = 0.0;
-    if (maskHeight - imgOffsetY > imgHeight) imgOffsetY = (maskHeight - imgHeight).toDouble();
+    if (maskHeight - imgOffsetY > imgHeight!) imgOffsetY = (maskHeight - imgHeight!).toDouble();
     if (imgOffsetX > 0) imgOffsetX = 0.0;
-    if (maskWidth - imgOffsetX > imgWidth) imgOffsetX = (maskWidth - imgWidth).toDouble();
+    if (maskWidth! - imgOffsetX > imgWidth!) imgOffsetX = (maskWidth! - imgWidth!).toDouble();
   }
 
   void zoomIn(Event event) {
@@ -252,14 +251,14 @@ class FnxImageCrop implements OnInit, AfterChanges, OnDestroy {
   }
 
   Point<double> getCenter() {
-    double cx = (maskWidth / 2.0 - imgOffsetX) / imgWidth.toDouble();
-    double cy = (maskHeight / 2.0 - imgOffsetY) / imgHeight.toDouble();
+    double cx = (maskWidth! / 2.0 - imgOffsetX) / imgWidth!.toDouble();
+    double cy = (maskHeight / 2.0 - imgOffsetY) / imgHeight!.toDouble();
     return new Point(cx, cy);
   }
 
   void centerTo(Point<double> center) {
-    imgOffsetX = (maskWidth / 2.0) - (center.x * imgWidth);
-    imgOffsetY = (maskHeight / 2.0) - (center.y * imgHeight);
+    imgOffsetX = (maskWidth! / 2.0) - (center.x * imgWidth!);
+    imgOffsetY = (maskHeight / 2.0) - (center.y * imgHeight!);
     trimOffsetToBoundaries();
     emitCropResult();
   }

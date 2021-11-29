@@ -7,7 +7,7 @@ import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/validator.dart';
 
-const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxText, multi: true);
+const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxText);
 
 ///
 /// Text input. Possible types are:
@@ -20,23 +20,23 @@ const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExis
   selector: 'fnx-text',
   template: r'''
 <input id="{{ componentId }}" type="{{ htmlType }}" [(ngModel)]="value" [readonly]="isReadonly"
-  [attr.minlength]="minLength"
-  [attr.maxlength]="maxLength"
-  [attr.min]="min"
-  [attr.max]="max"
+  [attr.minlength]="minLength?.toString()"
+  [attr.maxlength]="maxLength?.toString()"
+  [attr.min]="min?.toString()"
+  [attr.max]="max?.toString()"
   [attr.autocomplete]="autocomplete"
   (keyup)="markAsTouched()"
   [class.error]="isTouchedAndInvalid()"
   [attr.step]="decimalsAttr"
   [attr.placeholder]="placeholder"
-  [attr.tabindex]="(isReadonly || isDisabled) ? -1 : null"
+  [attr.tabindex]="(isReadonly || isDisabled) ? '-1' : '0'"
   #input
 />
 ''',
   providers: const [
     CUSTOM_INPUT_TEXT_VALUE_ACCESSOR,
-    const Provider(Focusable, useExisting: FnxText, multi: false),
-    const Provider(FnxValidatorComponent, useExisting: FnxText, multi: false),
+    const Provider(Focusable, useExisting: FnxText),
+    const Provider(FnxValidatorComponent, useExisting: FnxText),
   ],
   styles: const [":host input { text-align: inherit;}"],
   preserveWhitespace: false,
@@ -47,22 +47,22 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
   bool required = false;
 
   @Input()
-  int minLength = null;
+  int? minLength = null;
 
   @Input()
-  int maxLength = null;
+  int? maxLength = null;
 
   @Input()
-  int min = null;
+  int? min = null;
 
   @Input()
-  int max = null;
+  int? max = null;
 
   @Input()
   String type = 'text';
 
   @Input()
-  String placeholder = null;
+  String? placeholder = null;
 
   @Input()
   String autocomplete = "off";
@@ -74,11 +74,11 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
   bool disabled = false;
 
   @ViewChild("input")
-  HtmlElement element;
+  HtmlElement? element;
 
   int _decimals = 0;
 
-  FnxText(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
+  FnxText(@SkipSelf() @Optional() FnxValidatorComponent? parent) : super(parent);
 
   String get htmlType {
     switch (type) {
@@ -92,7 +92,8 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
     }
   }
 
-  static final RegExp _EMAIL_REGEXP = new RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
+  static final RegExp _EMAIL_REGEXP =
+      new RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
 
   @override
   ngOnInit() {
@@ -100,14 +101,14 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
     assertType();
   }
 
-  int get decimals {
+  int? get decimals {
     if (type == 'decimal') return _decimals;
 
     return null;
   }
 
-  String get decimalsAttr {
-    int dec = decimals;
+  String? get decimalsAttr {
+    int? dec = decimals;
     if (dec == null) return null;
     if (dec == 0) return '1';
 
@@ -115,7 +116,7 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
   }
 
   @Input()
-  set decimals(int decimals) {
+  set decimals(int? decimals) {
     if (decimals == null || decimals < 0 || decimals > 12) {
       throw "Invalid decimals count for decimal field. Min 0 max 12 decimals.";
     }
@@ -145,23 +146,23 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
   ///
   bool hasValidNumberImpl() {
     if (min == null && max == null) return true;
-    num v = parseNum(value);
+    num? v = parseNum(value);
 
     if (v == null && value != null && value.toString().length > 0) return false; // not a number
     if (required && v == null) return false;
-    if (min != null && v < min) return false;
-    if (max != null && v > max) return false;
+    if (min != null && v! < min!) return false;
+    if (max != null && v! > max!) return false;
     return true;
   }
 
   bool hasValidDecimals() {
-    num v = parseNum(value);
+    num? v = parseNum(value);
     if (v == null) return true;
 
-    if (decimals < 1) {
+    if (decimals! < 1) {
       return v.toInt() == v;
     } else {
-      int fac = pow(10, decimals);
+      int fac = pow(10, decimals!) as int;
       int i = (v.abs() * fac).toInt();
       double d = (v.abs() * fac).toDouble();
 
@@ -172,7 +173,7 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
     }
   }
 
-  num parseNum(value) {
+  num? parseNum(value) {
     return (value is num) ? value : num.tryParse(value);
   }
 
@@ -182,16 +183,16 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
   ///
   bool hasValidTextImpl() {
     if (minLength == null && maxLength == null && type == "text") return true;
-    String v = (value is String) ? value : value.toString();
+    String? v = (value is String) ? value : value.toString();
 
-    if (required && v.length == 0) return false;
-    if (minLength != null && v.length < minLength) return false;
-    if (maxLength != null && v.length > maxLength) return false;
+    if (required && v!.length == 0) return false;
+    if (minLength != null && v!.length < minLength!) return false;
+    if (maxLength != null && v!.length > maxLength!) return false;
 
     if (type == "http") {
       // TODO: this parsing might be expensive, we should cache results
       try {
-        Uri u = Uri.parse(v);
+        Uri u = Uri.parse(v!);
         String scheme = u.scheme.toLowerCase();
         if (scheme != "http" && scheme != "https") return false;
 
@@ -203,7 +204,7 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
     }
 
     if (type == "email") {
-      return _EMAIL_REGEXP.hasMatch(v);
+      return _EMAIL_REGEXP.hasMatch(v!);
     }
     return true;
   }
@@ -217,7 +218,7 @@ class FnxText extends FnxInputComponent implements ControlValueAccessor, OnInit,
   @override
   void focus() {
     if (element != null) {
-      element.focus();
+      element!.focus();
     }
   }
 }

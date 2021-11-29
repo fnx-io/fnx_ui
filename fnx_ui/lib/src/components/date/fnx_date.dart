@@ -10,33 +10,24 @@ import 'package:fnx_ui/src/validator.dart';
 
 export 'package:fnx_ui/src/components/date/fnx_date_picker.dart';
 
-const CUSTOM_DATE_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxDate, multi: true);
+const CUSTOM_DATE_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxDate);
 
 @Component(
-  selector: 'fnx-date',
-  providers: const [
-    CUSTOM_DATE_VALUE_ACCESSOR,
-    const Provider(FnxValidatorComponent, useExisting: FnxDate, multi: false),
-  ],
-  directives: [
-    coreDirectives,
-    formDirectives,
-    FnxDatePicker
-  ],
-  templateUrl: 'fnx_date.html',
-  preserveWhitespace: false,
-  styles: const [
-    ":host { position: relative; display: inline-block;}",
-    "fnx-date-picker { position: relative; display: block;}"
-  ]
-)
+    selector: 'fnx-date',
+    providers: const [
+      CUSTOM_DATE_VALUE_ACCESSOR,
+      const Provider(FnxValidatorComponent, useExisting: FnxDate),
+    ],
+    directives: [coreDirectives, formDirectives, FnxDatePicker],
+    templateUrl: 'fnx_date.html',
+    preserveWhitespace: false,
+    styles: const [":host { position: relative; display: inline-block;}", "fnx-date-picker { position: relative; display: block;}"])
 class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
-
   /// This is the model for the DOM input field, user types here the date and
   /// we try to parse it and sync it to model
-  String dateStr = null;
+  String? dateStr = null;
 
-  Control control = null;
+  Control? control = null;
 
   @Input()
   bool required = false;
@@ -56,9 +47,9 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
 
   Stream<bool> get openDatePicker => _openDatePicker.stream;
 
-  FnxValidatorComponent _inputWrapper;
+  FnxValidatorComponent? _inputWrapper;
 
-  FnxDate(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent) {
+  FnxDate(@SkipSelf() @Optional() FnxValidatorComponent? parent) : super(parent) {
     _inputWrapper = parent;
   }
 
@@ -69,7 +60,7 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
     }
   }
 
-  get focused => _focused;
+  bool get focused => _focused;
 
   bool get active {
     if (dateStr == null) return false;
@@ -112,7 +103,7 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
   onChangeInput(event) {
     this.dateStr = event;
 
-    DateTime parsed;
+    DateTime? parsed;
     try {
       parsed = dateStrToDateTime(dateStr);
       validFormattedDate = true;
@@ -124,14 +115,13 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
     setSuggestedErrorMessage(dateStr);
   }
 
-
-
   String get applicableFormat => dateTime ? date.DATETIME_FORMAT : date.DATE_FORMAT;
 
   void datePicked(DateTime picked) {
-    if (picked == null) {
+    /* if (picked == null) {
       value = null;
-    } else if (value == null || !(value is DateTime)) {
+    } else */
+    if (value == null || !(value is DateTime)) {
       value = roundIfNeeded(picked);
     } else {
       DateTime original = value as DateTime;
@@ -155,22 +145,20 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
     validFormattedDate = true;
   }
 
-  void setStrDate(DateTime value) {
+  void setStrDate(DateTime? value) {
     dateStr = formatDateTime(value);
   }
 
-  DateTime dateStrToDateTime(String pattern) {
+  DateTime? dateStrToDateTime(String? pattern) {
     try {
-      if (pattern == null || pattern
-          .trim()
-          .isEmpty) return null;
+      if (pattern == null || pattern.trim().isEmpty) return null;
       if (dateTime) {
         return date.dateTimeFormat.parse(pattern);
       } else {
         return date.dateFormat.parse(pattern);
       }
     } catch (e) {
-      if (pattern.contains(",")) {
+      if (pattern!.contains(",")) {
         pattern = pattern.replaceAll(",", ".");
         return dateStrToDateTime(pattern);
       }
@@ -182,7 +170,7 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
     return null;
   }
 
-  DateTime tryParseDate(Object o) {
+  DateTime? tryParseDate(Object? o) {
     if (o is DateTime) {
       return o;
     } else {
@@ -190,7 +178,7 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
     }
   }
 
-  String formatDateTime(DateTime value) {
+  String? formatDateTime(DateTime? value) {
     if (value == null) return null;
     if (dateTime) {
       return date.dateTimeFormat.format(value);
@@ -237,10 +225,9 @@ class FnxDate extends FnxInputComponent implements OnInit, OnDestroy {
     return requiredCheck && validFormattedDate;
   }
 
-  DateTime roundIfNeeded(DateTime d) {
+  DateTime? roundIfNeeded(DateTime? d) {
     if (d == null) return null;
     if (dateTime) return d;
     return new DateTime.utc(d.year, d.month, d.day, 12);
   }
-
 }

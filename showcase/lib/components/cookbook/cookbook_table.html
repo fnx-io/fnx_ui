@@ -86,7 +86,7 @@ Please note, most of the css classes here are pretty vital for this example. Be 
     </fnx-scroll-panel>
 
     <fnx-modal (close)="selectedRow = null" *ngIf="selectedRow != null">
-        <h3 header>{{selectedRow["name"]}}</h3>
+        <h3 header>{{selectedRow!["name"]}}</h3>
         <div main>
             {{selectedRow}}
         </div>

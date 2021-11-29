@@ -19,17 +19,15 @@ import 'package:logging/logging.dart';
 
 import 'index.template.dart' as self;
 
-@GenerateInjector(
-    [routerProvidersHash, // You can use routerProviders in production
-    FactoryProvider<Routing>(Routing, routingFactory, multi: false),
-    FactoryProvider<FnxExceptionHandler>(FnxExceptionHandler, exceptionHandlerFactory, multi: false),
-    FactoryProvider<ExceptionHandler>(ExceptionHandler, exceptionHandlerFactory, multi: false),
-    ]
-)
-final InjectorFactory injector = self.injector$Injector;
+@GenerateInjector([
+  routerProvidersHash, // You can use routerProviders in production
+  FactoryProvider<Routing>(Routing, routingFactory),
+  FactoryProvider<FnxExceptionHandler>(FnxExceptionHandler, exceptionHandlerFactory),
+  FactoryProvider<ExceptionHandler>(ExceptionHandler, exceptionHandlerFactory),
+])
+final InjectorFactory injector = self.injector$Injector as Injector Function(Injector);
 
 Future main() async {
-
   Intl.defaultLocale = 'cs_CZ';
   await initializeMessages('cs_CZ');
   await initializeDateFormatting("cs_CZ", null);
@@ -52,14 +50,13 @@ Future main() async {
 
   // START!
   runApp(ng.ExampleAppNgFactory, createInjector: injector);
-
 }
 
-FnxExceptionHandler _excHandler;
+FnxExceptionHandler? _excHandler;
 
 FnxExceptionHandler exceptionHandlerFactory() {
   if (_excHandler == null) {
     _excHandler = new FnxExceptionHandler();
   }
-  return _excHandler;
+  return _excHandler!;
 }

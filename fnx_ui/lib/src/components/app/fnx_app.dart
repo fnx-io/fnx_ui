@@ -5,6 +5,7 @@ import 'dart:async';
 
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:fnx_ui/errors.dart';
 import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
@@ -24,14 +25,7 @@ import 'package:logging/logging.dart';
   selector: 'fnx-app',
   templateUrl: 'fnx_app.html',
   preserveWhitespace: false,
-  directives: [
-    coreDirectives,
-    formDirectives,
-    FnxForm,
-    FnxModal,
-    FnxInput,
-    FnxText
-  ],
+  directives: [coreDirectives, formDirectives, FnxForm, FnxModal, FnxInput, FnxText],
   visibility: Visibility.all,
 )
 class FnxApp implements OnInit {
@@ -42,7 +36,7 @@ class FnxApp implements OnInit {
 
   ChangeDetectorRef _changeDetector;
 
-  FnxApp(@Optional() ExceptionHandler ex, this._changeDetector) {
+  FnxApp(@Optional() ExceptionHandler? ex, this._changeDetector) {
     if (ex == null) {
       log.warning("There is no exception handler configured");
     }
@@ -50,7 +44,7 @@ class FnxApp implements OnInit {
       log.warning(
           "Configured exception handler is not FnxExceptionHandler, fnx_ui won't be able to show nice errors.\nConsider: provide(ExceptionHandler, useValue: new FnxExceptionHandler())");
     } else {
-      (ex as FnxExceptionHandler).setShowErrorCallback(showError);
+      ex.setShowErrorCallback(showError);
     }
   }
 
@@ -72,7 +66,7 @@ class FnxApp implements OnInit {
       _changeDetector.detectChanges();
     });
     new Future.delayed(duration + const Duration(seconds: 1)).then((_) {
-      if (toasts.firstWhere((_ToastContent t) => t.hide == false, orElse: () => null) == null) {
+      if (toasts.firstWhereOrNull((_ToastContent t) => t.hide == false) == null) {
         toasts.clear();
       }
     });
@@ -81,7 +75,7 @@ class FnxApp implements OnInit {
 
   // Exception handling
 
-  FnxError errorToShow;
+  FnxError? errorToShow;
 
   void showError(FnxError error) {
     log.info("Showing error $error on UI");
@@ -93,7 +87,7 @@ class FnxApp implements OnInit {
   ///
   /// Plain old window.alert style dialog. Nonblocking.
   ///
-  Future alert(String message, {String headline: null}) {
+  Future alert(String message, {String? headline: null}) {
     headline = headline ?? GlobalMessages.appDefaultAlertHeadline();
     _ModalContent m = new _ModalContent()
       ..headline = headline
@@ -105,7 +99,7 @@ class FnxApp implements OnInit {
   ///
   /// Plain old window.confirm style dialog. Nonblocking.
   ///
-  Future<bool> confirm(String message, {String headline: null}) {
+  Future<bool> confirm(String message, {String? headline: null}) {
     headline = headline ?? GlobalMessages.appDefaultConfirmHeadline();
     _ModalContent m = new _ModalContent()
       ..headline = headline
@@ -118,7 +112,7 @@ class FnxApp implements OnInit {
   ///
   /// Plain old window.input style dialog. Nonblocking.
   ///
-  Future<Object> input(String message, {String headline: null, String prefilledValue: null}) {
+  Future<Object> input(String message, {String? headline: null, String? prefilledValue: null}) {
     headline = headline ?? GlobalMessages.appDefaultInputHeadline();
     _ModalContent m = new _ModalContent()
       ..headline = headline
@@ -139,7 +133,7 @@ class FnxApp implements OnInit {
   }
 
   void closeModal(String id, bool closingResult) {
-    _ModalContent mc = modalWindows[id];
+    _ModalContent? mc = modalWindows[id];
     if (mc == null) return;
     modalWindows.remove(id);
 
@@ -161,17 +155,17 @@ class FnxApp implements OnInit {
 
 class _ModalContent {
   String id = ui.uid('modal-');
-  String headline;
-  String message;
-  String ok;
-  String cancel;
-  String input;
+  String? headline;
+  String? message;
+  String? ok;
+  String? cancel;
+  String? input;
   var value;
-  Completer _completer;
+  late Completer _completer;
 }
 
 class _ToastContent {
-  String message;
+  String? message;
   bool hide = false;
   String cssClass = "";
 }

@@ -6,9 +6,6 @@ import 'dart:html';
 ///
 
 import 'package:angular/angular.dart';
-///
-/// This element can request focus.
-///
 
 ///
 /// This element can request focus.
@@ -22,20 +19,18 @@ import 'package:angular/angular.dart';
 /// This element can request focus.
 ///
 
+///
+/// This element can request focus.
+///
 
 abstract class Focusable {
-
   void focus();
-
 }
 
-@Directive(
-  selector: "[autoFocus]"
-)
+@Directive(selector: "[autoFocus]")
 class AutoFocus implements OnInit {
-
   HtmlElement element;
-  Focusable focusable;
+  Focusable? focusable;
 
   @Input()
   dynamic autoFocus;
@@ -51,10 +46,9 @@ class AutoFocus implements OnInit {
   void doFocus([_]) {
     if (autoFocus == false) return;
     if (focusable != null) {
-      focusable.focus();
+      focusable!.focus();
     } else {
       element.focus();
     }
   }
-
 }

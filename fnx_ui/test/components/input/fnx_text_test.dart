@@ -1,11 +1,9 @@
 import 'package:fnx_ui/fnx_ui.dart';
 @TestOn('dartium')
-
 import "package:test/test.dart";
 
 void main() {
-
-  FnxText fnxText = null;
+  late FnxText fnxText;
 
   test("Empty fnxText without attributes should be valid", () {
     fnxText = new FnxText(null);
@@ -13,7 +11,6 @@ void main() {
   });
 
   group("type=text validation", () {
-
     setUp(() {
       fnxText = new FnxText(null);
       fnxText.type = "text";
@@ -36,7 +33,6 @@ void main() {
 
       fnxText.value = null;
       expect(fnxText.isValid(), false);
-
     });
 
     test("minLength validation", () {
@@ -84,12 +80,9 @@ void main() {
 
       fnxText.maxLength = null;
     });
-
   });
 
-
   group("type=number validation", () {
-
     setUp(() {
       fnxText = new FnxText(null);
       fnxText.type = "number";
@@ -112,7 +105,6 @@ void main() {
 
       fnxText.value = null;
       expect(fnxText.isValid(), false);
-
     });
 
     test("min validation", () {
@@ -162,8 +154,6 @@ void main() {
       fnxText.value = "12s3";
       expect(fnxText.isValid(), false); // not a number
     });
-
-
   });
 
   group("type=http validation", () {
@@ -208,9 +198,7 @@ void main() {
       fnxText.required = true;
       fnxText.value = null;
       expect(fnxText.isValid(), false);
-
     });
-
   });
 
   group("type=email validation", () {
@@ -255,9 +243,6 @@ void main() {
       fnxText.required = true;
       fnxText.value = null;
       expect(fnxText.isValid(), false);
-
     });
-
   });
-
 }

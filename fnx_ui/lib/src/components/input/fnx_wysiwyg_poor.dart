@@ -7,8 +7,7 @@ import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/validator.dart';
 
-const CUSTOM_INPUT_WYSIWYG_POOR_VALUE_ACCESSOR =
-    const Provider(ngValueAccessor, useExisting: FnxWysiwygPoor, multi: true);
+const CUSTOM_INPUT_WYSIWYG_POOR_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxWysiwygPoor);
 
 @Component(
   selector: 'fnx-wysiwyg-poor',
@@ -23,7 +22,7 @@ const CUSTOM_INPUT_WYSIWYG_POOR_VALUE_ACCESSOR =
       <div #wysiwyg
            class="input--component flex--grow flex--shrink"
            [class.readonly]="isReadonly"
-           [attr.contenteditable]="!readonly"
+           [attr.contenteditable]="!readonly ? 'contenteditable' : null"
            (blur)="edited()"
            (keyup)="edited()"
            ></div>
@@ -39,16 +38,12 @@ const CUSTOM_INPUT_WYSIWYG_POOR_VALUE_ACCESSOR =
   ],
   providers: const [
     CUSTOM_INPUT_WYSIWYG_POOR_VALUE_ACCESSOR,
-    const Provider(FnxValidatorComponent, useExisting: FnxWysiwygPoor, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxWysiwygPoor),
   ],
-  directives: [
-    coreDirectives,
-    formDirectives
-  ],
+  directives: [coreDirectives, formDirectives],
   preserveWhitespace: false,
 )
 class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
-
   @Input()
   bool required = false;
 
@@ -59,11 +54,11 @@ class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, 
   bool disabled = false;
 
   @ViewChild("wysiwyg")
-  HtmlElement editor;
+  HtmlElement? editor;
 
-  FnxApp app;
+  FnxApp? app;
 
-  FnxWysiwygPoor(@Optional() this.app, @SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent) {
+  FnxWysiwygPoor(@Optional() this.app, @SkipSelf() @Optional() FnxValidatorComponent? parent) : super(parent) {
     if (app == null) {
       throw "Wysiwyg must be wrapped in <fxn-app> element - use this element in your root element's template.";
     }
@@ -72,7 +67,7 @@ class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, 
   @override
   ngOnInit() {
     super.ngOnInit();
-    editor.innerHtml = value == null ? EMPTY_STRING_VALUE : value;
+    editor!.innerHtml = value == null ? EMPTY_STRING_VALUE : value;
   }
 
   bool hasValidValue() {
@@ -81,14 +76,14 @@ class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, 
   }
 
   void edited() {
-    String html = editor.innerHtml;
+    String? html = editor!.innerHtml;
     value = (html == EMPTY_STRING_VALUE ? null : html);
     markAsTouched();
   }
 
   void writeValue(obj) {
     super.writeValue(obj);
-    editor.innerHtml = (value == null || value.isEmpty) ? EMPTY_STRING_VALUE : value;
+    editor!.innerHtml = (value == null || value.isEmpty) ? EMPTY_STRING_VALUE : value;
   }
 
   void doCommand(String command) {
@@ -97,8 +92,8 @@ class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, 
   }
 
   Future<Null> createLink() async {
-    List<Range> selection = saveSelection();
-    String link = await app.input("Insert link, including http://", headline: "Link");
+    List<Range> selection = saveSelection() as List<Range>;
+    String link = await (app!.input("Insert link, including http://", headline: "Link") as FutureOr<String>);
     if (link != null) {
       restoreSelection(selection);
       window.document.execCommand('createLink', false, link);
@@ -107,10 +102,10 @@ class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, 
   }
 
   List saveSelection() {
-    Selection sel = window.getSelection();
-    if (sel.rangeCount > 0) {
+    Selection sel = window.getSelection()!;
+    if (sel.rangeCount! > 0) {
       List<Range> ranges = [];
-      for (var i = 0; i < sel.rangeCount; ++i) {
+      for (var i = 0; i < sel.rangeCount!; ++i) {
         ranges.add(sel.getRangeAt(i));
       }
       return ranges;
@@ -119,13 +114,12 @@ class FnxWysiwygPoor extends FnxInputComponent implements ControlValueAccessor, 
   }
 
   void restoreSelection(List<Range> savedSel) {
-    Selection sel = window.getSelection();
-    if (sel.rangeCount > 0) {
+    Selection sel = window.getSelection()!;
+    if (sel.rangeCount! > 0) {
       sel.removeAllRanges();
     }
     for (var i = 0, len = savedSel.length; i < len; ++i) {
       sel.addRange(savedSel[i]);
     }
   }
-
 }

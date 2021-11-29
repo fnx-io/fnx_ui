@@ -1,12 +1,12 @@
 <div
-     [attr.readonly]="isReadonly"
+     [attr.readonly]="isReadonly ? 'readonly' : null"
      [class.open]="open"
      [class.error]="isTouchedAndInvalid()"
      style="display: inline-block; width: 100%"
      #select>
 
     <input id="{{ componentId }}" type="text" [(ngModel)]="text" [readonly]="isReadonly"
-           [attr.tabindex]="(isReadonly || isDisabled) ? -1 : 0"
+           [attr.tabindex]="(isReadonly || isDisabled) ? '-1' : '0'"
            (keyup)="markAsTouched()"
            (focus)="showOptions()"
            (blur)="hideOptions()"

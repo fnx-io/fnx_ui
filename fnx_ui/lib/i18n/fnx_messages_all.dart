@@ -15,7 +15,7 @@ Map<String, Function> _deferredLibraries = {
   'cs_CZ': () => messages_cs_CZ.loadLibrary(),
 };
 
-MessageLookupByLibrary _findExact(localeName) {
+MessageLookupByLibrary? _findExact(localeName) {
   switch (localeName) {
     case 'en_US':
       return messages_en_US.messages;
@@ -27,7 +27,7 @@ MessageLookupByLibrary _findExact(localeName) {
 }
 
 /// User programs should call this before using [localeName] for messages.
-Future initializeMessages(String localeName) {
+Future? initializeMessages(String localeName) {
   var lib = _deferredLibraries[Intl.canonicalizedLocale(localeName)];
   var load = lib == null ? new Future.value(false) : lib();
   return load.then((_) {
@@ -44,7 +44,7 @@ bool _messagesExistFor(String locale) {
   return messages != null;
 }
 
-MessageLookupByLibrary _findGeneratedMessagesFor(locale) {
+MessageLookupByLibrary? _findGeneratedMessagesFor(locale) {
   var actualLocale = Intl.verifiedLocale(locale, _messagesExistFor,
       onFailure: (_) => null);
   if (actualLocale == null) return null;

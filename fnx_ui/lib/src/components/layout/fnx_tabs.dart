@@ -25,7 +25,7 @@ import 'package:logging/logging.dart';
   ''',
   preserveWhitespace: false,
   providers: const [
-    const Provider(FnxValidatorComponent, useExisting: FnxTabs, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxTabs),
   ],
   visibility: Visibility.all,
   directives: [
@@ -37,14 +37,14 @@ class FnxTabs extends FnxValidatorComponent implements OnInit, OnDestroy {
   final Logger log = new Logger("FnxTabs");
 
   String id = ui.uid('tabs-');
-  String selectedId = null;
+  String? selectedId = null;
 
   @Input()
   bool left = false;
 
   List<FnxTab> tabs = [];
 
-  FnxTabs(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
+  FnxTabs(@SkipSelf() @Optional() FnxValidatorComponent? parent) : super(parent);
 
   void deregister(FnxTab fnxTab) {
     tabs.remove(fnxTab);
@@ -77,16 +77,16 @@ class FnxTabs extends FnxValidatorComponent implements OnInit, OnDestroy {
 }
 
 @Component(
-    selector: 'fnx-tab',
-    template: '''
+  selector: 'fnx-tab',
+  template: '''
   <div *ngIf="tabParent.selectedId == id">
     <ng-content></ng-content>
   </div>
   ''',
-    styles: const [":host { display: block; } "],
-    preserveWhitespace: false,
+  styles: const [":host { display: block; } "],
+  preserveWhitespace: false,
   providers: const [
-    const Provider(FnxValidatorComponent, useExisting: FnxTab, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxTab),
   ],
   directives: [
     coreDirectives,
@@ -95,13 +95,13 @@ class FnxTabs extends FnxValidatorComponent implements OnInit, OnDestroy {
 )
 class FnxTab extends FnxValidatorComponent implements OnInit, OnDestroy {
   @Input()
-  String title;
+  String? title;
 
   String id = ui.uid('tab-');
 
   FnxTabs tabParent;
 
-  FnxTab(this.tabParent, @SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
+  FnxTab(this.tabParent, @SkipSelf() @Optional() FnxValidatorComponent? parent) : super(parent);
 
   StreamController<bool> _select = new StreamController();
   @Output()

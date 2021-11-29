@@ -16,17 +16,15 @@ import 'package:logging/logging.dart';
 ///       </fnx-panel>
 ///
 @Component(
-  selector: 'fnx-panel',
-  templateUrl: 'fnx_panel.html',
-  styles: const [":host {display: block;}"],
-  preserveWhitespace: false,
-  providers: const [
-    const Provider(FnxValidatorComponent, useExisting: FnxPanel, multi: false),
-  ],
-  visibility: Visibility.all
-)
+    selector: 'fnx-panel',
+    templateUrl: 'fnx_panel.html',
+    styles: const [":host {display: block;}"],
+    preserveWhitespace: false,
+    providers: const [
+      const Provider(FnxValidatorComponent, useExisting: FnxPanel),
+    ],
+    visibility: Visibility.all)
 class FnxPanel extends FnxValidatorComponent implements OnInit, OnDestroy {
-
   final Logger log = new Logger("FnxPanel");
 
   ///
@@ -36,11 +34,11 @@ class FnxPanel extends FnxValidatorComponent implements OnInit, OnDestroy {
   bool closable = false;
 
   @Input()
-  bool open = null;
+  late bool open;
 
   String id = ui.uid('panel-');
 
-  FnxPanel(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
+  FnxPanel(@SkipSelf() @Optional() FnxValidatorComponent? parent) : super(parent);
 
   @override
   ngOnInit() {

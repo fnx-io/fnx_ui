@@ -15,7 +15,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m0(count) => "${count} files selected";
 
-  final messages = _notInlinedMessages(_notInlinedMessages);
+  final Map<String, dynamic> messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => {
     "appDefaultAlertHeadline" : MessageLookupByLibrary.simpleMessage("Alert"),
     "appDefaultConfirmHeadline" : MessageLookupByLibrary.simpleMessage("Confirm"),

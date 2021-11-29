@@ -7,8 +7,7 @@ import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/validator.dart';
 import 'package:intl/intl.dart';
 
-const CUSTOM_INPUT_FDOUBLE_VALUE_ACCESSOR =
-    const Provider(ngValueAccessor, useExisting: FnxFormattedDouble, multi: true);
+const CUSTOM_INPUT_FDOUBLE_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxFormattedDouble);
 
 @Component(
   selector: 'fnx-formatted-double',
@@ -20,7 +19,7 @@ const CUSTOM_INPUT_FDOUBLE_VALUE_ACCESSOR =
   (keyup)="markAsTouched()"
   [class.error]="isTouchedAndInvalid()"
   [attr.placeholder]="placeholder"
-  [attr.tabindex]="(isReadonly || isDisabled) ? -1 : 0"  
+  [attr.tabindex]="(isReadonly || isDisabled) ? '-1' : '0'"  
   (focus)="onFocus()"
   (blur)="onBlur()"
   #input
@@ -28,15 +27,12 @@ const CUSTOM_INPUT_FDOUBLE_VALUE_ACCESSOR =
 ''',
   providers: const [
     CUSTOM_INPUT_FDOUBLE_VALUE_ACCESSOR,
-    const Provider(Focusable, useExisting: FnxFormattedDouble, multi: false),
-    const Provider(FnxValidatorComponent, useExisting: FnxFormattedDouble, multi: false),
+    const Provider(Focusable, useExisting: FnxFormattedDouble),
+    const Provider(FnxValidatorComponent, useExisting: FnxFormattedDouble),
   ],
   styles: const [":host input { text-align: inherit;}"],
   preserveWhitespace: false,
-  directives: [
-    coreDirectives,
-    formDirectives
-  ],
+  directives: [coreDirectives, formDirectives],
 )
 class FnxFormattedDouble extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
   @Input()
@@ -46,16 +42,16 @@ class FnxFormattedDouble extends FnxInputComponent implements ControlValueAccess
   String get htmlType => 'text';
 
   @Input()
-  num min = null;
+  num? min = null;
 
   @Input()
-  num max = null;
+  num? max = null;
 
   @Input()
   String format = "#,##0.00";
 
   @Input()
-  String placeholder = null;
+  String? placeholder = null;
 
   @Input()
   bool autocomplete = true;
@@ -66,14 +62,14 @@ class FnxFormattedDouble extends FnxInputComponent implements ControlValueAccess
   @Input()
   bool disabled = false;
 
-  String _valueStr;
+  String? _valueStr;
 
   @ViewChild("input")
-  HtmlElement element;
+  HtmlElement? element;
 
   bool focused = false;
 
-  FnxFormattedDouble(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
+  FnxFormattedDouble(@SkipSelf() @Optional() FnxValidatorComponent? parent) : super(parent);
 
   String get autocompleteAttr => (autocomplete) ? 'on' : 'off';
 
@@ -86,17 +82,17 @@ class FnxFormattedDouble extends FnxInputComponent implements ControlValueAccess
   bool hasValidNumberImpl() {
     if (required && value == null) return false;
     if (min == null && max == null) return true;
-    double v = parseDouble(value);
+    double? v = parseDouble(value);
     if (v == null) return true;
 
     if (v == null && value != null && value.toString().length > 0) return false; // not a number
     if (required && v == null) return false;
-    if (min != null && v < min.toDouble()) return false;
-    if (max != null && v > max.toDouble()) return false;
+    if (min != null && v < min!.toDouble()) return false;
+    if (max != null && v > max!.toDouble()) return false;
     return true;
   }
 
-  double parseDouble(value) {
+  double? parseDouble(value) {
     if (value == null) return null;
     if (value is num) {
       return value.toDouble();
@@ -108,7 +104,7 @@ class FnxFormattedDouble extends FnxInputComponent implements ControlValueAccess
   @override
   void focus() {
     if (element != null) {
-      element.focus();
+      element!.focus();
     }
   }
 
@@ -117,7 +113,7 @@ class FnxFormattedDouble extends FnxInputComponent implements ControlValueAccess
     if (v == null) {
       super.value = null;
     } else {
-      double parsed = parseDouble(v);
+      double? parsed = parseDouble(v);
       super.value = parsed;
     }
   }
@@ -140,9 +136,9 @@ class FnxFormattedDouble extends FnxInputComponent implements ControlValueAccess
     return super.value;
   }
 
-  String get valueStr => _valueStr;
+  String? get valueStr => _valueStr;
 
-  set valueStr(String v) {
+  set valueStr(String? v) {
     _valueStr = v;
     value = valueStr;
   }
@@ -163,8 +159,7 @@ class FnxFormattedDouble extends FnxInputComponent implements ControlValueAccess
     } else {
       NumberFormat nf = new NumberFormat(format);
       _valueStr = nf.format(value);
-      value = parseDouble(nf.parse(_valueStr));
+      value = parseDouble(nf.parse(_valueStr!));
     }
   }
-
 }

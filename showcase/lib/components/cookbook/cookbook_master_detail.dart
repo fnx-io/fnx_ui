@@ -23,7 +23,7 @@ class CookbookMasterDetail {
   ExampleApp exApp;
   FnxApp app;
 
-  var selected = null;
+  dynamic selected = null;
 
   CookbookMasterDetail(this.exApp, this.app);
 

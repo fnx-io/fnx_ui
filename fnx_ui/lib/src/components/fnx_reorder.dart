@@ -7,34 +7,31 @@ import 'package:angular/angular.dart';
 /// Dulezite poznamecky - itemy, ktere se pretahuji, nesmi mit nastavenou sirku, vysku nebo border.
 ///
 ///
-@Directive(
-    selector: "[reorderContainer]"
-)
+@Directive(selector: "[reorderContainer]")
 class FnxReorderContainer {
-  
   HtmlElement container;
 
   FnxReorderContainer(this.container);
 
-  FnxReorderItem _dragged = null;
-  int _draggedIndex;
+  FnxReorderItem? _dragged = null;
+  int? _draggedIndex;
 
-  FnxReorderItem get dragged => _dragged;
-  int get draggedIndex => _draggedIndex;
+  FnxReorderItem? get dragged => _dragged;
+  int? get draggedIndex => _draggedIndex;
 
-  set dragged(FnxReorderItem value) {
+  set dragged(FnxReorderItem? value) {
     if (value == null) {
       // removing element from dragging
       if (_dragged != null) {
-        _dragged.itemElement.style.opacity = null;
+        _dragged!.itemElement.style.opacity = "";
         _draggedIndex = null;
       }
     }
     _dragged = value;
     if (_dragged != null) {
       // element is dragged, hide it
-      _dragged.itemElement.style.opacity = "0.6";
-      _draggedIndex = _dragged.reorderItem;
+      _dragged!.itemElement.style.opacity = "0.6";
+      _draggedIndex = _dragged!.reorderItem;
     }
     print("Dragged: $_dragged  $draggedIndex");
   }
@@ -48,8 +45,8 @@ class FnxReorderContainer {
       // we are not dragging anything, probably other reorderContainer on page
       return;
     }
-    int from = _draggedIndex;
-    int to = target.reorderItem;
+    int? from = _draggedIndex;
+    int? to = target.reorderItem;
     if (from == to) {
       // unnecessary
       return;
@@ -58,7 +55,6 @@ class FnxReorderContainer {
     _reorder.add(new ReorderEvent(from, to));
     _draggedIndex = to;
   }
-
 }
 
 ///
@@ -68,30 +64,25 @@ class FnxReorderContainer {
 ///
 ///
 class ReorderEvent {
-
-  int sourceIndex;
-  int destinationIndex;
+  int? sourceIndex;
+  int? destinationIndex;
 
   ReorderEvent(this.sourceIndex, this.destinationIndex);
 
   void applyToList(List data) {
-    data.insert(destinationIndex, data.removeAt(sourceIndex));
+    data.insert(destinationIndex!, data.removeAt(sourceIndex!));
   }
-
 }
 
 ///
 /// One item to reorder must be a child of reorderContainerVertical.
 ///
-/// 
 ///
-@Directive(
-    selector: "[reorderItem]"
-)
+///
+@Directive(selector: "[reorderItem]")
 class FnxReorderItem {
-
   @Input()
-  int reorderItem;
+  int? reorderItem;
 
   FnxReorderContainer parent;
   HtmlElement itemElement;
@@ -108,7 +99,7 @@ class FnxReorderItem {
       if (reorderItem == null) {
         throw "You must specify index of reorderItem: [reorderItem]='1'";
       }
-      ev.dataTransfer.dropEffect="none";
+      ev.dataTransfer.dropEffect = "none";
       parent.dragged = this;
     });
 
@@ -122,7 +113,5 @@ class FnxReorderItem {
       // something is dragged over me, and it's not me
       parent.emitReorder(this);
     });
-
   }
-
 }

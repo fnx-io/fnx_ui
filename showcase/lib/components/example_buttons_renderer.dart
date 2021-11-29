@@ -16,6 +16,6 @@ import 'package:angular/angular.dart';
 class ExampleButtonsRenderer {
 
   @Input()
-  String name;
+  String? name;
 
 }

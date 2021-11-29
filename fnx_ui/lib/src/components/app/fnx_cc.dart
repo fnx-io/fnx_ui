@@ -54,7 +54,7 @@ class FnxCC implements OnInit {
 
   @override
   ngOnInit() {
-    String val = cookie.get("fnxcc");
+    String? val = cookie.get("fnxcc");
     if (val == null) {
       visible = true;
       return;

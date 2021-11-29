@@ -10,30 +10,24 @@ import 'package:fnx_ui_showcase/app_config.dart';
 @Component(
   selector: 'cookbook-select-or-create',
   templateUrl: 'cookbook_select_or_create.html',
-  directives: [
-    fnxUiDirectives,
-    coreDirectives,
-    formDirectives,
-    appDirectives
-  ],
+  directives: [fnxUiDirectives, coreDirectives, formDirectives, appDirectives],
 )
 class CookbookSelectOrCreate {
-
   int id = 6;
 
   FnxApp app;
 
   List<Map> persons = [
-    {"id":1, "name":"John Smith", "occupation":"warrior", "phone":"4235532423"},
-    {"id":2, "name":"Kevin Baker", "occupation":"mage", "phone":"936246323"},
-    {"id":3, "name":"Emma Govinda", "occupation":"paladin", "phone":"423434334"},
-    {"id":4, "name":"Alice Cooper", "occupation":"thief", "phone":"967423514"},
-    {"id":5, "name":"George Holmes", "occupation":"detective", "phone":"4265321456"},
+    {"id": 1, "name": "John Smith", "occupation": "warrior", "phone": "4235532423"},
+    {"id": 2, "name": "Kevin Baker", "occupation": "mage", "phone": "936246323"},
+    {"id": 3, "name": "Emma Govinda", "occupation": "paladin", "phone": "423434334"},
+    {"id": 4, "name": "Alice Cooper", "occupation": "thief", "phone": "967423514"},
+    {"id": 5, "name": "George Holmes", "occupation": "detective", "phone": "4265321456"},
   ];
 
-  Map<int, Map> personsById = {};
+  Map<int?, Map> personsById = {};
 
-  List<int> members = []; // first element - empty, waiting for selection
+  List<int?> members = []; // first element - empty, waiting for selection
 
   Map createPerson = {};
 
@@ -49,6 +43,10 @@ class CookbookSelectOrCreate {
     members.removeAt(index);
   }
 
+  Map getPersonById(int? r) {
+    return personsById[r!]!;
+  }
+
   String renderPersonSelectDescription() {
     if (members.isEmpty) {
       return "Select a person ...";
@@ -58,7 +56,6 @@ class CookbookSelectOrCreate {
   }
 
   void createNewPerson() {
-
     // send to server, validate, receive id
     createPerson["id"] = id++;
 
@@ -75,5 +72,4 @@ class CookbookSelectOrCreate {
     // hide form
     openCreateModal = false;
   }
-
 }

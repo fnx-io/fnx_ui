@@ -1,8 +1,8 @@
 <div id="{{ componentId }}"
      class="select"
-     [attr.tabindex]="(isReadonly || isDisabled) ? -1 : 0"
+     [attr.tabindex]="(isReadonly || isDisabled) ? '-1' : '0'"
      (click)="toggleDropdown()"
-     [attr.readonly]="isReadonly"
+     [attr.readonly]="isReadonly ? 'readonly' : null"
      [class.open--up]="openUp"
      [class.open]="open"
      [class.error]="isTouchedAndInvalid()"
@@ -24,10 +24,10 @@
         <div class="select__items">
             <ng-content></ng-content>
         </div>
-        <p *ngIf="options.isEmpty" class="padding--small no-margin">
+        <p *ngIf="options!.isEmpty" class="padding--small no-margin">
             {{ optionsEmptyLabel }}
         </p>
-        <p *ngIf="filteredOptions.isEmpty && options.isNotEmpty" class="padding--small no-margin">
+        <p *ngIf="filteredOptions!.isEmpty && options.isNotEmpty" class="padding--small no-margin">
             {{ optionsEmptySearchLabel }}
         </p>
     </div>

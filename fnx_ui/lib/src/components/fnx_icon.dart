@@ -9,5 +9,5 @@ import 'package:angular/angular.dart';
 )
 class FnxIcon {
 
-  @Input() String type;
+  @Input() String? type;
 }

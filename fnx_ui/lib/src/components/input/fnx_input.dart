@@ -22,7 +22,7 @@ import 'package:logging/logging.dart';
   preserveWhitespace: false,
   visibility: Visibility.all,
   providers: const [
-    const Provider(FnxValidatorComponent, useExisting: FnxInput, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxInput),
   ],
   directives: [
     coreDirectives,
@@ -30,32 +30,31 @@ import 'package:logging/logging.dart';
   ],
 )
 class FnxInput extends FnxValidatorComponent implements OnInit, OnDestroy {
-
   static final Logger log = new Logger("FnxInput");
 
-  FnxInput(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
+  FnxInput(@SkipSelf() @Optional() FnxValidatorComponent? parent) : super(parent);
 
   final String _generatedId = ui.uid('comp_');
-  
+
   @Input()
-  String assignedId;
-  
+  String? assignedId;
+
   String get componentId => assignedId ?? _generatedId;
 
   @Input()
-  String label;
-  String _errorMessage;
-  String _defaultErrorMessage;
+  String? label;
+  String? _errorMessage;
+  String? _defaultErrorMessage;
 
   bool _required = false;
   bool _readonly = false;
 
   @Input()
-  void set errorMessage(String err) {
+  void set errorMessage(String? err) {
     this._errorMessage = err;
   }
 
-  String get errorMessage {
+  String? get errorMessage {
     if (_errorMessage != null) {
       return _errorMessage;
     } else if (_defaultErrorMessage != null) {
@@ -88,7 +87,7 @@ class FnxInput extends FnxValidatorComponent implements OnInit, OnDestroy {
 
   @Input()
   set required(bool value) {
-     log.shout("You are setting 'required' attribute to fnx-input, that's not what you want");
+    log.shout("You are setting 'required' attribute to fnx-input, that's not what you want");
 //    throw "You are setting 'required' attribute to fnx-input, that's not what you want";
   }
 
@@ -99,26 +98,26 @@ class FnxInput extends FnxValidatorComponent implements OnInit, OnDestroy {
 ///
 /// Ads support for custom validation and ngModel.
 ///
-abstract class FnxInputComponent<T> extends FnxValidatorComponent implements OnInit, OnDestroy, ControlValueAccessor<T> {
+abstract class FnxInputComponent<T> extends FnxValidatorComponent implements OnInit, OnDestroy, ControlValueAccessor<T?> {
   final String _privComponentId = ui.uid("comp_");
 
-  Control componentControl;
+  Control? componentControl;
 
-  FnxValidatorComponent _parent;
+  FnxValidatorComponent? _parent;
   FnxInputComponent(this._parent) : super(_parent);
 
-  T _value;
+  T? _value;
 
-  T get value => _value;
+  T? get value => _value;
 
   void set disabled(bool disabled); // abstract
 
-  StreamController<T> _valueChanged = new StreamController();
+  StreamController<T?> _valueChanged = new StreamController();
   @Output()
-  Stream<T> get valueChange => _valueChanged.stream;
+  Stream<T?> get valueChange => _valueChanged.stream;
 
   @Input()
-  set value(T v) {
+  set value(T? v) {
     if (v == "") v = null; // TODO: is it a good idea?
     if (v != this._value) {
       this._value = v;
@@ -133,11 +132,11 @@ abstract class FnxInputComponent<T> extends FnxValidatorComponent implements OnI
     }
   }
 
-  ChangeFunction<T> onChange = (T t, {String rawValue}) {};
+  ChangeFunction<T?> onChange = (T? t, {String? rawValue}) {};
   TouchFunction onTouched = () {};
 
   @override
-  void registerOnChange(ChangeFunction<T> f) {
+  void registerOnChange(ChangeFunction<T?> f) {
     this.onChange = f;
   }
 
@@ -145,7 +144,6 @@ abstract class FnxInputComponent<T> extends FnxValidatorComponent implements OnI
   void registerOnTouched(TouchFunction fn) {
     this.onTouched = fn;
   }
-
 
   @override
   void onDisabledChanged(bool isDisabled) {

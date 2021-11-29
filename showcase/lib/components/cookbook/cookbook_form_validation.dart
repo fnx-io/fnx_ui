@@ -10,21 +10,15 @@ import 'package:fnx_ui_showcase/app_config.dart';
 @Component(
   selector: 'cookbook-form-validation',
   templateUrl: 'cookbook_form_validation.html',
-  directives: [
-    fnxUiDirectives,
-    coreDirectives,
-    formDirectives,
-    appDirectives
-  ],
+  directives: [fnxUiDirectives, coreDirectives, formDirectives, appDirectives],
 )
 class CookbookFormValidation implements OnInit {
-
-  Map record = { };
+  Map record = {};
 
   FnxApp app;
 
   @ViewChild("validatedForm")
-  FnxForm form;
+  FnxForm? form;
 
   CookbookFormValidation(this.app);
 
@@ -34,10 +28,10 @@ class CookbookFormValidation implements OnInit {
 
   @override
   ngOnInit() {
-    form.addValidator(customValidation);
+    form!.addValidator(customValidation as String Function());
   }
 
-  String customValidation() {
+  String? customValidation() {
     if (record['one'] == null || record['two'] == null) {
       return "Please fill both values";
     }
@@ -46,5 +40,4 @@ class CookbookFormValidation implements OnInit {
     }
     return null;
   }
-
 }

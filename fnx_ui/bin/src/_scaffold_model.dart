@@ -4,9 +4,9 @@ import 'dart:io';
 class Identificator {
 
   String source;
-  String camelCase;
-  String underscores;
-  String dashes;
+  String? camelCase;
+  String? underscores;
+  String? dashes;
 
   Pattern validator = new RegExp(r'^[a-z][a-z0-9_]*[a-z0-9]$');
 
@@ -30,8 +30,8 @@ class Identificator {
 
 class GeneratedFile {
 
-  File file;
-  String template;
+  late File file;
+  late String template;
 
   GeneratedFile();
 

@@ -6,51 +6,47 @@ import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/validator.dart';
 
-const CUSTOM_INPUT_DOUBLE_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxDouble, multi: true);
+const CUSTOM_INPUT_DOUBLE_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxDouble);
 
 @Component(
   selector: 'fnx-double',
   template: r'''
 <input id="{{ componentId }}" type="{{ htmlType }}" [(ngModel)]="value" [readonly]="isReadonly" [disabled]="isDisabled"
-  [attr.min]="min"
-  [attr.max]="max"
-  [attr.step]="step"
+  [attr.min]="min?.toString()"
+  [attr.max]="max?.toString()"
+  [attr.step]="step?.toString()"
   [attr.autocomplete]="autocompleteAttr"
   (keyup)="markAsTouched()"
   [class.error]="isTouchedAndInvalid()"
   [attr.placeholder]="placeholder"
-  [attr.tabindex]="(isReadonly || isDisabled) ? -1 : 0"  
+  [attr.tabindex]="(isReadonly || isDisabled) ? '-1' : '0'"  
   #input
 />
 ''',
   providers: const [
     CUSTOM_INPUT_DOUBLE_VALUE_ACCESSOR,
-    const Provider(Focusable, useExisting: FnxDouble, multi: false),
-    const Provider(FnxValidatorComponent, useExisting: FnxDouble, multi: false),
+    const Provider(Focusable, useExisting: FnxDouble),
+    const Provider(FnxValidatorComponent, useExisting: FnxDouble),
   ],
   styles: const [":host input { text-align: inherit;}"],
   preserveWhitespace: false,
-  directives: [
-    coreDirectives,
-    formDirectives
-  ],
+  directives: [coreDirectives, formDirectives],
 )
 class FnxDouble extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
-
   @Input()
   bool required = false;
 
   @Input()
-  num min = null;
+  num? min = null;
 
   @Input()
-  num max = null;
+  num? max = null;
 
   @Input()
   num step = 0.1;
 
   @Input()
-  String placeholder = null;
+  String? placeholder = null;
 
   @Input()
   bool autocomplete = true;
@@ -62,9 +58,9 @@ class FnxDouble extends FnxInputComponent implements ControlValueAccessor, OnIni
   bool disabled = false;
 
   @ViewChild("input")
-  HtmlElement elementRef;
+  HtmlElement? elementRef;
 
-  FnxDouble(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
+  FnxDouble(@SkipSelf() @Optional() FnxValidatorComponent? parent) : super(parent);
 
   String get autocompleteAttr => (autocomplete) ? 'on' : 'off';
 
@@ -85,31 +81,31 @@ class FnxDouble extends FnxInputComponent implements ControlValueAccessor, OnIni
   bool hasValidNumberImpl() {
     if (required && value == null) return false;
     if (min == null && max == null) return true;
-    double v = parseDouble(value);
+    double? v = parseDouble(value);
     if (v == null) return true;
     if (v.isNaN) return false;
     if (v == null && value != null && value.toString().length > 0) return false; // not a number
     if (required && v == null) return false;
-    if (min != null && v < min.toDouble()) return false;
-    if (max != null && v > max.toDouble()) return false;
+    if (min != null && v < min!.toDouble()) return false;
+    if (max != null && v > max!.toDouble()) return false;
     return true;
   }
 
-  double parseDouble(value) {
+  double? parseDouble(value) {
     if (value == null) return null;
     if (value is num) {
-      return value;
+      return value as double?;
     } else {
-      String prs = value.toString().replaceAll(",",".");
+      String prs = value.toString().replaceAll(",", ".");
       print("PRS $prs");
-      return double.tryParse(prs)??double.nan;
+      return double.tryParse(prs) ?? double.nan;
     }
   }
 
   @override
   void focus() {
     if (elementRef != null) {
-      elementRef.focus();
+      elementRef!.focus();
     }
   }
 
@@ -118,7 +114,7 @@ class FnxDouble extends FnxInputComponent implements ControlValueAccessor, OnIni
     if (v == null) {
       super.value = null;
     } else {
-      double parsed = parseDouble(v);
+      double? parsed = parseDouble(v);
       super.value = parsed;
     }
   }
@@ -127,5 +123,4 @@ class FnxDouble extends FnxInputComponent implements ControlValueAccessor, OnIni
   get value {
     return super.value;
   }
-
 }

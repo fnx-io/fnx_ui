@@ -6,46 +6,43 @@ import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/validator.dart';
 
-const CUSTOM_INPUT_INT_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxInt, multi: true);
+const CUSTOM_INPUT_INT_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxInt);
 
 @Component(
   selector: 'fnx-int',
   template: r'''
 <input id="{{ componentId }}" type="{{ htmlType }}" [(ngModel)]="value" [readonly]="isReadonly"
-  [attr.min]="min"
-  [attr.max]="max"
+  [attr.min]="min?.toString()"
+  [attr.max]="max?.toString()"
   [attr.autocomplete]="autocompleteAttr"
   (keyup)="markAsTouched()"
   [class.error]="isTouchedAndInvalid()"
   [attr.placeholder]="placeholder"
-   [attr.tabindex]="(isReadonly || isDisabled) ? -1 : 0"  
+   [attr.tabindex]="(isReadonly || isDisabled) ? '-1' : '0'"  
   #input
 />
 ''',
   providers: const [
     CUSTOM_INPUT_INT_VALUE_ACCESSOR,
-    const Provider(Focusable, useExisting: FnxInt, multi: false),
-    const Provider(FnxValidatorComponent, useExisting: FnxInt, multi: false),
+    const Provider(Focusable, useExisting: FnxInt),
+    const Provider(FnxValidatorComponent, useExisting: FnxInt),
   ],
   styles: const [":host input { text-align: inherit;}"],
   preserveWhitespace: false,
-  directives: [
-    coreDirectives,
-    formDirectives
-  ],
+  directives: [coreDirectives, formDirectives],
 )
 class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy, Focusable {
   @Input()
   bool required = false;
 
   @Input()
-  num min = null;
+  num? min = null;
 
   @Input()
-  num max = null;
+  num? max = null;
 
   @Input()
-  String placeholder = null;
+  String? placeholder = null;
 
   @Input()
   bool autocomplete = true;
@@ -57,9 +54,9 @@ class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, 
   bool disabled = false;
 
   @ViewChild("input")
-  HtmlElement element;
+  HtmlElement? element;
 
-  FnxInt(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
+  FnxInt(@SkipSelf() @Optional() FnxValidatorComponent? parent) : super(parent);
 
   // 'number' must not be a constant in the html template !
   String get htmlType => 'number';
@@ -81,17 +78,17 @@ class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, 
     }
 
     if (min == null && max == null) return true;
-    int v = parseInt(value);
+    int? v = parseInt(value);
     if (v == null) return true;
 
     if (v == null && value != null && value.toString().length > 0) return false; // not a number
     if (required && v == null) return false;
-    if (min != null && v < min.toInt()) return false;
-    if (max != null && v > max.toInt()) return false;
+    if (min != null && v < min!.toInt()) return false;
+    if (max != null && v > max!.toInt()) return false;
     return true;
   }
 
-  int parseInt(value) {
+  int? parseInt(value) {
     if (value == null) return null;
     if (value is int) {
       return value;
@@ -103,7 +100,7 @@ class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, 
   @override
   void focus() {
     if (element != null) {
-      element.focus();
+      element!.focus();
     }
   }
 
@@ -114,7 +111,7 @@ class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, 
     if (v == null) {
       super.value = null;
     } else {
-      int parsed = parseInt(v);
+      int? parsed = parseInt(v);
       if (parsed != null) {
         super.value = parsed;
       }
@@ -125,5 +122,4 @@ class FnxInt extends FnxInputComponent implements ControlValueAccessor, OnInit, 
   get value {
     return super.value;
   }
-
 }

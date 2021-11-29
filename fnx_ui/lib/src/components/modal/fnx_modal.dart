@@ -47,7 +47,7 @@ class FnxModal implements OnInit, OnDestroy {
   ///
   /// Optional CSS width of this modal window. Possibly 90vw etc.
   @Input()
-  String width = null;
+  String? width = null;
 
   StreamController<bool> _close = new StreamController();
 
@@ -57,7 +57,7 @@ class FnxModal implements OnInit, OnDestroy {
   @Output()
   Stream<bool> get close => _close.stream;
 
-  StreamSubscription<KeyboardEvent> keyDownSubscription;
+  late StreamSubscription<KeyboardEvent> keyDownSubscription;
 
   void emitClose() {
     _close.add(false);

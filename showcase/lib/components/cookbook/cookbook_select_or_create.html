@@ -16,7 +16,7 @@
                 <span class="char margin--small--right">#{{c+1}}</span>
 
                 <p class="item flex--grow flex--shrink margin--small--right">
-                    {{personsById[r]['name'] + ', ' + personsById[r]['occupation'] + ', ' + personsById[r]['phone']}}
+                    {{getPersonById(r)['name'] + ', ' + getPersonById(r)['occupation'] + ', ' + getPersonById(r)['phone']}}
                 </p>
 
                 <span class="text--right">

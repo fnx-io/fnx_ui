@@ -14,19 +14,13 @@ import 'package:fnx_ui_showcase/app_config.dart';
 @Component(
   selector: 'cookbook-wizard',
   templateUrl: 'cookbook_wizard.html',
-  directives: [
-    fnxUiDirectives,
-    coreDirectives,
-    formDirectives,
-    appDirectives
-  ],
+  directives: [fnxUiDirectives, coreDirectives, formDirectives, appDirectives],
 )
 class CookbookWizard {
-
   FnxApp app;
 
   @ViewChild("wizardForm")
-  FnxForm wizardForm;
+  FnxForm? wizardForm;
 
   int step = 0;
   static int stepCount = 5;
@@ -45,7 +39,7 @@ class CookbookWizard {
     } else {
       // becouse othewise would be all elements in the form marked as touched after first step
       // and their errors would be highlighted on UI
-      wizardForm.markAsNotTouched();
+      wizardForm!.markAsNotTouched();
       step++;
     }
   }
@@ -56,5 +50,4 @@ class CookbookWizard {
       step--;
     }
   }
-
 }

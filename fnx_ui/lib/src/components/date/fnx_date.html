@@ -7,7 +7,7 @@
     <input type="text" class="form-control spacer" [attr.id]="componentId"
            [ngModel]="dateStr"
            (ngModelChange)="onChangeInput($event)"
-           [attr.tabindex]="(isReadonly || isDisabled) ? -1 : 0"
+           [attr.tabindex]="(isReadonly || isDisabled) ? '-1' : '0'"
            [readonly]="isReadonly"
            autocomplete="off"
            (focus)="onFocus()"

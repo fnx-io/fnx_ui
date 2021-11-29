@@ -4,7 +4,7 @@ import 'package:fnx_ui/fnx_ui.dart';
 import 'package:fnx_ui/src/components/input/fnx_input.dart';
 import 'package:fnx_ui/src/validator.dart';
 
-const CUSTOM_INPUT_CHECK_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxCheck, multi: true);
+const CUSTOM_INPUT_CHECK_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxCheck);
 
 @Component(
   selector: 'fnx-check',
@@ -15,7 +15,7 @@ const CUSTOM_INPUT_CHECK_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExi
     (click)="markAsTouched()"
     [disabled]="disabled || isReadonly"
     [class.disabled]="disabled || isReadonly"
-    [attr.tabindex]="(isReadonly || isDisabled) ? -1 : 0"    
+    [attr.tabindex]="(isReadonly || isDisabled) ? '-1' : '0'"    
     ><label attr.for="{{componentId}}"
     (focus)="markAsTouched()"
     (click)="markAsTouched()"
@@ -24,12 +24,9 @@ const CUSTOM_INPUT_CHECK_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExi
 ''',
   providers: const [
     CUSTOM_INPUT_CHECK_VALUE_ACCESSOR,
-    const Provider(FnxValidatorComponent, useExisting: FnxCheck, multi: false),
+    const Provider(FnxValidatorComponent, useExisting: FnxCheck),
   ],
-  directives: [
-    coreDirectives,
-    formDirectives
-  ],
+  directives: [coreDirectives, formDirectives],
   preserveWhitespace: false,
 )
 class FnxCheck extends FnxInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
@@ -44,9 +41,9 @@ class FnxCheck extends FnxInputComponent implements ControlValueAccessor, OnInit
   bool disabled = false;
 
   @Input()
-  String label;
+  String? label;
 
-  FnxCheck(@SkipSelf() @Optional() FnxValidatorComponent parent) : super(parent);
+  FnxCheck(@SkipSelf() @Optional() FnxValidatorComponent? parent) : super(parent);
 
   @override
   bool hasValidValue() {

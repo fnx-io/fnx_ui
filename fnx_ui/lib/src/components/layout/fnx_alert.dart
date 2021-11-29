@@ -30,7 +30,7 @@ class FnxAlert implements OnInit {
   /// Input. One of possible predefined types:"info","warning","error","success"
   ///
   @Input()
-  String type;
+  String? type;
 
   ///
   /// Input. Displays small cross icon which hides the message.
@@ -42,13 +42,13 @@ class FnxAlert implements OnInit {
   /// Input. Use to customize colors: bg--red text--yellow.
   ///
   @Input()
-  String colorClass;
+  String? colorClass;
 
   ///
   /// Input. Use to customize icon. Possible values are icon names from material design icons.
   ///
   @Input()
-  String icon;
+  String? icon;
 
   bool get isClosable => closable != null;
 
