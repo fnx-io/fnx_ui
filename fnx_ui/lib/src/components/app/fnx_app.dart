@@ -112,7 +112,7 @@ class FnxApp implements OnInit {
   ///
   /// Plain old window.input style dialog. Nonblocking.
   ///
-  Future<Object> input(String message, {String? headline: null, String? prefilledValue: null}) {
+  Future<Object?> input(String message, {String? headline: null, String? prefilledValue: null}) {
     headline = headline ?? GlobalMessages.appDefaultInputHeadline();
     _ModalContent m = new _ModalContent()
       ..headline = headline
@@ -121,7 +121,7 @@ class FnxApp implements OnInit {
       ..ok = GlobalMessages.ok()
       ..cancel = GlobalMessages.cancel()
       ..value = prefilledValue;
-    return _modal(m);
+    return _modal<Object?>(m);
   }
 
   Future<T> _modal<T>(_ModalContent mc) {
@@ -161,7 +161,7 @@ class _ModalContent {
   String? cancel;
   String? input;
   var value;
-  late Completer _completer;
+  late Completer<Object?> _completer;
 }
 
 class _ToastContent {

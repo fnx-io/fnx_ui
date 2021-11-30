@@ -33,8 +33,14 @@ class FnxPanel extends FnxValidatorComponent implements OnInit, OnDestroy {
   @Input()
   bool closable = false;
 
+  bool? _open;
+
+  bool get open => _open ?? false;
+
   @Input()
-  late bool open;
+  set open(bool? value) {
+    _open = (value ?? false);
+  }
 
   String id = ui.uid('panel-');
 
@@ -44,8 +50,8 @@ class FnxPanel extends FnxValidatorComponent implements OnInit, OnDestroy {
   ngOnInit() {
     super.ngOnInit();
     if (closable == null) closable = false;
-    if (open == null) {
-      open = !closable;
+    if (_open == null) {
+      _open = !closable;
     }
   }
 

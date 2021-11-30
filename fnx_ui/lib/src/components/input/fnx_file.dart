@@ -16,6 +16,7 @@ const CUSTOM_INPUT_FILE_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExis
   template: r'''
 <div class="input__file">
   <span class="input__file__dropzone" [class.drag--here]="possibleDrop()" [class.readonly]="isReadonly"
+      [class.disabled]="isDisabled"
       (dragenter)="onDrag($event, true)"
       (dragleave)="onDrag($event, false)"
       (dragover)="onDragOver($event)"

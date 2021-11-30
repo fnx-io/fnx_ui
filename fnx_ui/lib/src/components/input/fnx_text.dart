@@ -19,7 +19,7 @@ const CUSTOM_INPUT_TEXT_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExis
 @Component(
   selector: 'fnx-text',
   template: r'''
-<input id="{{ componentId }}" type="{{ htmlType }}" [(ngModel)]="value" [readonly]="isReadonly"
+<input id="{{ componentId }}" type="{{ htmlType }}" [(ngModel)]="value" [readonly]="isReadonly"  [disabled]="isDisabled"
   [attr.minlength]="minLength?.toString()"
   [attr.maxlength]="maxLength?.toString()"
   [attr.min]="min?.toString()"

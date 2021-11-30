@@ -97,13 +97,17 @@ class FnxSelect extends FnxInputComponent implements ControlValueAccessor, OnIni
   }
 
   void hideOptions() {
-    modal!.activeChilds.remove(this);
+    modal?.activeChilds.remove(this);
     open = false;
     filter = null;
   }
 
   void showOptions() {
-    modal!.activeChilds.add(this);
+    if (isReadonly || isDisabled) {
+      hideOptions();
+      return;
+    }
+    modal?.activeChilds.add(this);
     open = true;
     dropdownTracker.updatePosition();
     later(dropdownTracker.updatePosition);

@@ -3,6 +3,7 @@
      [attr.tabindex]="(isReadonly || isDisabled) ? '-1' : '0'"
      (click)="toggleDropdown()"
      [attr.readonly]="isReadonly ? 'readonly' : null"
+     [class.disabled]="isDisabled"
      [class.open--up]="openUp"
      [class.open]="open"
      [class.error]="isTouchedAndInvalid()"

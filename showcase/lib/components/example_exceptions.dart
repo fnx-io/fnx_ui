@@ -11,15 +11,9 @@ import 'package:logging/logging.dart';
 @Component(
   selector: 'example-exceptions',
   templateUrl: 'example_exceptions.html',
-  directives: [
-    fnxUiDirectives,
-    coreDirectives,
-    formDirectives,
-    appDirectives
-  ],
+  directives: [fnxUiDirectives, coreDirectives, formDirectives, appDirectives],
 )
 class ExampleExceptions {
-
   FnxApp app;
 
   final Logger log = new Logger("ExampleExceptions");
@@ -29,7 +23,7 @@ class ExampleExceptions {
   ExampleExceptions(FnxExceptionHandler handler, this.app) {
     // register custom exception handler
     handler.registerErrorProcessor(int, processIntException);
-    handler.registerErrorProcessor(CustomException, processCustomException as FnxError Function(Object, StackTrace?));
+    handler.registerErrorProcessor(CustomException, processCustomException);
   }
 
   void stringException() {
@@ -49,9 +43,7 @@ class ExampleExceptions {
   ///
   FnxError processIntException(Object exception, StackTrace? stacktrace) {
     int code = (exception as int);
-    return new FnxError("This is error code ${code}",
-        headline: "Custom headline",
-        details: ["code = ${code}", "2*code = ${2*code}"]);
+    return new FnxError("This is error code ${code}", headline: "Custom headline", details: ["code = ${code}", "2*code = ${2 * code}"]);
   }
 
   ///
@@ -61,11 +53,8 @@ class ExampleExceptions {
     app.toast("Custom exception, yay!");
     return null;
   }
-
 }
 
 class CustomException {
-
   CustomException();
-
 }

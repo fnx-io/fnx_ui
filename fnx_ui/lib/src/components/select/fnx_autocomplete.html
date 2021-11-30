@@ -5,7 +5,7 @@
      style="display: inline-block; width: 100%"
      #select>
 
-    <input id="{{ componentId }}" type="text" [(ngModel)]="text" [readonly]="isReadonly"
+    <input id="{{ componentId }}" type="text" [(ngModel)]="text" [readonly]="isReadonly" [disabled]="isDisabled"
            [attr.tabindex]="(isReadonly || isDisabled) ? '-1' : '0'"
            (keyup)="markAsTouched()"
            (focus)="showOptions()"

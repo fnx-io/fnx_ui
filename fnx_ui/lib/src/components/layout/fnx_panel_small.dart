@@ -32,15 +32,6 @@ import 'package:fnx_ui/src/validator.dart';
 class FnxPanelSmall extends FnxPanel implements OnInit, OnDestroy {
   FnxPanelSmall(@SkipSelf() @Optional() FnxValidatorComponent? parent) : super(parent);
 
-  ///
-  /// Input. Can by collapsed or expanded by user. Default = false = always open.
-  ///
-  @Input()
-  bool closable = false;
-
-  @Input()
-  bool open = false;
-
   @override
   bool get disabled => false;
 }

@@ -43,7 +43,9 @@ class FnxCheck extends FnxInputComponent implements ControlValueAccessor, OnInit
   @Input()
   String? label;
 
-  FnxCheck(@SkipSelf() @Optional() FnxValidatorComponent? parent) : super(parent);
+  FnxCheck(@SkipSelf() @Optional() FnxValidatorComponent? parent) : super(parent) {
+    value = false;
+  }
 
   @override
   bool hasValidValue() {

@@ -11,20 +11,14 @@ import 'package:logging/logging.dart';
 ///
 /// Demo: [http://demo.fnx.io/fnx_ui/ng2/#/Panels](http://demo.fnx.io/fnx_ui/ng2/#/Panels)
 ///
-@Component(
-  selector: 'fnx-alert',
-  templateUrl: 'fnx_alert.html',
-  preserveWhitespace: false,
-  directives: [
-    coreDirectives,
-    formDirectives,
-  ]
-)
+@Component(selector: 'fnx-alert', templateUrl: 'fnx_alert.html', preserveWhitespace: false, directives: [
+  coreDirectives,
+  formDirectives,
+])
 class FnxAlert implements OnInit {
-
   final Logger log = new Logger("FnxAlert");
 
-  static const POSSIBLE_TYPES = const ["info","warning","error","success"];
+  static const POSSIBLE_TYPES = const ["info", "warning", "error", "success"];
 
   ///
   /// Input. One of possible predefined types:"info","warning","error","success"
@@ -56,7 +50,7 @@ class FnxAlert implements OnInit {
 
   String id = ui.uid('alert-');
 
-  Map get classes => { 'alert':true, colorClass: true, 'margin--bottom': true, 'border': type == 'info'};
+  Map<Object, Object?> get classes => {'alert': true, colorClass ?? '_': true, 'margin--bottom': true, 'border': type == 'info'};
 
   @override
   ngOnInit() {
@@ -66,29 +60,43 @@ class FnxAlert implements OnInit {
 
     if (icon == null && type != null) {
       switch (type) {
-        case "info": icon = "info"; break;
-        case "warning": icon = "warning"; break;
-        case "error": icon = "error"; break;
-        case "success": icon = "check"; break;
+        case "info":
+          icon = "info";
+          break;
+        case "warning":
+          icon = "warning";
+          break;
+        case "error":
+          icon = "error";
+          break;
+        case "success":
+          icon = "check";
+          break;
       }
     }
 
     if (colorClass == null && type != null) {
       switch (type) {
-        case "info": colorClass = "bg--white"; break;
-        case "warning": colorClass = "bg--fnx"; break;
-        case "error": colorClass = "bg--red"; break;
-        case "success": colorClass = "bg--green"; break;
+        case "info":
+          colorClass = "bg--white";
+          break;
+        case "warning":
+          colorClass = "bg--fnx";
+          break;
+        case "error":
+          colorClass = "bg--red";
+          break;
+        case "success":
+          colorClass = "bg--green";
+          break;
       }
     }
 
     if (icon == null) icon = "info";
     if (colorClass == null) colorClass = "bg--info";
-
   }
 
   void close() {
     open = false;
   }
-
 }
