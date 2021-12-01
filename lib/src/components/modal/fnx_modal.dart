@@ -72,9 +72,9 @@ class FnxModal implements OnInit, OnDestroy {
   }
 
   Function tryOrFalse(Function fnc) {
-    return (KeyboardEvent e) {
+    return (Object e) {
       try {
-        return fnc(e);
+        return fnc(e as KeyboardEvent);
       } catch (ex) {
         log.info("Very strange exception here: $ex");
         return false;
