@@ -21,13 +21,8 @@ import 'package:logging/logging.dart';
 ///      </fnx-modal>
 ///
 ///
-@Component(
-    selector: 'fnx-modal',
-    templateUrl: 'fnx_modal.html',
-    preserveWhitespace: false
-)
+@Component(selector: 'fnx-modal', templateUrl: 'fnx_modal.html', preserveWhitespace: false)
 class FnxModal implements OnInit, OnDestroy {
-
   Set<dynamic> activeChilds = new Set();
 
   static List<FnxModal> _stack = [];
@@ -57,6 +52,7 @@ class FnxModal implements OnInit, OnDestroy {
   ngOnInit() {
     _stack.add(this);
     keyDownSubscription = document.onKeyDown
+        .where((e) => e is KeyboardEvent)
         .where(tryOrFalse((KeyboardEvent e) => this == _stack.last))
         .where(tryOrFalse((KeyboardEvent e) => activeChilds.isEmpty))
         .where(tryOrFalse((KeyboardEvent e) => e.keyCode == KeyCode.ESC))
@@ -85,5 +81,4 @@ class FnxModal implements OnInit, OnDestroy {
       }
     };
   }
-
 }
