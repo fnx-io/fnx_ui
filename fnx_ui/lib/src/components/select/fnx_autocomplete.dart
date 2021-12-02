@@ -11,8 +11,8 @@ import 'package:fnx_ui/src/util/pair.dart';
 import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'package:fnx_ui/src/validator.dart';
 
-typedef Future<List<Pair>> OptionsProvider(String? filledText);
-typedef Future<Pair> DefaultOptionProvider(var initialValue);
+typedef Future<List<Pair>?> OptionsProvider(String? filledText);
+typedef Future<Pair?> DefaultOptionProvider(var initialValue);
 
 const CUSTOM_AUTOCOMPLETE_VALUE_ACCESSOR = const Provider(ngValueAccessor, useExisting: FnxAutocomplete);
 
@@ -232,7 +232,7 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
     if (defaultOptionProvider == null) return;
     version++;
     int loadingFor = version;
-    Pair loaded = await defaultOptionProvider!(value);
+    Pair? loaded = await defaultOptionProvider!(value);
     if (loadingFor == version) {
       // we will use this
       if (loaded != null) {
@@ -248,10 +248,10 @@ class FnxAutocomplete extends FnxInputComponent implements ControlValueAccessor,
   Future<Null> loadFreshOptions(String? data) async {
     version++;
     int loadingFor = version;
-    List<Pair> loaded = await optionsProvider(data);
+    List<Pair> loaded = await optionsProvider(data) ?? const [];
     if (loadingFor == version) {
       // we will use this
-      loadedOptions = loaded ?? const [];
+      loadedOptions = loaded;
       updateOptionsFromSearch();
     } else {
       // too old next batch is comming
