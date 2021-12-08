@@ -94,7 +94,8 @@ class FnxDatePicker implements OnInit, OnDestroy {
     valueChanged();
   }
 
-  set shown(bool toShow) {
+  set shown(bool? toShow) {
+    toShow = toShow ?? false;
     bool alreadyShown = _shown;
     this._shown = toShow;
     if (toShow && !alreadyShown) {
@@ -103,9 +104,9 @@ class FnxDatePicker implements OnInit, OnDestroy {
     }
 
     if (shown == true) {
-      modal!.activeChilds.add(this);
+      modal?.activeChilds.add(this);
     } else {
-      modal!.activeChilds.remove(this);
+      modal?.activeChilds.remove(this);
     }
   }
 
