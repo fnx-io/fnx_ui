@@ -9,7 +9,7 @@ import 'package:fnx_ui/src/util/ui.dart' as ui;
 import 'package:fnx_ui/src/validator.dart';
 import 'package:logging/logging.dart';
 
-typedef String formValidatorFunction();
+typedef String? formValidatorFunction();
 
 @Component(
     selector: 'fnx-form',
@@ -73,7 +73,7 @@ class FnxForm extends FnxValidatorComponent implements OnInit, OnDestroy {
     errorMessages = [];
 
     for (formValidatorFunction f in _validators) {
-      String error = f();
+      String? error = f();
       if (error != null) {
         errorMessages.add(error);
       }
@@ -97,7 +97,7 @@ class FnxForm extends FnxValidatorComponent implements OnInit, OnDestroy {
     _validators.remove(f);
   }
 
-  bool get isReadonly => (readonly ?? false);
+  bool get isReadonly => readonly;
 }
 
 class BeforeFormSubmitEvent {}
