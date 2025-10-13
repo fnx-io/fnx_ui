@@ -34,17 +34,13 @@ import 'package:logging/logging.dart';
 </div>
 ''',
   preserveWhitespace: false,
-  styles: [
-    ":host {display: block; position: relative;}",
-    ".scroll-panel-container { overflow-y: auto; }"
-  ],
+  styles: [":host {display: block; position: relative;}", ".scroll-panel-container { overflow-y: auto; }"],
   directives: [
     coreDirectives,
     formDirectives,
   ],
 )
-class FnxScrollPanel implements OnInit {
-
+class FnxScrollPanel implements OnInit, OnDestroy {
   final Logger log = new Logger("FnxScrollPanel");
 
   StreamController<bool> _loadMore = new StreamController<bool>();
@@ -67,14 +63,19 @@ class FnxScrollPanel implements OnInit {
 
   StreamController<int> _debounceCtrl;
 
+  MutationObserver _mutationObserver;
+
   FnxScrollPanel();
 
   @override
   ngOnInit() {
     container.onScroll.listen(processScroll);
-    content.onResize.listen(processScroll);
-    content.on["DOMNodeInserted"].listen(processScroll);
-    content.on["DOMNodeRemoved"].listen(processScroll);
+
+    // Observe DOM changes instead of deprecated DOMNodeInserted/Removed and unreliable onResize
+    _mutationObserver = new MutationObserver((mutations, observer) {
+      processScroll(null);
+    });
+    _mutationObserver.observe(content, childList: true, subtree: false);
 
     _debounceCtrl = new StreamController<int>();
     Stream<int> eventStream = _debounceCtrl.stream;
@@ -86,6 +87,11 @@ class FnxScrollPanel implements OnInit {
     eventStream.listen((_) => doEmit());
 
     processScroll(null);
+  }
+
+  @override
+  void ngOnDestroy() {
+    _mutationObserver?.disconnect();
   }
 
   void processScroll(event) {
@@ -104,5 +110,4 @@ class FnxScrollPanel implements OnInit {
     log.fine("Emiting load more event (with $debounceMs ms debounce)");
     _loadMore.add(true);
   }
-
 }
